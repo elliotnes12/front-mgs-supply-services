@@ -27,6 +27,10 @@ const groups = {
   createGroupScreen: "CreateGroupScreen",
 };
 
+const reports ={
+  root: "ReportsRoot"
+}
+
 const settings = {
   root: "SettingsRoot",
   settingScreen: "SettingsScreen",
@@ -42,5 +46,6 @@ export const screens = {
     chats,
     groups,
     settings,
+    reports
   },
 }
