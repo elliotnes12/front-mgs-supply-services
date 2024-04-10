@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/rubik": "^0.2.3",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-navigation/bottom-tabs": "^6.5.2",
@@ -16,7 +17,9 @@
     "@react-navigation/native-stack": "^6.9.7",
     "expo": "~47.0.9",
     "expo-camera": "~13.1.0",
+    "expo-font": "~11.0.1",
     "expo-image-picker": "~14.0.2",
+    "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "formik": "^2.2.9",
     "intl": "^1.2.5",
@@ -30,7 +33,7 @@
     "react-native-screens": "~3.18.0",
     "react-native-svg": "13.4.0",
     "react-search-input": "^0.11.3",
-    "socket.io-client": "^4.5.4",
+    "socket.io-client": "^4.7.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {

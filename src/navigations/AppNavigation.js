@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
-import { screens } from '../utils';
+import { initSockets, screens } from '../utils';
 import { BottomTabNavigation } from './ButtonTabNavigation';
 import {
   UserProfileScreen,
@@ -15,6 +15,8 @@ import {
   ChangeNameGroupScreen,
 } from "../screens/Groups";
 import { styles } from "./Styles.style";
+
+initSockets();
 
 const Stack = createNativeStackNavigator();
 

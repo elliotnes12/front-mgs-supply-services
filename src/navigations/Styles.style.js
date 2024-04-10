@@ -6,7 +6,8 @@ export const styles = new StyleSheet.create({
       backgroundColor: "#ffffff",
     },
     headerStyle: {
-      backgroundColor: "#7da74d",
+      backgroundColor: "#ffffff",
+      borderColor:"#ffffff"
     },
     headerTitleStyle: {
       color: "#fff",

@@ -1,12 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from "@react-navigation/native";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NativeBaseProvider } from "native-base";
 import HandlerNavigation from './src/navigations/HandlerNavigation';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthProvider } from './src/contexts';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    'Rubik': require('./assets/fonts/rubik/Rubik-Regular.ttf'),
+  });
+
+ 
   return (
     <NavigationContainer>
       <NativeBaseProvider>
@@ -18,9 +24,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
