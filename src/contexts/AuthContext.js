@@ -70,7 +70,6 @@ export function AuthProvider(props) {
             setLoading(false);
 
         } catch (error) {
-            console.log(error);
             setLoading(false)
         }
     };

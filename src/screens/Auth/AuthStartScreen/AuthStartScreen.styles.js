@@ -14,9 +14,7 @@ export const styles = new StyleSheet.create({
   },
   img: {
     width: 300,
-    height: 200,
     resizeMode: "contain",
-    marginVertical: 10,
   },
   title: {
     fontFamily: "Rubik",
@@ -35,9 +33,10 @@ export const styles = new StyleSheet.create({
   },
   btn: {
     backgroundColor: "#7DA74D",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    width:300,
+    padding: 7,
+    borderRadius: 50,
+    marginTop:10
   },
   btnText: {
     fontFamily: "Rubik",
@@ -45,19 +44,5 @@ export const styles = new StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 18,
     textAlign: "center",
-  },
-  circleContainer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-  },
-  circle: {
-    width: 100,
-    height: 100,
-    borderRadius: 50, // Esto hace que sea un círculo perfecto
-    backgroundColor: "#7DA74D",
-    position: "absolute",
-    top: 50,
-    left: 0,
-  },
+  }
 });

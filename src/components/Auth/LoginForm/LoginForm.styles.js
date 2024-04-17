@@ -10,20 +10,72 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 19
   },
+  field: {
+    borderColor: "#7DA74D",
+    borderWidth: 1.2,
+    alignSelf: "stretch",
+    marginBottom: 20,
+    borderRadius: 8,
+    height: 55,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: 'row',
+    width: 300,
+  },
   input: {
-    fontFamily:"Rubik",
-    backgroundColor: "#F8F8F8",
-    color: "#fff",
+    fontFamily: "Rubik",
     fontSize: 18,
-    marginVertical: 5,
-    width: 300 
+    flex: 1,
+    height: '80%',
+    placeholderTextColor: "#7DA74D",
+    paddingHorizontal: 13,
+    maxWidth: 250,
+    paddingLeft:20
   },
-  btn: {
-    fontFamily:"Rubik",
+  titleBox:{
+    width:'auto',
+    height:'auto',
+    paddingHorizontal:2,
+    paddingVertical: 0.5,
+    backgroundColor:'#FFFFFF',
+    position:'absolute',
+    justifyContent:'center',
+  },
+  placeholder:{
+    color:"#7DA74D",
+    fontFamily: "Rubik",
+    fontSize:18
+  },  
+  icon: {
+    width: 40,
+    height: 50,
+    textAlign: 'center',
+    lineHeight: 50
+  },
+  inputError:{
+    borderColor:'#dc3545'
+  },
+  button: {
+    fontFamily: "Rubik",
     backgroundColor: "#7DA74D",
-    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: '20%',
+    width: 300,
+    borderRadius: 50,
+    marginTop: 40,
+    elevation: 3
   },
-  inputError: {
-    backgroundColor: "#270C0D",
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
   },
+  errorlogin:{
+    fontSize:18,
+    color:"red",
+  }
 });

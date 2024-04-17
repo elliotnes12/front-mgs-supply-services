@@ -1,4 +1,4 @@
-import { png } from "./png";
+import { png , } from "./png";
 
 export const assets = {
   image: {

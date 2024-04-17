@@ -1,34 +1,62 @@
 import { StyleSheet } from "react-native";
 
 export const styles = new StyleSheet.create({
- 
-  container:{
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    width:"100%"
+
+  container: {
+    width: '100%',
+    flex: 0,
   },
-  content:{
+  gradient: {
+    width: '100%',
+    flex: 0,
+  },
+  content: {
     flex: 1,
-    width:"100%",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
-    position: "relative",
+    width: '100%',
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
   },
-  img:{
+  img: {
     width: 300,
     resizeMode: "contain",
-    marginVertical: 15,
+    marginBottom: 5,
+  },
+  imgContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
   },
   title: {
-    color: "#000",
-    marginVertical: 15,
-    opacity: 0.6,
-  },
-  register: {
     color: "#7DA74D",
-    textAlign: "center",
+    fontSize: 33,
+    fontFamily: "Rubik",
+  },
+  subtitle: {
+    color: "#7DA74D",
+    fontSize: 16,
+    fontFamily: "Rubik",
+    marginBottom: 35,
+    padding: 15,
+    textAlign: "center"
+  },
+  signUp: {
     fontSize: 18,
-    marginVertical: 30,
+    borderWidth: 1,
+    borderColor: "#CEDC39",
+    borderRadius: 50,
+    width: 300,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 120,
+    marginBottom: 20
+  },
+  signUpText: {
+    color: "#7DA74D",
+    fontWeight: '400',
   },
   info: {
     color: "#000",

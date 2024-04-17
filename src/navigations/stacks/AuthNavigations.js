@@ -30,7 +30,7 @@ export function AuthNavigation(){
             <Stack.Screen
                name={screens.auth.registerScreen}
                component={RegisterScreen}
-               options={{title:"Registro"}}
+               options={{headerShown:false}}
             /> 
                 
        </Stack.Navigator>
