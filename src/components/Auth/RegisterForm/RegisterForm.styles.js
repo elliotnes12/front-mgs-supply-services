@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     fontSize: 21,
-    fontWeight:"bold"
   },
   field: {
     borderColor: "#7DA74D",
