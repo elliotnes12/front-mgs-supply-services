@@ -24,7 +24,7 @@ export function RegisterScreen() {
         keyboardShouldPersistTaps="handled">
 
         <View style={styles.imgContainer}>
-          <Image source={assets.image.png.originLogo} style={styles.img} />
+          <Image source={assets.image.png.whiteLogo} style={styles.img} />
         </View>
         <View style={styles.content}>
           <Text style={styles.title}>Registration</Text>

@@ -31,7 +31,7 @@ export function LoginScreen() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.imgContainer}>
-          <Image source={assets.image.png.originLogo} style={styles.img} />
+          <Image source={assets.image.png.whiteLogo} style={styles.img} />
         </View>
         <SafeAreaView style={styles.content}>
           <Text style={styles.title}>Welcome</Text>
@@ -43,7 +43,9 @@ export function LoginScreen() {
             <Text style={styles.signUpText}>Sign Up</Text>
           </Pressable>
         </SafeAreaView>
+     
       </KeyboardAwareScrollView>
+
     </LinearGradient>
 
 

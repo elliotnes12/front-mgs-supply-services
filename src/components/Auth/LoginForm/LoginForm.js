@@ -19,6 +19,7 @@ export function LoginForm() {
   const [loading, setLoading] = useState(false);
 
 
+
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchema(),
@@ -98,6 +99,11 @@ export function LoginForm() {
       <CustomModal isVisible={isModalVisible} onClose={closeModal}>
         <Text style={styles.errorlogin}>Invalid username or Password</Text>
       </CustomModal>
+
+
+
+
+
 
 
     </>

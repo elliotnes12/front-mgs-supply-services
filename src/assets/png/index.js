@@ -1,5 +1,5 @@
-import auth01 from "./logo3.png";
-import logo from "./logo.png";
+import originLogo from "./logo.png";
+import whiteLogo from "./logo3.png";
 
 export const png = {
   originLogo,

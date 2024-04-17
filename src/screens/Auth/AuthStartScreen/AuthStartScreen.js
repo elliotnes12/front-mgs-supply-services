@@ -16,7 +16,7 @@ export  function AuthStartScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
      
-        <Image source={assets.image.png.whiteLogo} style={styles.img} />
+        <Image source={assets.image.png.originLogo} style={styles.img} />
         <Text style={styles.title}>Welcome</Text>
         <Text style={styles.description}>
           Check out our Privacy Policy. Tap 'Accept and continue' to agree to the Terms of Service.
