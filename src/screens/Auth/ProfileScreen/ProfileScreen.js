@@ -31,10 +31,7 @@ export function ProfileScreen() {
 
         <View style={styles.content}>
           <Text style={styles.title}>User Profile</Text>
-          {/* <RegisterForm /> */}
-
           <ProfileForm/>
-
           <Pressable style={styles.btnLogin} onPress={() => {
             navigation.goBack();
           }}>

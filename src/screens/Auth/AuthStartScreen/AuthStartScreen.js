@@ -8,7 +8,7 @@ export  function AuthStartScreen() {
   const navigation = useNavigation();
 
   const goToLogin = () => {
-    navigation.navigate(screens.auth.loginScreen);
+    navigation.navigate(screens.auth.profileScreen);
   };
 
 
