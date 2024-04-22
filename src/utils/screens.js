@@ -2,6 +2,7 @@ const auth = {
   authStartScreen: "AuthStartScreen",
   loginScreen: "LoginScreen",
   registerScreen: "RegisterScreen",
+  profileScreen: "ProfileScreen"
 };
 
 const global = {
