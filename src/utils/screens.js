@@ -2,7 +2,8 @@ const auth = {
   authStartScreen: "AuthStartScreen",
   loginScreen: "LoginScreen",
   registerScreen: "RegisterScreen",
-  profileScreen: "ProfileScreen"
+  profileScreen: "ProfileScreen",
+  jobHistoryScreen: "JobHistoryScreen"
 };
 
 const global = {

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { screens } from "../../utils/index";
-import { AuthStartScreen, LoginScreen, ProfileScreen, RegisterScreen } from "../../screens/Auth";
+import { AuthStartScreen, JobHistoryScreen, LoginScreen, ProfileScreen, RegisterScreen } from "../../screens/Auth";
 import {styles } from "../Styles.style";
 
 
@@ -18,6 +18,12 @@ export function AuthNavigation(){
             <Stack.Screen 
                name={screens.auth.authStartScreen}
                component={AuthStartScreen}
+               options={{headerShown:false}}
+            />
+
+            <Stack.Screen
+               name={screens.auth.jobHistoryScreen}
+               component={JobHistoryScreen}
                options={{headerShown:false}}
             />
 

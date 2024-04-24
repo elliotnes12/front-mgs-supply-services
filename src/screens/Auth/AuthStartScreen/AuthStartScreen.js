@@ -1,14 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
-import { screens } from "../../../utils";
+import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { assets } from "../../../assets";
+import { screens } from "../../../utils";
 import { styles } from "./AuthStartScreen.styles";
-import { SafeAreaView, View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 export  function AuthStartScreen() {
   const navigation = useNavigation();
 
   const goToLogin = () => {
-    navigation.navigate(screens.auth.profileScreen);
+    navigation.navigate(screens.auth.jobHistoryScreen);
   };
 
 
