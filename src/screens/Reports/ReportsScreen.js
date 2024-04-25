@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native";
-import { useAuth } from "../../hooks";
+import { useAuth } from "../../modules/Auth/hooks";
 import { Button, Text } from "native-base";
 
 export function ReportsScreen() {

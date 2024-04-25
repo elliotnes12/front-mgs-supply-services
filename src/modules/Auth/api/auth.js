@@ -1,17 +1,27 @@
-import { ENV } from "../utils";
+import { ENV } from "../../../utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export class Auth {
-  async register(email, password) {
+  async register(email, password,idEmployee) {
+    let data = undefined;
     try {
 
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.AUTH.REGISTER}`;
+
+      if(idEmployee){
+          data = JSON.stringify({ email, password, idEmployee });
+      }
+      else{
+        data = JSON.stringify({ email, password });
+      }
+
       const params = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: data,
+        timeout: 10000
       };
 
       const response = await fetch(url, params);
@@ -35,6 +45,7 @@ export class Auth {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        timeout: 10000,
       };
 
       const response = await fetch(url, params);
@@ -64,6 +75,7 @@ export class Auth {
         body: JSON.stringify({ 
           refreshToken:refreshToken
          }),
+         timeout: 10000,
       };
 
       const response = await fetch(url, params);

@@ -7,10 +7,11 @@ export const styles = new StyleSheet.create({
     },
     headerStyle: {
       backgroundColor: "#ffffff",
-      borderColor:"#ffffff"
+      borderColor:"blue"
     },
     headerTitleStyle: {
-      color: "#fff",
+      color: "#000",
+      height:20
     },
   },
   modalStyles: {

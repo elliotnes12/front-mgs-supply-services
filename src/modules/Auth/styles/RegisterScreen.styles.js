@@ -1,8 +1,37 @@
-// En tu archivo de LoginForm.styles.js
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
-  
+export const styles = new StyleSheet.create({
+
+
+  title:{
+    fontFamily: "Rubik",
+    fontSize:28,
+    color:"#7DA74D",
+    marginBottom:15,
+    marginTop:35
+  },
+  register: {
+    color: "#0891b2",
+    textAlign: "center",
+    fontSize: 18,
+    marginVertical: 30,
+  },
+  btnLogin: {
+    fontFamily: "Rubik",
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: "#CEDC39",
+    borderRadius: 50,
+    width: 300,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 60,
+    marginBottom: 30
+  },
+  btnLoginText:{
+    color:"#7DA74D",
+  }, 
   container:{
     flex:0,
     justifyContent:"center",
@@ -10,12 +39,6 @@ export const styles = StyleSheet.create({
   },
   viewInput: {
     marginBottom: 5,
-  },
-  title: {
-    color:"#7DA74D",
-    marginTop: 10,
-    marginBottom: 20,
-    fontSize: 21,
   },
   field: {
     borderColor: "#7DA74D",
@@ -79,7 +102,7 @@ export const styles = StyleSheet.create({
   borderBottom: {
     borderBottomWidth: 1,
     borderBottomColor: "#7DA74D",
-    width: "50%", // La mitad de la pantalla
-    marginVertical: 20, // Ajusta esto según tu diseño
+    width: "50%",
+    marginVertical: 20, 
   },
 });

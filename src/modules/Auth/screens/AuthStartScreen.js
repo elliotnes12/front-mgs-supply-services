@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { screens } from "../../../utils";
 import { assets } from "../../../assets";
-import { styles } from "./AuthStartScreen.styles";
+import { styles } from "../styles/AuthStartScreen.styles";
 import { SafeAreaView, View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 export  function AuthStartScreen() {

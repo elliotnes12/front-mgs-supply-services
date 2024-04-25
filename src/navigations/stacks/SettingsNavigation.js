@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { SettingsScreen, ChangeFirstNameScreen, ChangeLastnameScreen } from "../../screens/Settings";
+import { SettingsScreen, ChangeFirstNameScreen, ChangeLastnameScreen } from "../../modules/Settings";
 import { screens } from "../../utils";
 import { styles } from "../Styles.style";
 

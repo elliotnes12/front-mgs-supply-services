@@ -1,24 +1,9 @@
-import { View, Text } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react';
+import { View } from 'react-native';
 import Modal from 'react-native-modal';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-import { styles } from "./modal.styles";
-import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CustomModal({ isVisible, children, onClose }) {
 
-  useEffect(() => {
-    let timeoutId;
-
-    if (isVisible) {
-      timeoutId = setTimeout(() => {
-        onClose();
-      }, 2000);
-    }
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [isVisible, onClose]);
 
   return (
     <Modal

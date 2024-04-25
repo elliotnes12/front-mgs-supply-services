@@ -1,14 +1,23 @@
-// En tu archivo de LoginForm.styles.js
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export const styles = new StyleSheet.create({
+
+  title: {
+    color: "#7DA74D",
+    fontSize: 33,
+    fontFamily: "Rubik",
+    textAlign: "center"
+  },
+  subtitle: {
+    color: "#7DA74D",
+    fontSize: 16,
+    fontFamily: "Rubik",
+    marginBottom: 35,
+    padding: 15,
+    textAlign: "center"
+  },
   viewInput: {
     marginBottom: 5,
-  },
-  title: {
-    marginTop: 10,
-    marginBottom: 10,
-    fontSize: 19
   },
   field: {
     borderColor: "#7DA74D",
@@ -31,15 +40,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 13,
     maxWidth: 250,
     paddingLeft:20
-  },
-  titleBox:{
-    width:'auto',
-    height:'auto',
-    paddingHorizontal:2,
-    paddingVertical: 0.5,
-    backgroundColor:'#FFFFFF',
-    position:'absolute',
-    justifyContent:'center',
   },
   placeholder:{
     color:"#7DA74D",
@@ -77,5 +77,27 @@ export const styles = StyleSheet.create({
   errorlogin:{
     fontSize:18,
     color:"red",
-  }
+  },
+  signUp: {
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: "#CEDC39",
+    borderRadius: 50,
+    width: 300,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 120,
+    marginBottom: 20
+  },
+  signUpText: {
+    color: "#7DA74D",
+    fontWeight: '400',
+  },
+  info: {
+    color: "#000",
+    marginVertical: 15,
+    opacity: 0.6,
+    textAlign: "center",
+  },
 });

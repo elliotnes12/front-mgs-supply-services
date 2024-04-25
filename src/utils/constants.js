@@ -33,5 +33,10 @@ export const ENV = {
     JWT:{
         ACCESS:"access",
         REFRESH:"refresh"
+    },
+    TYPES_USERS:{
+        CUSTOMER:"customer",
+        EMPLOYEE:"employee",
+        MANAGER:"manager"
     }
 }

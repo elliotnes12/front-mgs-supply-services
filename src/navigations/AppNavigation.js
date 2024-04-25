@@ -25,6 +25,8 @@ export function AppNavigation() {
     <Stack.Navigator>
       <Stack.Screen
         name={screens.tab.root}
+        options={{ headerShown: false, ...styles.stackNavigationStyles }}
+
         component={BottomTabNavigation}
       />
       <Stack.Screen

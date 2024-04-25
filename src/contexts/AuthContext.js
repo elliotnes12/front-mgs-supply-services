@@ -11,6 +11,7 @@ export function AuthProvider(props) {
 
     const { children } = props;
     const [user, setUser] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
     const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -64,7 +65,8 @@ export function AuthProvider(props) {
 
             const response = await userController.getMe(accessToken);
 
-            setUser(response)
+            setUser(response.user)
+            setUserInfo(response.info)
             setToken(accessToken)
 
             setLoading(false);
@@ -93,7 +95,8 @@ export function AuthProvider(props) {
         user,
         login,
         logout,
-        updateUser
+        updateUser,
+        userInfo
     };
 
     if (loading) return null;
