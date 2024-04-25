@@ -83,8 +83,8 @@ export function JobHistoryScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden />
-      <Text style={{ fontWeight: "bold", alignItems: "center", fontSize: 26 }}>Last Jobs</Text>
       <Backdrop scrollX={scrollX} />
+      <Text style={ styles.titulo }>History Last Jobs</Text>
       <Animated.FlatList
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
@@ -152,4 +152,13 @@ const styles = StyleSheet.create({
     margin: 0,
     marginBottom: 10,
   },
+  titulo: {
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "Rubik",
+    fontWeight: "bold",
+    fontSize: 33,
+    textAlign: "center",
+    marginTop: 50
+  }
 });
