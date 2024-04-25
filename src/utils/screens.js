@@ -33,9 +33,7 @@ const reports ={
 
 const settings = {
   root: "SettingsRoot",
-  settingScreen: "SettingsScreen",
-  changeFirstnameScreen: "ChangeFirstnameScreen",
-  changeLastnameScreen: "ChangeLastnameScreen",
+  settingScreen: "SettingsScreen"
 };
 
 export const screens = {

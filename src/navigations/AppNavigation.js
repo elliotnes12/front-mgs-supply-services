@@ -15,6 +15,7 @@ import {
   ChangeNameGroupScreen,
 } from "../screens/Groups";
 import { styles } from "./Styles.style";
+import { DashboardScreen } from '../modules/dashboard/screens/DashboardScreen';
 
 initSockets();
 
@@ -29,6 +30,7 @@ export function AppNavigation() {
 
         component={BottomTabNavigation}
       />
+    
       <Stack.Screen
         name={screens.global.chatScreen}
         component={ChatScreen}

@@ -1,9 +1,14 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  background:{
+    height:"100%",
+    backgroundColor:"rgba(255, 255, 255, 1)"
+  },
   container: {
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flex:1
   },
   containerImg:{
     width:140,
@@ -49,7 +54,7 @@ export const styles = StyleSheet.create({
     alignSelf: "stretch",
     marginBottom: 20,
     borderRadius: 18,
-    height: 45,
+    height: 50,
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: 'row',
@@ -85,5 +90,22 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 120,
     marginBottom: 20
+  },
+  singOffText:{
+    color:"rgba(125, 167, 77, 1)"
+  },
+  active:{
+    fontSize: 18,
+    borderRadius:15,
+    backgroundColor: "rgba(125, 167, 77, 1)",
+    width: 300,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 120,
+    marginBottom: 20
+  },
+  activeText:{
+    color:"#fff"
   }
 });

@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export function ChangeFirstNameScreen() {
+export function DashboardScreen() {
   return (
     <View>
-      <Text>ChangeFirstNameScreen</Text>
+      <Text>DashboardScreen</Text>
     </View>
   )
 }

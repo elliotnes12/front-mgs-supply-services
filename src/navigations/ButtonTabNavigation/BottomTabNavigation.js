@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAuth } from '../../modules/Auth/hooks';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./BottomTabNavigation.styles";
+import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -19,6 +20,7 @@ export function BottomTabNavigation() {
   const [tabBarVisible, setTabBarVisible] = useState("flex");
 
   const baseTabs = [
+    { name: "DashboardScreen", component: DashboardScreen, title: 'Dashboard', iconName: 'dashboard' },
     { name: screens.tab.chats.root, component: ChatNavigation, title: 'Chats', iconName: 'chat' },
     { name: screens.tab.groups.root, component: GroupsNavigation, title: 'Grupos', iconName: 'account-group' },
     { name: screens.tab.settings.root, component: SettingsNavigation, title: 'Setting', iconName: 'cog-outline' },
@@ -91,6 +93,9 @@ export function BottomTabNavigation() {
 function screenIcon(route, color, size, active) {
   let iconName;
 
+  if (route.name === "DashboardScreen") {
+    iconName = 'home';
+  }
   if (route.name === screens.tab.chats.root) {
     iconName = 'chat';
   }

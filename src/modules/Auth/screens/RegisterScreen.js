@@ -21,6 +21,10 @@ export function RegisterScreen() {
   const [value, setValue] = useState("customer");
   const [showIdInput, setShowIdInput] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
+  const [isPassFosused,setIsPassFocused] = useState(false);
+  const [isPassConfirmFosused,setIsPassConfirmFocused] = useState(false);
+  const [isIdEmployeeFosused,setIsIdEmployeeFocused] = useState(false);
 
   const handleRadioChange = (newValue) => {
     setValue(newValue);
@@ -106,7 +110,7 @@ export function RegisterScreen() {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={[styles.field, formik.errors.email && styles.inputError]}>
+        <View style={[styles.field, { borderColor: isEmailFocused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }, formik.errors.email && styles.inputError]}>
           <Input
             placeholder="Email"
             variant="unstyled"
@@ -115,9 +119,11 @@ export function RegisterScreen() {
             value={formik.values.email}
             onChangeText={(text) => formik.setFieldValue("email", text)}
             style={styles.input}
+            onFocus={() => setIsEmailFocused(true)}
+            onBlur={() => setIsEmailFocused(false)}
           />
         </View>
-        <View style={[styles.field, formik.errors.password && styles.inputError]}>
+        <View style={[styles.field,{ borderColor: isPassFosused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }, formik.errors.password && styles.inputError]}>
 
           <Input
             placeholder="Password"
@@ -128,6 +134,8 @@ export function RegisterScreen() {
             secureTextEntry={hide}
             onChangeText={(text) => formik.setFieldValue("password", text)}
             style={styles.input}
+            onFocus={() => setIsPassFocused(true)}
+            onBlur={() => setIsPassFocused(false)}
           />
           <TouchableOpacity onPress={() => setHide(!hide)}>
             <MaterialCommunityIcons
@@ -138,7 +146,7 @@ export function RegisterScreen() {
             />
           </TouchableOpacity>
         </View>
-        <View style={[styles.field, formik.errors.confirmPassword && styles.inputError]}>
+        <View style={[styles.field,{ borderColor: isPassConfirmFosused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }, formik.errors.confirmPassword && styles.inputError]}>
 
           <Input
             placeholder="Confirm Password"
@@ -149,6 +157,8 @@ export function RegisterScreen() {
             secureTextEntry={confirmHide}
             onChangeText={(text) => formik.setFieldValue("confirmPassword", text)}
             style={styles.input}
+            onFocus={() => setIsPassConfirmFocused(true)}
+            onBlur={() => setIsPassConfirmFocused(false)}
           />
           <TouchableOpacity onPress={() => setConfirmHide(!confirmHide)}>
             <MaterialCommunityIcons
@@ -163,7 +173,7 @@ export function RegisterScreen() {
 
         {showIdInput && (
 
-          <View style={[styles.field, formik.errors.employeeNumber && styles.inputError]}>
+          <View style={[styles.field,{ borderColor: isIdEmployeeFosused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }, formik.errors.employeeNumber && styles.inputError]}>
 
             <Input
               placeholder="employee number"
@@ -173,6 +183,8 @@ export function RegisterScreen() {
               value={formik.values.employeeNumber}
               onChangeText={(text) => formik.setFieldValue("employeeNumber", text)}
               style={styles.input}
+              onFocus={() => setIsIdEmployeeFocused(true)}
+            onBlur={() => setIsIdEmployeeFocused(false)}
             />
           </View>
         )}
