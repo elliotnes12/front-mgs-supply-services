@@ -1,21 +1,19 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
-import { initSockets, screens } from '../utils';
-import { BottomTabNavigation } from './ButtonTabNavigation';
-import {
-  UserProfileScreen,
-  CameraScreen,
-  ImageFullScreen,
-} from "../screens/Global";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 import { ChatScreen } from "../screens/Chats";
 import {
-  GroupScreen,
-  GroupProfileScreen,
+  ImageFullScreen,
+  UserProfileScreen
+} from "../screens/Global";
+import {
   AddUserGroupScreen,
   ChangeNameGroupScreen,
+  GroupProfileScreen,
+  GroupScreen,
 } from "../screens/Groups";
+import { initSockets, screens } from '../utils';
+import { BottomTabNavigation } from './ButtonTabNavigation';
 import { styles } from "./Styles.style";
-import { DashboardScreen } from '../modules/dashboard/screens/DashboardScreen';
 
 initSockets();
 
@@ -26,8 +24,7 @@ export function AppNavigation() {
     <Stack.Navigator>
       <Stack.Screen
         name={screens.tab.root}
-        options={{ headerShown: false, ...styles.stackNavigationStyles }}
-
+        options={{ headerShown: false }}
         component={BottomTabNavigation}
       />
     
@@ -41,7 +38,6 @@ export function AppNavigation() {
         component={GroupScreen}
         options={{ headerShown: false, ...styles.stackNavigationStyles }}
       />
-
 
       <Stack.Group
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
@@ -66,14 +62,12 @@ export function AppNavigation() {
           component={ChangeNameGroupScreen}
           options={{ title: "Cambiar nombre del grupo" }}
         />
-
         <Stack.Screen
           name={screens.global.imageFullScreen}
           component={ImageFullScreen}
           options={{ headerShown: false }}
         />
       </Stack.Group>
-
     </Stack.Navigator>
-  )
+  );
 }

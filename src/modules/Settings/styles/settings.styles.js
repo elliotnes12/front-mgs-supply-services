@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   background:{
     height:"100%",
-    backgroundColor:"rgba(255, 255, 255, 1)"
+    backgroundColor:"#F3F3F3"
   },
   container: {
     justifyContent: "flex-start",
@@ -81,31 +81,42 @@ export const styles = StyleSheet.create({
   },
   singOff:{
     fontSize: 18,
-    borderWidth: 1,
-    borderColor: "#CEDC39",
+    backgroundColor: "#7DA74D",
     borderRadius: 50,
     width: 300,
-    height: 40,
+    height: 50,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 120,
+    marginTop: 40,
     marginBottom: 20
+  },
+  dropdownList: {
+    position: 'absolute',
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+    marginTop: 10,
+    maxHeight: 150,
+    zIndex: 999,
   },
   singOffText:{
-    color:"rgba(125, 167, 77, 1)"
+    color:"#fff",
+    fontFamily:"Rubik",
+    fontWeight:"bold"
   },
   active:{
-    fontSize: 18,
-    borderRadius:15,
-    backgroundColor: "rgba(125, 167, 77, 1)",
-    width: 300,
-    height: 40,
+    borderRadius:28,
+    backgroundColor: "#ADD8E6",
+    width: 150,
+    height: 50,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 120,
-    marginBottom: 20
+    marginBottom: 20,
   },
   activeText:{
-    color:"#fff"
+    color:"#000",
+    fontSize:16
   }
 });

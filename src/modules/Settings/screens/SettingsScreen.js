@@ -9,6 +9,8 @@ import CustomModal from "../../../components/core/Modal/Modal";
 import { ENV } from "../../../utils";
 import { initialValues, validationSchema } from "../forms/Settings.forms";
 import { useFormik } from "formik";
+import { assets } from "../../../assets";
+
 
 export function SettingsScreen() {
   const { logout, user: { role, active, email }, userInfo } = useAuth();
@@ -17,6 +19,7 @@ export function SettingsScreen() {
   const [idEmployee, setIdEmployee] = useState(false);
   const [isNameFocused, setIsNameFocused] = useState(false);
   const [isLastNameFocused, setIsLastNameFocused] = useState(false);
+  const [isCompanyFocused, setIsCompanyFocused] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
 
   const formik = useFormik({
@@ -51,6 +54,8 @@ export function SettingsScreen() {
   const handleNameBlur = () => setIsNameFocused(false);
   const handleLastNameFocus = () => setIsLastNameFocused(true);
   const handleLastNameBlur = () => setIsLastNameFocused(false);
+  const handleCompanyFocus = () => setIsCompanyFocused(true);
+  const handleCompanyBlur = () => setIsCompanyFocused(false);
 
   const saveImage = async (imageUri) => {
     try {
@@ -84,11 +89,17 @@ export function SettingsScreen() {
 
   return (
     <View style={styles.background}>
-
       <SafeAreaView style={styles.container}>
         <View style={styles.containerImg}>
           <View style={styles.imgProfile}>
-            <Image style={{ width: "100%", height: "100%" }} source={{ uri: image }} />
+            {(image ?
+              <>
+                <Image style={{ width: "100%", height: "100%" }} source={{ uri: image }} />
+              </> :
+              <>
+                <Image style={{ width: "100%", height: "110%" }} resizeMode="cover" source={assets.image.png.profile} />
+              </>
+            )}
           </View>
           <TouchableOpacity style={styles.camera} onPress={() => setIsModalVisible(true)}>
             <Icon as={MaterialCommunityIcons} name="camera-outline" size={25} color="#000" />
@@ -158,13 +169,32 @@ export function SettingsScreen() {
               />
             </View>
           )}
+
+
+
+          {!idEmployee && !active && (
+            <View style={[styles.field, { borderColor: isCompanyFocused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }]}>
+              <View style={styles.icon}>
+                <Icon as={MaterialCommunityIcons} name="domain" size={25} color="#fff" />
+              </View>
+              <TextInput
+                placeholder="Company"
+                placeholderTextColor="#7DA74D"
+                autoCapitalize="none"
+                style={styles.input}
+                onFocus={handleCompanyFocus}
+                onBlur={handleCompanyBlur}
+              />
+            </View>
+          )}
+
         </View>
 
 
 
         {activeProfile && (
           <TouchableOpacity style={styles.active} onPress={logout}>
-            <Text style={styles.activeText}>Active</Text>
+            <Text style={styles.activeText}>Activate Profile</Text>
           </TouchableOpacity>
         )}
 

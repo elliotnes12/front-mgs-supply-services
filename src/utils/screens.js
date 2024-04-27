@@ -5,6 +5,7 @@ const auth = {
 };
 
 const global = {
+  dashboard:"DashboardScreen",
   userProfileScreen: "UserProfileScreen",
   cameraScreen: "CameraScreen",
   imageFullScreen: "ImageFullScreen",
@@ -18,7 +19,7 @@ const global = {
 const chats = {
   root: "ChatsRoot",
   chatsScreen: "ChatsScreen",
-  createChatScreen: "CreateChatScreen",
+  createChatScreen: "CreateChatScreen"
 };
 
 const groups = {

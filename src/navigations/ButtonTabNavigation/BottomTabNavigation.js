@@ -3,13 +3,13 @@ import { TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SettingsNavigation, GroupsNavigation, ChatNavigation, ReportsNavigation } from '../stacks';
 import { screens } from '../../utils';
-import { Icon, View } from 'native-base';
+import { Icon, Image, Text, View } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAuth } from '../../modules/Auth/hooks';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./BottomTabNavigation.styles";
 import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
-
+import { assets } from '../../assets';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +20,6 @@ export function BottomTabNavigation() {
   const [tabBarVisible, setTabBarVisible] = useState("flex");
 
   const baseTabs = [
-    { name: "DashboardScreen", component: DashboardScreen, title: 'Dashboard', iconName: 'dashboard' },
     { name: screens.tab.chats.root, component: ChatNavigation, title: 'Chats', iconName: 'chat' },
     { name: screens.tab.groups.root, component: GroupsNavigation, title: 'Grupos', iconName: 'account-group' },
     { name: screens.tab.settings.root, component: SettingsNavigation, title: 'Setting', iconName: 'cog-outline' },
@@ -41,13 +40,13 @@ export function BottomTabNavigation() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerTitle: false,
-        headerShown: route.name === screens.tab.settings.root, // Mostrar header solo en la pantalla de ajustes
-        tabBarStyle: {
-          height:50,
-          display:tabBarVisible,
-          flex:0
-        },
-
+        headerShown: route.name === screens.tab.settings.root,
+        tabBarLabelStyle: { display: 'none' },
+        tabBarStyle: styles.tabBar,
+        tabBarButton: styles.tabBarButton,
+        tabBarIcon: ({ color, size }) => screenIcon(route, color, size, active),
+        tabBarStyle: [{ display: tabBarVisible, }, styles.tabBar],
+        headerStyle:[styles.headerGoback],
         headerLeft: () => (route.name === screens.tab.settings.root ? (
           <TouchableOpacity
             onPress={() => {
@@ -65,15 +64,34 @@ export function BottomTabNavigation() {
           if (!active && route.name !== screens.tab.settings.root) {
             return <TouchableOpacity {...props} disabled />;
           }
-          if(route.name === screens.tab.settings.root){
+          if (route.name === screens.tab.settings.root) {
             return <TouchableOpacity onPressIn={handleSettingsPress} {...props} />;
           }
-          
           return <TouchableOpacity {...props} />;
         },
       })}
-     
     >
+      <Tab.Screen
+        name="DashboardScreen"
+        component={DashboardScreen}
+        options={{
+          tabBarItemStyle: [styles.tabBarItemHome],
+          tabBarIcon: ({ color, size }) => (
+            <View style={[styles.itemHome,{backgroundColor:!active? "": "#CEDC39", borderRadius:24}]}>
+              <View style={{ width: 40, height: 30 }}>
+                <Image
+                  style={styles.img}
+                  resizeMode='contain'
+                  source={
+                    assets.image.png.home
+                  } alt="icon" />
+              </View>
+              <Text style={{ color: "rgba(34, 33, 40, 1)", marginLeft: 5 }}>Home</Text>
+            </View>
+          ),
+        }}
+      />
+
       {tabsToShow.map(tab => (
         <Tab.Screen
           key={tab.name}
@@ -82,7 +100,10 @@ export function BottomTabNavigation() {
           options={{
             title: tab.title,
             headerTitleAlign: "center",
-            headerTintColor: "rgba(71, 71, 71, 1)"
+            headerTintColor: "rgba(71, 71, 71, 1)",
+            tabBarItemStyle: [styles.tabBarItemOptions,
+              {backgroundColor:!active && tab.name === screens.tab.settings.root? "#fff" : 
+              active? "#fff" : "transparent" }]
           }}
         />
       ))}
@@ -91,30 +112,30 @@ export function BottomTabNavigation() {
 }
 
 function screenIcon(route, color, size, active) {
-  let iconName;
+  let image;
 
   if (route.name === "DashboardScreen") {
-    iconName = 'home';
+    image = 'home';
   }
   if (route.name === screens.tab.chats.root) {
-    iconName = 'chat';
+    image = assets.image.png.chat;
   }
   if (route.name === screens.tab.groups.root) {
-    iconName = 'account-group';
+    image = assets.image.png.calendar;
   }
   if (route.name === screens.tab.settings.root) {
-    iconName = 'cog-outline';
+    image = assets.image.png.setting;
   }
   if (route.name === screens.tab.reports.root) {
-    iconName = 'file-document';
+    image = 'file-document';
   }
 
   return (
-    <Icon
-      as={MaterialCommunityIcons}
-      name={iconName}
-      color={active ? "#000" : "#000"}
-      size={size}
-    />
+    <Image
+      style={styles.img}
+      resizeMode='contain'
+      source={
+        image
+      } alt="icon" />
   );
 }
