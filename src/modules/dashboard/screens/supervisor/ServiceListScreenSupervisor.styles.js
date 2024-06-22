@@ -145,7 +145,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'hidden',
     flexDirection:"row"
-    
-    
   }
 });
