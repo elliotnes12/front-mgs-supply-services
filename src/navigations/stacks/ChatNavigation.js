@@ -1,7 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import {  ChatsScreen, CreateChatsScreen } from "../../screens/Chats";
+import {  ChatsScreen } from "../../modules/chat/screens/ChatsScreen";
+import {  CreateChatsScreen } from "../../modules/chat/screens/CreateChatsScreen";
 import { screens } from "../../utils";
 import { styles } from "../Styles.style";
 
@@ -20,7 +21,7 @@ export function ChatNavigation() {
       <Stack.Screen
         name={screens.tab.chats.chatsScreen}
         component={ChatsScreen}
-        options={{title:"Chats"}}
+        options={{headerShown:false}}
       />
 
       <Stack.Screen
@@ -28,7 +29,7 @@ export function ChatNavigation() {
         component={CreateChatsScreen}
         options={{
           title:"Nuevo chat",
-          presentation: "model",
+          presentation: "modal",
           ...styles.modalStyles
         
         }}

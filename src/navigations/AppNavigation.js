@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { ChatScreen } from "../screens/Chats";
+import { ChatScreen } from "../modules/chat/screens/ChatScreen";
 import {
   ImageFullScreen,
   UserProfileScreen
@@ -15,16 +15,17 @@ import { initSockets, screens } from '../utils';
 import { BottomTabNavigation } from './ButtonTabNavigation';
 import { styles } from "./Styles.style";
 
+
 initSockets();
 
 const Stack = createNativeStackNavigator();
 
 export function AppNavigation() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator >
       <Stack.Screen
         name={screens.tab.root}
-        options={{ headerShown: false }}
+        options={{ headerShown: false,...styles.stackNavigationStyles  }}
         component={BottomTabNavigation}
       />
     

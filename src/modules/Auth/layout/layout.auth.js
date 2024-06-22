@@ -1,37 +1,57 @@
-
-
-import React from 'react'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from './layout.styles';
-import { View, Image } from 'native-base';
+import React, { useState } from "react";
+import { KeyboardAvoidingView, Platform, View, ImageBackground, SafeAreaView, ScrollView, Keyboard, ActivityIndicator } from "react-native";
 import { assets } from "../../../assets";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { styles } from "./layout.styles";
 
-export default function LayoutAuth({ children }) {
-    return (
-        <>
-            <LinearGradient
-                colors={['rgba(125, 167, 77, 1)', 'rgba(125, 167, 77, 1)']}
-                style={styles.gradient}
-                start={[0, 0]}
-                end={[1, 0]}>
-                <KeyboardAwareScrollView
-                    contentContainerStyle={styles.container}
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    keyboardShouldPersistTaps="handled">
+export default function LayoutAuth({ children, userType }) {
+  const [loading, setLoading] = useState(true);
+  
+  let backgroundImage;
 
-                    <View style={styles.imgContainer}>
-                        <Image source={assets.image.png.whiteLogo} alt="Logo" style={styles.img} />
-                    </View>
+  if (userType === "customer") {
+    backgroundImage = assets.image.imagesAuth.registerCustomer;
+  } else if (userType === "company") {
+    backgroundImage = assets.image.imagesAuth.registerEmployee;
+  }
+  else if(userType === "login"){
+    backgroundImage = assets.image.png.bglogin;
+  }
 
-                    <SafeAreaView style={styles.content}>
-                        {children}
-                    </SafeAreaView>
+  const handleImageLoad = () => {
+    setLoading(false);
+  };
 
-                </KeyboardAwareScrollView>
-
-            </LinearGradient>
-        </>
-    )
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : null}
+        style={{ flex: 1 }}
+        enabled
+      >
+        <View style={{ flex: 1 }}>
+          {loading && (
+            <View style={styles.spinnerContainer}>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )}
+          <ImageBackground
+            source={backgroundImage}
+            style={styles.container}
+            resizeMode="cover"
+            onLoad={handleImageLoad}
+          >
+            <ScrollView
+              contentContainerStyle={styles.scrollViewContent}
+              keyboardShouldPersistTaps="handled"
+            >
+              <View style={styles.overlay} />
+              <View style={styles.content}>
+                {children}
+              </View>
+            </ScrollView>
+          </ImageBackground>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
 }

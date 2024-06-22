@@ -1,26 +1,34 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { StyleSheet } from 'react-native';
 import { NativeBaseProvider } from "native-base";
 import HandlerNavigation from './src/navigations/HandlerNavigation';
 import { AuthProvider } from './src/contexts';
-import { useFonts } from 'expo-font';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
+import { useFonts, Poppins_400Regular, Poppins_700Bold, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
 export default function App() {
 
-  const [fontsLoaded] = useFonts({
-    'Rubik': require('./assets/fonts/rubik/Rubik-Regular.ttf'),
+  let [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_400Regular,
+    Poppins_700Bold,
+    Poppins_600SemiBold,
+    
   });
 
- 
-  return (
-    <NavigationContainer>
-      <NativeBaseProvider>
-         <AuthProvider>
-           <HandlerNavigation />
-         </AuthProvider> 
-      </NativeBaseProvider>
-    </NavigationContainer>
-  );
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }else{
+
+    return (
+      <NavigationContainer>
+        <NativeBaseProvider>
+           <AuthProvider>
+             <HandlerNavigation />
+           </AuthProvider> 
+        </NativeBaseProvider>
+      </NavigationContainer>
+    );
+  }
+
 }
 

@@ -1,50 +1,70 @@
-import { View, Text, Pressable } from 'react-native'
-import React from 'react'
-import { styles } from "../styles/dashboard.styles";
+import React from 'react';
+import { View, Text, Pressable } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Icon, Image } from 'native-base';
+import { Image } from 'native-base';
 import { assets } from "../../../assets";
+import { useAuth } from '../../Auth/hooks';
+import { ServiceListScreenCt } from './customer/ServiceListScreen';
+import { ServiceListScreenSp } from './supervisor/ServiceListScreenSupervisor';
+import { styles } from "../styles/dashboard.styles";
 
 export function DashboardScreen() {
+    const { userInfo, isCustomer } = useAuth();
+    const { name } = userInfo;
+
     return (
         <View style={styles.background}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
-                    <View style={styles.btnNewTask}>
-                        <Pressable style={styles.taskIcon} >
-                            <Icon as={MaterialCommunityIcons} name="plus" size={25} color="#000" />
-                        </Pressable>
-                        <Text style={styles.labelNewTask}>New Task</Text>
-                    </View>
                     <View style={styles.profile}>
-                        <Pressable style={styles.alerts} >
-                            <Icon as={MaterialCommunityIcons} name="bell-badge-outline" size={33} color="#000" />
-                        </Pressable>
-
-                        <Pressable style={styles.goProfile} >
-                            <Image style={{ width: "100%", height: "100%" }} resizeMode="cover" source={assets.image.png.profile} />
-                        </Pressable>
+                        <View style={styles.containerProfile}>
+                            <Pressable style={styles.goProfile}>
+                                <Image style={styles.imageProfile} resizeMode="cover" source={assets.image.png.profile} />
+                            </Pressable>
+                        </View>
+                        <View style={styles.userInfo}>
+                            <Text style={styles.userInfo__hello}>Hello,</Text>
+                            <Text style={styles.userInfo__name}>{name}</Text>
+                        </View>
                     </View>
+                    <Pressable style={styles.alerts}>
+                        <Image style={styles.imageAlerts} resizeMode="cover" source={assets.image.png.alerts} />
+                    </Pressable>
                 </View>
 
-                <View style={styles.welcome}>
-                      <Text style={styles.greetings}>
-                         <Text style={{fontWeight:"bold",color:"#000"}}>Hi, Max </Text>nice to see you!
-                      </Text>
-                </View>
-            
-                 <View style={styles.news}>
-                     <View style={styles.headerNews}>
-                       <Pressable style={styles.btnNewsActive}  >
-                           <Text style={styles.textNewsActive}>Latest Activities</Text>
-                        </Pressable>
-                        <Pressable style={styles.btnNews}>
-                           <Text style={styles.textNews}>All</Text>
-                        </Pressable>
-                     </View>
-                 </View>
+                {isCustomer && (
+                    <>
+                        <View style={styles.promos}>
+                            <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.bgpromos}>
+                                <Text style={styles.promoText}>Cleaning the lobby and Office</Text>
+                                <Text style={styles.promoLastService}>Last service used</Text>
+                                <Text style={styles.promoDaysAgo}>3 days ago</Text>
+                                <Text style={styles.promoRating}>4.7</Text>
+                                <Text style={styles.promoTitle}>Carpet cleaning</Text>
+                                <Image style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.man} />
+                                <Image style={styles.promoClock} resizeMode="cover" source={assets.image.png.reloj} />
+                                <Image style={styles.promoStar} resizeMode="cover" source={assets.image.png.estrellados} />
+                            </LinearGradient>
+                        </View>
+
+                        <Text style={styles.tituloCategorias}>
+                            Choose a category
+                        </Text>
+                        <View style={styles.tabViewContainer}>
+                            <ServiceListScreenCt />
+                        </View>
+                    </>
+                )}
+
+                {!isCustomer && userInfo.type === "supervisor" && (
+                    <>
+                        <Text style={styles.title}>Services Generated</Text>
+                        <Text style={styles.viewAll}>View All</Text>
+                        <ServiceListScreenSp />
+                    </>
+                )}
             </SafeAreaView>
         </View>
     )
-}
+};

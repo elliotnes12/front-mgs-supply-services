@@ -19,7 +19,7 @@ export function GroupsNavigation() {
       <Stack.Screen
         name={screens.tab.groups.groupsScreen}
         component={GroupScreen}
-        options={{title:"Grupos"}}
+        options={{headerShown:false}}
       />
 
       <Stack.Screen

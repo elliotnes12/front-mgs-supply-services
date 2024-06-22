@@ -12,6 +12,7 @@ export function AuthProvider(props) {
     const { children } = props;
     const [user, setUser] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
+    const [isCustomer, setIsCustomer] = useState(false);
     const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -65,13 +66,24 @@ export function AuthProvider(props) {
 
             const response = await userController.getMe(accessToken);
 
-            setUser(response.user)
-            setUserInfo(response.info)
+            
+            const {user,customer,employee} = response.data;
+
+            if(customer){
+                setIsCustomer(true)
+                setUserInfo(customer)
+            }else{
+                setUserInfo(employee)
+            }
+
+
+            setUser(user)
             setToken(accessToken)
 
             setLoading(false);
 
         } catch (error) {
+            console.log("whoisit" + isCustomer)
             setLoading(false)
         }
     };
@@ -96,7 +108,8 @@ export function AuthProvider(props) {
         login,
         logout,
         updateUser,
-        userInfo
+        userInfo,
+        isCustomer
     };
 
     if (loading) return null;

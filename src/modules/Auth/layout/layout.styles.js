@@ -1,36 +1,18 @@
 import { StyleSheet } from "react-native";
 
-
-export const styles = new StyleSheet.create({
-
-   
+export const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flex: 0,
+    flex: 1,
   },
-  gradient: {
-    width: '100%',
-    flex: 0,
-  },
-  img: {
-    width: 300,
-    resizeMode: "contain",
-    marginBottom: 5,
-  },
-  imgContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30,
+  scrollViewContent: {
+    flexGrow: 1,
   },
   content: {
-    flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
-    width: '100%',
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
   },
-
-
-})
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+});

@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
     goBack: {
         borderRadius: 50,
@@ -13,8 +12,8 @@ export const styles = StyleSheet.create({
         borderWidth: 2,
         marginLeft: 20,
     },
-    headerGoback:{
-        backgroundColor:"#F3F3F3"
+    headerGoback: {
+        backgroundColor: "#fff"
     },
     tabBarButton: {
         flex: 1,
@@ -22,48 +21,56 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     tabBar: {
-        marginLeft: "5%",
-        marginRight: "5%",
-        paddingLeft: 18,
-        paddingRight: 18,
-        height: 65,
-        width: "90%",
-        borderRadius: 50,
-        backgroundColor: "rgba(210, 210, 210, 0.8)",
-        marginBottom: 20,
+        height: 100,
+        width: "100%",
+        backgroundColor: "#F9FCDE",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-around",
         flexDirection: "column",
-    },
-    tabBarItemHome: {
-        width: 130,
-        maxWidth: 130,
-        height: "100%",
-        marginRight: 2,
-        height:"100%"
-        
+        padding: 0,
+        margin: 0,
+        borderTopWidth: 0, 
+        position: 'relative', 
+        zIndex: 2,
     },
     tabBarItemOptions: {
-        width: 45,
-        height: 45,
-        maxWidth: 45,
-        overflow: "hidden",
-        borderRadius: 25,
-        marginRight: 5,
+        flex: 1, 
+        height: "100%",
+        position: "relative",
         padding: 8,
-        marginTop:10
+        alignItems: 'center',
+        backgroundColor: "transparent",
+        justifyContent: 'center',
     },
     img: {
-        width: "100%",
-        height: "100%",
+        width: 28,
+        height: 28,
     },
-    itemHome: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    tabText: {
+        color: "rgba(34, 33, 40, 1)",
+        marginTop: 5,
+        fontSize: 13,
+        fontFamily: "Poppins_400Regular"
+    },
+    border: { 
+        position: "absolute",
+        bottom:-16,
+        left:-50
+    },
+    registerOrder: {
+        width: 65,
+        height: 65,
+        borderRadius: 32.5,
+        display: "flex",
+        alignItems: "center",
         justifyContent: "center",
-        padding: 10,
-        paddingRight: 25,
-        borderRadius: 25,
-        overflow:"hidden"
-    }
+        position: "absolute",
+        bottom: 0,
+        left: -32.5
+    },
+
 });

@@ -1,115 +1,212 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  background:{
-    height:"100%",
-    backgroundColor:"rgba(243, 243, 243, 1)"
+  background: {
+    height: "100%",
+    backgroundColor: "#fff",
   },
   container: {
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding:25,
-    flex:1
+    padding: 25,
+    flex: 1,
   },
-  btnNewTask:{
-    backgroundColor:"rgba(206, 220, 57, 1)",
-    width:157,
-    height:62,
-    flexDirection:"row",
-    alignItems:"center",
-    borderRadius:40,
-    paddingLeft:20,
+  header: {
+    backgroundColor: "#fff",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    height: 70,
+    marginBottom:20
   },
-  taskIcon:{
-    height:50,
-    width:50,
-    justifyContent:"center",
-    alignItems:"center",
-    backgroundColor:"rgba(240, 240, 240, 1)",
-    borderRadius:25,
-    marginRight:10,
-    borderWidth:2,
-    borderColor:"#fff"
+  profile: {
+    flexDirection: "row",
   },
-  labelNewTask:{
-    fontWeight:"500",
-    fontFamily:"Rubik"
+  alerts: {
+    height: 35,
+    width: 35,
+    marginRight: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  header:{
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"space-between",
-    width:"100%"
+  goProfile: {
+    height: 70,
+    width: 70,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 35,
+    overflow: "hidden",
+    borderWidth: 4,
+    borderColor: "#fff",
   },
-  profile:{
-    height:62,
-    flexDirection:"row",
-    alignItems:"center",
+  containerProfile: {
+    height: 75,
+    width: 75,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#CEDC39",
+    borderRadius: 37.5,
   },
-  alerts:{
-    height:50,
-    width:50,
-    justifyContent:"center",
-    alignItems:"center",
-    backgroundColor:"rgba(240, 240, 240, 1)",
-    borderRadius:25,
-    marginRight:10,
-    borderWidth:4,
-    borderColor:"#fff",
-    padding:15
+  userInfo: {
+    marginLeft: 10,
+    justifyContent: "center",
+    minWidth: 100,
   },
-  goProfile:{
-    height:56,
-    width:56,
-    justifyContent:"center",
-    alignItems:"center",
-    borderRadius:28,
-    marginRight:10,
-    overflow:"hidden",
-    borderWidth:4,
-    borderColor:"#fff"
+  userInfo__hello: {
+    fontFamily: "Poppins_400Regular",
+    color: "#333333",
+    fontSize: 16,
   },
-  welcome:{
-    marginTop:30
+  userInfo__name: {
+    fontFamily: "Poppins_700Bold",
+    color: "#333333",
+    fontSize: 17,
   },
-  greetings:{
-    fontSize:28,
-    width:200,
-    color:"rgba(121, 121, 129, 1)",
-    paddingLeft:10
+  promos: {
+    height: 210,
+    marginTop: 15,
+    width: "100%",
+    borderRadius: 20,
+    overflow: "hidden",
+    position: "relative",
   },
-  news:{
-    padding:10,
-    marginTop:30
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
   },
-  headerNews:{
-    flexDirection:"row",
-    alignItems:"center"
+  searchInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#ABABAB',
+    borderWidth: 1,
+    borderRadius: 4,
+    flex: 1,
   },
-  btnNewsActive:{
-    backgroundColor:"rgba(125, 167, 77, 1)",
-    height:50,
-    justifyContent:"center",
-    alignItems:"center",
-    width:141,
-    borderRadius:25
+  searchIcon: {
+    width: 27,
+    height: 27,
+    marginLeft: 15,
   },
-  textNews:{
-    color:"rgba(31, 31, 33, 1)"
+  searchInput: {
+    height: 45,
+    flex: 1,
+    paddingHorizontal: 10,
+    fontFamily: "Poppins_400Regular",
+    fontSize: 16,
   },
-  btnNews:{
-    backgroundColor:"rgba(250, 250, 250, 1)",
-    height:50,
-    justifyContent:"center",
-    alignItems:"center",
-    width:80,
-    borderRadius:25,
-    borderWidth:2,
-    borderColor:"#fff",
-    marginLeft:15
+  searchButton: {
+    backgroundColor: '#CEDC39',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    height: 61,
+    width: 56,
+    borderRadius: 4,
   },
-  textNewsActive:{
-    color:"#fff"
-  }
+  searchButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  bgpromos: {
+    width: "100%",
+    height: "100%",
+    position: "relative",
+  },
+  promos__bgman: {
+    height: 180,
+    width: 250,
+    position: "absolute",
+    right: -35,
+    bottom: 0,
+  },
+  tabViewContainer: {
+    flex: 1,
+    marginTop: 5,
+    width: "100%",
+  },
+  tituloCategorias: {
+    color: "#333333",
+    fontFamily: 'Poppins_700Bold',
+    marginTop: 10,
+    fontSize: 24,
+  },
+  imageProfile: {
+    width: "100%",
+    height: "100%",
+  },
+  imageAlerts: {
+    width: "100%",
+    height: "100%",
+  },
+  promoText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    position: "absolute",
+    top: 100,
+    left: 10,
+  },
+  promoLastService: {
+    backgroundColor: "white",
+    fontSize: 16,
+    color: "#7EA74C",
+    position: "absolute",
+    top: 30,
+    left: 10,
+    padding: 5,
+  },
+  promoDaysAgo: {
+    color: "#FFFFFF",
+    position: "absolute",
+    top: 180,
+    left: 40,
+  },
+  promoRating: {
+    fontSize: 18,
+    color: "#FFFFFF",
+    position: "absolute",
+    top: 30,
+    left: 180,
+  },
+  promoTitle: {
+    fontFamily: 'Poppins_700Bold',
+    fontSize: 21,
+    color: "#FFFFFF",
+    position: "absolute",
+    top: 70,
+    left: 10,
+  },
+  promoClock: {
+    width: 24,
+    height: 24,
+    position: "absolute",
+    top: 180,
+    left: 10,
+  },
+  promoStar: {
+    width: 18,
+    height: 18,
+    position: "absolute",
+    top: 33,
+    left: 158,
+  },
+  titleChooseCategory:{
+    color:"#333333",
+    fontFamily:"Poppins_700Bold",
+    fontSize:20
+  },
+  viewAll:{
+    top:-30,
+    left:280,
+    color:'#7DA74D'
+  },
+  title:{
+    color: "#333333",
+    fontFamily: 'Poppins_700Bold',
+    marginTop: 10,
+    fontSize: 18,
   
+  },
 });

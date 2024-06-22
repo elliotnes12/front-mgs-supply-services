@@ -1,17 +1,41 @@
-import originLogo from "./logo.png";
-import whiteLogo from "./logo3.png";
-import profile  from "./profile.png";
-import setting  from "./setting.png";
-import chat  from "./chat.png";
-import calendar  from "./calendar.png";
-import home  from "./home.png";
-
-export const png = {
-  originLogo,
-  whiteLogo,
-  profile,
-  setting,
-  chat,
-  calendar,
-  home
+const png = {
+  originLogo: require("./login1/logo.png"),
+  whiteLogo: require("./registro/logodos.png"),
+  profile: require("./home1/profile.png"),
+  setting: require("./buttonmenu/setting.png"),
+  chat: require("./buttonmenu/chatuno.png"),
+  calendar: require("./orders/calendar.png"),
+  home: require("./buttonmenu/home.png"),
+  homeFocus: require("./buttonmenu/homeFocus.png"),
+  plus: require("./buttonmenu/plus.png"),
+  order: require("./buttonmenu/order.png"),
+  alerts: require("./home1/campana.png"),
+  lupa: require("./home1/lupa.png"),
+  man: require("./home1/man.png"),
+  message: require("./chats/message.png"),
+  chatFocus: require("./buttonmenu/chatFocus.png"),
+  iconServices: require("./home1/icon-services.png"),
+  categoriaUno: require("./login1/categoria1.png"),
+  estrella: require("./home1/estrella.png"),
+  flecha: require("./home1/flecha.png"),
+  reloj: require("./home1/reloj.png"),
+  estrellados: require("./home1/estrellados.png"),
+  bglogin: require("./fondos/bglogin.jpg"),
+  escoba: require("./orders/escoba.png"),
+  botePintura: require("./orders/botePintura.png"),
+  documentouno: require("./home1/documentouno.png"),
+  comentariosuno: require("./home1/comentariosuno.png"),
+  documentosdos: require("./home1/documentosdos.png"),
+  comentariosdos: require("./home1/comentariosdos.png"),
+  maletauno: require("./home1/maletauno.png"),
+  maletinuno: require("./registro/maletinuno.png"),
+  customer: require("./registro/customer.png"),
+  customerdos: require("./registro/customerdos.png"),
+  maletindos: require("./registro/maletindos.png"),
+  union: require("./buttonmenu/union.png"),
+  orderFocus: require("./buttonmenu/orderFocus.png"),
+  calendar:require("./home1/calendar.png"),
+  aprovado:require("./home1/aprovado.png")
 };
+
+export { png };

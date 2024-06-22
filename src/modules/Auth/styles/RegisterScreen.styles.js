@@ -1,14 +1,37 @@
 import { StyleSheet } from "react-native";
 
-export const styles = new StyleSheet.create({
-
-
-  title:{
-    fontFamily: "Rubik",
-    fontSize:28,
-    color:"#7DA74D",
-    marginBottom:15,
-    marginTop:35
+export const styles = StyleSheet.create({
+  title: {
+    fontFamily: "Poppins_600SemiBold",
+    fontSize: 32,
+    marginTop:135,
+    color: "#FFFFFF",
+  },
+  subtitle:{
+    color:"#ffffff",
+    fontFamily:'Poppins_400Regular'
+  },
+  cuestion: {
+    alignSelf: "flex-start",
+    fontFamily:'Poppins_400Regular',
+    color:"#ffffff",
+    marginTop: 32,
+    marginBottom: 10,
+  },
+  actions: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  registerButton: {
+    width: 155,
+    height: 50,
+    fontFamily:'Poppins_400Regular',
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    flexDirection:"row",
+    display:"flex"
   },
   register: {
     color: "#0891b2",
@@ -17,7 +40,6 @@ export const styles = new StyleSheet.create({
     marginVertical: 30,
   },
   btnLogin: {
-    fontFamily: "Rubik",
     fontSize: 18,
     borderWidth: 1,
     borderColor: "#CEDC39",
@@ -27,82 +49,101 @@ export const styles = new StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 60,
-    marginBottom: 30
+    marginBottom: 30,
   },
-  btnLoginText:{
-    color:"#7DA74D",
-  }, 
-  container:{
-    flex:0,
-    justifyContent:"center",
-    alignItems:"center"
+  btnLoginText: {
+    color: "#7DA74D",
+  },
+  container: {
+    flex: 1,
+    height:"100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   viewInput: {
     marginBottom: 5,
   },
   field: {
-    borderColor: "#7DA74D",
+    marginBottom: 10,
+    width: 320,
+  },
+  inputContainer: {
+    borderColor: "#ffffff",
     borderWidth: 1.2,
-    marginBottom: 20,
     borderRadius: 8,
-    height: 55,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flexDirection: 'row',
-    width: 300,
+    height: 45,
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 10,
   },
   input: {
-    fontFamily: "Rubik",
     fontSize: 18,
     flex: 1,
-    height: '80%',
-    placeholderTextColor: "#7DA74D",
-    paddingHorizontal: 13,
-    maxWidth: 250,
-    paddingLeft:20
+    height: '100%',
+    color: "#000",
   },
-  placeholder:{
-    color:"#7DA74D",
-    fontFamily: "Rubik",
-    fontSize:18
-  },  
-  icon: {
-    width: 40,
-    height: 50,
-    textAlign: 'center',
-    lineHeight: 50
-  },
-  inputError:{
-    borderColor:'#dc3545'
+  inputError: {
+    borderColor: '#dc3545',
   },
   button: {
-    fontFamily: "Rubik",
     backgroundColor: "#7DA74D",
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: '20%',
-    width: 300,
+    width: 250,
     borderRadius: 50,
-    marginTop: 40,
-    elevation: 3
+    marginTop: 20,
+    marginBottom: 20,
+    elevation: 3,
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     lineHeight: 21,
-    fontWeight: 'bold',
+    fontFamily:'Poppins_400Regular',
     letterSpacing: 0.25,
     color: 'white',
   },
-  label:{
-    color:"#000",
-    fontFamily: "Rubik",
-    fontSize:18
+  label: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontFamily:'Poppins_400Regular',
+    marginBottom: 5,
   },
-  borderBottom: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#7DA74D",
-    width: "50%",
-    marginVertical: 20, 
+  labelContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
+  icon: {
+    marginLeft: 10,
+  },
+  errorlogin: {
+    color: '#dc3545',
+  },
+  signUpButton: {
+    padding: 15,
+    borderRadius: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    width:220
+  },
+  loginNowContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom:20,
+    width:220
+  },
+  loginNowText: {
+    fontSize: 16,
+    color: "#fff",
+  },
+  loginNowLink: {
+    color: "#fff",
+    textDecorationLine: "underline",
+  },
+  
 });

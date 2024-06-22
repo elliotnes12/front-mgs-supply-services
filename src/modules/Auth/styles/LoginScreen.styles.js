@@ -1,106 +1,105 @@
 import { StyleSheet } from "react-native";
 
-export const styles = new StyleSheet.create({
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+  },
+  logo:{
 
+     width:270,
+     height:100,
+     marginTop:40
+  },
   title: {
-    color: "#7DA74D",
-    fontSize: 33,
-    fontFamily: "Rubik",
-    textAlign: "center"
+    fontFamily: "Poppins_600SemiBold",
+    fontSize: 32,
+    marginTop: 120,
+    color: "#FFFFFF",
   },
   subtitle: {
-    color: "#7DA74D",
-    fontSize: 16,
-    fontFamily: "Rubik",
-    marginBottom: 35,
-    padding: 15,
-    textAlign: "center"
-  },
-  viewInput: {
-    marginBottom: 5,
+    color: "#FFFFFF",
+    fontFamily: 'Poppins_400Regular',
+    marginBottom: 25
   },
   field: {
-    borderColor: "#7DA74D",
-    borderWidth: 1.2,
-    alignSelf: "stretch",
     marginBottom: 20,
+    width: 320,
+  },
+  inputContainer: {
+    borderColor: "#ffffff",
+    borderWidth: 1.2,
     borderRadius: 8,
-    height: 55,
-    justifyContent: "flex-start",
+    height: 45,
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 10,
+    flexDirection: "row",
     alignItems: "center",
-    flexDirection: 'row',
-    width: 300,
   },
   input: {
-    fontFamily: "Rubik",
     fontSize: 18,
     flex: 1,
-    height: '80%',
-    placeholderTextColor: "#7DA74D",
-    paddingHorizontal: 13,
-    maxWidth: 250,
-    paddingLeft:20
+    height: '100%',
+    color: "#000",
   },
-  placeholder:{
-    color:"#7DA74D",
-    fontFamily: "Rubik",
-    fontSize:18
-  },  
+  inputError: {
+    borderColor: '#dc3545',
+  },
+  label: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontFamily: 'Poppins_400Regular',
+    marginBottom: 5,
+  },
+  labelContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   icon: {
-    width: 40,
-    height: 50,
-    textAlign: 'center',
-    lineHeight: 50
-  },
-  inputError:{
-    borderColor:'#dc3545'
+    marginLeft: 10,
   },
   button: {
-    fontFamily: "Rubik",
-    backgroundColor: "#7DA74D",
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: '20%',
-    width: 300,
-    borderRadius: 50,
-    marginTop: 40,
-    elevation: 3
+    padding: 15,
+    borderRadius: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    width: 220
   },
-  text: {
-    fontSize: 16,
+  buttonText: {
+    fontSize: 14,
     lineHeight: 21,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins_400Regular',
     letterSpacing: 0.25,
     color: 'white',
   },
-  errorlogin:{
-    fontSize:18,
-    color:"red",
+  buttonSpinner: {
+    position: 'absolute',
+    left: 16,
+  },
+  errorlogin: {
+    color: '#dc3545',
   },
   signUp: {
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: "#CEDC39",
-    borderRadius: 50,
-    width: 300,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 120,
-    marginBottom: 20
+    marginTop: 20,
   },
   signUpText: {
-    color: "#7DA74D",
-    fontWeight: '400',
+    color: '#FFFFFF',
+    textDecorationLine: 'underline',
   },
-  info: {
-    color: "#000",
-    marginVertical: 15,
-    opacity: 0.6,
-    textAlign: "center",
+  loginNowContainer:{
+    marginTop:15,
+    display:"flex"
   },
-  buttonSpinner:{
-    position:"absolute"
+  loginNowText:{
+    color:"#fff"
+  },
+  loginNowLink:{
+    color:"#fff",
+    textDecorationLine: "underline",
   }
 });

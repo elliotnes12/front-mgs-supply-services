@@ -1,29 +1,29 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  background:{
-    height:"100%",
-    backgroundColor:"#F3F3F3"
+  background: {
+    height: "100%",
+    backgroundColor: "#fff",
   },
   container: {
     justifyContent: "flex-start",
     alignItems: "center",
-    flex:1
+    flex: 1,
   },
-  containerImg:{
-    width:140,
-    height:140,
-    alignItems:"center",
-    justifyContent:"center",
-    marginBottom:20,
-    marginTop:20
-  },
-  imgProfile: {
+  containerImg: {
     width: 140,
     height: 140,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  imgProfile: {
+    width: 110,
+    height: 110,
     backgroundColor: "#CCC",
-    borderRadius:70,
-    overflow:"hidden",
+    borderRadius: 55,
+    overflow: "hidden",
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
@@ -32,21 +32,6 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 3,
-  },
-  camera: {
-    width: 50,
-    height: 50,
-    backgroundColor: "rgba(206, 220, 57, 0.8)",
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",  
-    bottom:0,
-    right:0,
-    position:"absolute"
-  },
-  img:{
-    width:"100%",
-    height:"100%"
   },
   field: {
     borderColor: "#7DA74D",
@@ -59,64 +44,33 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: 'row',
     width: 300,
-    overflow:"hidden"
+    overflow: "hidden",
   },
   input: {
-    fontFamily: "Rubik",
-    fontSize: 18,
+    fontFamily: "Poppins_400Regular",
+    fontSize: 16,
     flex: 1,
     height: '80%',
-    placeholderTextColor: "#7DA74D",
+    color: "#000",
     paddingHorizontal: 13,
     maxWidth: 250,
-    paddingLeft:20,
+    paddingLeft: 20,
   },
-  icon:{
-    height:"100%",
-    width:50,
-    backgroundColor:"rgba(125, 167, 77, 1)",
-    justifyContent:"center",
-    alignItems:"center",
-    color:"#fff"
-  },
-  singOff:{
+  signOff: {
     fontSize: 18,
-    backgroundColor: "#7DA74D",
     borderRadius: 50,
-    width: 300,
+    width: 170,
     height: 50,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 40,
-    marginBottom: 20
-  },
-  dropdownList: {
-    position: 'absolute',
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    marginTop: 10,
-    maxHeight: 150,
-    zIndex: 999,
-  },
-  singOffText:{
-    color:"#fff",
-    fontFamily:"Rubik",
-    fontWeight:"bold"
-  },
-  active:{
-    borderRadius:28,
-    backgroundColor: "#ADD8E6",
-    width: 150,
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 120,
     marginBottom: 20,
   },
-  activeText:{
-    color:"#000",
-    fontSize:16
-  }
+  signOffText: {
+    color: "#fff",
+    fontFamily: "Poppins_600SemiBold",
+  },
+  errorlogin: {
+    color: '#dc3545',
+  },
 });

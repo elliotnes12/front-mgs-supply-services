@@ -40,3 +40,8 @@ export const ENV = {
         MANAGER:"manager"
     }
 }
+
+export const tabIds = {
+    TAB_ID_SERVICES: "idServices",
+    TAB_ID_PRODUCTS: "idProducts"
+}

@@ -15,12 +15,7 @@ export function AuthNavigation(){
           }
        }>
 
-            <Stack.Screen 
-               name={screens.auth.authStartScreen}
-               component={AuthStartScreen}
-               options={{headerShown:false}}
-            />
-
+            
             <Stack.Screen
                name={screens.auth.loginScreen}
                component={LoginScreen}

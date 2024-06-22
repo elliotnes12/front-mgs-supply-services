@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View, ActivityIndicator, Pressable, Keyboard } from "react-native";
+import { Text, TextInput, TouchableOpacity, View, ActivityIndicator, Pressable } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useFormik } from "formik";
 import { useNavigation } from "@react-navigation/native";
@@ -10,6 +11,8 @@ import { initialValues, validationSchema } from "../forms/LoginForm.form";
 import { useAuth } from "../hooks";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/LoginScreen.styles";
+import { assets } from "../../../assets";
+import { Image } from "native-base";
 
 const authController = new Auth();
 
@@ -30,10 +33,12 @@ export function LoginScreen() {
       setLoading(true);
       try {
         const { email, password } = formValue;
-        const { access, refresh } = await authController.login(email, password);
-        await authController.setAccessToken(access);
-        await authController.setRefreshToken(refresh);
-        await login(access);
+     
+        const { data } = await authController.login(email, password);
+       
+        await authController.setAccessToken(data.access);
+        await authController.setRefreshToken(data.refresh);
+        await login(data.access);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -57,15 +62,22 @@ export function LoginScreen() {
   };
 
   return (
-    <LayoutAuth>
-      <Text style={styles.title}>Welcome</Text>
+    <LayoutAuth userType={"login"}>
+
+      <View style={styles.logo}>
+      <Image style={{ width: "100%", height: "100%" }} alt="Logo-MgsSupplyServices"  resizeMode="contain" source={assets.image.png.originLogo} />
+
+      </View>
+      <Text style={styles.title}>Welcome Back</Text>
       <Text style={styles.subtitle}>Enter and Keep your work day recorded.</Text>
-      <View style={styles.formContainer}>
-        <View style={[styles.field, { borderColor: isEmailFocused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" } , formik.errors.email && styles.inputError]}>
+      
+      <View style={styles.field}>
+        <Text style={styles.label}>Email address</Text>
+        <View style={[styles.inputContainer, formik.errors.email && styles.inputError]}>
           <TextInput
-            style={[styles.input, !isEmailFocused && styles.inputInactive]}
+            style={styles.input}
             placeholder="Email"
-            placeholderTextColor="#7DA74D"
+            placeholderTextColor="#FFFFFF" 
             autoCapitalize="none"
             value={formik.values.email}
             onChangeText={(text) => formik.setFieldValue("email", text)}
@@ -73,39 +85,58 @@ export function LoginScreen() {
             onBlur={() => setIsEmailFocused(false)}
           />
         </View>
-        <View style={[styles.field, { borderColor: isPasswordFocused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }, formik.errors.password && styles.inputError]}>
+      </View>
+      
+      <View style={styles.field}>
+        <View style={styles.labelContainer}>
+          <Text style={styles.label}>Your password</Text>
+          <TouchableOpacity onPress={() => setHide(!hide)}>
+            <MaterialCommunityIcons
+              style={styles.icon}
+              name={hide ? "eye-off" : "eye"}
+              color="#FFFFFF" // Cambiado a blanco
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.inputContainer, formik.errors.password && styles.inputError]}>
           <TextInput
-            style={[styles.input, !isPasswordFocused && styles.inputInactive]}
+            style={styles.input}
             placeholder="Password"
-            placeholderTextColor="#7DA74D"
+            placeholderTextColor="#FFFFFF" // Cambiado a blanco
             secureTextEntry={hide}
             value={formik.values.password}
             onChangeText={(text) => formik.setFieldValue("password", text)}
             onFocus={() => setIsPasswordFocused(true)}
             onBlur={() => setIsPasswordFocused(false)}
           />
-          <TouchableOpacity onPress={() => setHide(!hide)}>
-            <MaterialCommunityIcons
-              style={styles.icon}
-              name={hide ? "eye-off" : "eye"}
-              color="#000000"
-              size={30}
-            />
-          </TouchableOpacity>
         </View>
-        <Pressable disabled={loading} style={({ pressed }) => [styles.button, pressed && { backgroundColor: '#81B547' }]} onPress={formik.handleSubmit}>
-          {loading && (
-            <ActivityIndicator size="small" animating={true} color="#fff" style={styles.buttonSpinner} />
-          )}
-          <Text style={[styles.text, loading && { color: "rgba(255, 255, 255, 0.5)" }]}>Login</Text>
-        </Pressable>
-        <CustomModal isVisible={isModalVisible} onClose={closeModal}>
-          <Text style={styles.errorlogin}>Invalid username or Password</Text>
-        </CustomModal>
       </View>
-      <Pressable style={styles.signUp} onPress={goToRegister}>
-        <Text style={styles.signUpText}>Sign Up</Text>
-      </Pressable>
+      
+      <Pressable onPress={formik.handleSubmit}>
+          <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.button}>
+            {loading && (
+              <View style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0, justifyContent: "center", alignItems: "center" }}>
+                <ActivityIndicator size="small" animating={true} color="#fff" />
+              </View>
+            )}
+            <Text style={styles.buttonText}>Login</Text>
+          </LinearGradient>
+        </Pressable>
+
+        <View style={styles.loginNowContainer}>
+          <Text style={styles.loginNowText}>Don't have an account?
+          <TouchableOpacity  onPress={goToRegister}>
+            <Text style={styles.loginNowLink}> Sign up</Text>
+          </TouchableOpacity> 
+          </Text>
+         
+        </View>
+
+      <CustomModal isVisible={isModalVisible} onClose={closeModal}>
+        <Text style={styles.errorlogin}>Invalid username or Password</Text>
+      </CustomModal>
+      
     </LayoutAuth>
   );
 }
