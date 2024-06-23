@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   container: {
-    top:-30,
     justifyContent: "flex-start",
     alignItems: "flex-start",
     padding: 25,
@@ -197,22 +196,27 @@ export const styles = StyleSheet.create({
     top: 33,
     left: 158,
   },
+  options:{
+    width:"100%",
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    marginBottom:10
+  },
   titleChooseCategory:{
     color:"#333333",
     fontFamily:"Poppins_700Bold",
     fontSize:20
   },
-  viewAll:{
-    top:-30,
-    left:280,
+  options__all:{
     color:'#7DA74D'
   },
-  title:{
+  options__title:{
     color: "#333333",
     fontFamily: 'Poppins_700Bold',
-    top:-5,
     fontSize: 18,
-    left:30,
+   
   
   },
 });

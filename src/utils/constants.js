@@ -1,5 +1,5 @@
 
-const IP = "192.168.56.1";
+const IP = "192.168.100.78";
 const SERVER = `${IP}:3977`;
 
 export const ENV = {

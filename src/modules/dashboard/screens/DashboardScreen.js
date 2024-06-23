@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'native-base';
@@ -43,7 +43,7 @@ export function DashboardScreen() {
                                 <Text style={styles.promoRating}></Text>
                                 <Text style={styles.promoTitle}>register your </Text>
                                 <Image alt='mujer' style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.mujer} />
-                                
+
                             </LinearGradient>
                         </View>
 
@@ -58,8 +58,12 @@ export function DashboardScreen() {
 
                 {!isCustomer && userInfo.type === "supervisor" && (
                     <>
-                        <Text style={styles.title}>Services Generated</Text>
-                        <Text style={styles.viewAll}>View All</Text>
+                        <View style={styles.options}>
+                            <Text style={styles.options__title}>Services Generated</Text>
+                            <TouchableOpacity>
+                                <Text style={styles.options__all}>ViewAll</Text>
+                            </TouchableOpacity>
+                        </View>
                         <ServiceListScreenSp />
                     </>
                 )}
