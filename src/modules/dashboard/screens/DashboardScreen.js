@@ -20,7 +20,7 @@ export function DashboardScreen() {
                     <View style={styles.profile}>
                         <View style={styles.containerProfile}>
                             <Pressable style={styles.goProfile}>
-                                <Image style={styles.imageProfile} resizeMode="cover" source={assets.image.png.profile} />
+                                <Image alt='profile' style={styles.imageProfile} resizeMode="cover" source={assets.image.png.profile} />
                             </Pressable>
                         </View>
                         <View style={styles.userInfo}>
@@ -29,7 +29,7 @@ export function DashboardScreen() {
                         </View>
                     </View>
                     <Pressable style={styles.alerts}>
-                        <Image style={styles.imageAlerts} resizeMode="cover" source={assets.image.png.alerts} />
+                        <Image alt='alerts' style={styles.imageAlerts} resizeMode="cover" source={assets.image.png.alerts} />
                     </Pressable>
                 </View>
 
@@ -37,14 +37,13 @@ export function DashboardScreen() {
                     <>
                         <View style={styles.promos}>
                             <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.bgpromos}>
-                                <Text style={styles.promoText}>Cleaning the lobby and Office</Text>
-                                <Text style={styles.promoLastService}>Last service used</Text>
-                                <Text style={styles.promoDaysAgo}>3 days ago</Text>
-                                <Text style={styles.promoRating}>4.7</Text>
-                                <Text style={styles.promoTitle}>Carpet cleaning</Text>
-                                <Image style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.man} />
-                                <Image style={styles.promoClock} resizeMode="cover" source={assets.image.png.reloj} />
-                                <Image style={styles.promoStar} resizeMode="cover" source={assets.image.png.estrellados} />
+                                <Text style={styles.promoText}>service via chat</Text>
+                                <Text style={styles.promoLastService}>New</Text>
+                                <Text style={styles.promoDaysAgo}></Text>
+                                <Text style={styles.promoRating}></Text>
+                                <Text style={styles.promoTitle}>register your </Text>
+                                <Image alt='mujer' style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.mujer} />
+                                
                             </LinearGradient>
                         </View>
 

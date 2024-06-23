@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   container: {
+    top:-30,
     justifyContent: "flex-start",
     alignItems: "flex-start",
     padding: 25,
@@ -66,11 +67,11 @@ export const styles = StyleSheet.create({
     fontSize: 17,
   },
   promos: {
-    height: 210,
+    height: 150,
     marginTop: 15,
-    width: "100%",
-    borderRadius: 20,
-    overflow: "hidden",
+    width: 400,
+
+    
     position: "relative",
   },
   searchContainer: {
@@ -116,10 +117,10 @@ export const styles = StyleSheet.create({
     position: "relative",
   },
   promos__bgman: {
-    height: 180,
-    width: 250,
+    height: 150,
+    width: 120,
     position: "absolute",
-    right: -35,
+    left:220,
     bottom: 0,
   },
   tabViewContainer: {
@@ -142,19 +143,23 @@ export const styles = StyleSheet.create({
     height: "100%",
   },
   promoText: {
+    fontFamily: 'Poppins_700Bold',
     color: "#FFFFFF",
-    fontSize: 15,
+    fontSize: 20,
     position: "absolute",
     top: 100,
-    left: 10,
+    left: 30,
   },
   promoLastService: {
+    height:30,
+    width:60,
+    borderRadius:5,
     backgroundColor: "white",
-    fontSize: 16,
+    fontSize: 18,
     color: "#7EA74C",
     position: "absolute",
-    top: 30,
-    left: 10,
+    top: 20,
+    left: 30,
     padding: 5,
   },
   promoDaysAgo: {
@@ -168,7 +173,7 @@ export const styles = StyleSheet.create({
     color: "#FFFFFF",
     position: "absolute",
     top: 30,
-    left: 180,
+    left: 30,
   },
   promoTitle: {
     fontFamily: 'Poppins_700Bold',
@@ -176,7 +181,7 @@ export const styles = StyleSheet.create({
     color: "#FFFFFF",
     position: "absolute",
     top: 70,
-    left: 10,
+    left: 30,
   },
   promoClock: {
     width: 24,
@@ -205,8 +210,9 @@ export const styles = StyleSheet.create({
   title:{
     color: "#333333",
     fontFamily: 'Poppins_700Bold',
-    marginTop: 10,
+    top:-5,
     fontSize: 18,
+    left:30,
   
   },
 });

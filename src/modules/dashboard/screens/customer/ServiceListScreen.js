@@ -8,33 +8,38 @@ import { styles } from './ServiceListScreen.styles';
 
 const FirstRoute = () => (
   <View style={styles.scene}>
-    <Text style={styles.title}>Latest Services</Text>
+    <Text style={styles.title}>Services Used </Text>
     <Text style={styles.viewAll}>View All</Text>
     {/* Item 1 */}
     <View style={styles.item}>
       <View style={styles.item__img}>
-        <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+        <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+        <Image alt='estrella' style={styles.item__estrellaContainer} resizeMode="cover" source={assets.image.png.estrella} />
+        <Image alt='calender' style={styles.item__calendar} resizeMode="cover" source={assets.image.png.calendar} />
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
         <Text>Cleaning the lobby area</Text>
+        <Text style={styles.calificacion} >4.8</Text>
+        <Text style={styles.fecha} >May 12, 2024</Text>
+
         <View style={styles.item__paddingTop15}></View>
         <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+          <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
       </View>
     </View>
     {/* Item 2 */}
     <View style={styles.item}>
       <View style={styles.item__img}>
-        <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+        <Image alt='categoria1' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
         <Text>Cleaning the lobby area</Text>
         <View style={styles.item__paddingTop15}></View>
         <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+          <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
       </View>
     </View>

@@ -12,7 +12,33 @@ const RenderLastServices = () => (
     {/* Item 1 */}
     <View style={styles.item}>
       <View style={styles.item__img}>
-        <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+        <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+      </View>
+      <View style={styles.item__text}>
+        <Text style={styles.item__title}>Office Cleaning</Text>
+        <Text>Cleaning the lobby area</Text>
+        <Text style={styles.fecha}>May 12, 2024</Text>
+        <Text >Estatus:</Text>
+        <View style={styles.item__paddingTop15}></View>
+        <TouchableOpacity style={styles.item__flechaContainer}>
+          <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.item__calendario}>
+          <Image alt='calender' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
+        </TouchableOpacity>
+        <View style={styles.aprovado}>
+          <Image alt='aprovado' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.aprovado} />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.progress}>In Progress</Text>
+        </TouchableOpacity>
+
+      </View>
+    </View>
+    {/* Item 2 */}
+    <View style={styles.item}>
+      <View style={styles.item__img}>
+        <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
@@ -21,33 +47,44 @@ const RenderLastServices = () => (
         <Text>Estatus:</Text>
         <View style={styles.item__paddingTop15}></View>
         <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+          <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.item__calendario}>
-          <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
+          <Image alt='calender' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.aprovado}>
-          <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.aprovado} />
+        <View style={styles.canceled}>
+          <Image alt='aprovado' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.aprovado} />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.progress}>canceled</Text>
         </TouchableOpacity>
 
       </View>
     </View>
-    {/* Item 2 */}
+
     <View style={styles.item}>
       <View style={styles.item__img}>
-        <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+        <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
         <Text>Cleaning the lobby area</Text>
         <Text style={styles.fecha}>May 12, 2024</Text>
+        <Text>Estatus:</Text>
         <View style={styles.item__paddingTop15}></View>
         <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+          <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.item__calendario}>
-          <Image style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
+          <Image alt='calender' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
         </TouchableOpacity>
+        <View style={styles.success}>
+          <Image alt='aprovado' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.aprovado} />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.progress}>success</Text>
+        </TouchableOpacity>
+
       </View>
     </View>
   </View>
@@ -64,7 +101,7 @@ const getIconFocus = (key) => {
     return assets.image.png.documentosdos;
   } else if (key === tabIds.TAB_ID_PRODUCTS) {
     return assets.image.png.documentosdos;
-  } 
+  }
 };
 
 // Function to get the non-focus icon based on the label
@@ -73,7 +110,7 @@ const getIcon = (key) => {
     return assets.image.png.documentouno;
   } else if (key === tabIds.TAB_ID_PRODUCTS) {
     return assets.image.png.documentouno;
-  } 
+  }
 };
 
 const initialLayout = { width: "100%" };
@@ -83,7 +120,7 @@ export const ServiceListScreenSp = () => {
 
   // Define the routes
   const routes = [
-    { key: tabIds.TAB_ID_SERVICES, title: 'services', label : 'services' },
+    { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
     { key: tabIds.TAB_ID_PRODUCTS, title: 'products', label: 'Orders' },
   ];
 
@@ -106,7 +143,7 @@ export const ServiceListScreenSp = () => {
       indicatorStyle={styles.indicatorStyle}
       pressColor='transparent'
       style={styles.tabBarStyle}
-      
+
 
       tabStyle={styles.tabStyle}
       renderLabel={({ route, focused }) => (
@@ -118,7 +155,7 @@ export const ServiceListScreenSp = () => {
 
             <Image style={styles.iconServices} resizeMode="cover" source={getIconFocus(route.key)} />
             <Text style={styles.tabTextFocused}>
-                {route.label}
+              {route.label}
             </Text>
           </LinearGradient>
         ) : (

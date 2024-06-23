@@ -35,7 +35,8 @@ const png = {
   union: require("./buttonmenu/union.png"),
   orderFocus: require("./buttonmenu/orderFocus.png"),
   calendar:require("./home1/calendar.png"),
-  aprovado:require("./home1/aprovado.png")
+  aprovado:require("./home1/aprovado.png"),
+  mujer:require("./home1/mujer.png")
 };
 
 export { png };

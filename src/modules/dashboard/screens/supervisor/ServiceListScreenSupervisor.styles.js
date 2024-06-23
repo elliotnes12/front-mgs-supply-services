@@ -32,8 +32,8 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   tabItem: {
-    height: 46,
-    width: 140,
+    height: 40,
+    width: 120,
     padding: 10,
     borderRadius: 25,
     backgroundColor: '#F5F5F5',
@@ -44,8 +44,8 @@ export const styles = StyleSheet.create({
     zIndex:4
   },
   gradient: {
-    height: 46,
-    width: 140,
+    height: 40,
+    width: 120,
     padding: 10,
     borderRadius: 25,
     backgroundColor: '#F5F5F5',
@@ -76,10 +76,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     position: 'relative',
-    marginBottom: 15,
+    marginBottom: 5,
   },
   item__img: {
-    right:10,
+    top:10,
+    right:1,
     width: 100,
     height: 100,
     marginRight: 20,
@@ -124,26 +125,48 @@ export const styles = StyleSheet.create({
     width:"100%",
   },
   fecha:{
-    left:50,
+    left:15,
     color:"#C4C4C4",
     fontFamily: 'Poppins_400Regular',
   },
   item__calendario:{
     width: 15,
     height: 15,
-    marginRight: 20,
-    position: 'relative',
-    right:-30,
-    top:-55,
+    left:0,
+    top:66,
+    position:'absolute'
   },
   aprovado:{
-    width: '100%',
-    backgroundColor:'red',
-    height: 20,
-    padding: 10,
-    borderRadius: 25,
-    alignItems: 'center',
-    overflow: 'hidden',
-    flexDirection:"row"
-  }
+    width: 110,
+    backgroundColor:"#ECB403",
+    padding: 12,
+    borderRadius: 10,
+    top:85,
+    left:70,
+    position:'absolute'
+  },
+  progress:{
+    fontSize:17,
+    color:"#FFFFFF",
+    top:-37,
+    left:85,
+    position:'absolute', 
+  },
+ canceled:{
+  width: 110,
+  backgroundColor:"#FF8585",
+  padding: 12,
+  borderRadius: 10,
+  top:87,
+  left:70,
+  position:'absolute'
+ },
+ success:{
+  width: 110,
+  backgroundColor:"#7DA74D",
+  padding: 12,
+  borderRadius: 10,
+  top:87,
+  left:70,
+  position:'absolute'}
 });
