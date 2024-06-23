@@ -1,43 +1,61 @@
-import * as React from 'react';
-import { View, Text, Dimensions, Image, TouchableOpacity } from 'react-native';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as React from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { TabBar, TabView } from 'react-native-tab-view';
 import { assets } from '../../../../assets';
 import { styles } from './ServiceListScreen.styles';
 
 
-const FirstRoute = () => (
+const RenderServices = () => (
   <View style={styles.scene}>
-    <Text style={styles.title}>Services Used </Text>
-    <Text style={styles.viewAll}>View All</Text>
-    {/* Item 1 */}
+
+    <View style={styles.options}>
+      <Text style={styles.options__title}>Services Used</Text>
+      <TouchableOpacity>
+        <Text style={styles.options__all}>ViewAll</Text>
+      </TouchableOpacity>
+    </View>
+
     <View style={styles.item}>
       <View style={styles.item__img}>
         <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
-        <Image alt='estrella' style={styles.item__estrellaContainer} resizeMode="cover" source={assets.image.png.estrella} />
-        <Image alt='calender' style={styles.item__calendar} resizeMode="cover" source={assets.image.png.calendar} />
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
-        <Text>Cleaning the lobby area</Text>
-        <Text style={styles.calificacion} >4.8</Text>
-        <Text style={styles.fecha} >May 12, 2024</Text>
+        <Text style={styles.item_subtitle}>Cleaning the lobby area</Text>
+        <View style={styles.item__raiting}>
+          <Image alt='icon-star-raiting' resizeMode="cover" source={assets.image.png.iconEstrella} />
+          <Text style={styles.item__raitingtext} >4.8</Text>
+        </View>
 
-        <View style={styles.item__paddingTop15}></View>
+        <View style={styles.item__date}>
+          <Image alt='icon-calendar' resizeMode="cover" source={assets.image.png.calendar} />
+          <Text style={styles.item__datetext} >May 12, 2024</Text>
+        </View>
+
         <TouchableOpacity style={styles.item__flechaContainer}>
           <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
       </View>
     </View>
-    {/* Item 2 */}
+    
     <View style={styles.item}>
       <View style={styles.item__img}>
-        <Image alt='categoria1' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+        <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
-        <Text>Cleaning the lobby area</Text>
-        <View style={styles.item__paddingTop15}></View>
+        <Text style={styles.item_subtitle}>Cleaning the lobby area</Text>
+        <View style={styles.item__raiting}>
+          <Image alt='icon-star-raiting' resizeMode="cover" source={assets.image.png.iconEstrella} />
+          <Text style={styles.item__raitingtext} >4.8</Text>
+        </View>
+
+        <View style={styles.item__date}>
+          <Image alt='icon-calendar' resizeMode="cover" source={assets.image.png.calendar} />
+          <Text style={styles.item__datetext} >May 12, 2024</Text>
+        </View>
+
         <TouchableOpacity style={styles.item__flechaContainer}>
           <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
@@ -46,21 +64,19 @@ const FirstRoute = () => (
   </View>
 );
 
-// Function component for the SecondRoute
-const SecondRoute = () => (
+const RenderOrders = () => (
   <View style={[styles.scene, styles.backgroundWhite]}>
     <Text>Contenido de la segunda pestaña</Text>
   </View>
 );
 
-const ThirdRoute = () => (
+const RenderRaiting = () => (
   <View style={[styles.scene, styles.backgroundWhite]}>
     <Text>Contenido de la tercera pestaña</Text>
   </View>
 );
 
 
-// Function to get the focus icon based on the label
 const getIconFocus = (label) => {
   if (label === "Services") {
     return assets.image.png.iconServices;
@@ -71,7 +87,6 @@ const getIconFocus = (label) => {
   }
 };
 
-// Function to get the non-focus icon based on the label
 const getIcon = (label) => {
   if (label === "Services") {
     return assets.image.png.maletauno;
@@ -98,11 +113,11 @@ export const ServiceListScreenCt = () => {
   const renderScene = ({ route }) => {
     switch (route.key) {
       case 'first':
-        return <FirstRoute />;
+        return <RenderServices />;
       case 'second':
-        return <SecondRoute />;
+        return <RenderOrders />;
       case 'third':
-        return <ThirdRoute />;
+        return <RenderRaiting />;
       default:
         return null;
     }

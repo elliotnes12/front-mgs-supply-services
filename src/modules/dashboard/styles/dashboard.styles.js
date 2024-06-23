@@ -6,9 +6,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   container: {
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 25,
+    paddingLeft:24,
+    paddingRight:24,
     flex: 1,
   },
   header: {
@@ -68,52 +67,37 @@ export const styles = StyleSheet.create({
   promos: {
     height: 150,
     marginTop: 15,
-    width: 400,
-
-    
+    width:"100%",
     position: "relative",
   },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
+  promos__title:{
+    color:"#fff",
+    fontFamily:"Poppins_600SemiBold",
+    width:180,
+    fontSize:21,
+    lineHeight:21,
+    position:"absolute",
+    bottom:40,
+    left:20
   },
-  searchInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderColor: '#ABABAB',
-    borderWidth: 1,
-    borderRadius: 4,
-    flex: 1,
-  },
-  searchIcon: {
-    width: 27,
-    height: 27,
-    marginLeft: 15,
-  },
-  searchInput: {
-    height: 45,
-    flex: 1,
-    paddingHorizontal: 10,
-    fontFamily: "Poppins_400Regular",
-    fontSize: 16,
-  },
-  searchButton: {
-    backgroundColor: '#CEDC39',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    height: 61,
-    width: 56,
-    borderRadius: 4,
-  },
-  searchButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+  promos__label:{
+    borderRadius:10,
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    width:50,
+    height:30,
+    backgroundColor:"#fff",
+    position:"absolute",
+    top:20,
+    left:20,
+    opacity:0.7
   },
   bgpromos: {
     width: "100%",
     height: "100%",
     position: "relative",
+    borderRadius:10,
   },
   promos__bgman: {
     height: 150,
@@ -126,12 +110,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginTop: 5,
     width: "100%",
-  },
-  tituloCategorias: {
-    color: "#333333",
-    fontFamily: 'Poppins_700Bold',
-    marginTop: 10,
-    fontSize: 24,
   },
   imageProfile: {
     width: "100%",
@@ -161,41 +139,7 @@ export const styles = StyleSheet.create({
     left: 30,
     padding: 5,
   },
-  promoDaysAgo: {
-    color: "#FFFFFF",
-    position: "absolute",
-    top: 180,
-    left: 40,
-  },
-  promoRating: {
-    fontSize: 18,
-    color: "#FFFFFF",
-    position: "absolute",
-    top: 30,
-    left: 30,
-  },
-  promoTitle: {
-    fontFamily: 'Poppins_700Bold',
-    fontSize: 21,
-    color: "#FFFFFF",
-    position: "absolute",
-    top: 70,
-    left: 30,
-  },
-  promoClock: {
-    width: 24,
-    height: 24,
-    position: "absolute",
-    top: 180,
-    left: 10,
-  },
-  promoStar: {
-    width: 18,
-    height: 18,
-    position: "absolute",
-    top: 33,
-    left: 158,
-  },
+
   options:{
     width:"100%",
     display:"flex",
@@ -204,10 +148,11 @@ export const styles = StyleSheet.create({
     alignItems:"center",
     marginBottom:10
   },
-  titleChooseCategory:{
+  titleCategories:{
     color:"#333333",
     fontFamily:"Poppins_700Bold",
-    fontSize:20
+    fontSize:20,
+    marginTop:5
   },
   options__all:{
     color:'#7DA74D'
@@ -215,8 +160,6 @@ export const styles = StyleSheet.create({
   options__title:{
     color: "#333333",
     fontFamily: 'Poppins_700Bold',
-    fontSize: 18,
-   
-  
+    fontSize: 18,  
   },
 });

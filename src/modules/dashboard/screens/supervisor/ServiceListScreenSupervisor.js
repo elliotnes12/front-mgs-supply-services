@@ -9,56 +9,30 @@ import { tabIds } from '../../../../utils';
 
 const RenderLastServices = () => (
   <View style={styles.scene}>
-    {/* Item 1 */}
+
     <View style={styles.item}>
       <View style={styles.item__img}>
         <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
-        <Text>Cleaning the lobby area</Text>
-        <Text style={styles.fecha}>May 12, 2024</Text>
-        <Text >Estatus:</Text>
-        <View style={styles.item__paddingTop15}></View>
+        <Text style={styles.item_subtitle}>Cleaning the lobby area</Text>
+
+        <View style={styles.item__date}>
+          <Image alt='icon-calendar' resizeMode="cover" source={assets.image.png.calendar} />
+          <Text style={styles.item__datetext} >May 12, 2024</Text>
+        </View>
+
+        <View style={styles.item__estatus}>
+          <Text>Estatus:</Text>
+          <View style={[styles.estatus, styles.aprobado]} >
+            <Text style={{ color: "#fff" }}>in progress</Text>
+          </View>
+        </View>
+
         <TouchableOpacity style={styles.item__flechaContainer}>
           <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item__calendario}>
-          <Image alt='calender' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
-        </TouchableOpacity>
-        <View style={styles.aprovado}>
-          <Image alt='aprovado' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.aprovado} />
-        </View>
-        <TouchableOpacity>
-          <Text style={styles.progress}>In Progress</Text>
-        </TouchableOpacity>
-
-      </View>
-    </View>
-    {/* Item 2 */}
-    <View style={styles.item}>
-      <View style={styles.item__img}>
-        <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
-      </View>
-      <View style={styles.item__text}>
-        <Text style={styles.item__title}>Office Cleaning</Text>
-        <Text>Cleaning the lobby area</Text>
-        <Text style={styles.fecha}>May 12, 2024</Text>
-        <Text>Estatus:</Text>
-        <View style={styles.item__paddingTop15}></View>
-        <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.item__calendario}>
-          <Image alt='calender' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
-        </TouchableOpacity>
-        <View style={styles.canceled}>
-          <Image alt='aprovado' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.aprovado} />
-        </View>
-        <TouchableOpacity>
-          <Text style={styles.progress}>canceled</Text>
-        </TouchableOpacity>
-
       </View>
     </View>
 
@@ -68,23 +42,50 @@ const RenderLastServices = () => (
       </View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>Office Cleaning</Text>
-        <Text>Cleaning the lobby area</Text>
-        <Text style={styles.fecha}>May 12, 2024</Text>
-        <Text>Estatus:</Text>
-        <View style={styles.item__paddingTop15}></View>
+        <Text style={styles.item_subtitle}>Cleaning the lobby area</Text>
+
+        <View style={styles.item__date}>
+          <Image alt='icon-calendar' resizeMode="cover" source={assets.image.png.calendar} />
+          <Text style={styles.item__datetext} >May 12, 2024</Text>
+        </View>
+
+        <View style={styles.item__estatus}>
+          <Text>Estatus:</Text>
+          <View style={[styles.estatus, styles.canceled]} >
+            <Text style={{ color: "#fff" }}>Canceled</Text>
+          </View>
+        </View>
+
         <TouchableOpacity style={styles.item__flechaContainer}>
           <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.item__calendario}>
-          <Image alt='calender' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.calendar} />
-        </TouchableOpacity>
-        <View style={styles.success}>
-          <Image alt='aprovado' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.aprovado} />
-        </View>
-        <TouchableOpacity>
-          <Text style={styles.progress}>success</Text>
-        </TouchableOpacity>
+      </View>
+    </View>
 
+   
+    <View style={styles.item}>
+      <View style={styles.item__img}>
+        <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
+      </View>
+      <View style={styles.item__text}>
+        <Text style={styles.item__title}>Office Cleaning</Text>
+        <Text style={styles.item_subtitle}>Cleaning the lobby area</Text>
+
+        <View style={styles.item__date}>
+          <Image alt='icon-calendar' resizeMode="cover" source={assets.image.png.calendar} />
+          <Text style={styles.item__datetext} >May 12, 2024</Text>
+        </View>
+
+        <View style={styles.item__estatus}>
+          <Text>Estatus:</Text>
+          <View style={[styles.estatus, styles.success]} >
+            <Text style={{ color: "#fff" }}>Success</Text>
+          </View>
+        </View>
+
+        <TouchableOpacity style={styles.item__flechaContainer}>
+          <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+        </TouchableOpacity>
       </View>
     </View>
   </View>
@@ -175,12 +176,13 @@ export const ServiceListScreenSp = () => {
 
   return (
     <View style={styles.tabViewContainer}>
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        renderTabBar={renderTabBar}
-      />
-    </View>
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+      renderTabBar={renderTabBar}
+    />
+  </View>
   );
 }

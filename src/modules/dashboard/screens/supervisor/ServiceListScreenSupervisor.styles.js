@@ -1,14 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { Directions } from 'react-native-gesture-handler';
 
 export const styles = StyleSheet.create({
   scene: {
-    left:205,
     flex: 1,
-    flexDirection:'column',
+    flexDirection: 'column',
     justifyContent: 'flex-start',
-    position:"relative",
-  
+    position: "relative",
+
   },
   backgroundWhite: {
     backgroundColor: '#fff',
@@ -20,85 +18,84 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   tabBarStyle: {
-    backgroundColor:'#fff',
+    backgroundColor: '#fff',
     width: '100%',
     shadowColor: '#fff',
-    paddingLeft: 0, // Elimina el padding izquierdo
+    paddingLeft: 0,
     paddingRight: 0,
+    marginBottom: 10
   },
   tabStyle: {
-    flexDirection:'row',
-    width: 150,
+    width: 130,
     height: '100%',
+    marginRight:5
   },
   tabItem: {
-    height: 40,
-    width: 120,
-    padding: 10,
+    backgroundColor: "#F5F5F5",
+    height: '100%',
+    width: 130,
+    margin: 0,
+    paddingBottom: 8,
+    paddingTop: 8,
+    marginLeft: 0,
     borderRadius: 25,
-    backgroundColor: '#F5F5F5',
+    justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    flexDirection:"row",
-    position:"relative",
-    zIndex:4
+    flexDirection: "row",
+   
+
   },
   gradient: {
-    height: 40,
-    width: 120,
-    padding: 10,
-    borderRadius: 25,
-    backgroundColor: '#F5F5F5',
+    height: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
-    overflow: 'hidden',
-    flexDirection:"row",
-    position:"relative",
-    zIndex:4
+    borderRadius: 25,
+    flexDirection: 'row',
   },
   tabText: {
     color: '#ABABAB',
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: 'Poppins_400Regular',
-    flexDirection:'row',
   },
   tabTextFocused: {
     color: '#fff',
-    fontSize: 15,
-    flexDirection:'row',
+    fontSize: 16,
   },
   iconServices: {
     width: 20,
     height: 20,
     marginRight: 8,
   },
-  item: {
-    right:200,
-    flexDirection: 'row',
-    width: '100%',
-    position: 'relative',
-    marginBottom: 5,
-  },
   item__img: {
-    top:10,
-    right:1,
     width: 100,
     height: 100,
     marginRight: 20,
   },
   item__text: {
+    top: -15,
     paddingTop: 20,
     flex: 1,
   },
+  item: {
+    flexDirection: 'row',
+    width: '100%',
+    position: 'relative',
+    marginBottom: 5,
+  },
   item__title: {
-    fontFamily: 'Poppins_700Bold',
+    color: "#0F0F0F",
+    fontFamily: 'Poppins_600SemiBold',
   },
-  item__paddingTop15: {
-    paddingTop: 15,
+  item_subtitle: {
+    color: "#0F0F0F",
+    fontFamily: 'Poppins_400Regular',
   },
-  item__estrellaContainer: {
-    width: 15,
-    height: 15,
-    marginRight: 20,
+  item__estatus: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
+
   },
   item__flechaContainer: {
     width: 24,
@@ -121,52 +118,59 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   tabViewContainer: {
-    height: 500, 
-    width:"100%",
+    height: 500,
+    width: "100%",
   },
-  fecha:{
-    left:15,
-    color:"#C4C4C4",
+  fecha: {
+    left: 15,
+    color: "#C4C4C4",
     fontFamily: 'Poppins_400Regular',
   },
-  item__calendario:{
+  item__calendario: {
     width: 15,
     height: 15,
-    left:0,
-    top:66,
-    position:'absolute'
+    left: 0,
+    top: 66,
+    position: 'absolute'
   },
-  aprovado:{
+  progress: {
+    fontSize: 17,
+    color: "#FFFFFF",
+    top: -37,
+    left: 85,
+    position: 'absolute',
+  },
+  estatus: {
     width: 110,
-    backgroundColor:"#ECB403",
-    padding: 12,
+    marginTop: 5,
+    marginLeft: 5,
     borderRadius: 10,
-    top:85,
-    left:70,
-    position:'absolute'
+    height: 25,
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  progress:{
-    fontSize:17,
-    color:"#FFFFFF",
-    top:-37,
-    left:85,
-    position:'absolute', 
+  aprobado: {
+    backgroundColor: "#ECB403",
   },
- canceled:{
-  width: 110,
-  backgroundColor:"#FF8585",
-  padding: 12,
-  borderRadius: 10,
-  top:87,
-  left:70,
-  position:'absolute'
- },
- success:{
-  width: 110,
-  backgroundColor:"#7DA74D",
-  padding: 12,
-  borderRadius: 10,
-  top:87,
-  left:70,
-  position:'absolute'}
+  canceled: {
+    backgroundColor: "#FF8585",
+  },
+  success: {
+    backgroundColor: "#7DA74D",
+  },
+  item__date: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    width: 120,
+    marginTop: 5,
+    justifyContent: "flex-start",
+  },
+  item__datetext: {
+    color: "#333",
+    fontSize: 12,
+    marginLeft: 5,
+  }
 });

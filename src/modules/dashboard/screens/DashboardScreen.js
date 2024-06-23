@@ -37,17 +37,20 @@ export function DashboardScreen() {
                     <>
                         <View style={styles.promos}>
                             <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.bgpromos}>
-                                <Text style={styles.promoText}>service via chat</Text>
-                                <Text style={styles.promoLastService}>New</Text>
-                                <Text style={styles.promoDaysAgo}></Text>
-                                <Text style={styles.promoRating}></Text>
-                                <Text style={styles.promoTitle}>register your </Text>
-                                <Image alt='mujer' style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.mujer} />
+                                <View style={styles.promos__label}>
+                                     <Text style={{color:'#7EA74C'}}>New</Text>
+                                </View>
+                                <Text style={styles.promos__title}>
+                                Register Your service via chat 
+                                </Text>
+
+                                <Image alt='fondo'  resizeMode="cover" source={assets.image.png.pleca} />
+                                <Image alt='register-service' style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.mujer} />
 
                             </LinearGradient>
                         </View>
 
-                        <Text style={styles.tituloCategorias}>
+                        <Text style={styles.titleCategories}>
                             Choose a category
                         </Text>
                         <View style={styles.tabViewContainer}>
