@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
       flex: 1,
       paddingHorizontal: 25,
       paddingBottom: 10,
+      marginTop:10
     },
     header__customer: {
       display: "flex",

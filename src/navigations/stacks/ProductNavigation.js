@@ -2,13 +2,13 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { screens } from "../../utils";
 import { styles } from "../Styles.style";
-import { PendingScreen } from '../../screens/Pendings/PendingScreen';
+import { ProductScreen } from '../../modules/product/screens/ProductScreen';
 
 const Stack =  createNativeStackNavigator();
 
 
 
-export function GroupsNavigation() {
+export function ProductNavigation() {
   return (
     <Stack.Navigator screenOptions={
         {
@@ -17,8 +17,8 @@ export function GroupsNavigation() {
      }>
 
       <Stack.Screen
-        name={screens.tab.groups.groupsScreen}
-        component={PendingScreen}
+        name={screens.tab.products.productScreen}
+        component={ProductScreen}
         options={{headerShown:false}}
       />
 

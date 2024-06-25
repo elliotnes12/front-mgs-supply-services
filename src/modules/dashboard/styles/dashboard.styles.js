@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
   container: {
     paddingLeft:24,
     paddingRight:24,
+    marginTop:10,
     flex: 1,
   },
   header: {
@@ -29,6 +30,23 @@ export const styles = StyleSheet.create({
     marginRight: 10,
     justifyContent: "center",
     alignItems: "center",
+    position:"relative"
+  },
+  alerts__count:{
+    width:25,
+    height:25,
+    top:-8,
+    left:-10,
+    zIndex:1,
+    position:"absolute",
+    backgroundColor:"#FF8585",
+    borderRadius:12.5,
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
+  },
+  alert__text:{
+    color:"#fff"
   },
   goProfile: {
     height: 70,

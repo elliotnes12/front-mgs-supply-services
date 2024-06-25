@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Pressable, TouchableOpacity } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Text, Pressable, TouchableOpacity, Animated, Easing } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'native-base';
@@ -12,6 +12,44 @@ import { styles } from "../styles/dashboard.styles";
 export function DashboardScreen() {
     const { userInfo, isCustomer } = useAuth();
     const { name } = userInfo;
+    const swingAnim = useRef(new Animated.Value(0)).current;
+
+    const animateAlert = () => {
+        Animated.sequence([
+            Animated.timing(swingAnim, {
+                toValue: 1,
+                duration: 100,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }),
+            Animated.timing(swingAnim, {
+                toValue: -1,
+                duration: 100,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }),
+            Animated.timing(swingAnim, {
+                toValue: 1,
+                duration: 100,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }),
+            Animated.timing(swingAnim, {
+                toValue: 0,
+                duration: 100,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    }
+    const startSwing = () => {
+        animateAlert();
+    };
+
+    const swing = swingAnim.interpolate({
+        inputRange: [-1, 1],
+        outputRange: ['-15deg', '15deg'],
+    });
 
     return (
         <View style={styles.background}>
@@ -28,9 +66,14 @@ export function DashboardScreen() {
                             <Text style={styles.userInfo__name}>{name}</Text>
                         </View>
                     </View>
-                    <Pressable style={styles.alerts}>
-                        <Image alt='alerts' style={styles.imageAlerts} resizeMode="cover" source={assets.image.png.alerts} />
-                    </Pressable>
+                    <Animated.View style={{ transform: [{ rotate: swing }] }}>
+                        <TouchableOpacity style={styles.alerts} onPress={startSwing}>
+                            <View style={styles.alerts__count}>
+                                <Text style={styles.alert__text}>3</Text>
+                            </View>
+                            <Image alt='alerts' style={styles.imageAlerts} resizeMode="cover" source={assets.image.png.alerts} />
+                        </TouchableOpacity>
+                    </Animated.View>
                 </View>
 
                 {isCustomer && (
@@ -72,5 +115,5 @@ export function DashboardScreen() {
                 )}
             </SafeAreaView>
         </View>
-    )
-};
+    );
+}

@@ -17,10 +17,10 @@ export const styles = new StyleSheet.create({
   },
   modalStyles: {
     contentStyle: {
-      backgroundColor: "#171717",
+      backgroundColor: "#fff",
     },
     headerStyle: {
-      backgroundColor: "#171717",
+      backgroundColor: "#fff",
     },
     headerTitleStyle: {
       color: "#fff",

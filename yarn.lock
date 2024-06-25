@@ -2303,6 +2303,13 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-community/datetimepicker@^8.1.1":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-8.1.1.tgz#d1dc92a3a5e6c36e26dadc118d07a3465c9fae9f"
+  integrity sha512-+P9odPpeUtjota9S85S8eVfC0YOfqLXNxzG6duE3TpKU5cXdGPgp0S8VUgOBq3u9cwP9hMr6Jea/7Kx6jUldJQ==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-native-picker/picker@2.4.8":
   version "2.4.8"
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.8.tgz#a1a21f3d6ecadedbc3f0b691a444ddd7baa081f8"

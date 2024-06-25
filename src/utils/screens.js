@@ -19,9 +19,14 @@ const global = {
 const chats = {
   root: "ChatsRoot",
   chatsScreen: "ChatsScreen",
-  createChatScreen: "CreateChatScreen"
+  createChatScreen: "CreateChatScreen",
+  chatScreen:"ChatScreen"
 };
 
+const products = {
+  root: "ProductScreen",
+  productScreen: "ProductScreen"
+}
 const groups = {
   root: "GroupsRoot",
   groupsScreen: "GroupsScreen",
@@ -44,6 +49,7 @@ export const screens = {
     root: "BottomTabRoot",
     chats,
     groups,
+    products,
     settings,
     reports
   },

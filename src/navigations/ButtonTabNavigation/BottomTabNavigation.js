@@ -1,47 +1,50 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Image, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAuth } from '../../modules/Auth/hooks';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./BottomTabNavigation.styles";
 import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
 import { assets } from '../../assets';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SettingsNavigation, GroupsNavigation, ChatNavigation, ReportsNavigation } from '../stacks';
+import { SettingsNavigation, GroupsNavigation, ChatNavigation, ReportsNavigation,ProductNavigation } from '../stacks';
 import { screens } from '../../utils';
 
 const Tab = createBottomTabNavigator();
 
 export function BottomTabNavigation() {
-  const { user } = useAuth();
+  const { user, isCustomer } = useAuth();
   const navigation = useNavigation();
   const [tabBarVisible, setTabBarVisible] = useState("flex");
 
-  const baseTabs = [
-    { name: screens.tab.root, title: 'Home', iconName: 'home' },
-    { name: screens.tab.chats.root, title: 'Chats', iconName: 'chat' },
-    { name: 'boton-central', title: '', iconName: 'plus' },
-    { name: screens.tab.groups.root, title: 'Orders', iconName: 'order' },
-    { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
-  ];
+  let baseTabs = undefined;
 
-  const adminTabs = [
-    { name: screens.tab.reports.root, title: 'Reportes', iconName: 'file-document' }
-  ];
+  if (isCustomer) {
+    baseTabs = [
+      { name: screens.tab.root, title: 'Home', iconName: 'home' },
+      { name: screens.tab.chats.root, title: 'Chats', iconName: 'chat' },
+      { name: 'boton-central', title: '', iconName: 'plus' },
+      { name: screens.tab.products.root, title: 'Products', iconName: 'order' },
+      { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
+    ];
+  } else {
+    baseTabs = [
+      { name: screens.tab.root, title: 'Home', iconName: 'home' },
+      { name: screens.tab.chats.root, title: 'Chats', iconName: 'chat' },
+      { name: 'boton-central', title: '', iconName: 'plus' },
+      { name: screens.tab.groups.root, title: 'Pending', iconName: 'pending' },
+      { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
+    ];
+  }
 
-  const botonCentral = { name: "boton-central", title: 'Central', iconName: 'plus' };
 
-  const tabsToShow = user.role.name === 'admin' ? [...baseTabs, botonCentral, ...adminTabs] : baseTabs;
+  const tabsToShow = [...baseTabs];
 
-  const handleTabPress = (screenName) => {
-    navigation.navigate(screenName);
-  };
 
-  const CentralComponent = () =>{
-     return(
+  const CentralComponent = () => {
+    return (
       <></>
-     )
+    );
   }
 
   const handleSettingsPress = () => {
@@ -49,32 +52,6 @@ export function BottomTabNavigation() {
     navigation.navigate(screens.tab.settings.root);
   };
 
-  const screenIcon = (route, color, size, focused) => {
-    let image;
-
-    if (route.name === screens.tab.dashboard.root) {
-      image = assets.image.png.home;
-    } else if (route.name === screens.tab.chats.root) {
-      image = assets.image.png.chat;
-    } else if (route.name === screens.tab.groups.root) {
-      image = assets.image.png.calendar;
-    } else if (route.name === screens.tab.settings.root) {
-      image = assets.image.png.setting;
-    } else if (route.name === screens.tab.reports.root) {
-      image = 'file-document';
-    } else if (route.name === "boton-central") {
-      image = 'plus';
-
-      return (
-        <Image
-          style={styles.img}
-          resizeMode='contain'
-          source={image}
-          alt="icon"
-        />
-      );
-    }
-  };
 
   const getComponentByName = (name) => {
     switch (name) {
@@ -88,6 +65,8 @@ export function BottomTabNavigation() {
         return SettingsNavigation;
       case screens.tab.reports.root:
         return ReportsNavigation;
+      case screens.tab.products.root:
+        return ProductNavigation;
       default:
         return null;
     }
@@ -111,6 +90,10 @@ export function BottomTabNavigation() {
         return assets.image.png.setting;
       case 'plus':
         return assets.image.png.plus;
+      case 'pending':
+        return assets.image.png.iconPending;
+      case 'pending-focus':
+        return assets.image.png.iconPendingFocus;
       default:
         return null;
     }
@@ -123,7 +106,6 @@ export function BottomTabNavigation() {
         headerShown: route.name === screens.tab.settings.root,
         tabBarLabelStyle: { display: 'none' },
         tabBarActiveTintColor: 'green',
-        tabBarIcon: ({ focused, color, size }) => screenIcon(route, color, size, focused),
         tabBarStyle: [{ display: tabBarVisible }, styles.tabBar],
         headerStyle: [styles.headerGoback],
         headerLeft: () => (route.name === screens.tab.settings.root ? (
@@ -144,6 +126,9 @@ export function BottomTabNavigation() {
           if (route.name === screens.tab.settings.root) {
             return <TouchableOpacity onPressIn={handleSettingsPress} {...props} />;
           }
+          else if(route.name === screens.tab.chats.chatScreen){
+            return <TouchableOpacity onPressIn={handleSettingsPress} {...props} />;
+          }
 
           return <TouchableOpacity {...props} />;
         },
@@ -159,7 +144,7 @@ export function BottomTabNavigation() {
             headerTitleAlign: "center",
             headerTintColor: "rgba(71, 71, 71, 1)",
             tabBarItemStyle: [styles.tabBarItemOptions],
-            tabBarIcon: ({ focused, color, size }) => {
+            tabBarIcon: ({ focused }) => {
               if (tab.name === 'boton-central') {
                 return (
                   <View>
@@ -169,7 +154,7 @@ export function BottomTabNavigation() {
                       source={assets.image.png.union}
                       alt="icon"
                     />
-                    <TouchableOpacity style={styles.centralButton}>
+                    <TouchableOpacity onPress={() => navigation.navigate(screens.global.userProfileScreen) }  style={styles.centralButton}>
                       <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.registerOrder}>
                         <Image
                           style={styles.img}
@@ -201,4 +186,3 @@ export function BottomTabNavigation() {
     </Tab.Navigator>
   );
 }
-

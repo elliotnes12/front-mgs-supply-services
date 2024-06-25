@@ -2,6 +2,9 @@ import { useState, useEffect, createContext } from "react";
 import { User } from "../api/user";
 import { Auth } from "../api";
 import { hasExpiredToken } from "../utils/token";
+import { useNavigation } from '@react-navigation/native';
+import { CommonActions } from '@react-navigation/native';
+
 
 export const AuthContext = createContext();
 
@@ -15,6 +18,7 @@ export function AuthProvider(props) {
     const [isCustomer, setIsCustomer] = useState(false);
     const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigation = useNavigation();
 
     const userController = new User();
     const authController = new Auth();
@@ -91,7 +95,10 @@ export function AuthProvider(props) {
     const logout = () => {
         setUser(null);
         setToken(null);
+        setUserInfo(null);
+        setIsCustomer(false);
         authController.removeTokens();
+
     };
 
     const updateUser = (key, value) => {

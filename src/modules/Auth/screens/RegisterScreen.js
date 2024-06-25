@@ -116,7 +116,7 @@ export function RegisterScreen() {
               <View style={styles.registerButton}>
 
                 <View style={{ width: 26, height: 26, right: 25 }}>
-                  <Image style={{ width: "100%", height: "100%" }} resizeMode="contain" source={assets.image.png.maletinuno} />
+                  <Image style={{ width: "100%", height: "100%" }} resizeMode="contain" source={assets.image.png.iconMaleta} />
                 </View>
                 <Text style={styles.buttonText}>Company</Text>
 

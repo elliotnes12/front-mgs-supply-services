@@ -50,11 +50,11 @@ export function GroupScreen() {
     <View>
       <LinearGradient style={styles.gradient} colors={['#CEDC39', '#7DA74D']}>
         <SafeAreaView style={styles.safeArea}>
-          <Text style={styles.title}>Create a Service</Text>
-          <Text style={styles.subtitle}>Schedule a service with us</Text>
         </SafeAreaView>
       </LinearGradient>
-      <Text style={styles.selectServiceText}>Select a service</Text>
+       <View>  
+      <Text style={styles.selectServiceText}>Office Cleaning</Text>
+      </View> 
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -96,12 +96,15 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
   },
   safeArea: {
-    padding: 40,
+    paddingHorizontal:24,
+    paddingTop:55,
+    
   },
   title: {
+    left:30,
     color: "#fff",
-    fontSize: 24,
-    fontFamily: "Poppins_700Bold",
+    fontSize: 30,
+    fontFamily: "Poppins_600SemiBold",
   },
   subtitle: {
     color: "#fff",
@@ -111,8 +114,9 @@ const styles = StyleSheet.create({
   selectServiceText: {
     marginTop: 20,
     paddingLeft: 20,
-    fontFamily: "Poppins_400Regular",
+    fontFamily: "Poppins_700Bold",
     fontSize: 16,
+    color:"#080C2F",
   },
   flatListContainer: {
     paddingVertical: 20,
@@ -150,6 +154,5 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-
-
+ 
 });

@@ -89,7 +89,7 @@ const getIconFocus = (label) => {
 
 const getIcon = (label) => {
   if (label === "Services") {
-    return assets.image.png.maletauno;
+    return assets.image.png.iconMaletaFocus;
   } else if (label === "Orders") {
     return assets.image.png.documentouno;
   } else if (label === "Rating") {

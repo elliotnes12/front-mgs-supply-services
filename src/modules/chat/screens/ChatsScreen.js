@@ -107,7 +107,7 @@ export function ChatsScreen() {
           <View style={styles.recentChatsContainer}>
             {chats.length > 0 ? (
               chats.map(chat => (
-                <TouchableOpacity key={chat.id} onPress={() => navigation.navigate('ChatDetail', { idchat: chat.id })}>
+                <TouchableOpacity key={chat.id} onPress={() => navigation.navigate('ChatScreen', { idchat: chat.id })}>
                   <View style={styles.chatItem}>
                     <Image style={styles.chatImage} resizeMode="cover" source={assets.image.png.profile} />
                     <View style={styles.chatTextContainer}>
