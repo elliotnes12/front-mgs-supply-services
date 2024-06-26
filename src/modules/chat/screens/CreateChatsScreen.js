@@ -4,7 +4,8 @@ import React from 'react'
 export function CreateChatsScreen() {
   return (
     <View>
-      <Text>CreateChatsScreen</Text>
+      <Text >CreateChatsScreen</Text>
+       
     </View>
   )
 }

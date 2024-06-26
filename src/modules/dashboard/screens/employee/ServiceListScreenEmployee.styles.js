@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     position: "relative",
+    marginTop:20
 
   },
   flatListContainer:{

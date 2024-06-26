@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { ChatScreen } from "../modules/chat/screens/ChatScreen";
 import {
   ImageFullScreen,
   UserProfileScreen
@@ -16,6 +15,7 @@ import { styles } from "./Styles.style";
 import { useTabBar } from './TabBarProvider'; // Importar el contexto
 import { BottomTabNavigation } from './ButtonTabNavigation/BottomTabNavigation';
 import { useNavigation } from '@react-navigation/native';
+import { ChatScreen } from '../screens/Global/ChatSreen';
 
 initSockets();
 
@@ -49,12 +49,8 @@ export function AppNavigation() {
         options={{ headerShown: false, ...styles.stackNavigationStyles }}
         component={BottomTabNavigation}
       />
-    
-      <Stack.Screen
-        name={screens.global.chatScreen}
-        component={ChatScreen}
-        options={{ headerShown: false, ...styles.stackNavigationStyles }}
-      />
+
+
       <Stack.Screen
         name={screens.global.groupScreen}
         component={GroupScreen}
@@ -65,9 +61,14 @@ export function AppNavigation() {
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
         <Stack.Screen
+          name={screens.tab.chats.chatScreen}
+          component={ChatScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name={screens.global.userProfileScreen}
           component={UserProfileScreen}
-          options={{ title: "Info. del usuario" ,headerShown: false}}
+          options={{ title: "Info. del usuario", headerShown: false }}
         />
         <Stack.Screen
           name={screens.global.groupProfileScreen}

@@ -8,6 +8,7 @@ import { useAuth } from '../../Auth/hooks';
 import { ServiceListScreenCt } from './customer/ServiceListScreen';
 import { ServiceListScreenSp } from './supervisor/ServiceListScreenSupervisor';
 import { styles } from "../styles/dashboard.styles";
+import { ServiceListScreenEmployee } from './employee/ServiceListScreenEmployee';
 
 export function DashboardScreen() {
     const { userInfo, isCustomer } = useAuth();
@@ -81,13 +82,13 @@ export function DashboardScreen() {
                         <View style={styles.promos}>
                             <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.bgpromos}>
                                 <View style={styles.promos__label}>
-                                     <Text style={{color:'#7EA74C'}}>New</Text>
+                                    <Text style={{ color: '#7EA74C' }}>New</Text>
                                 </View>
                                 <Text style={styles.promos__title}>
-                                Register Your service via chat 
+                                    Register Your service via chat
                                 </Text>
 
-                                <Image alt='fondo'  resizeMode="cover" source={assets.image.png.pleca} />
+                                <Image alt='fondo' resizeMode="cover" source={assets.image.png.pleca} />
                                 <Image alt='register-service' style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.mujer} />
 
                             </LinearGradient>
@@ -113,7 +114,21 @@ export function DashboardScreen() {
                         <ServiceListScreenSp />
                     </>
                 )}
+
+
+                {!isCustomer && userInfo.type === "employee" && (
+                    <>
+                        <View style={styles.options}>
+                            <Text style={styles.options__title}>Pending services</Text>
+                            <TouchableOpacity>
+                                <Text style={styles.options__all}>ViewAll</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <ServiceListScreenEmployee />
+                    </>
+                )}
             </SafeAreaView>
         </View>
     );
 }
+

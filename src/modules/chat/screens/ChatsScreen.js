@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { assets } from "../../../assets";
 import { useAuth } from '../../Auth/hooks';
-import { styles } from "../styles/chatScreen.styles";
+import { styles } from "../styles/chatsScreen.styles";
 
 const initialUsers = [
   { id: 1, name: 'John Doe', role: 'Manager', status: 'green' },

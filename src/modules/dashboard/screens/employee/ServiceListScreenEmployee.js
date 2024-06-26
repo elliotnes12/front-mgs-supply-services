@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
-import { TabView, TabBar } from 'react-native-tab-view';
-import { LinearGradient } from 'expo-linear-gradient';
 import { assets } from '../../../../assets';
-import { styles } from './ServiceListScreenSupervisor.styles';
-import { tabIds } from '../../../../utils';
-
+import { styles } from './ServiceListScreenEmployee.styles';
 
 const data = [
   { title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'progress' },
   { title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'cancel' },
+  { title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'success' },
   { title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'success' }
+
 ]
 
 
@@ -90,97 +88,10 @@ const RenderLastServices = () => (
   </View>
 );
 
-const RenderLastProducts = () => (
-  <View style={[styles.scene, styles.backgroundWhite]}>
-    <Text>Contenido de la segunda pestaña</Text>
-  </View>
-);
 
-const getIconFocus = (key) => {
-  if (key === tabIds.TAB_ID_SERVICES) {
-    return assets.image.png.documentosdos;
-  } else if (key === tabIds.TAB_ID_PRODUCTS) {
-    return assets.image.png.documentosdos;
-  }
-};
-
-const getIcon = (key) => {
-  if (key === tabIds.TAB_ID_SERVICES) {
-    return assets.image.png.documentouno;
-  } else if (key === tabIds.TAB_ID_PRODUCTS) {
-    return assets.image.png.documentouno;
-  }
-};
-
-const initialLayout = { width: "100%" };
-
-export const ServiceListScreenSp = () => {
-  const [index, setIndex] = React.useState(0);
-
-  // Define the routes
-  const routes = [
-    { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
-    { key: tabIds.TAB_ID_PRODUCTS, title: 'products', label: 'Orders' },
-  ];
-
-  // Render the scene based on the route key
-  const renderScene = ({ route }) => {
-    switch (route.key) {
-      case tabIds.TAB_ID_SERVICES:
-        return <RenderLastServices />;
-      case tabIds.TAB_ID_PRODUCTS:
-        return <RenderLastProducts />;
-      default:
-        return null;
-    }
-  };
-
-  // Customize the appearance of the tab bar
-  const renderTabBar = (props) => (
-    <TabBar
-      {...props}
-      indicatorStyle={styles.indicatorStyle}
-      pressColor='transparent'
-      style={styles.tabBarStyle}
-
-
-      tabStyle={styles.tabStyle}
-      renderLabel={({ route, focused }) => (
-        focused ? (
-          <LinearGradient
-            colors={['#CEDC39', '#7DA74D']}
-            style={styles.gradient}
-          >
-
-            <Image style={styles.iconServices} resizeMode="cover" source={getIconFocus(route.key)} />
-            <Text style={styles.tabTextFocused}>
-              {route.label}
-            </Text>
-          </LinearGradient>
-        ) : (
-          <View style={styles.tabItem}>
-            <Image style={styles.iconServices} resizeMode="cover" source={getIcon(route.key)} />
-            <Text style={styles.tabText}>
-              {route.label}
-            </Text>
-          </View>
-
-        )
-
-
-      )}
-    />
-  );
+export const ServiceListScreenEmployee = () => {
 
   return (
-    <View style={styles.tabViewContainer}>
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={initialLayout}
-        renderTabBar={renderTabBar}
-      />
-    </View>
+    <RenderLastServices />
   );
 }

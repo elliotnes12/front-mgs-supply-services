@@ -17,7 +17,9 @@ export const styles = new StyleSheet.create({
   },
   modalStyles: {
     contentStyle: {
-      backgroundColor: "#fff",
+      backgroundColor: "red",
+      zIndex:10,
+      position:"relative"
     },
     headerStyle: {
       backgroundColor: "#fff",
