@@ -41,7 +41,11 @@ const png = {
   iconPending: require("./icons/icon-pending.png"),
   iconPendingFocus: require("./icons/icon-pending-focus.png"),
   destellos:require("./icons/destellos.png"),
-  calendardos:require("./icons/calendardos.png")
+  calendardos:require("./icons/calendardos.png"),
+  iconClose:require("./icons/close.png"),
+  microfono:require("./icons/microfono.png"),
+  fondo:require("./icons/fondo.png"),
+  inbox:require("./icons/inbox.png"),
 };
 
 export { png };

@@ -6,7 +6,7 @@ const auth = {
 
 const global = {
   dashboard:"DashboardScreen",
-  userProfileScreen: "UserProfileScreen",
+  createService: "CreateService",
   cameraScreen: "CameraScreen",
   imageFullScreen: "ImageFullScreen",
   chatScreen: "ChatScreen",

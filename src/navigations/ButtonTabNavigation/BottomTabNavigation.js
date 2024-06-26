@@ -154,7 +154,7 @@ export function BottomTabNavigation() {
                       source={assets.image.png.union}
                       alt="icon"
                     />
-                    <TouchableOpacity onPress={() => navigation.navigate(screens.global.userProfileScreen) }  style={styles.centralButton}>
+                    <TouchableOpacity onPress={() => navigation.navigate(screens.global.createService) }  style={styles.centralButton}>
                       <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.registerOrder}>
                         <Image
                           style={styles.img}

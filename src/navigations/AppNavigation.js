@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import {
+  CreateService,
   ImageFullScreen,
-  UserProfileScreen
 } from "../screens/Global";
 import {
   AddUserGroupScreen,
@@ -15,7 +15,7 @@ import { styles } from "./Styles.style";
 import { useTabBar } from './TabBarProvider'; // Importar el contexto
 import { BottomTabNavigation } from './ButtonTabNavigation/BottomTabNavigation';
 import { useNavigation } from '@react-navigation/native';
-import { ChatScreen } from '../screens/Global/ChatSreen';
+import { ChatScreen } from '../screens/Global/ChatScreen';
 
 initSockets();
 
@@ -66,9 +66,9 @@ export function AppNavigation() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={screens.global.userProfileScreen}
-          component={UserProfileScreen}
-          options={{ title: "Info. del usuario", headerShown: false }}
+          name={screens.global.createService}
+          component={CreateService}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={screens.global.groupProfileScreen}

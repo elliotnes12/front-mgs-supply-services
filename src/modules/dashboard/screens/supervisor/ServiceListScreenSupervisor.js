@@ -61,7 +61,9 @@ const renderItem = ({ item }) => {
           <Text style={styles.item_subtitle}>{item.subTitle}</Text>
 
           <View style={styles.item__date}>
-            <Image alt='icon-calendar' resizeMode="cover" source={assets.image.png.calendar} />
+            <View style={{width:25,height:25}}>
+              <Image alt='icon-calendar' style={{width:"100%",height:"100%"}} source={assets.image.png.calendar} />
+            </View>
             <Text style={styles.item__datetext} >{item.date}</Text>
           </View>
 
@@ -117,13 +119,11 @@ const initialLayout = { width: "100%" };
 export const ServiceListScreenSp = () => {
   const [index, setIndex] = React.useState(0);
 
-  // Define the routes
   const routes = [
     { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
     { key: tabIds.TAB_ID_PRODUCTS, title: 'products', label: 'Orders' },
   ];
 
-  // Render the scene based on the route key
   const renderScene = ({ route }) => {
     switch (route.key) {
       case tabIds.TAB_ID_SERVICES:
@@ -135,7 +135,6 @@ export const ServiceListScreenSp = () => {
     }
   };
 
-  // Customize the appearance of the tab bar
   const renderTabBar = (props) => (
     <TabBar
       {...props}

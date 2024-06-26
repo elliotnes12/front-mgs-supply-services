@@ -18,10 +18,6 @@ export function RegisterScreen() {
   const [userType, setUserType] = useState("customer");
   const [showIdInput, setShowIdInput] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [isPassFocused, setIsPassFocused] = useState(false);
-  const [isPassConfirmFocused, setIsPassConfirmFocused] = useState(false);
-  const [isIdEmployeeFocused, setIsIdEmployeeFocused] = useState(false);
 
   const handleRadioChange = (newValue) => {
     setUserType(newValue);

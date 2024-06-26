@@ -1,3 +1,3 @@
 export * from "./CameraScreen";
-export * from "./UserProfileScreen";
+export * from "./CreateService";
 export * from "./ImageFullScreen";
