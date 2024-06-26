@@ -39,7 +39,9 @@ const png = {
   notice: require("./icons/notice.png"),
   decline: require("./icons/decline.png"),
   iconPending: require("./icons/icon-pending.png"),
-  iconPendingFocus: require("./icons/icon-pending-focus.png")
+  iconPendingFocus: require("./icons/icon-pending-focus.png"),
+  destellos:require("./icons/destellos.png"),
+  calendardos:require("./icons/calendardos.png")
 };
 
 export { png };
