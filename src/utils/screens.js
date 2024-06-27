@@ -20,7 +20,8 @@ const chats = {
   root: "ChatsRoot",
   chatsScreen: "ChatsScreen",
   createChatScreen: "CreateChatScreen",
-  chatScreen:"ChatScreen"
+  chatScreen:"ChatScreen",
+  chatScreenCustomer:"ChatScreenSupervisor"
 };
 
 const products = {

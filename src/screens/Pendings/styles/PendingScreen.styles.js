@@ -1,17 +1,18 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: {
+    container_item: {
         paddingHorizontal: 24,
         paddingVertical: 10,
          marginBottom: 7,
          position:"relative",
          display:"flex",
+         justifyContent:"space-between",
          flexDirection:"row",
          width:"100%",
     },
     gradient: {
-        height: 140,
+        height: 145,
         borderBottomLeftRadius: 35,
         borderBottomRightRadius: 35,
         paddingBottom:10,
@@ -29,12 +30,7 @@ export const styles = StyleSheet.create({
         fontFamily: 'Poppins_700Bold',
         color: "#FFFFFF",
     },
-    flechaizquierda: {
-      
-        marginRight:10,
-        width: 30,
-        height: 30,
-    },
+
     office: {
         fontSize: 18,
         fontFamily: 'Poppins_700Bold',
@@ -66,6 +62,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         width:"100%",
+        marginBottom:10
     },
     item__img: {
         height: 50,
@@ -106,7 +103,7 @@ export const styles = StyleSheet.create({
         width:120,
         justifyContent:"space-between",
         alignItems:"center",
-        marginLeft:35
+       
     },
     options__item:{
         flex:1,

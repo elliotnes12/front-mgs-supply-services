@@ -110,15 +110,13 @@ export const styles = StyleSheet.create({
     justifyContent:"space-between",
   },
   item__date:{
-    position: "absolute",
+    position:"absolute",
     right:0,
     bottom:0,
     display:"flex",
     flexDirection:"row",
     alignItems:"center",
-    width:120,
-    marginTop:5,
-    justifyContent:"flex-start",
+    width:130,
   },
   item__datetext:{
     color:"#333",

@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
       height: 100,
       justifyContent: 'flex-start',
       textAlignVertical: 'top',
-      borderColor: 'gray',
+      borderColor: '#828282',
       borderWidth: 1,
       padding: 10,
    },

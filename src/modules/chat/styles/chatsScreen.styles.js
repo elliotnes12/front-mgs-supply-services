@@ -19,6 +19,16 @@ export const styles = StyleSheet.create({
     scrollContainer: {
       flexGrow: 1,
     },
+    searchInput:{
+      marginBottom:25,
+      borderRadius:40,
+      paddingLeft:15,
+      borderWidth:1,
+      borderColor:"#828282"
+    },
+    searchInput__input:{
+      height:50
+    },
     transparentBackground: {
       position: 'absolute',
       top: 0,
@@ -41,6 +51,7 @@ export const styles = StyleSheet.create({
     },
     usersContainer: {
       marginBottom: 25,
+      height:130
     },
     usersList: {
       alignItems: 'center',

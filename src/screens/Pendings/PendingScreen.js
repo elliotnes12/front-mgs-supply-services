@@ -5,64 +5,60 @@ import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { assets } from "../../assets";
 import { styles } from "./styles/PendingScreen.styles";
+import { stylesGlobal } from '../../modules/styles/global.style';
 
 export function PendingScreen() {
     const [tasks, setTasks] = useState([]);
-    const [countEmployees, setCountEmployees] = useState(2);
     const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1);
-
-    // Simula la carga de datos desde una API
-    const fetchTasks = async (pageNumber) => {
-        setLoading(true);
-        // Aquí puedes realizar una llamada a la API para obtener los datos
-        // Por ahora, simplemente simulamos la carga de datos
-        const newTasks = Array.from({ length: 4 }, (_, index) => ({
-            id: (pageNumber - 1) * 2 + index + 1,
-            title: 'Office Cleaning',
-            description: 'Cleaning the lobby area'
-        }));
-        setTasks(prevTasks => [...prevTasks, ...newTasks]);
-        setLoading(false);
-    };
 
     useEffect(() => {
-        if (page == 1) {
-
-            fetchTasks(page)
-        }
-
+        // Simulación de carga de datos
+        setLoading(true);
+        setTimeout(() => {
+            setTasks([
+                {
+                    id: 1,
+                    title: "Cleaning office",
+                    description: "cleaning de lobby area",
+                    employees: [
+                        { idEmployee: "2323", name: "Jose Luis Carmona" },
+                        { idEmployee: "2323", name: "Jorge Antonio Ruiz Perez" }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Cleaning Hospital",
+                    description: "cleaning de lobby area",
+                    employees: [
+                        { idEmployee: "43434", name: "Carlos Roberto Garcia" }
+                    ]
+                }
+            ]);
+            setLoading(false);
+        }, 1000); // Simulación de retardo de carga
     }, []);
 
-    const handleLoadMore = () => {
-        //setPage(prevPage => prevPage + 1);
-    };
-
     const renderItem = ({ item }) => (
-        <View key={item.id} style={styles.container}>
+        <View key={item.id} style={styles.container_item}>
             <View>
-            <Text style={styles.office}>{item.title}</Text>
-            <View style={styles.notice}>
-                <View style={{ width: 20, height: 20, marginRight: 5 }}>
-                    <Image source={assets.image.png.notice} style={styles.notice__img} />
-                </View>
-                <Text style={{ fontSize: 15 }}>{item.description}</Text>
-            </View>
-            <Text style={styles.assigned}>Assigned employees: {countEmployees}</Text>
-            <View style={styles.employeeList}>
-                <View style={styles.item}>
-                    <View style={styles.item__img}>
-                        <Image source={assets.image.png.profile} style={{ width: "100%", height: "100%" }} />
+                <Text style={styles.office}>{item.title}</Text>
+                <View style={styles.notice}>
+                    <View style={stylesGlobal.imageMin}>
+                        <Image source={assets.image.png.notice} style={stylesGlobal.imageMin__img} />
                     </View>
-                    <Text style={styles.personalName}>Anna Rachel</Text>
+                    <Text style={{ fontSize: 15 }}>{item.description}</Text>
                 </View>
-                <View style={styles.item}>
-                    <View style={styles.item__img}>
-                        <Image source={assets.image.png.profile} style={{ width: "100%", height: "100%" }} />
-                    </View>
-                    <Text style={styles.personalName}>Jose Luis Tovar</Text>
+                <Text style={styles.assigned}>Assigned employees: {item.employees.length}</Text>
+                <View style={styles.employeeList}>
+                    {item.employees.map((employee) => (
+                        <View key={employee.idEmployee} style={styles.item}>
+                            <View style={styles.item__img}>
+                                <Image source={assets.image.png.profile} style={{ width: "100%", height: "100%" }} />
+                            </View>
+                            <Text style={styles.personalName}>{employee.name}</Text>
+                        </View>
+                    ))}
                 </View>
-            </View>
             </View>
             <View style={styles.options}>
                 <TouchableOpacity style={styles.options__item}>
@@ -87,7 +83,7 @@ export function PendingScreen() {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1}}>
             <LinearGradient style={styles.gradient} colors={['#CEDC39', '#7DA74D']}>
                 <SafeAreaView style={styles.safeArea}>
                     <Text style={styles.title}>Services</Text>
@@ -97,7 +93,6 @@ export function PendingScreen() {
                 data={tasks}
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
-                onEndReached={handleLoadMore}
                 onEndReachedThreshold={0.5}
                 ListFooterComponent={renderFooter}
                 contentContainerStyle={styles.scrollViewContent}

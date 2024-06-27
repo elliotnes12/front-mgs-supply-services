@@ -117,11 +117,11 @@ export const styles = StyleSheet.create({
     position: "relative",
     borderRadius:10,
   },
-  promos__bgman: {
+  bg_person: {
     height: 150,
     width: 120,
     position: "absolute",
-    left:220,
+    right:20,
     bottom: 0,
   },
   tabViewContainer: {

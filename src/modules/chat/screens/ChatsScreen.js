@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { assets } from "../../../assets";
 import { useAuth } from '../../Auth/hooks';
 import { styles } from "../styles/chatsScreen.styles";
+import { useEffect } from 'react';
+import { stylesGlobal } from '../../styles/global.style';
+import { ENV, screens } from '../../../utils';
 
 const initialUsers = [
   { id: 1, name: 'John Doe', role: 'Manager', status: 'green' },
@@ -29,15 +32,28 @@ const chats = [
 
 export function ChatsScreen() {
   const [users, setUsers] = useState(initialUsers);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const navigation = useNavigation();
-
   const { userInfo, isCustomer } = useAuth();
   const { name } = userInfo;
 
-  const loadMoreUsers = () => {
-    
-  };
 
+  useEffect(() => {
+    if (!isCustomer) {
+      setFilteredUsers(users);
+    }
+  }, []);
+
+
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    const filtered = users.filter(user =>
+      user.name.toLowerCase().includes(text.toLowerCase()) || user.id.toString() === text.toLowerCase()
+    );
+    setFilteredUsers(filtered);
+
+  };
   return (
 
     <View style={styles.background}>
@@ -59,19 +75,35 @@ export function ChatsScreen() {
 
           {!isCustomer &&
 
-             <View>
-                 <Text style={[styles.title,styles.containerTitle]}>Chat</Text>
-             </View>
+            <>
+
+              <View>
+                <Text style={[styles.title, styles.containerTitle]}>Chat</Text>
+              </View>
+
+              <View style={[stylesGlobal.itemHorizontal,styles.searchInput]}>
+                <View style={stylesGlobal.imageMin}>
+                  <Image alt='icon-support' style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.iconLupa} />
+                </View>
+                <TextInput
+                  style={styles.searchInput__input}
+                  placeholder="Search by name or ID"
+                  value={searchQuery}
+                  onChangeText={handleSearch}
+                />
+              </View>
+            </>
+
           }
 
           <View style={styles.usersContainer}>
             <FlatList
               horizontal
-              data={users}
+              data={!isCustomer ? filteredUsers : users}
               keyExtractor={(item) => item.id.toString()}
               contentContainerStyle={styles.usersList}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => navigation.navigate('UserProfile', { userId: item.id })}>
+                <TouchableOpacity onPress={() => navigation.navigate(isCustomer? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: item.id, userName: item.name })}>
                   <View style={styles.userItem}>
                     <View style={styles.userProfile}>
                       <Image style={styles.userImage} resizeMode="cover" source={assets.image.png.profile} />
@@ -95,7 +127,6 @@ export function ChatsScreen() {
                 </TouchableOpacity>
               )}
               showsHorizontalScrollIndicator={false}
-              onEndReached={loadMoreUsers}
               onEndReachedThreshold={0.5}
             />
           </View>
@@ -107,7 +138,7 @@ export function ChatsScreen() {
           <View style={styles.recentChatsContainer}>
             {chats.length > 0 ? (
               chats.map(chat => (
-                <TouchableOpacity key={chat.id} onPress={() => navigation.navigate('ChatScreen', { idchat: chat.id })}>
+                <TouchableOpacity key={chat.id} onPress={() => navigation.navigate(isCustomer? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer , { userId: chat.id, userName: chat.name })}>
                   <View style={styles.chatItem}>
                     <Image style={styles.chatImage} resizeMode="cover" source={assets.image.png.profile} />
                     <View style={styles.chatTextContainer}>

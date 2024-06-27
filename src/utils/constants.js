@@ -1,5 +1,5 @@
 
-const IP = "192.168.56.1";
+const IP = "192.168.100.78";
 const SERVER = `${IP}:3977`;
 
 export const ENV = {
@@ -42,6 +42,7 @@ export const ENV = {
 }
 
 export const tabIds = {
-    TAB_ID_SERVICES: "idServices",
-    TAB_ID_PRODUCTS: "idProducts"
+    TAB_ID_SERVICES: "services",
+    TAB_ID_PRODUCTS: "orders",
+    TAB_ID_RAITING: "raiting"
 }

@@ -16,7 +16,7 @@ import { useTabBar } from './TabBarProvider'; // Importar el contexto
 import { BottomTabNavigation } from './ButtonTabNavigation/BottomTabNavigation';
 import { useNavigation } from '@react-navigation/native';
 import { ChatScreen } from '../screens/Global/ChatScreen';
-
+import { ChatScreenSupervisor } from '../screens/Global/ChatScreenSupervisor';
 initSockets();
 
 const Stack = createNativeStackNavigator();
@@ -60,6 +60,13 @@ export function AppNavigation() {
       <Stack.Group
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
+
+        <Stack.Screen
+          name={screens.tab.chats.chatScreenCustomer}
+          component={ChatScreenSupervisor}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name={screens.tab.chats.chatScreen}
           component={ChatScreen}

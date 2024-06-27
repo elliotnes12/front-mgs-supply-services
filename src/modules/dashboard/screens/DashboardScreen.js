@@ -89,7 +89,7 @@ export function DashboardScreen() {
                                 </Text>
 
                                 <Image alt='fondo' resizeMode="cover" source={assets.image.png.pleca} />
-                                <Image alt='register-service' style={styles.promos__bgman} resizeMode="cover" source={assets.image.png.mujer} />
+                                <Image alt='register-service' style={styles.bg_person} resizeMode="cover" source={assets.image.png.mujer} />
 
                             </LinearGradient>
                         </View>

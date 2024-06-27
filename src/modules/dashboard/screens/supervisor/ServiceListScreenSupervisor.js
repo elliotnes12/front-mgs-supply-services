@@ -5,6 +5,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { assets } from '../../../../assets';
 import { styles } from './ServiceListScreenSupervisor.styles';
 import { tabIds } from '../../../../utils';
+import { getIcon } from '../../../../utils/util';
+import { stylesGlobal } from '../../../styles/global.style';
 
 
 const data = [
@@ -13,6 +15,8 @@ const data = [
   { title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'success' }
 ]
 
+
+const initialLayout = { width: "100%" };
 
 const renderStatus = (status) => {
   switch (status) {
@@ -61,8 +65,8 @@ const renderItem = ({ item }) => {
           <Text style={styles.item_subtitle}>{item.subTitle}</Text>
 
           <View style={styles.item__date}>
-            <View style={{width:25,height:25}}>
-              <Image alt='icon-calendar' style={{width:"100%",height:"100%"}} source={assets.image.png.calendar} />
+          <View style={[stylesGlobal.imageMin]}>
+              <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
             </View>
             <Text style={styles.item__datetext} >{item.date}</Text>
           </View>
@@ -98,23 +102,8 @@ const RenderLastProducts = () => (
   </View>
 );
 
-const getIconFocus = (key) => {
-  if (key === tabIds.TAB_ID_SERVICES) {
-    return assets.image.png.documentosdos;
-  } else if (key === tabIds.TAB_ID_PRODUCTS) {
-    return assets.image.png.documentosdos;
-  }
-};
 
-const getIcon = (key) => {
-  if (key === tabIds.TAB_ID_SERVICES) {
-    return assets.image.png.documentouno;
-  } else if (key === tabIds.TAB_ID_PRODUCTS) {
-    return assets.image.png.documentouno;
-  }
-};
 
-const initialLayout = { width: "100%" };
 
 export const ServiceListScreenSp = () => {
   const [index, setIndex] = React.useState(0);
@@ -151,7 +140,7 @@ export const ServiceListScreenSp = () => {
             style={styles.gradient}
           >
 
-            <Image style={styles.iconServices} resizeMode="cover" source={getIconFocus(route.key)} />
+            <Image style={styles.iconServices} resizeMode="cover" source={getIcon(route.key+"-focus")} />
             <Text style={styles.tabTextFocused}>
               {route.label}
             </Text>
