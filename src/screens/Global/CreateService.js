@@ -6,6 +6,8 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { assets } from "../../assets";
 import { styles } from "./styles/CreateService.style";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Modal from 'react-native-modal';
+import MapView, { Marker } from 'react-native-maps';
 
 const data = [
   { id: '1', title: 'Cleaning' },
@@ -25,7 +27,18 @@ export function CreateService() {
   const [searchText, setSearchText] = useState('');
   const [filteredEmployees, setFilteredEmployees] = useState(dataEmployees);
   const [loading, setLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const handleMapPress = (e) => {
+    const { latitude, longitude } = e.nativeEvent.coordinate;
+    setLocation(`${latitude}, ${longitude}`);
+    toggleModal();
+  };
 
   const getImage = (label) => {
     if (label === "Cleaning") {
@@ -46,7 +59,7 @@ export function CreateService() {
             <View style={{ width: 20, height: 20, marginRight: 5 }}>
               <Image alt="tabs" style={{ width: "100%", height: "100%" }} resizeMode="contain" source={getImage(item.title)} />
             </View>
-            <Text style={styles.selectedButtonText}>{item.title}</Text>
+            <Text style={{color:"#fff"}}>{item.title}</Text>
           </LinearGradient>
         ) : (
           <View style={{ borderWidth: 1, borderColor: "#4F4F4F", borderRadius: 20, height: 45, width: 110, justifyContent: "center", alignItems: "center", flexDirection: "row", backgroundColor: '#fff' }}>
@@ -91,10 +104,9 @@ export function CreateService() {
           </TouchableOpacity>
           <View>
             <Text style={styles.title}>Create a Service</Text>
-            <Text style={styles.subTitle}>Schedule a service with us</Text>
+            <Text style={styles.subTitle}>Create of the generated services</Text>
           </View>
         </SafeAreaView>
-
       </LinearGradient>
 
       <FlatList
@@ -148,7 +160,7 @@ export function CreateService() {
                 <View style={styles.street}>
                   <Text style={styles.street__label}>{location}</Text>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={toggleModal}>
                   <Text style={styles.street__googleMaps}>SET GOOGLE MAP</Text>
                 </TouchableOpacity>
               </View>
@@ -177,6 +189,33 @@ export function CreateService() {
           </>
         }
       />
+
+      <Modal isVisible={isModalVisible}>
+        <View style={{ flex: 1 }}>
+          <MapView
+            style={{ flex: 1 }}
+            initialRegion={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            onPress={handleMapPress}
+          >
+            <Marker
+              coordinate={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+              }}
+              title="Selected Location"
+              description={location}
+            />
+          </MapView>
+          <TouchableOpacity onPress={toggleModal} style={{ position: 'absolute', top: 40, right: 20 }}>
+            <Text style={{ color: 'white', fontSize: 18 }}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </>
   );
 }

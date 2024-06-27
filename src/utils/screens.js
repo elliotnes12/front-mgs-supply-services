@@ -21,7 +21,8 @@ const chats = {
   chatsScreen: "ChatsScreen",
   createChatScreen: "CreateChatScreen",
   chatScreen:"ChatScreen",
-  chatScreenCustomer:"ChatScreenSupervisor"
+  chatScreenCustomer:"ChatScreenSupervisor",
+  chatsScreenEmployee:"ChatsScreenEmployee"
 };
 
 const products = {
@@ -31,6 +32,8 @@ const products = {
 const groups = {
   root: "GroupsRoot",
   groupsScreen: "GroupsScreen",
+  pendingScreen: "PendingScreen",
+  pendingScreenEmployee: "PendingScreenEmployee",
   createGroupScreen: "CreateGroupScreen",
 };
 

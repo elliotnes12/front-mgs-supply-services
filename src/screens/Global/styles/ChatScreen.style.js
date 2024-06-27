@@ -88,7 +88,46 @@ export const styles = StyleSheet.create({
       paddingLeft:15,
       paddingTop:190,
      },
-    
+     contentMessageOne:{
+        display:"flex",
+        width:"100%",
+        justifyContent:"flex-end",
+        flexDirection:"row",
+        alignContent:"center",
+        paddingRight:20,
+        marginBottom:10,
+     },
+     contentMessageTwo:{
+        display:"flex",
+        width:"100%",
+        flexDirection:"row",
+        justifyContent:"flex-start",
+        alignContent:"center",
+        paddingLeft:10,
+        marginBottom:10
+     },
+     contentMessageOne__message:{
+        backgroundColor:'#7DA74D',
+        color:"#fff",
+        width:150,
+        minHeight:35,
+        fontSize:15,
+        borderRadius:10,
+        display:"flex",
+        alignItems:"center",
+        flexDirection:"row",
+        padding:10
+     },
+     contentMessageTwo__message:{
+      backgroundColor:"#F5FFEF",
+      width:150,
+      minHeight:40,
+      fontSize:15,
+      borderRadius:10,
+      alignItems:"center",
+      display:"flex",
+      padding:10
+   }
 
 
 })

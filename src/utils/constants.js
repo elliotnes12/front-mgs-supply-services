@@ -1,5 +1,5 @@
 
-const IP = "192.168.100.78";
+const IP = "192.168.56.1";
 const SERVER = `${IP}:3977`;
 
 export const ENV = {
@@ -14,7 +14,8 @@ export const ENV = {
             REFRESH_ACCESS_TOKEN: "auth/refresh_access_token",
         },
         ME: "user/me",
-        USER: "user",
+        USER: "users",
+        EMPLOYEES: "employees-by-users",
         USER_EXCEPT_PARTICIPANTS_GROUP: "users_exept_participants_group",
         CHAT: "chat",
         CHAT_MESSAGE: "chat/message",

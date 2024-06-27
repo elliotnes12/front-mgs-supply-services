@@ -30,7 +30,7 @@ const chats = [
 
 
 
-export function ChatsScreen() {
+export function ChatsScreenEmployee() {
   const [users, setUsers] = useState(initialUsers);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -61,21 +61,6 @@ export function ChatsScreen() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <SafeAreaView style={styles.container}>
 
-
-          {isCustomer &&
-
-            <View style={styles.header__customer}>
-              <View style={styles.containerTitle}>
-                <Text style={styles.title}>Chat</Text>
-                <Text style={styles.title}>Support</Text>
-              </View>
-
-              <Image alt='icon-support' style={{ width: 40, height: 40 }} resizeMode="contain" source={assets.image.png.iconSupport} />
-            </View>
-          }
-
-          {!isCustomer &&
-
             <>
 
               <View>
@@ -95,7 +80,7 @@ export function ChatsScreen() {
               </View>
             </>
 
-          }
+          
 
           <View style={styles.usersContainer}>
             <FlatList
@@ -118,11 +103,7 @@ export function ChatsScreen() {
                     </View>
                     <Text style={styles.userName}>{item.name}</Text>
                     <View style={styles.userRoleContainer}>
-                      {item.role ? (
-                        <Text style={styles.userRole}>Support</Text>
-                      ) : (
-                        <View style={styles.emptyRole} />
-                      )}
+                       <Text>{item.role}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -172,6 +153,3 @@ export function ChatsScreen() {
   );
 }
 
-
-
-export default ChatsScreen;

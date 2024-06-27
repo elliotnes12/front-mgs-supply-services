@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { assets } from '../../../../assets';
 import { styles } from './ServiceListScreenEmployee.styles';
+import { stylesGlobal } from '../../../styles/global.style';
 
 const data = [
   { title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'progress' },
@@ -59,7 +60,9 @@ const renderItem = ({ item }) => {
           <Text style={styles.item_subtitle}>{item.subTitle}</Text>
 
           <View style={styles.item__date}>
-            <Image alt='icon-calendar' resizeMode="cover" source={assets.image.png.calendar} />
+          <View style={[stylesGlobal.imageMin]}>
+              <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
+            </View>
             <Text style={styles.item__datetext} >{item.date}</Text>
           </View>
 

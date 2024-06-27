@@ -49,6 +49,7 @@ const png = {
   camera:require("./icons/camera.png"),
   clip:require("./icons/clip.png"),
   iconguinos:require("./icons/guinos.png"),
+  iconsuccess:require("./icons/success.png"),
 };
 
 export { png };

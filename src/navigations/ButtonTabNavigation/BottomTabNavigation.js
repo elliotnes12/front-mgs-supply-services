@@ -7,13 +7,14 @@ import { styles } from "./BottomTabNavigation.styles";
 import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
 import { assets } from '../../assets';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SettingsNavigation, GroupsNavigation, ChatNavigation, ReportsNavigation,ProductNavigation } from '../stacks';
+import { SettingsNavigation, GroupsNavigation, ChatNavigation, ReportsNavigation,ProductNavigation,ChatNavigationEmployee } from '../stacks';
 import { screens } from '../../utils';
+import { PendingEmployeeNavigation } from '../stacks/PendingEmployeeNavigation';
 
 const Tab = createBottomTabNavigator();
 
 export function BottomTabNavigation() {
-  const { user, isCustomer } = useAuth();
+  const { user, isCustomer , userInfo} = useAuth();
   const navigation = useNavigation();
   const [tabBarVisible, setTabBarVisible] = useState("flex");
 
@@ -28,13 +29,27 @@ export function BottomTabNavigation() {
       { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
     ];
   } else {
-    baseTabs = [
-      { name: screens.tab.root, title: 'Home', iconName: 'home' },
-      { name: screens.tab.chats.root, title: 'Chats', iconName: 'chat' },
-      { name: 'boton-central', title: '', iconName: 'plus' },
-      { name: screens.tab.groups.root, title: 'Pending', iconName: 'pending' },
-      { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
-    ];
+
+    
+    if( userInfo?.type == "supervisor"){
+      baseTabs = [
+        { name: screens.tab.root, title: 'Home', iconName: 'home' },
+        { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
+        { name: 'boton-central', title: '', iconName: 'plus' },
+        { name: screens.tab.groups.root, title: 'Pending', iconName: 'pending' },
+        { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
+      ];
+    }else{
+      baseTabs = [
+        { name: screens.tab.root, title: 'Home', iconName: 'home' },
+        { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
+        { name: 'boton-central', title: '', iconName: 'plus' },
+        { name: screens.tab.groups.pendingScreenEmployee, title: 'Pending', iconName: 'pending' },
+        { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
+      ];
+    }
+
+  
   }
 
 
@@ -67,6 +82,10 @@ export function BottomTabNavigation() {
         return ReportsNavigation;
       case screens.tab.products.root:
         return ProductNavigation;
+      case screens.tab.groups.pendingScreenEmployee:
+        return PendingEmployeeNavigation;  
+      case screens.tab.chats.chatsScreenEmployee:
+        return ChatNavigationEmployee;  
       default:
         return null;
     }
@@ -145,6 +164,9 @@ export function BottomTabNavigation() {
             headerTintColor: "rgba(71, 71, 71, 1)",
             tabBarItemStyle: [styles.tabBarItemOptions],
             tabBarIcon: ({ focused }) => {
+
+              const isSupervisor = !isCustomer && userInfo.type == 'supervisor'?  screens.global.createService : '';       
+
               if (tab.name === 'boton-central') {
                 return (
                   <View>
@@ -154,7 +176,7 @@ export function BottomTabNavigation() {
                       source={assets.image.png.union}
                       alt="icon"
                     />
-                    <TouchableOpacity onPress={() => navigation.navigate(screens.global.createService) }  style={styles.centralButton}>
+                    <TouchableOpacity onPress={() => navigation.navigate(isSupervisor) }  style={styles.centralButton}>
                       <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.registerOrder}>
                         <Image
                           style={styles.img}

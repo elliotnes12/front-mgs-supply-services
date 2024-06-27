@@ -172,9 +172,9 @@ export const styles = StyleSheet.create({
     },
     unreadBadge: {
       backgroundColor: '#CEDC39',
-      borderRadius: 10.5,
-      width: 21,
-      height: 21,
+      borderRadius: 15,
+      width: 30,
+      height: 30,
       marginTop: 5,
       justifyContent: "center",
       alignItems: "center",
@@ -182,7 +182,7 @@ export const styles = StyleSheet.create({
     unreadBadgeText: {
       fontFamily: 'Poppins_700Bold',
       fontSize: 12,
-      color: '#fff',
+      color: '#000',
     },
     noChats: {
       alignItems: 'center',

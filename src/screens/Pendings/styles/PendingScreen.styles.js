@@ -86,6 +86,9 @@ export const styles = StyleSheet.create({
     edit:{
         color:"#FFBD12"
     },
+    complet:{
+        color:"#7DA74D"
+    },
     scrollViewContent: {
         marginTop:20,
         paddingBottom: 20, 
@@ -99,11 +102,10 @@ export const styles = StyleSheet.create({
     options:{
         display:"flex",
         flexDirection:"row",
-        alignItems:"center",
         width:120,
         justifyContent:"space-between",
         alignItems:"center",
-       
+        position:'relative'
     },
     options__item:{
         flex:1,
@@ -111,6 +113,7 @@ export const styles = StyleSheet.create({
         flexDirection:"column",
         alignItems:"center",
         width:100,
+        
         
     }
 });
