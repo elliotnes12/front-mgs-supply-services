@@ -36,29 +36,59 @@ export const styles = StyleSheet.create({
       fontSize:12,
       marginLeft:15
      },
-     contente__item:{
+     contente__items:{
+      backgroundColor:'red',
       display:'flex',
       flexDirection:'row',
-      paddingLeft:200,
-      paddingTop:'200%',
-      position:'absolute'
+      paddingLeft:10,
+      paddingTop:'100%',
+      padding:10
+      
      },
-     contente__inbox:{
+     contente__item:{
+      backgroundColor:'red',
       display:'flex',
       flexDirection:'row',
-      paddingLeft:200,
-      paddingTop:'200%',
-      position:'absolute'
+      paddingLeft:10,
+      paddingTop:'50%',
       
      },
      inbox:{
-      width:100,
-      height:100,
-      display:'flex',
-      flexDirection:'row'
-
-     }
-
+      width:290,
+      height:45,
+      borderRadius:15,
+     },
+     mensaje:{
+        flex:1,
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        backgroundColor:"#fff",
+        paddingRight:15,
+        borderRadius:20
+     },
+     mensaje__input:{
+      flex:1,
+      height:"100%"
+     },
+     contente__icons:{
+      display:"flex",
+      alignItems:"center",
+      flexDirection:"row",
+      marginLeft:15,
+     },
+     camera:{
+      marginLeft:10,
+     },
+     clip:{
+      marginRight:10,
+     },
+     contente__microfono:{
+      paddingLeft:15,
+      paddingTop:190,
+     },
+    
 
 
 })

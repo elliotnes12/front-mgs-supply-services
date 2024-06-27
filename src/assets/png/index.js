@@ -46,6 +46,9 @@ const png = {
   microfono:require("./icons/microfono.png"),
   fondo:require("./icons/fondo.png"),
   inbox:require("./icons/inbox.png"),
+  camera:require("./icons/camera.png"),
+  clip:require("./icons/clip.png"),
+  iconguinos:require("./icons/guinos.png"),
 };
 
 export { png };
