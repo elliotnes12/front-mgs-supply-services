@@ -25,7 +25,7 @@ export class User {
   async getAll(accessToken){
     try {
       console.log(accessToken)
-      const url = `${ENV.API_URL}/${ENV.ENDPOINTS.EMPLOYEES}`;
+      const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USER}`;
       const params = {
         headers: {
           Authorization: `Bearer ${accessToken}`,

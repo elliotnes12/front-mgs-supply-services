@@ -1,43 +1,71 @@
 import React, { useState } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { assets } from "../../../assets";
 import { useAuth } from '../../Auth/hooks';
 import { styles } from "../styles/chatsScreen.styles";
 import { useEffect } from 'react';
 import { stylesGlobal } from '../../styles/global.style';
-import { ENV, screens } from '../../../utils';
+import { screens } from '../../../utils';
+import { User } from '../../../api/user';
+import { useCallback } from 'react';
+import { Chat } from '../api/Chat';
 
-const initialUsers = [
-  { id: 1, name: 'John Doe', role: 'Manager', status: 'green' },
-  { id: 2, name: 'Jane Smith', role: 'Employee', status: 'yellow' },
-  { id: 3, name: 'Sam Wilson', role: 'Employee', status: 'red' },
-  { id: 4, name: 'Alice Johnson', status: 'disconnected' },
-];
 
-const moreUsers = [
-  { id: 5, name: 'Peter Parker', role: 'Intern', status: 'green' },
-  { id: 6, name: 'Bruce Wayne', role: 'CEO', status: 'yellow' },
-];
-
-const chats = [
-  { id: 1, name: 'John Doe', lastMessage: 'Hello, how are you?', time: '12:30 PM', unreadCount: 2 },
-  { id: 3, name: 'Esther', lastMessage: 'Can we reschedule our meeting?', time: '11:45 AM', unreadCount: 5 },
-
-  { id: 2, name: 'Jane Smith', lastMessage: 'Can we reschedule our meeting?', time: '11:45 AM', unreadCount: 5 },
-];
 
 
 
 export function ChatsScreenEmployee() {
-  const [users, setUsers] = useState(initialUsers);
+  const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [chats,setChats] = useState([])
   const navigation = useNavigation();
-  const { userInfo, isCustomer } = useAuth();
+  const { userInfo, isCustomer, accessToken ,user} = useAuth();
   const { name } = userInfo;
 
+
+  const userController = new User();
+  const chatController = new Chat();
+
+  console.log(user._id)
+
+  useEffect(() => {
+
+    (async () => {
+
+      const users = await userController.getAll(accessToken);
+      const { data } = users;
+      setUsers(data);
+      setFilteredUsers(data);
+
+      console.log(users.data);
+
+    })();
+
+
+  }, [])
+
+
+  useFocusEffect(
+    useCallback(() => {
+
+      (async () => {
+
+        try{
+
+            const response = await chatController.getAll(accessToken);
+            setChats(response.data);
+           
+        }
+        catch(error){
+
+        }
+      })()
+
+    }, [])
+  )
 
 
   useEffect(() => {
@@ -47,10 +75,25 @@ export function ChatsScreenEmployee() {
   }, []);
 
 
+  const createChat = (idUser,name) =>{
+
+    (async() =>{
+
+        try{
+
+          await chatController.create(accessToken,user._id,idUser);
+          navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: idUser, userName: name });
+        }
+        catch(error){
+
+        }
+    })()
+  }
+
   const handleSearch = (text) => {
     setSearchQuery(text);
     const filtered = users.filter(user =>
-      user.name.toLowerCase().includes(text.toLowerCase()) || user.id.toString() === text.toLowerCase()
+      user.name.toLowerCase().includes(text.toLowerCase()) || user.id === text.toLowerCase()
     );
     setFilteredUsers(filtered);
 
@@ -61,26 +104,22 @@ export function ChatsScreenEmployee() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <SafeAreaView style={styles.container}>
 
-            <>
 
-              <View>
-                <Text style={[styles.title, styles.containerTitle]}>Chat</Text>
-              </View>
+          <View>
+            <Text style={[styles.title, styles.containerTitle]}>Chat</Text>
+          </View>
 
-              <View style={[stylesGlobal.itemHorizontal,styles.searchInput]}>
-                <View style={stylesGlobal.imageMin}>
-                  <Image alt='icon-support' style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.iconLupa} />
-                </View>
-                <TextInput
-                  style={styles.searchInput__input}
-                  placeholder="Search by name or ID"
-                  value={searchQuery}
-                  onChangeText={handleSearch}
-                />
-              </View>
-            </>
-
-          
+          <View style={[stylesGlobal.itemHorizontal, styles.searchInput]}>
+            <View style={stylesGlobal.imageMin}>
+              <Image alt='icon-support' style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.iconLupa} />
+            </View>
+            <TextInput
+              style={styles.searchInput__input}
+              placeholder="Search by name or ID"
+              value={searchQuery}
+              onChangeText={handleSearch}
+            />
+          </View>
 
           <View style={styles.usersContainer}>
             <FlatList
@@ -89,7 +128,7 @@ export function ChatsScreenEmployee() {
               keyExtractor={(item) => item.id.toString()}
               contentContainerStyle={styles.usersList}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => navigation.navigate(isCustomer? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: item.id, userName: item.name })}>
+                <TouchableOpacity onPress={() => createChat(item.id,item.name)}>
                   <View style={styles.userItem}>
                     <View style={styles.userProfile}>
                       <Image style={styles.userImage} resizeMode="cover" source={assets.image.png.profile} />
@@ -103,7 +142,7 @@ export function ChatsScreenEmployee() {
                     </View>
                     <Text style={styles.userName}>{item.name}</Text>
                     <View style={styles.userRoleContainer}>
-                       <Text>{item.role}</Text>
+                      <Text>{item.type}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -113,14 +152,13 @@ export function ChatsScreenEmployee() {
             />
           </View>
 
-          {/* Sección de Chats Recientes */}
           <View style={styles.chatsHeader}>
             <Text style={styles.chatsTitle}>Chats</Text>
           </View>
           <View style={styles.recentChatsContainer}>
             {chats.length > 0 ? (
               chats.map(chat => (
-                <TouchableOpacity key={chat.id} onPress={() => navigation.navigate(isCustomer? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer , { userId: chat.id, userName: chat.name })}>
+                <TouchableOpacity key={chat.id} onPress={() => navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: chat.id, userName: chat.name })}>
                   <View style={styles.chatItem}>
                     <Image style={styles.chatImage} resizeMode="cover" source={assets.image.png.profile} />
                     <View style={styles.chatTextContainer}>
@@ -140,7 +178,7 @@ export function ChatsScreenEmployee() {
               ))
             ) : (
               <View style={styles.noChats}>
-                <Text style={styles.noChatsText}>0 Chats</Text>
+                <Text style={styles.noChatsText}>Empty</Text>
               </View>
             )}
           </View>

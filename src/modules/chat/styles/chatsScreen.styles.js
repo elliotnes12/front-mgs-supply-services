@@ -20,24 +20,14 @@ export const styles = StyleSheet.create({
       flexGrow: 1,
     },
     searchInput:{
+      height:35,
       marginBottom:25,
       borderRadius:40,
       paddingLeft:15,
       borderWidth:1,
-      borderColor:"#828282"
+      borderColor:"#828282",
+      marginRight:30
     },
-    searchInput__input:{
-      height:50
-    },
-    transparentBackground: {
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: 'transparent',
-    },
-  
     title: {
       fontFamily: 'Poppins_600SemiBold',
       fontSize: 24,
@@ -51,7 +41,7 @@ export const styles = StyleSheet.create({
     },
     usersContainer: {
       marginBottom: 25,
-      height:130
+      height:130,
     },
     usersList: {
       alignItems: 'center',
