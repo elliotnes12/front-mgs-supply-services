@@ -52,4 +52,26 @@ export class Chat {
             throw error;
         }
     }
+
+    
+    async getLastMessage(token,chatId) {
+        try {
+
+            const url = `${ENV.API_URL}/${ENV.ENDPOINTS.CHAT_MESSAGE_LAST}/${chatId}`;
+            const params = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            };
+
+            const response = await fetch(url, params);
+            const result = await response.json();
+
+            if (result.meta.code != 200 ) throw result;
+
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
 }

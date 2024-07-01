@@ -15,6 +15,7 @@ export const ENV = {
         },
         ME: "user/me",
         USER: "users",
+        USER_SUPPORT: "users-support",
         EMPLOYEES: "employees-by-users",
         USER_EXCEPT_PARTICIPANTS_GROUP: "users_exept_participants_group",
         CHAT: "chat",

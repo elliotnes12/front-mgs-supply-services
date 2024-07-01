@@ -1562,6 +1562,39 @@
     "@formatjs/ecma402-abstract" "2.0.0"
     tslib "^2.4.0"
 
+"@formatjs/intl-datetimeformat@^6.12.5":
+  version "6.12.5"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-6.12.5.tgz#5450cefdc48939a15086b8de9f8361f961eac8ce"
+  integrity sha512-RYVlgQjUWUKZWMPl7Id8iSETXxHYLbHbii1hrDA/LpWtmFqWKFnF8esMXaHxpysDHviEpJbyGIqrYsABWjrFTw==
+  dependencies:
+    "@formatjs/ecma402-abstract" "2.0.0"
+    "@formatjs/intl-localematcher" "0.5.4"
+    tslib "^2.4.0"
+
+"@formatjs/intl-enumerator@1.4.7":
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-enumerator/-/intl-enumerator-1.4.7.tgz#6ab697f3f8f18cf0cc6a6b028cb9c40db6001f3d"
+  integrity sha512-03RHnFqfpB4H/jwCwlzC+wkTDk2Fi24JmVIY2PVGvTUpikN2bSr9+8oTXfOC+y7B7VxjCArUnqWXVoctkmy85w==
+  dependencies:
+    tslib "^2.4.0"
+
+"@formatjs/intl-getcanonicallocales@2.3.0", "@formatjs/intl-getcanonicallocales@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-getcanonicallocales/-/intl-getcanonicallocales-2.3.0.tgz#b6c6fa1c664e30a61f27fa6399a76159d82a5842"
+  integrity sha512-BOXbLwqQ7nKua/l7tKqDLRN84WupDXFDhGJQMFvsMVA2dKuOdRaWTxWpL3cJ7qPkoNw11Jf+Xpj4OSPBBvW0eQ==
+  dependencies:
+    tslib "^2.4.0"
+
+"@formatjs/intl-locale@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-locale/-/intl-locale-4.0.0.tgz#c111a33078413eba2011e82140466261eb1d67cd"
+  integrity sha512-+4dbMEGsp1bvB3JB3UHH6YTjMnFTifnfdaHp4ROrCCu50NedA69RBsDCG3eivcZkbj57X9ehGhMWjLxlP+gyVw==
+  dependencies:
+    "@formatjs/ecma402-abstract" "2.0.0"
+    "@formatjs/intl-enumerator" "1.4.7"
+    "@formatjs/intl-getcanonicallocales" "2.3.0"
+    tslib "^2.4.0"
+
 "@formatjs/intl-localematcher@0.5.4":
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/@formatjs/intl-localematcher/-/intl-localematcher-0.5.4.tgz#caa71f2e40d93e37d58be35cfffe57865f2b366f"
@@ -5658,7 +5691,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-luxon@^3.2.1:
+luxon@^3.4.4:
   version "3.4.4"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.4.tgz#cf20dc27dc532ba41a169c43fdcc0063601577af"
   integrity sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==
@@ -6999,6 +7032,11 @@ react-native-linear-gradient@^2.8.3:
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz#9a116649f86d74747304ee13db325e20b21e564f"
   integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
+
+react-native-localize@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-3.2.0.tgz#7d9beb38c9d08b2aa87ffd9d165a66f66531b3ae"
+  integrity sha512-Wi486WdDoBcDKUNxzr2/8f64ZwkWExlIvn0lcfFhsRNP2CVXGkjLyXhr3h6jf3Utkv5EmoFKiNqcmZn9kjYDxQ==
 
 react-native-maps@^1.15.6:
   version "1.15.6"

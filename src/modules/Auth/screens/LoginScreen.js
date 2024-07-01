@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View, ActivityIndicator, Pressable } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useFormik } from "formik";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from 'expo-linear-gradient';
+import { useFormik } from "formik";
+import { Image } from "native-base";
+import React, { useState } from "react";
+import { ActivityIndicator, Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { assets } from "../../../assets";
+import { LoadingScreen } from "../../../components/core/LoadingScreen";
 import CustomModal from "../../../components/core/Modal/Modal";
 import { screens } from "../../../utils";
 import { Auth } from "../api/auth";
@@ -11,8 +14,6 @@ import { initialValues, validationSchema } from "../forms/LoginForm.form";
 import { useAuth } from "../hooks";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/LoginScreen.styles";
-import { assets } from "../../../assets";
-import { Image } from "native-base";
 
 const authController = new Auth();
 
@@ -115,7 +116,7 @@ export function LoginScreen() {
       
       <Pressable onPress={formik.handleSubmit}>
           <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.button}>
-            {loading && (
+          {loading && (
               <View style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0, justifyContent: "center", alignItems: "center" }}>
                 <ActivityIndicator size="small" animating={true} color="#fff" />
               </View>

@@ -7,6 +7,10 @@ export const stylesGlobal = StyleSheet.create({
     height:25,
     marginRight:10
    },
+   imageMd:{
+      width:40,
+      height:40,
+   },
    imageMin__img:{
     width:"100%",
     height:"100%"
@@ -19,6 +23,7 @@ export const stylesGlobal = StyleSheet.create({
    itemHorizontal:{
     display:"flex",
     flexDirection:"row",
-    alignItems:"center"
+    alignItems:"center",
+    flex:1
  }
 })

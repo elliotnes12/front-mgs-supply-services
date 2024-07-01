@@ -1,15 +1,14 @@
 import { StyleSheet } from "react-native";
 
+
 export const styles = StyleSheet.create({
     background: {
       flex: 1,
-      backgroundColor: '#fff',
     },
     container: {
       flex: 1,
-      paddingHorizontal: 25,
-      paddingBottom: 10,
-      marginTop:15
+      paddingHorizontal: 24,
+      marginTop:15,
     },
     header__customer: {
       display: "flex",
@@ -20,24 +19,27 @@ export const styles = StyleSheet.create({
       flexGrow: 1,
     },
     searchInput:{
-      height:35,
+      height:56,
       marginBottom:25,
-      borderRadius:40,
+      borderRadius:10,
       paddingLeft:15,
       borderWidth:1,
-      borderColor:"#828282",
-      marginRight:30
+      borderColor:"#ABABAB",
+    
+    },
+    searchInput__input:{
+      flex:1,
+      color:"#ABABAB"
     },
     title: {
       fontFamily: 'Poppins_600SemiBold',
       fontSize: 24,
       color: '#333',
-      width: 100,
-      lineHeight: 27
     },
     containerTitle: {
-      marginBottom: 20,
-      width: 100
+      
+      marginBottom:10,
+      padding:0
     },
     usersContainer: {
       marginBottom: 25,
@@ -47,7 +49,8 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
     },
     userItem: {
-      marginRight: 20,
+      marginRight: 5,
+      width:85,
       alignItems: 'center',
     },
     userProfile: {
@@ -75,9 +78,6 @@ export const styles = StyleSheet.create({
     statusYellow: {
       backgroundColor: 'yellow',
     },
-    statusRed: {
-      backgroundColor: 'red',
-    },
     statusDisconnected: {
       backgroundColor: 'grey',
     },
@@ -93,7 +93,8 @@ export const styles = StyleSheet.create({
       fontFamily: 'Poppins_400Regular',
       fontSize: 13,
       color: '#666',
-      lineHeight: 15
+      lineHeight: 15,
+      color:"#7DA74D"
     },
     emptyRole: {
       height: 20,
@@ -106,7 +107,7 @@ export const styles = StyleSheet.create({
     },
     chatsTitle: {
       fontFamily: 'Poppins_700Bold',
-      fontSize: 20,
+      fontSize: 19,
       color: '#333',
   
     },
@@ -116,8 +117,16 @@ export const styles = StyleSheet.create({
       color: '#7DA74D',
       textDecorationLine: 'none',
     },
+    recentChatsIndicator:{
+      flex:1,
+      height:200,
+      justifyContent:"center",
+      alignItems:"center"
+    },
     recentChatsContainer: {
+      flex:1,
       marginBottom: 20,
+      position:"relative"
     },
     chatItem: {
       backgroundColor: "#fff",
@@ -126,61 +135,75 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       marginBottom: 5,
     },
-    chatImage: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      justifyContent: "center",
-      alignItems: "center"
+    chatItem__img: {
+      width: 60,
+      height: 60,
+      overflow:"hidden",
+      borderRadius:30,
+      backgroundColor:"purple"
     },
-    imgMessage: {
-      width: 25,
-      height: 25
+    imageMin__img:{
+      borderRadius:"50%"
     },
     chatTextContainer: {
       flex: 1,
-      marginLeft: 10,
-      position: "relative"
+      marginLeft: 20,
+      paddingTop:10,
+      position: "relative",
+      flexDirection:"column",
     },
-    chatName: {
+    chatItem__name: {
       fontFamily: 'Poppins_700Bold',
       fontSize: 16,
+      height:20,
       color: '#333',
     },
-    chatMessage: {
-      fontFamily: 'Poppins_400Regular',
-      fontSize: 14,
-      color: '#C4C4C4',
-    },
-    chatInfo: {
-      alignItems: 'flex-end',
-    },
-    chatTime: {
+    chatItem__message: {
       fontFamily: 'Poppins_400Regular',
       fontSize: 12,
       color: '#C4C4C4',
     },
-    unreadBadge: {
-      backgroundColor: '#CEDC39',
+    chatInfo: {
+      position:"relative",
+      flex:1,
+      height:"100%"
+    },
+    chatTime: {
+      fontFamily: 'Poppins_400Regular',
+      fontSize: 12,
+      position:"absolute",
+      color: '#C4C4C4',
+      right:0,
+      top:5
+    },
+    totalMessageContainer: {
+      backgroundColor: '#7DA74D',
       borderRadius: 15,
       width: 30,
       height: 30,
       marginTop: 5,
       justifyContent: "center",
       alignItems: "center",
+      position:"absolute",
+      right:0,
+      top:20
     },
-    unreadBadgeText: {
-      fontFamily: 'Poppins_700Bold',
+    totalMessage: {
+      fontFamily: 'Poppins_400Regular',
       fontSize: 12,
-      color: '#000',
+      color: '#fff',
     },
     noChats: {
+      flex:1,
       alignItems: 'center',
+      justifyContent:"center",
+      height:200,
     },
     noChatsText: {
-      fontFamily: 'Poppins_700Bold',
+      fontFamily: 'Poppins_400Regular',
       fontSize: 16,
       color: '#333',
+    
     },
     messagesHeader: {
       flexDirection: 'row',
