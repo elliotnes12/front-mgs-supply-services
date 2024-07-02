@@ -50,6 +50,7 @@ const png = {
   clip:require("./icons/clip.png"),
   iconguinos:require("./icons/guinos.png"),
   iconsuccess:require("./icons/success.png"),
+  calendarwhite:require("./icons/calendarwhite.png"),
 };
 
 export { png };

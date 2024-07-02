@@ -9,11 +9,14 @@ import { ServiceListScreenCt } from './customer/ServiceListScreen';
 import { ServiceListScreenSp } from './supervisor/ServiceListScreenSupervisor';
 import { styles } from "../styles/dashboard.styles";
 import { ServiceListScreenEmployee } from './employee/ServiceListScreenEmployee';
+import { useNavigation } from '@react-navigation/native';
+import { screens } from '../../../utils';
 
 export function DashboardScreen() {
     const { userInfo, isCustomer } = useAuth();
     const { name } = userInfo;
     const swingAnim = useRef(new Animated.Value(0)).current;
+    const navigation = useNavigation();
 
     const animateAlert = () => {
         Animated.sequence([
@@ -107,7 +110,7 @@ export function DashboardScreen() {
                     <>
                         <View style={styles.options}>
                             <Text style={styles.options__title}>Services Generated</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() =>  navigation.navigate(screens.tab.services.root) }>
                                 <Text style={styles.options__all}>ViewAll</Text>
                             </TouchableOpacity>
                         </View>

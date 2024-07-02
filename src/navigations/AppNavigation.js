@@ -17,6 +17,7 @@ import { BottomTabNavigation } from './ButtonTabNavigation/BottomTabNavigation';
 import { useNavigation } from '@react-navigation/native';
 import { ChatScreen } from '../screens/Global/ChatScreen';
 import { ChatScreenSupervisor } from '../screens/Global/ChatScreenSupervisor';
+import { ServicesScreen } from '../screens/Global/ServicesScreen';
 initSockets();
 
 const Stack = createNativeStackNavigator();
@@ -72,6 +73,14 @@ export function AppNavigation() {
           component={ChatScreen}
           options={{ headerShown: false }}
         />
+
+         <Stack.Screen
+          name={screens.tab.services.root}
+          component={ServicesScreen}
+          options={{ headerShown: false }}
+        />
+
+
         <Stack.Screen
           name={screens.global.createService}
           component={CreateService}

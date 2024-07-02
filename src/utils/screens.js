@@ -25,6 +25,9 @@ const chats = {
   chatsScreenEmployee:"ChatsScreenEmployee"
 };
 
+const services = {
+    root: "ServicesScreen"
+}
 const products = {
   root: "ProductScreen",
   productScreen: "ProductScreen"
@@ -55,6 +58,7 @@ export const screens = {
     groups,
     products,
     settings,
-    reports
+    reports,
+    services
   },
 }
