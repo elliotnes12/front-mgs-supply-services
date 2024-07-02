@@ -2,7 +2,7 @@ import { ENV } from "../../../utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export class Auth {
-  async register(email, password,idEmployee) {
+  async register(email, password,idEmployee,name) {
     let data = undefined;
     try {
 
@@ -12,7 +12,7 @@ export class Auth {
           data = JSON.stringify({ email, password, idEmployee });
       }
       else{
-        data = JSON.stringify({ email, password });
+        data = JSON.stringify({ email, name, password });
       }
 
       const params = {
@@ -27,7 +27,7 @@ export class Auth {
       const response = await fetch(url, params);
       const result = await response.json();
 
-      if (response.meta.code !== 201) throw result;
+      if (result.meta.code !== 201) throw result;
 
       return result;
 

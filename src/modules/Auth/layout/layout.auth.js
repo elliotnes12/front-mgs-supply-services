@@ -9,9 +9,9 @@ export default function LayoutAuth({ children, userType }) {
   let backgroundImage;
 
   if (userType === "customer") {
-    backgroundImage = assets.image.imagesAuth.registerCustomer;
+    backgroundImage = assets.image.png.bgCustomer;
   } else if (userType === "company") {
-    backgroundImage = assets.image.imagesAuth.registerEmployee;
+    backgroundImage = assets.image.png.bgEmployee;
   }
   else if(userType === "login"){
     backgroundImage = assets.image.png.bglogin;
