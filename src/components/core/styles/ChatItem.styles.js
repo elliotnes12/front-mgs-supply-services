@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     chatItem: {
       backgroundColor: "#fff",
       height: 73,
+      flex:1,
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: 5,
@@ -35,22 +36,23 @@ export const styles = StyleSheet.create({
       fontFamily: 'Poppins_400Regular',
       fontSize: 12,
       color: '#C4C4C4',
-    },
-    chatInfo: {
-      position:"relative",
       flex:1,
-      height:"100%"
+    },
+    chatContainerTime: {
+      position:"relative",
+      height:"100%",
+      width:50,
     },
     chatTime: {
       fontFamily: 'Poppins_400Regular',
       fontSize: 12,
       position:"absolute",
       color: '#C4C4C4',
-      right:0,
+      right:15,
       top:5
     },
     totalMessageContainer: {
-      backgroundColor: '#7DA74D',
+      backgroundColor: '#444',
       borderRadius: 15,
       width: 30,
       height: 30,
@@ -58,7 +60,7 @@ export const styles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       position:"absolute",
-      right:0,
+      right:10,
       top:20
     },
     totalMessage: {

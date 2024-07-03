@@ -7,7 +7,9 @@ import { styles } from './ServiceListScreen.styles';
 import { FlatList } from 'native-base';
 import { getIcon } from '../../../../utils/util';
 import { stylesGlobal } from '../../../styles/global.style';
-import { tabIds } from '../../../../utils';
+import { screens, tabIds } from '../../../../utils';
+import { useNavigation } from '@react-navigation/native';
+import { ItemService } from '../../../../components/core/ItemService';
 
 
 const data = [
@@ -20,51 +22,23 @@ const data = [
 const initialLayout = { width: "100%" };
 
 
-const renderItem = ({ item }) => {
-  return (
-    <>
-      <View style={styles.item}>
-        <View style={styles.item__img}>
-          <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
-        </View>
-        <View style={styles.item__text}>
-          <Text style={styles.item__title}>{item.title}</Text>
-          <Text style={styles.item_subtitle}>{item.subTitle}</Text>
-          <View style={styles.item__raiting}>
-            <Image alt='icon-star-raiting' resizeMode="cover" source={assets.image.png.iconEstrella} />
-            <Text style={styles.item__raitingtext} >{item.raiting}</Text>
-          </View>
 
-          <View style={styles.item__date}>
-            <View style={[stylesGlobal.imageMin]}>
-              <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
-            </View>
-            <Text style={styles.item__datetext} >{item.date}</Text>
-          </View>
 
-          <TouchableOpacity style={styles.item__flechaContainer}>
-            <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </>
-  )
-}
+const RenderServices = ({navigation}) => (
 
-const RenderServices = () => (
-
+  
   <>
 
     <View style={styles.options}>
       <Text style={styles.options__title}>Services Used</Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() =>  navigation.navigate(screens.tab.services.root) }>
         <Text style={styles.options__all}>ViewAll</Text>
       </TouchableOpacity>
     </View>
 
     <FlatList
       data={data}
-      renderItem={renderItem}
+      renderItem={ItemService}
       keyExtractor={item => item.id}
       contentContainerStyle={styles.flatListContainer}
     />
@@ -89,6 +63,8 @@ const RenderRaiting = () => (
 
 export const ServiceListScreenCt = () => {
   const [index, setIndex] = React.useState(0);
+  
+  const navigation = useNavigation();
 
   const routes = [
     { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
@@ -100,7 +76,7 @@ export const ServiceListScreenCt = () => {
   const renderScene = ({ route }) => {
     switch (route.key) {
       case 'services':
-        return <RenderServices />;
+        return <RenderServices navigation={navigation} />;
       case 'second':
         return <RenderOrders />;
       case 'third':

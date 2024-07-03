@@ -123,7 +123,7 @@ export function DashboardScreen() {
                     <>
                         <View style={styles.options}>
                             <Text style={styles.options__title}>Pending services</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() =>  navigation.navigate(screens.tab.services.root) }>
                                 <Text style={styles.options__all}>ViewAll</Text>
                             </TouchableOpacity>
                         </View>

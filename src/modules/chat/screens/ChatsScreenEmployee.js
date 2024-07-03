@@ -10,7 +10,7 @@ import { screens } from '../../../utils';
 import { User } from '../../../api/user';
 import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
-import { ListChatItem } from '../../../components/core/ListChatItem';
+import { ChatItem } from '../../../components/core/ChatItem';
 
 export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
@@ -23,7 +23,6 @@ export function ChatsScreenEmployee() {
   const { name } = userInfo;
   const userController = new User();
   const chatController = new Chat();
-
 
   useEffect(() => {
     (async () => {
@@ -39,7 +38,16 @@ export function ChatsScreenEmployee() {
       (async () => {
         try {
           const response = await chatController.getAll(accessToken);
-          setChats(response.data);
+          if (response && response.data) {
+            const result = response.data.sort((a, b) => {
+              const dateA = new Date(a.last_message_chat);
+              const dateB = new Date(b.last_message_chat);
+              return dateB - dateA;
+            });
+  
+            console.log("Sorted chats:", result);
+            setChats(result);
+          }
         } catch (error) {
           console.error(error);
         } finally {
@@ -48,6 +56,18 @@ export function ChatsScreenEmployee() {
       })();
     }, [])
   );
+  
+
+  const upTopChat = (chatId) => {
+
+      const data = chats;
+      const formIndex = data.map( (chat) => chat.idChat).indexOf(chatId);
+      const toIndex = 0;
+      const element = data.splice(formIndex,1)[0];
+      data.splice(toIndex,0,element);
+      setChats([...data]);
+
+  }
 
   useEffect(() => {
     if (!isCustomer) setFilteredUsers(users);
@@ -66,12 +86,7 @@ export function ChatsScreenEmployee() {
 
   const handleSearch = (text) => {
     setSearchQuery(text);
-    console.log(users)
-    console.log(text)
-    setFilteredUsers(users.filter(user =>
-
-      user.name === text
-    ));
+    setFilteredUsers(users.filter(user => user.name === text));
   };
 
   return (
@@ -96,27 +111,18 @@ export function ChatsScreenEmployee() {
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.usersList}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => createChat(item.id, item.name)}>
-                <View key={item.id} style={styles.userItem}>
+              <TouchableOpacity key={item.id.toString()} onPress={() => createChat(item.id, item.name)}>
+                <View style={styles.userItem}>
                   <View style={styles.userProfile}>
-
-                    {item.image &&
-                      <>
-                        <View style={styles.chatItem__img}>
-                          <Image style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.profile} />
-                        </View>
-                      </>
-                    }
-                    {item.image == undefined &&
-                      <>
-                        <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "#CEDC39", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                          <Text style={{ color: "#000", fontSize: 18 }}>{item?.name?.substring(0, 2).toUpperCase()}</Text>
-                        </View>
-                      </>
-                    }
-
-
-
+                    {item.image ? (
+                      <View style={styles.chatItem__img}>
+                        <Image style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.profile} />
+                      </View>
+                    ) : (
+                      <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "#CEDC39", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <Text style={{ color: "#000", fontSize: 18 }}>{item?.name?.substring(0, 2).toUpperCase()}</Text>
+                      </View>
+                    )}
                     <View style={[
                       styles.userStatus,
                       item.status === 'green' && styles.statusGreen,
@@ -141,10 +147,7 @@ export function ChatsScreenEmployee() {
           {loading ? <LoadingScreen /> : (
             chats.length > 0 ? (
               chats.map(chat => (
-                <>
-                <ListChatItem chat={chat} isCustomer={isCustomer}  token={accessToken} />
-                </>
-                
+                <ChatItem upTopChat={upTopChat} key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
               ))
             ) : (
               <View style={styles.noChats}><Text style={styles.noChatsText}>Empty</Text></View>
