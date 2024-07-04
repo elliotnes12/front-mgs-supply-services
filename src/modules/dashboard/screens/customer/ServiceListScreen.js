@@ -13,10 +13,10 @@ import { ItemService } from '../../../../components/core/ItemService';
 
 
 const data = [
-  { title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' },
-  { title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' },
-  { title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' }
-]
+  { id: '1', title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' },
+  { id: '2', title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' },
+  { id: '3', title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' }
+];
 
 
 const initialLayout = { width: "100%" };
@@ -24,28 +24,22 @@ const initialLayout = { width: "100%" };
 
 
 
-const RenderServices = ({navigation}) => (
-
-  
+const RenderServices = ({ navigation }) => (
   <>
-
     <View style={styles.options}>
       <Text style={styles.options__title}>Services Used</Text>
-      <TouchableOpacity onPress={() =>  navigation.navigate(screens.tab.services.root) }>
+      <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
         <Text style={styles.options__all}>ViewAll</Text>
       </TouchableOpacity>
     </View>
 
     <FlatList
       data={data}
-      renderItem={ItemService}
+      renderItem={({ item }) => <ItemService item={item} />}
       keyExtractor={item => item.id}
       contentContainerStyle={styles.flatListContainer}
     />
-
-
   </>
-
 );
 
 const RenderOrders = () => (

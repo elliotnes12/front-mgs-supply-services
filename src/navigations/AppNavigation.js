@@ -12,9 +12,7 @@ import {
 } from "../screens/Groups";
 import { initSockets, screens } from '../utils';
 import { styles } from "./Styles.style";
-import { useTabBar } from './TabBarProvider'; // Importar el contexto
 import { BottomTabNavigation } from './ButtonTabNavigation/BottomTabNavigation';
-import { useNavigation } from '@react-navigation/native';
 import { ChatScreen } from '../screens/Global/ChatScreen';
 import { ChatScreenSupervisor } from '../screens/Global/ChatScreenSupervisor';
 import { ServicesScreen } from '../screens/Global/ServicesScreen';
@@ -23,25 +21,7 @@ initSockets();
 const Stack = createNativeStackNavigator();
 
 export function AppNavigation() {
-  const { setIsTabBarVisible } = useTabBar(); // Obtener el estado del contexto
-  const navigation = useNavigation(); // Usar useNavigation para obtener el objeto navigation
-
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('state', (e) => {
-      const state = e.data.state;
-      const currentRoute = state.routes[state.index].name;
-
-      // Si la ruta actual es ChatScreen, ocultar la barra de navegación
-      if (currentRoute === screens.global.chatScreen) {
-        setIsTabBarVisible(false);
-      } else {
-        setIsTabBarVisible(true);
-      }
-    });
-
-    return unsubscribe;
-  }, [navigation]);
+ 
 
   return (
     <Stack.Navigator >

@@ -53,7 +53,10 @@ export const screens = {
   auth,
   global,
   tab: {
-    root: "BottomTabRoot",
+    root:"BottomTabRoot",
+    rootEmployee: "BottomTabRoot",
+    rootCustomer:"BottomTabRoot",
+    rootSupervisor:"BottomTabRoot",
     chats,
     groups,
     products,

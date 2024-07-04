@@ -22,7 +22,7 @@ export function BottomTabNavigation() {
 
   if (isCustomer) {
     baseTabs = [
-      { name: screens.tab.root, title: 'Home', iconName: 'home' },
+      { name: screens.tab.rootCustomer, title: 'Home', iconName: 'home' },
       { name: screens.tab.chats.root, title: 'Chats', iconName: 'chat' },
       { name: 'boton-central', title: '', iconName: 'plus' },
       { name: screens.tab.products.root, title: 'Products', iconName: 'order' },
@@ -33,7 +33,7 @@ export function BottomTabNavigation() {
     
     if( userInfo?.type == "supervisor"){
       baseTabs = [
-        { name: screens.tab.root, title: 'Home', iconName: 'home' },
+        { name: screens.tab.rootSupervisor, title: 'Home', iconName: 'home' },
         { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
         { name: 'boton-central', title: '', iconName: 'plus' },
         { name: screens.tab.groups.root, title: 'Pending', iconName: 'pending' },
@@ -41,7 +41,7 @@ export function BottomTabNavigation() {
       ];
     }else{
       baseTabs = [
-        { name: screens.tab.root, title: 'Home', iconName: 'home' },
+        { name: screens.tab.rootEmployee, title: 'Home', iconName: 'home' },
         { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
         { name: 'boton-central', title: '', iconName: 'plus' },
         { name: screens.tab.groups.pendingScreenEmployee, title: 'Pending', iconName: 'pending' },
@@ -70,7 +70,11 @@ export function BottomTabNavigation() {
 
   const getComponentByName = (name) => {
     switch (name) {
-      case screens.tab.root:
+      case screens.tab.rootSupervisor:
+        return DashboardScreen;
+      case screens.tab.rootEmployee:
+        return DashboardScreen;
+      case screens.tab.rootCustomer:
         return DashboardScreen;
       case screens.tab.chats.root:
         return ChatNavigation;

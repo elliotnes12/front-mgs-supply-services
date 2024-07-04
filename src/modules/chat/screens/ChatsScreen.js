@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, ScrollView, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { assets } from "../../../assets";
@@ -63,22 +63,16 @@ export function ChatsScreen() {
     })();
   };
 
-
-
   return (
     <ScrollView style={{ flex: 1 }} alwaysBounceVertical={false}>
       <SafeAreaView style={styles.container}>
-        <View style={[stylesGlobal.itemHorizontal,{justifyContent:"space-between"}]}>
+        <View style={[stylesGlobal.itemHorizontal, { justifyContent: "space-between" }]}>
           <View>
-            <Text style={[styles.title]}>Support</Text>
-            <Text style={[styles.title, styles.containerTitle]}>
-              Chat
-            </Text>
+            <Text style={styles.title}>Support</Text>
+            <Text style={[styles.title, styles.containerTitle]}>Chat</Text>
           </View>
-          <View>
-             <View style={stylesGlobal.imageMd}>
-                 <Image style={stylesGlobal.imageMin__img} resizeMode='contain' source={getIcon("icon-support")} />
-             </View>
+          <View style={stylesGlobal.imageMd}>
+            <Image style={stylesGlobal.imageMin__img} resizeMode='contain' source={getIcon("icon-support")} />
           </View>
         </View>
 
@@ -90,7 +84,7 @@ export function ChatsScreen() {
             contentContainerStyle={styles.usersList}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => createChat(item.id, item.name)}>
-                <View key={item.id}  style={styles.userItem}>
+                <View style={styles.userItem}>
                   <View style={styles.userProfile}>
                     <Image style={styles.userImage} resizeMode="contain" source={assets.image.png.profile} />
                     <View style={[
@@ -106,19 +100,20 @@ export function ChatsScreen() {
                 </View>
               </TouchableOpacity>
             )}
-        
             showsHorizontalScrollIndicator={false}
             onEndReachedThreshold={0.5}
           />
         </View>
+        
         <View style={styles.chatsHeader}>
           <Text style={styles.chatsTitle}>Chats</Text>
         </View>
+        
         <View style={styles.recentChatsContainer}>
           {loading ? <LoadingScreen /> : (
             chats.length > 0 ? (
               chats.map(chat => (
-                <TouchableOpacity key={chat.id} onPress={() => navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: chat.id, userName: chat.name })}>
+                <TouchableOpacity key={chat.idChat.toString()} onPress={() => navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: chat.id, userName: chat.name })}>
                   <View style={styles.chatItem}>
                     <View style={styles.chatItem__img}>
                       <Image style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.profile} />
@@ -137,7 +132,9 @@ export function ChatsScreen() {
                 </TouchableOpacity>
               ))
             ) : (
-              <View style={styles.noChats}><Text style={styles.noChatsText}>Not found chats</Text></View>
+              <View style={styles.noChats}>
+                <Text style={styles.noChatsText}>No chats found</Text>
+              </View>
             )
           )}
         </View>
