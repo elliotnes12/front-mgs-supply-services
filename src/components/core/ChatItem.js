@@ -74,13 +74,13 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
             <View key={chat?.idChat} style={styles.chatItem}>
                 {chat?.image ? (
                     <View style={styles.chatItem__img}>
-                        <Image style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.profile} />
+                        <Image alt="icon-profile" style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.profile} />
                     </View>
                 ) : (
                     <View
                         style={{
-                            width: 60,
-                            height: 60,
+                            width: 50,
+                            height: 50,
                             borderRadius: 30,
                             backgroundColor: "#CEDC39",
                             display: "flex",
@@ -88,7 +88,7 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
                             alignItems: "center",
                         }}
                     >
-                        <Text style={{ color: "#000", fontSize: 18 }}>{chat?.name?.substring(0, 2).toUpperCase()}</Text>
+                        <Text style={{ color: "#000", fontSize: 16 }}>{chat?.name?.substring(0, 2).toUpperCase()}</Text>
                     </View>
                 )}
                 <View style={styles.chatTextContainer}>

@@ -9,7 +9,6 @@ export default function App() {
 
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
-    Poppins_400Regular,
     Poppins_700Bold,
     Poppins_600SemiBold,
     

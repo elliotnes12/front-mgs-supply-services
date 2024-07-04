@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
 
    container: {
-      paddingHorizontal: 24,
-      paddingTop: 20,
    },
    header: {
       height: 155,
@@ -38,9 +36,11 @@ export const styles = StyleSheet.create({
    titleServices: {
       fontFamily: "Poppins_400Regular",
       fontSize: 17,
+      
    },
    flatListContainer: {
-      paddingLeft: 0
+      flex:1,
+      marginBottom:20
    },
    item: {
       display: "flex",

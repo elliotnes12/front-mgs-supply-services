@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { assets } from "../../assets";
 import { styles } from "./styles/PendingScreen.styles";
 import { stylesGlobal } from '../../modules/styles/global.style';
+import { Header } from '../../components/core/Header';
 
 export function PendingScreen() {
     const [tasks, setTasks] = useState([]);
@@ -40,7 +41,7 @@ export function PendingScreen() {
 
     const renderItem = ({ item }) => (
         <View key={item.id} style={styles.container_item}>
-            <View>
+            <View style={{flex:1}}>
                 <Text style={styles.office}>{item.title}</Text>
                 <View style={styles.notice}>
                     <View style={stylesGlobal.imageMin}>
@@ -62,14 +63,14 @@ export function PendingScreen() {
             </View>
             <View style={styles.options}>
                 <TouchableOpacity style={styles.options__item}>
-                    <View style={{ width: 35, height: 35 }}>
-                        <Image source={assets.image.png.iconEdit} style={{ width: "100%", height: "100%" }} />
+                    <View style={stylesGlobal.imageMd}>
+                        <Image alt="icon-edit" source={assets.image.png.iconEdit} style={stylesGlobal.imageMin__img} />
                     </View>
                     <Text style={styles.edit}>Edit</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.options__item}>
-                    <View style={{ width: 35, height: 35 }}>
-                        <Image source={assets.image.png.decline} style={{ width: "100%", height: "100%" }} />
+                    <View style={stylesGlobal.imageMd}>
+                        <Image alt="icon-cancel" source={assets.image.png.decline} style={{ width: "100%", height: "100%" }} />
                     </View>
                     <Text style={styles.decline}>Cancel</Text>
                 </TouchableOpacity>
@@ -84,11 +85,7 @@ export function PendingScreen() {
 
     return (
         <View style={{ flex: 1}}>
-            <LinearGradient style={styles.gradient} colors={['#CEDC39', '#7DA74D']}>
-                <SafeAreaView style={styles.safeArea}>
-                    <Text style={styles.title}>Services</Text>
-                </SafeAreaView>
-            </LinearGradient>
+            <Header goBack={false} title={"To Do"} />
             <FlatList
                 data={tasks}
                 renderItem={renderItem}

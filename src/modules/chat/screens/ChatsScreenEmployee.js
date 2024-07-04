@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, ScrollView, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { assets } from "../../../assets";
@@ -11,6 +11,7 @@ import { User } from '../../../api/user';
 import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { ChatItem } from '../../../components/core/ChatItem';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
@@ -44,7 +45,7 @@ export function ChatsScreenEmployee() {
               const dateB = new Date(b.last_message_chat);
               return dateB - dateA;
             });
-  
+
             console.log("Sorted chats:", result);
             setChats(result);
           }
@@ -56,17 +57,14 @@ export function ChatsScreenEmployee() {
       })();
     }, [])
   );
-  
 
   const upTopChat = (chatId) => {
-
-      const data = chats;
-      const formIndex = data.map( (chat) => chat.idChat).indexOf(chatId);
-      const toIndex = 0;
-      const element = data.splice(formIndex,1)[0];
-      data.splice(toIndex,0,element);
-      setChats([...data]);
-
+    const data = chats;
+    const formIndex = data.map((chat) => chat.idChat).indexOf(chatId);
+    const toIndex = 0;
+    const element = data.splice(formIndex, 1)[0];
+    data.splice(toIndex, 0, element);
+    setChats([...data]);
   }
 
   useEffect(() => {
@@ -90,59 +88,21 @@ export function ChatsScreenEmployee() {
   };
 
   return (
-    <ScrollView style={{ flex: 1 }} alwaysBounceVertical={false}>
-      <SafeAreaView style={styles.container}>
-        <View><Text style={[styles.title, styles.containerTitle]}>Chat</Text></View>
-        <View style={[stylesGlobal.itemHorizontal, styles.searchInput]}>
-          <View style={stylesGlobal.imageMin}>
-            <Image alt='icon-support' style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.iconLupa} />
-          </View>
-          <TextInput
-            style={styles.searchInput__input}
-            placeholder="Search by name or ID"
-            value={searchQuery}
-            onChangeText={handleSearch}
-          />
-        </View>
-        <View style={styles.usersContainer}>
-          <FlatList
-            horizontal
-            data={!isCustomer ? filteredUsers : users}
-            keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={styles.usersList}
-            renderItem={({ item }) => (
-              <TouchableOpacity key={item.id.toString()} onPress={() => createChat(item.id, item.name)}>
-                <View style={styles.userItem}>
-                  <View style={styles.userProfile}>
-                    {item.image ? (
-                      <View style={styles.chatItem__img}>
-                        <Image style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.profile} />
-                      </View>
-                    ) : (
-                      <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: "#CEDC39", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <Text style={{ color: "#000", fontSize: 18 }}>{item?.name?.substring(0, 2).toUpperCase()}</Text>
-                      </View>
-                    )}
-                    <View style={[
-                      styles.userStatus,
-                      item.status === 'green' && styles.statusGreen,
-                      item.status === 'yellow' && styles.statusYellow,
-                      item.status === 'red' && styles.statusRed,
-                      item.status === 'disconnected' && styles.statusDisconnected
-                    ]} />
-                  </View>
-                  <Text style={styles.userName}>{item.name}</Text>
-                  <Text style={styles.userRole}>{item.type}</Text>
-                </View>
+    <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 80 }}>
+        <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.chats_header}>
+          <SafeAreaView style={styles.chats_header__content}>
+            <Text style={{ color: "#fff", fontFamily: "Poppins_600SemiBold" }}>{"mgs supply & services".toUpperCase()}</Text>
+            <View style={[styles.chatsOptions, stylesGlobal.itemHorizontal]} >
+              <TouchableOpacity style={stylesGlobal.imageMin}>
+                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
               </TouchableOpacity>
-            )}
-            showsHorizontalScrollIndicator={false}
-            onEndReachedThreshold={0.5}
-          />
-        </View>
-        <View style={styles.chatsHeader}>
-          <Text style={styles.chatsTitle}>Chats</Text>
-        </View>
+              <TouchableOpacity style={stylesGlobal.imageMin}>
+                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoMenuVertical} />
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
+        </LinearGradient>
         <View style={styles.recentChatsContainer}>
           {loading ? <LoadingScreen /> : (
             chats.length > 0 ? (
@@ -154,7 +114,11 @@ export function ChatsScreenEmployee() {
             )
           )}
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+      <TouchableOpacity style={[styles.addChat]}>
+        <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconAddChat} />
+      </TouchableOpacity>
+    </View>
   );
 }
+

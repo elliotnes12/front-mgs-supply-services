@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container_item: {
         paddingHorizontal: 24,
-        paddingVertical: 10,
+        paddingVertical: 5,
          marginBottom: 7,
          position:"relative",
          display:"flex",
@@ -13,8 +13,6 @@ export const styles = StyleSheet.create({
     },
     gradient: {
         height: 145,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 35,
         paddingBottom:10,
     },
     safeArea: {
@@ -26,13 +24,13 @@ export const styles = StyleSheet.create({
     },
     title: {
         marginHorizontal: 5,
-        fontSize: 28,
+        fontSize: 24,
         fontFamily: 'Poppins_700Bold',
         color: "#FFFFFF",
     },
 
     office: {
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: 'Poppins_700Bold',
         color: "#080C2F"
     },
@@ -62,12 +60,12 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         width:"100%",
-        marginBottom:10
+        marginBottom:5
     },
     item__img: {
-        height: 50,
-        width: 50,
-        borderRadius: 35,
+        height: 40,
+        width: 40,
+        borderRadius: 20,
         overflow: "hidden",
         borderWidth: 4,
         borderColor: "#fff",
@@ -95,7 +93,7 @@ export const styles = StyleSheet.create({
     },
     personalName:{
         fontFamily:"Poppins_400Regular",
-        fontSize:15,
+        fontSize:13,
         color: "#0F0F0F"
     },
 
@@ -103,6 +101,7 @@ export const styles = StyleSheet.create({
         display:"flex",
         flexDirection:"row",
         width:120,
+        height:"100%",
         justifyContent:"space-between",
         alignItems:"center",
         position:'relative'

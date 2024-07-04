@@ -7,11 +7,12 @@ export const styles = StyleSheet.create({
       flex:1,
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 5,
+      marginBottom: 0,
+      marginBottom:5
     },
     chatItem__img: {
-      width: 60,
-      height: 60,
+      width: 30,
+      height: 30,
       overflow:"hidden",
       borderRadius:30,
       backgroundColor:"purple"
@@ -22,9 +23,11 @@ export const styles = StyleSheet.create({
     chatTextContainer: {
       flex: 1,
       marginLeft: 20,
-      paddingTop:10,
+      paddingTop:15,
       position: "relative",
       flexDirection:"column",
+      borderBottomWidth:0.5,
+      borderBottomColor:"#8E8E93"
     },
     chatItem__name: {
       fontFamily: 'Poppins_700Bold',
@@ -42,6 +45,9 @@ export const styles = StyleSheet.create({
       position:"relative",
       height:"100%",
       width:50,
+      
+      borderBottomWidth:0.5,
+      borderBottomColor:"#8E8E93"
     },
     chatTime: {
       fontFamily: 'Poppins_400Regular',
@@ -52,7 +58,7 @@ export const styles = StyleSheet.create({
       top:5
     },
     totalMessageContainer: {
-      backgroundColor: '#444',
+      backgroundColor: '#7DA74D',
       borderRadius: 15,
       width: 30,
       height: 30,
@@ -61,7 +67,7 @@ export const styles = StyleSheet.create({
       alignItems: "center",
       position:"absolute",
       right:10,
-      top:20
+      top:20, 
     },
     totalMessage: {
       fontFamily: 'Poppins_400Regular',

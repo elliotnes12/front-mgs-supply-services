@@ -8,6 +8,7 @@ import { styles } from "./styles/CreateService.style";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from 'react-native-modal';
 import MapView, { Marker } from 'react-native-maps';
+import { Header } from '../../components/core/Header';
 
 const data = [
   { id: '1', title: 'Cleaning' },
@@ -59,7 +60,7 @@ export function CreateService() {
             <View style={{ width: 20, height: 20, marginRight: 5 }}>
               <Image alt="tabs" style={{ width: "100%", height: "100%" }} resizeMode="contain" source={getImage(item.title)} />
             </View>
-            <Text style={{color:"#fff"}}>{item.title}</Text>
+            <Text style={{ color: "#fff" }}>{item.title}</Text>
           </LinearGradient>
         ) : (
           <View style={{ borderWidth: 1, borderColor: "#4F4F4F", borderRadius: 20, height: 45, width: 110, justifyContent: "center", alignItems: "center", flexDirection: "row", backgroundColor: '#fff' }}>
@@ -97,24 +98,19 @@ export function CreateService() {
 
   return (
     <>
-      <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.header}>
-        <SafeAreaView style={styles.header__content}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 35, height: 35, marginRight: 10 }}>
-            <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.flechaizquierda} />
-          </TouchableOpacity>
-          <View>
-            <Text style={styles.title}>Create a Service</Text>
-            <Text style={styles.subTitle}>Create of the generated services</Text>
-          </View>
-        </SafeAreaView>
-      </LinearGradient>
+
 
       <FlatList
         style={styles.container}
         ListHeaderComponent={
+          
           <>
-            <View>
-              <Text style={[styles.textGray, styles.titleServices]}>Select a service</Text>
+            <Header title={"Create a Service"} goBack={true} subtitle={"schedule a service with us"} />
+
+            <View style={{ marginTop: 20, paddingHorizontal:24 }}>
+            
+             
+            <Text style={[styles.textGray, styles.titleServices]}>Select a service</Text>
               <FlatList
                 data={data}
                 renderItem={renderItem}
@@ -123,10 +119,6 @@ export function CreateService() {
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.flatListContainer}
               />
-            </View>
-
-            <View style={{ marginTop: 20 }}>
-              <Text style={[styles.textGray, styles.titleServices]}>Set date & time</Text>
               <TouchableOpacity style={styles.item}>
                 <View style={{ width: 35, height: 35, marginRight: 15 }}>
                   <Image alt="icon choose a date" style={{ width: "100%", height: "100%" }} source={assets.image.png.calendar} />

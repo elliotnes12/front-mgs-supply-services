@@ -52,7 +52,10 @@ const png = {
   clip:require("./icons/clip.png"),
   iconguinos:require("./icons/guinos.png"),
   iconsuccess:require("./icons/success.png"),
-  calendarwhite:require("./icons/calendarwhite.png"),
+  iconCalendarSearch:require("./icons/icon-calendar-search.png"),
+  iconoLupaWhite:require('./icons/icono-lupa-white.png'),
+  iconoMenuVertical:require('./icons/menu-vertical.png'),
+  iconAddChat:require('./icons/chat-add.png')
 };
 
 export { png };

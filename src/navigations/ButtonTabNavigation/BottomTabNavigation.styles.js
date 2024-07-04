@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     },
     border: { 
         position: "absolute",
-        bottom:-16,
+        bottom:-25,
         left:-50
     },
     registerOrder: {
