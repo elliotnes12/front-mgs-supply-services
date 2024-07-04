@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 
 
 export const styles = StyleSheet.create({
+  chats_header: {
+    height:100,
+    flex:1
+  },
     background: {
       flex: 1,
     },
@@ -34,7 +38,7 @@ export const styles = StyleSheet.create({
     title: {
       fontFamily: 'Poppins_600SemiBold',
       fontSize: 24,
-      color: '#333',
+      color: '#f5f5f5',
     },
     containerTitle: {
       

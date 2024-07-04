@@ -19,13 +19,13 @@ export const getIcon = (label) => {
     case "orders":
       return assets.image.png.documentouno;
     case "raiting":
-      return assets.image.png.comentariosuno;
+      return assets.image.png.estrellauno;
     case "services-focus":
       return assets.image.png.iconServices;
     case "orders-focus":
       return assets.image.png.documentosdos;
     case "raiting-focus":
-      return assets.image.png.comentariosdos;
+      return assets.image.png.estrellados;
     default:
       return null;
   }

@@ -11,6 +11,8 @@ import { User } from '../../../api/user';
 import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { getIcon } from '../../../utils/util';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export function ChatsScreen() {
   const [users, setUsers] = useState([]);
@@ -64,18 +66,22 @@ export function ChatsScreen() {
   };
 
   return (
-    <ScrollView style={{ flex: 1 }} alwaysBounceVertical={false}>
-      <SafeAreaView style={styles.container}>
+    <ScrollView style={{ flex: 1, }} alwaysBounceVertical={false}>
+       <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.chats_header}>
+       <SafeAreaView style={styles.container}>
         <View style={[stylesGlobal.itemHorizontal, { justifyContent: "space-between" }]}>
-          <View>
+          <View  style={{flex:1,display:'flex',flexDirection:'row',}}>
             <Text style={styles.title}>Support</Text>
-            <Text style={[styles.title, styles.containerTitle]}>Chat</Text>
+            <Text style={[styles.title, styles.containerTitle,{marginLeft:10}]}>Chat</Text>
           </View>
           <View style={stylesGlobal.imageMd}>
-            <Image style={stylesGlobal.imageMin__img} resizeMode='contain' source={getIcon("icon-support")} />
+            <Image style={stylesGlobal.imageMin__img} resizeMode='contain' source={assets.image.png.iconsupportwhite} />
           </View>
         </View>
-
+        </SafeAreaView>
+       </LinearGradient>
+     
+       <SafeAreaView style={styles.container}> 
         <View style={styles.usersContainer}>
           <FlatList
             horizontal
@@ -138,7 +144,7 @@ export function ChatsScreen() {
             )
           )}
         </View>
-      </SafeAreaView>
+        </SafeAreaView>
     </ScrollView>
   );
 }

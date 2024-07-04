@@ -55,7 +55,10 @@ const png = {
   iconCalendarSearch:require("./icons/icon-calendar-search.png"),
   iconoLupaWhite:require('./icons/icono-lupa-white.png'),
   iconoMenuVertical:require('./icons/menu-vertical.png'),
-  iconAddChat:require('./icons/chat-add.png')
+  iconAddChat:require('./icons/chat-add.png'),
+  iconsupportwhite:require('./icons/icon-supportwhite.png'),
+  estrellados:require("./home/estrellados.png"),
+  estrellauno:require("./home/estrellauno.png")
 };
 
 export { png };

@@ -14,9 +14,11 @@ export function Header({ search, title, subtitle, goBack }) {
             <SafeAreaView style={styles.header__content}>
                 {goBack &&
                     <>
+                         
                         <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 35, height: 35, marginRight: 10 }}>
                             <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.flechaizquierda} />
                         </TouchableOpacity>
+                       
                     </>
                 }
 
@@ -24,6 +26,10 @@ export function Header({ search, title, subtitle, goBack }) {
                     <Text style={styles.title}>{title}</Text>
                     {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
                 </View>
+
+                <TouchableOpacity style={[stylesGlobal.imageMin,{ right:20 }]}>
+                                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
+                </TouchableOpacity>
                 {search &&
                     <View style={[stylesGlobal.itemHorizontal, styles.globalSearch]}>
                         <View style={[stylesGlobal.itemHorizontal, styles.containerSearch]}>
