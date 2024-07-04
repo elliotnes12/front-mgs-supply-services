@@ -14,11 +14,11 @@ export function Header({ search, title, subtitle, goBack }) {
             <SafeAreaView style={styles.header__content}>
                 {goBack &&
                     <>
-                         
+
                         <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 35, height: 35, marginRight: 10 }}>
                             <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.flechaizquierda} />
                         </TouchableOpacity>
-                       
+
                     </>
                 }
 
@@ -27,24 +27,30 @@ export function Header({ search, title, subtitle, goBack }) {
                     {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
                 </View>
 
-                <TouchableOpacity style={[stylesGlobal.imageMin,{ right:20 }]}>
-                                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
-                </TouchableOpacity>
                 {search &&
-                    <View style={[stylesGlobal.itemHorizontal, styles.globalSearch]}>
-                        <View style={[stylesGlobal.itemHorizontal, styles.containerSearch]}>
-                            <View style={stylesGlobal.imageMin}>
-                                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconLupa} />
-                            </View>
-                            <TextInput style={{ flex: 1 }} />
-                        </View>
-                        <TouchableOpacity style={styles.btnSearch}>
-                            <View style={[stylesGlobal.imageMin]}>
-                                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendarSearch} />
-                            </View>
+                    <>
+                        <TouchableOpacity style={[stylesGlobal.imageMin, { right: 20 }]}>
+                            <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
                         </TouchableOpacity>
-                    </View>
+
+                    </>
                 }
+
+
+                <View style={[stylesGlobal.itemHorizontal, styles.globalSearch]}>
+                    <View style={[stylesGlobal.itemHorizontal, styles.containerSearch]}>
+                        <View style={stylesGlobal.imageMin}>
+                            <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconLupa} />
+                        </View>
+                        <TextInput style={{ flex: 1 }} />
+                    </View>
+                    <TouchableOpacity style={styles.btnSearch}>
+                        <View style={[stylesGlobal.imageMin]}>
+                            <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendarSearch} />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+
             </SafeAreaView>
         </LinearGradient>
     );
