@@ -2,11 +2,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
-import { assets } from '../../../../assets';
 import { styles } from './ServiceListScreen.styles';
 import { FlatList } from 'native-base';
 import { getIcon } from '../../../../utils/util';
-import { stylesGlobal } from '../../../styles/global.style';
 import { screens, tabIds } from '../../../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { ItemService } from '../../../../components/core/ItemService';
@@ -29,7 +27,7 @@ const RenderServices = ({ navigation }) => (
     <View style={styles.options}>
       <Text style={styles.options__title}>Services Used</Text>
       <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
-        <Text style={styles.options__all}>ViewAll</Text>
+        <Text style={styles.options__all}>View All</Text>
       </TouchableOpacity>
     </View>
 

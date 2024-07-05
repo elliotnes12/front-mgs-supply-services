@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Border, Color, FontSize } from '../../../../utils/constantsStyle';
 
 export const styles = StyleSheet.create({
   scene: {
@@ -29,10 +30,9 @@ export const styles = StyleSheet.create({
     shadowColor: '#fff',
     paddingLeft: 0,
     paddingRight: 0,
-    marginBottom: 10
   },
   tabStyle: {
-    marginBottom:20,
+    marginBottom:5,
     width: 130,
     height: '100%',
     marginRight:5
@@ -62,11 +62,14 @@ export const styles = StyleSheet.create({
   },
   tabText: {
     color: '#ABABAB',
-    fontSize: 16,
     fontFamily: 'Poppins_400Regular',
+    fontSize: FontSize.headline16_size,
+    lineHeight: 24,
   },
   tabTextFocused: {
     color: '#fff',
+    lineHeight: 24,
+    fontFamily: 'Poppins_400Regular',
     fontSize: 16,
   },
   iconServices: {
@@ -89,26 +92,43 @@ export const styles = StyleSheet.create({
     width: '100%',
     position: 'relative',
     marginBottom: 5,
-    height:120
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    elevation: 30,
+    shadowRadius: 30,
+    shadowColor: "#333",
+    borderRadius: Border.br_3xs,
+    height: 120,
+    backgroundColor: Color.blanco,
+    paddingTop:10
   },
   item__title: {
-    color: "#0F0F0F",
     fontFamily: 'Poppins_600SemiBold',
+    color: Color.secondaryColor,
+    lineHeight: 18,
+    letterSpacing: 0.3,
+    fontSize: FontSize.headline16_size,
+    fontWeight: "500",
   },
   item_subtitle: {
     color: "#0F0F0F",
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: 'Poppins_300Light',
+    fontSize: FontSize.paragraphRegularSmall_size,
   },
-  item__estatus: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
-
+  item__estatus:{
+    color: Color.fontWhite,
+    fontWeight: "300",
+    lineHeight: 24,
+    textAlign: "left",
+    fontSize: FontSize.paragraphRegularSmall_size,
   },
   item__flechaContainer: {
     width: 24,
     height: 24,
-    marginRight: 20,
+    marginRight: 0,
     position: 'absolute',
     right: 0,
     top: '50%',
@@ -187,14 +207,22 @@ export const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center",
-    marginBottom:10
+    marginBottom:15
   },
   options__title:{
-    color: "#333333",
+    color: Color.gray1,
     fontFamily: 'Poppins_700Bold',
-    fontSize: 18,  
+    fontSize: FontSize.h3_size,
+    textTransform: "capitalize",
+    fontWeight: "500",
+    lineHeight: 24, 
   },
   options__all:{
-    color:'#7DA74D'
+    color: Color.colorSecundario,
+    fontFamily:"Poppins_500Medium",
+    fontWeight: "500",
+    textTransform: "capitalize",
+    lineHeight: 24,
+    fontSize: FontSize.size_mini,
   },
 });

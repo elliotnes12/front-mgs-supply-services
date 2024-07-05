@@ -37,15 +37,13 @@ export function ServicesScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: "#f0f0f0",
     },
     flatListContainer: {
         paddingHorizontal: 24,
         marginTop:40,
-        paddingBottom:40
+        paddingBottom:170
     },
-    itemContainer: {
-        paddingVertical: 10,
-    },
+   
 });

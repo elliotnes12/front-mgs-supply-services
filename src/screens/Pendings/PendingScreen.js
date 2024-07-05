@@ -1,8 +1,6 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { Image } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image } from 'native-base';
 import { assets } from "../../assets";
 import { styles } from "./styles/PendingScreen.styles";
 import { stylesGlobal } from '../../modules/styles/global.style';
@@ -13,30 +11,35 @@ export function PendingScreen() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Simulación de carga de datos
         setLoading(true);
-        setTimeout(() => {
-            setTasks([
-                {
-                    id: 1,
-                    title: "Cleaning office",
-                    description: "cleaning de lobby area",
-                    employees: [
-                        { idEmployee: "2323", name: "Jose Luis Carmona" },
-                        { idEmployee: "2323", name: "Jorge Antonio Ruiz Perez" }
-                    ]
-                },
-                {
-                    id: 2,
-                    title: "Cleaning Hospital",
-                    description: "cleaning de lobby area",
-                    employees: [
-                        { idEmployee: "43434", name: "Carlos Roberto Garcia" }
-                    ]
-                }
-            ]);
-            setLoading(false);
-        }, 1000); // Simulación de retardo de carga
+        setTasks([
+            {
+                id: 1,
+                title: "Cleaning office",
+                description: "cleaning de lobby area",
+                employees: [
+                    { idEmployee: "2323", name: "Jose Luis Carmona" },
+                    { idEmployee: "2323", name: "Jorge Antonio Ruiz Perez" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Cleaning Hospital",
+                description: "cleaning de lobby area",
+                employees: [
+                    { idEmployee: "43434", name: "Carlos Roberto Garcia" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Cleaning Hospital",
+                description: "cleaning de lobby area",
+                employees: [
+                    { idEmployee: "43434", name: "Carlos Roberto Garcia" }
+                ]
+            }
+        ]);
+        setLoading(false);
     }, []);
 
     const renderItem = ({ item }) => (
@@ -54,7 +57,7 @@ export function PendingScreen() {
                     {item.employees.map((employee) => (
                         <View key={employee.idEmployee} style={styles.item}>
                             <View style={styles.item__img}>
-                                <Image source={assets.image.png.profile} style={{ width: "100%", height: "100%" }} />
+                                <Image alt="icon-employee" source={assets.image.png.profile} style={{ width: "100%", height: "100%" }} />
                             </View>
                             <Text style={styles.personalName}>{employee.name}</Text>
                         </View>
@@ -84,16 +87,22 @@ export function PendingScreen() {
     };
 
     return (
-        <View style={{ flex: 1}}>
-            <Header goBack={false} title={"To Do"} />
-            <FlatList
-                data={tasks}
-                renderItem={renderItem}
-                keyExtractor={item => item.id.toString()}
-                onEndReachedThreshold={0.5}
-                ListFooterComponent={renderFooter}
-                contentContainerStyle={styles.scrollViewContent}
-            />
-        </View>
+        <>
+            <Header title={"Pendings"} />
+            <View style={{ flexGrow: 1, justifyContent: "center", flexDirection: "row", alignItems: "center", paddingHorizontal: 24 }}>
+                {loading && <LoadingScreen />}
+                {!loading && tasks.length > 0 && (
+                    <FlatList
+                        data={tasks}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id.toString()}
+                        onEndReachedThreshold={0.5}
+                        ListFooterComponent={renderFooter}
+                        contentContainerStyle={styles.scrollViewContent}
+                    />
+                )}
+                {!loading && tasks.length === 0 && <Text>Empty</Text>}
+            </View>
+        </>
     );
 }

@@ -24,8 +24,8 @@ const renderStatus = (status) => {
     case 'progress':
       return (
         <>
-          <View style={styles.item__estatus}>
-            <Text>Estatus:</Text>
+          <View style={[stylesGlobal.itemHorizontal]}>
+            <Text style={styles.item__estatus}>Estatus:</Text>
             <View style={[styles.estatus, styles.aprobado]} >
               <Text style={{ color: "#fff" }}>in progress</Text>
             </View>
@@ -34,8 +34,8 @@ const renderStatus = (status) => {
       )
     case 'cancel':
       return (
-        <View style={styles.item__estatus}>
-          <Text>Estatus:</Text>
+        <View style={[stylesGlobal.itemHorizontal]}>
+          <Text style={styles.item__estatus}>Estatus:</Text>
           <View style={[styles.estatus, styles.canceled]} >
             <Text style={{ color: "#fff" }}>Canceled</Text>
           </View>
@@ -43,8 +43,8 @@ const renderStatus = (status) => {
       )
     case 'success':
       return (
-        <View style={styles.item__estatus}>
-          <Text>Estatus:</Text>
+        <View style={[stylesGlobal.itemHorizontal]}>
+          <Text style={styles.item__estatus}>Estatus:</Text>
           <View style={[styles.estatus, styles.success]} >
             <Text style={{ color: "#fff" }}>Success</Text>
           </View>
@@ -65,7 +65,7 @@ const renderItem = ({ item }) => {
           <Text style={styles.item_subtitle}>{item.subTitle}</Text>
 
           <View style={styles.item__date}>
-          <View style={[stylesGlobal.imageMin]}>
+          <View style={[stylesGlobal.imageSmall]}>
               <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
             </View>
             <Text style={styles.item__datetext} >{item.date}</Text>
@@ -88,7 +88,7 @@ const RenderLastServices = ({navigation}) => (
  <View style={styles.options}>
   <Text style={styles.options__title}>Services Generated</Text>
   <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
-    <Text style={styles.options__all}>ViewAll</Text>
+    <Text style={styles.options__all}>View All</Text>
   </TouchableOpacity>
  </View>  
 

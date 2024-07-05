@@ -1,8 +1,9 @@
 import { StyleSheet } from "react-native";
+import { Color, FontSize } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
     header: {
-        height: 100,
+        height: 110,
         display: "flex",
         width: "100%",
         alignItems: "flex-start",
@@ -22,15 +23,18 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: "#fff",
-        fontSize: 18,
+        fontSize: 22,
         fontFamily: "Poppins_700Bold",
-        
+        lineHeight: 29,
+        textAlign: "left",
+        color: Color.blanco,
+        fontWeight: "500",
     },
     subtitle: {
         color: "#fff",
         fontFamily: "Poppins_400Regular",
         fontSize: 15,
-        marginTop:-10
+        marginTop:-5
 
     },
     containerSearch: {

@@ -1,26 +1,17 @@
 import { StyleSheet } from "react-native";
+import { Border, Color, FontSize } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
-    container_item: {
-        paddingHorizontal: 24,
-        paddingVertical: 5,
-         marginBottom: 7,
-         position:"relative",
-         display:"flex",
-         justifyContent:"space-between",
-         flexDirection:"row",
-         width:"100%",
-    },
     gradient: {
         height: 145,
-        paddingBottom:10,
+        paddingBottom: 10,
     },
     safeArea: {
         display: 'flex',
-        height:"100%",
+        height: "100%",
         flexDirection: 'row',
-        alignItems:"center",
-        marginHorizontal: 30,
+        alignItems: "center",
+        marginHorizontal: 24,
     },
     title: {
         marginHorizontal: 5,
@@ -28,22 +19,54 @@ export const styles = StyleSheet.create({
         fontFamily: 'Poppins_700Bold',
         color: "#FFFFFF",
     },
-
+    container_item: {
+        paddingVertical: 5,
+        position: "relative",
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        width: "100%",
+        borderRadius: Border.br_3xs,
+        shadowOpacity: 1,
+        elevation: 30,
+        shadowRadius: 30,
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowColor: Color.gray1,
+        paddingTop: 15,
+        minHeight: 153,
+        paddingLeft: 10,
+        backgroundColor: Color.blanco,
+        marginBottom: 10,
+    },
     office: {
-        fontSize: 16,
         fontFamily: 'Poppins_700Bold',
-        color: "#080C2F"
+        fontSize: FontSize.headline16_size,
+        letterSpacing: 0.3,
+        lineHeight: 17,
+        color: Color.secondaryColor,
+        textAlign: "left",
+        fontWeight: "500",
     },
     notice: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 10,
-        fontSize:15
+        fontSize: 15,
+    },
+    notice_description: {
+        fontWeight: "300",
+        lineHeight: 24,
+        fontSize: FontSize.paragraphRegularSmall_size,
+        textAlign: "left",
+        color: Color.fontMid,
     },
     notice__img: {
-        width:"100%",
-        height:"100%"
+        width: "100%",
+        height: "100%",
     },
     cleaning: {
         fontFamily: 'Poppins_400Regular',
@@ -51,16 +74,18 @@ export const styles = StyleSheet.create({
     },
     assigned: {
         fontFamily: 'Poppins_400Regular',
-        color: "#0F0F0F",
-        fontSize:15,
-        marginBottom: 10
+        fontWeight: "300",
+        lineHeight: 24,
+        fontSize: FontSize.paragraphRegularSmall_size,
+        textAlign: "left",
+        color: "#0f0f0f",
     },
     item: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        width:"100%",
-        marginBottom:5
+        width: "100%",
+        marginBottom: 5,
     },
     item__img: {
         height: 40,
@@ -69,7 +94,7 @@ export const styles = StyleSheet.create({
         overflow: "hidden",
         borderWidth: 4,
         borderColor: "#fff",
-        marginRight: 10
+        marginRight: 10,
     },
     container__item: {
         alignItems: 'flex-end',
@@ -81,38 +106,35 @@ export const styles = StyleSheet.create({
     decline: {
         color: "#FF8585",
     },
-    edit:{
-        color:"#FFBD12"
+    edit: {
+        color: "#FFBD12",
     },
-    complet:{
-        color:"#7DA74D"
+    complet: {
+        color: "#7DA74D",
     },
     scrollViewContent: {
-        marginTop:20,
-        paddingBottom: 20, 
+        marginTop: 20,
+        paddingBottom: 20,
     },
-    personalName:{
-        fontFamily:"Poppins_400Regular",
-        fontSize:13,
-        color: "#0F0F0F"
+    personalName: {
+        fontFamily: "Poppins_400Regular",
+        fontSize: 13,
+        color: "#0F0F0F",
     },
-
-    options:{
-        display:"flex",
-        flexDirection:"row",
-        width:120,
-        height:"100%",
-        justifyContent:"space-between",
-        alignItems:"center",
-        position:'relative'
+    options: {
+        display: "flex",
+        flexDirection: "row",
+        width: 120,
+        height: "100%",
+        justifyContent: "space-between",
+        alignItems: "center",
+        position: 'relative',
     },
-    options__item:{
-        flex:1,
-        display:"flex",
-        flexDirection:"column",
-        alignItems:"center",
-        width:100,
-        
-        
-    }
+    options__item: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: 100,
+    },
 });

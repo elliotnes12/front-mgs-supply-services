@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Color } from '../../../../utils/constantsStyle';
 
 export const styles = StyleSheet.create({
   scene: {
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10
+    marginVertical:15
   },
   titleCategories: {
     color: "#333333",
@@ -23,12 +24,21 @@ export const styles = StyleSheet.create({
     marginTop: 5
   },
   options__all: {
-    color: '#7DA74D'
+    fontFamily:"Poppins_500Medium",
+    color: '#7da74d',
+    fontWeight: "500",
+    textTransform: "capitalize",
+    lineHeight:24
   },
   options__title: {
-    color: "#333333",
+    color: "#333",
     fontFamily: 'Poppins_600SemiBold',
-    fontSize: 16,
+    textTransform: "capitalize",
+    lineHeight: 24,
+    fontSize:19,
+    textAlign: "left",
+    fontWeight: "500",
+
   },
   indicatorStyle: {
     backgroundColor: 'transparent',
@@ -43,14 +53,14 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   tabItem: {
-    backgroundColor:"#F5F5F5",
+    backgroundColor:Color.colorWhitesmoke_100,
     height: '100%',
-    width: 120,
+    width: 122,
     margin:0,
     paddingBottom:8,
     paddingTop:8,
     marginLeft:0,
-    borderRadius: 25,
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -66,11 +76,14 @@ export const styles = StyleSheet.create({
   tabText: {
     color: '#ABABAB',
     fontSize: 16,
+    lineHeight:24,
     fontFamily: 'Poppins_400Regular',
   },
   tabTextFocused: {
     color: '#fff',
     fontSize: 16,
+    lineHeight:24,
+    fontFamily: 'Poppins_400Regular',
   },
   iconServices: {
     width: 20,

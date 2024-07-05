@@ -7,10 +7,10 @@ import { assets } from "../../../assets";
 import { useAuth } from '../../Auth/hooks';
 import { ServiceListScreenCt } from './customer/ServiceListScreen';
 import { ServiceListScreenSp } from './supervisor/ServiceListScreenSupervisor';
-import { styles } from "../styles/dashboard.styles";
 import { ServiceListScreenEmployee } from './employee/ServiceListScreenEmployee';
 import { useNavigation } from '@react-navigation/native';
 import { screens } from '../../../utils';
+import { styles } from '../styles/dashboard.styles';
 
 export function DashboardScreen() {
     const { userInfo, isCustomer } = useAuth();
@@ -46,6 +46,7 @@ export function DashboardScreen() {
             }),
         ]).start();
     }
+
     const startSwing = () => {
         animateAlert();
     };
@@ -67,7 +68,7 @@ export function DashboardScreen() {
                         </View>
                         <View style={styles.userInfo}>
                             <Text style={styles.userInfo__hello}>Hello,</Text>
-                            <Text style={styles.userInfo__name}>{name}</Text>
+                            <Text  style={styles.userInfo__name}>{name}</Text>
                         </View>
                     </View>
                     <Animated.View style={{ transform: [{ rotate: swing }] }}>
@@ -97,10 +98,10 @@ export function DashboardScreen() {
                             </LinearGradient>
                         </View>
 
-                        <Text style={styles.titleCategories}>
-                            Choose a category
-                        </Text>
                         <View style={styles.tabViewContainer}>
+                            <Text style={styles.titleCategories}>
+                                Choose a category
+                            </Text>
                             <ServiceListScreenCt />
                         </View>
                     </>
@@ -110,7 +111,7 @@ export function DashboardScreen() {
                     <>
                         <View style={styles.options}>
                             <Text style={styles.options__title}></Text>
-                            <TouchableOpacity onPress={() =>  navigation.navigate(screens.tab.services.root) }>
+                            <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
                                 <Text style={styles.options__all}></Text>
                             </TouchableOpacity>
                         </View>
@@ -118,15 +119,8 @@ export function DashboardScreen() {
                     </>
                 )}
 
-
                 {!isCustomer && userInfo.type === "employee" && (
                     <>
-                        <View style={styles.options}>
-                            <Text style={styles.options__title}>Pending services</Text>
-                            <TouchableOpacity onPress={() =>  navigation.navigate(screens.tab.services.root) }>
-                                <Text style={styles.options__all}>ViewAll</Text>
-                            </TouchableOpacity>
-                        </View>
                         <ServiceListScreenEmployee />
                     </>
                 )}
@@ -134,4 +128,3 @@ export function DashboardScreen() {
         </View>
     );
 }
-

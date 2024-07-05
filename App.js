@@ -3,7 +3,7 @@ import { NativeBaseProvider } from "native-base";
 import HandlerNavigation from './src/navigations/HandlerNavigation';
 import { AuthProvider } from './src/contexts';
 import AppLoading from 'expo-app-loading';
-import { useFonts, Poppins_400Regular, Poppins_700Bold, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
+import { useFonts, Poppins_400Regular, Poppins_700Bold, Poppins_600SemiBold,Poppins_500Medium,Poppins_300Light } from '@expo-google-fonts/poppins';
 
 export default function App() {
 
@@ -11,6 +11,8 @@ export default function App() {
     Poppins_400Regular,
     Poppins_700Bold,
     Poppins_600SemiBold,
+    Poppins_500Medium,
+    Poppins_300Light
     
   });
 

@@ -1,15 +1,15 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   background: {
-    height: "100%",
+    flexGrow: 1,
     backgroundColor: "#fff",
   },
   container: {
-    paddingLeft:24,
-    paddingRight:24,
-    marginTop:10,
-    flex: 1,
+    paddingLeft: 24,
+    paddingRight: 24,
+    marginTop: 5,
+    flexGrow: 1,
   },
   header: {
     backgroundColor: "#fff",
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: 70,
-    marginBottom:20
+    marginBottom: 20,
   },
   profile: {
     flexDirection: "row",
@@ -30,27 +30,27 @@ export const styles = StyleSheet.create({
     marginRight: 10,
     justifyContent: "center",
     alignItems: "center",
-    position:"relative"
+    position: "relative",
   },
-  alerts__count:{
-    width:25,
-    height:25,
-    top:-8,
-    left:-10,
-    zIndex:1,
-    position:"absolute",
-    backgroundColor:"#FF8585",
-    borderRadius:12.5,
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center"
+  alerts__count: {
+    width: 25,
+    height: 25,
+    top: -8,
+    left: -10,
+    zIndex: 1,
+    position: "absolute",
+    backgroundColor: "#FF8585",
+    borderRadius: 12.5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  alert__text:{
-    color:"#fff"
+  alert__text: {
+    color: "#fff",
   },
   goProfile: {
-    height: 70,
-    width: 70,
+    height: 60,
+    width: 60,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 35,
@@ -59,8 +59,8 @@ export const styles = StyleSheet.create({
     borderColor: "#fff",
   },
   containerProfile: {
-    height: 75,
-    width: 75,
+    height: 65,
+    width: 65,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,
@@ -79,49 +79,50 @@ export const styles = StyleSheet.create({
   },
   userInfo__name: {
     fontFamily: "Poppins_700Bold",
-    color: "#333333",
+    color: "#333",
+    lineHeight: 20,
     fontSize: 17,
   },
   promos: {
     height: 150,
     marginTop: 15,
-    width:"100%",
+    width: "100%",
     position: "relative",
   },
-  promos__title:{
-    color:"#fff",
-    fontFamily:"Poppins_600SemiBold",
-    width:180,
-    fontSize:21,
-    lineHeight:21,
-    position:"absolute",
-    bottom:40,
-    left:20
+  promos__title: {
+    color: "#fff",
+    fontFamily: "Poppins_600SemiBold",
+    textTransform: "capitalize",
+    width: 201,
+    fontSize: 23,
+    lineHeight: 24,
+    position: "absolute",
+    bottom: 40,
+    left: 20,
   },
-  promos__label:{
-    borderRadius:10,
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
-    width:50,
-    height:30,
-    backgroundColor:"#fff",
-    position:"absolute",
-    top:20,
-    left:20,
-    opacity:0.7
+  promos__label: {
+    borderRadius: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 50,
+    height: 30,
+    backgroundColor: "rgba(255, 255, 255, 0.76)",
+    position: "absolute",
+    top: 20,
+    left: 20,
   },
   bgpromos: {
     width: "100%",
     height: "100%",
     position: "relative",
-    borderRadius:10,
+    borderRadius: 10,
   },
   bg_person: {
     height: 150,
     width: 120,
     position: "absolute",
-    right:20,
+    right: 20,
     bottom: 0,
   },
   tabViewContainer: {
@@ -146,9 +147,9 @@ export const styles = StyleSheet.create({
     left: 30,
   },
   promoLastService: {
-    height:30,
-    width:60,
-    borderRadius:5,
+    height: 30,
+    width: 60,
+    borderRadius: 5,
     backgroundColor: "white",
     fontSize: 18,
     color: "#7EA74C",
@@ -157,27 +158,28 @@ export const styles = StyleSheet.create({
     left: 30,
     padding: 5,
   },
-
-  options:{
-    width:"100%",
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"space-between",
-    alignItems:"center",
-    marginBottom:0
+  options: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 0,
   },
-  titleCategories:{
-    color:"#333333",
-    fontFamily:"Poppins_700Bold",
-    fontSize:20,
-    marginTop:5
+  titleCategories: {
+    color: "#333",
+    fontFamily: "Poppins_700Bold",
+    fontSize: 20,
+    marginBottom: 10,
+    marginTop: 15,
+    lineHeight: 24,
   },
-  options__all:{
-    color:'#7DA74D'
+  options__all: {
+    color: '#7DA74D',
   },
-  options__title:{
-    color: "#333333",
+  options__title: {
+    color: "#666",
     fontFamily: 'Poppins_700Bold',
-    fontSize: 18,  
+    fontSize: 18,
   },
 });

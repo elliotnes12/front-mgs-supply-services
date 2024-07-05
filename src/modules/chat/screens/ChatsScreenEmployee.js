@@ -45,8 +45,6 @@ export function ChatsScreenEmployee() {
               const dateB = new Date(b.last_message_chat);
               return dateB - dateA;
             });
-
-            console.log("Sorted chats:", result);
             setChats(result);
           }
         } catch (error) {
@@ -88,37 +86,38 @@ export function ChatsScreenEmployee() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 80 }}>
-        <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.chats_header}>
-          <SafeAreaView style={styles.chats_header__content}>
-            <Text style={{ color: "#fff", fontFamily: "Poppins_600SemiBold" }}>{"mgs supply & services".toUpperCase()}</Text>
-            <View style={[styles.chatsOptions, stylesGlobal.itemHorizontal]} >
-              <TouchableOpacity style={stylesGlobal.imageMin}>
-                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
-              </TouchableOpacity>
-              <TouchableOpacity style={stylesGlobal.imageMin}>
-                <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoMenuVertical} />
-              </TouchableOpacity>
-            </View>
-          </SafeAreaView>
-        </LinearGradient>
-        <View style={styles.recentChatsContainer}>
-          {loading ? <LoadingScreen /> : (
-            chats.length > 0 ? (
-              chats.map(chat => (
-                <ChatItem upTopChat={upTopChat} key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
-              ))
-            ) : (
-              <View style={styles.noChats}><Text style={styles.noChatsText}>Empty</Text></View>
-            )
-          )}
-        </View>
-      </ScrollView>
-      <TouchableOpacity style={[styles.addChat]}>
+    <View style={styles.background}>
+      <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.chats_header}>
+        <SafeAreaView style={styles.chats_header__content}>
+          <Text style={{ color: "#fff", fontFamily: "Poppins_600SemiBold" }}>{"mgs supply & services".toUpperCase()}</Text>
+          <View style={[styles.chatsOptions, stylesGlobal.itemHorizontal]} >
+            <TouchableOpacity style={stylesGlobal.imageMin}>
+              <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
+            </TouchableOpacity>
+            <TouchableOpacity style={stylesGlobal.imageMin}>
+              <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoMenuVertical} />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </LinearGradient>
+      <View style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 0 }}>
+          <View style={styles.recentChatsContainer}>
+            {loading ? <LoadingScreen /> : (
+              chats.length > 0 ? (
+                chats.map(chat => (
+                  <ChatItem upTopChat={upTopChat} key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
+                ))
+              ) : (
+                <View style={styles.noChats}><Text style={styles.noChatsText}>Empty</Text></View>
+              )
+            )}
+          </View>
+        </ScrollView>
+      </View>
+      <TouchableOpacity style={styles.addChat}>
         <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconAddChat} />
       </TouchableOpacity>
     </View>
   );
 }
-

@@ -12,6 +12,8 @@ import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { getIcon } from '../../../utils/util';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Header } from '../../../components/core/Header';
+import { ChatItem } from '../../../components/core/ChatItem';
 
 
 export function ChatsScreen() {
@@ -25,6 +27,15 @@ export function ChatsScreen() {
   const { name } = userInfo;
   const userController = new User();
   const chatController = new Chat();
+  
+  const upTopChat = (chatId) => {
+    const data = chats;
+    const formIndex = data.map((chat) => chat.idChat).indexOf(chatId);
+    const toIndex = 0;
+    const element = data.splice(formIndex, 1)[0];
+    data.splice(toIndex, 0, element);
+    setChats([...data]);
+  }
 
   useEffect(() => {
     (async () => {
@@ -66,22 +77,10 @@ export function ChatsScreen() {
   };
 
   return (
-    <ScrollView style={{ flex: 1, }} alwaysBounceVertical={false}>
-       <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.chats_header}>
-       <SafeAreaView style={styles.container}>
-        <View style={[stylesGlobal.itemHorizontal, { justifyContent: "space-between" }]}>
-          <View  style={{flex:1,display:'flex',flexDirection:'row',}}>
-            <Text style={styles.title}>Support</Text>
-            <Text style={[styles.title, styles.containerTitle,{marginLeft:10}]}>Chat</Text>
-          </View>
-          <View style={stylesGlobal.imageMd}>
-            <Image style={stylesGlobal.imageMin__img} resizeMode='contain' source={assets.image.png.iconsupportwhite} />
-          </View>
-        </View>
-        </SafeAreaView>
-       </LinearGradient>
-     
-       <SafeAreaView style={styles.container}> 
+    <ScrollView style={{ flex: 1, padding:0,margin:0 }} alwaysBounceVertical={false}>
+       <Header title={"Support Chat"} />
+       <View style={styles.container}>
+        <Text style={styles.chatsTitle}>Support Team</Text> 
         <View style={styles.usersContainer}>
           <FlatList
             horizontal
@@ -119,23 +118,8 @@ export function ChatsScreen() {
           {loading ? <LoadingScreen /> : (
             chats.length > 0 ? (
               chats.map(chat => (
-                <TouchableOpacity key={chat.idChat.toString()} onPress={() => navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: chat.id, userName: chat.name })}>
-                  <View style={styles.chatItem}>
-                    <View style={styles.chatItem__img}>
-                      <Image style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.profile} />
-                    </View>
-                    <View style={styles.chatTextContainer}>
-                      <Text style={styles.chatItem__name}>{chat.name}</Text>
-                      <Text style={styles.chatItem__message}>So what can I do</Text>
-                    </View>
-                    <View style={styles.chatInfo}>
-                      <Text style={styles.chatTime}>3:30pm</Text>
-                      <View style={styles.totalMessageContainer}>
-                        <Text style={styles.totalMessage}>2</Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity>
+                <ChatItem upTopChat={upTopChat} key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
+           
               ))
             ) : (
               <View style={styles.noChats}>
@@ -144,7 +128,7 @@ export function ChatsScreen() {
             )
           )}
         </View>
-        </SafeAreaView>
+        </View>
     </ScrollView>
   );
 }

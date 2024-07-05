@@ -22,7 +22,7 @@ export function ItemService({item}) {
                     </View>
 
                     <View style={styles.item__date}>
-                        <View style={[stylesGlobal.imageMin]}>
+                        <View style={[stylesGlobal.imageSmall]}>
                             <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
                         </View>
                         <Text style={styles.item__datetext} >{item.date}</Text>

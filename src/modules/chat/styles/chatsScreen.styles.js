@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
+      paddingTop:20,
       paddingHorizontal: 24,
-      marginTop:15,
     },
     header__customer: {
       display: "flex",
@@ -42,7 +42,6 @@ export const styles = StyleSheet.create({
     },
     containerTitle: {
       
-      marginBottom:10,
       padding:0
     },
     usersContainer: {
@@ -62,8 +61,8 @@ export const styles = StyleSheet.create({
       marginBottom: 10,
     },
     userImage: {
-      width: 60,
-      height: 60,
+      width: 65,
+      height: 65,
       borderRadius: 30,
     },
     userStatus: {

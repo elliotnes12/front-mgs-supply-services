@@ -2,32 +2,38 @@ import { StyleSheet } from "react-native";
 
 
 export const stylesGlobal = StyleSheet.create({
-   imageMin:{
-    width:25,
-    height:25,
-    marginRight:10
+
+   imageSmall: {
+      width: 15,
+      height: 15,
+      marginRight: 5
    },
-   imageMd:{
-      width:40,
-      height:40,
+   imageMin: {
+      width: 25,
+      height: 25,
+      marginRight: 5
    },
-   imageLg:{
-      width:60,
-      height:60,
+   imageMd: {
+      width: 40,
+      height: 40,
    },
-   imageMin__img:{
-    width:"100%",
-    height:"100%"
+   imageLg: {
+      width: 60,
+      height: 60,
    },
-   itemVertical:{
-      display:"flex",
-      flexDirection:"column",
-      alignItems:"flex-start",
-      flex:1
+   imageMin__img: {
+      width: "100%",
+      height: "100%"
    },
-   itemHorizontal:{
-    display:"flex",
-    flexDirection:"row",
-    alignItems:"center",
- }
+   itemVertical: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      flex: 1
+   },
+   itemHorizontal: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+   }
 })

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Border, Color, FontSize } from "../../../utils/constantsStyle";
 
 
 export const styles = StyleSheet.create({
@@ -7,7 +8,20 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         position: 'relative',
-        marginBottom: 15,
+        marginBottom: 5,
+        shadowOpacity: 1,
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        elevation: 30,
+        shadowRadius: 30,
+        shadowColor: "#333",
+        borderRadius: Border.br_3xs,
+        height: 120,
+        backgroundColor: Color.blanco,
+        paddingTop:10,
+        paddingLeft:5
       },
       item__img: {
         width: 100,
@@ -20,12 +34,16 @@ export const styles = StyleSheet.create({
         flex: 1,
       },
       item__title: {
-        color:"#0F0F0F",
+        letterSpacing: 0.3,
+        lineHeight: 18,
+        fontSize:FontSize.headline16_size,
+        color:Color.secondaryColor,
         fontFamily: 'Poppins_600SemiBold',
+        fontWeight:"500"
       },
       item_subtitle:{
         color:"#0F0F0F",
-        fontFamily: 'Poppins_400Regular',
+        fontFamily: 'Poppins_300Light',
       },
       item__raiting:{
         display:"flex",
@@ -45,15 +63,16 @@ export const styles = StyleSheet.create({
         width:130,
       },
       item__datetext:{
-        color:"#333",
-        fontSize:12,
+        color: Color.gray1,
+        fontSize: FontSize.textXsReguler_size,
         marginLeft:5,
+        height: 17,
       },
     
       item__flechaContainer: {
         width: 24,
         height: 24,
-        marginRight: 20,
+        marginRight: 5,
         position: 'absolute',
         right: 0,
         top: '50%',
