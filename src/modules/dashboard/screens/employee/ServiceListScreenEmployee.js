@@ -78,10 +78,10 @@ const renderItem = ({ item }) => {
 }
 
 const RenderLastServices = () => (
-  <View style={styles.scene}>
-
-
-    <FlatList
+ 
+ 
+ <View style={styles.scene}>
+     <FlatList
       data={data}
       renderItem={renderItem}
       keyExtractor={item => item.id}

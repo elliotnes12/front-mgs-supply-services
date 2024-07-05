@@ -180,5 +180,21 @@ export const styles = StyleSheet.create({
     color: "#333",
     fontSize: 12,
     marginLeft: 5,
-  }
+  },
+  options:{
+    width:"100%",
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    marginBottom:0
+  },
+  options__title:{
+    color: "#333333",
+    fontFamily: 'Poppins_700Bold',
+    fontSize: 18,  
+  },
+  options__all:{
+    color:'#7DA74D'
+  },
 });

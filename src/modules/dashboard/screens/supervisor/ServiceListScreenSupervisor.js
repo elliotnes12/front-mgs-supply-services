@@ -4,10 +4,10 @@ import { TabView, TabBar } from 'react-native-tab-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import { assets } from '../../../../assets';
 import { styles } from './ServiceListScreenSupervisor.styles';
-import { tabIds } from '../../../../utils';
+import { screens, tabIds } from '../../../../utils';
 import { getIcon } from '../../../../utils/util';
 import { stylesGlobal } from '../../../styles/global.style';
-
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
   { title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'progress' },
@@ -82,19 +82,27 @@ const renderItem = ({ item }) => {
   )
 }
 
-const RenderLastServices = () => (
-  <View style={styles.scene}>
 
+const RenderLastServices = ({navigation}) => (
+ <>
+ <View style={styles.options}>
+  <Text style={styles.options__title}>Services Generated</Text>
+  <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
+    <Text style={styles.options__all}>ViewAll</Text>
+  </TouchableOpacity>
+ </View>  
 
-    <FlatList
+  
+   <FlatList
       data={data}
       renderItem={renderItem}
       keyExtractor={item => item.id}
       contentContainerStyle={styles.flatListContainer}
     />
-
-  </View>
+  
+ </>
 );
+
 
 const RenderLastProducts = () => (
   <View style={[styles.scene, styles.backgroundWhite]}>
@@ -107,6 +115,8 @@ const RenderLastProducts = () => (
 
 export const ServiceListScreenSp = () => {
   const [index, setIndex] = React.useState(0);
+ 
+  const navigation = useNavigation();
 
   const routes = [
     { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
@@ -116,7 +126,7 @@ export const ServiceListScreenSp = () => {
   const renderScene = ({ route }) => {
     switch (route.key) {
       case tabIds.TAB_ID_SERVICES:
-        return <RenderLastServices />;
+        return <RenderLastServices navigation={navigation}/>;
       case tabIds.TAB_ID_PRODUCTS:
         return <RenderLastProducts />;
       default:

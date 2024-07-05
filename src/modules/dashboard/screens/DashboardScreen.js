@@ -109,9 +109,9 @@ export function DashboardScreen() {
                 {!isCustomer && userInfo.type === "supervisor" && (
                     <>
                         <View style={styles.options}>
-                            <Text style={styles.options__title}>Services Generated</Text>
+                            <Text style={styles.options__title}></Text>
                             <TouchableOpacity onPress={() =>  navigation.navigate(screens.tab.services.root) }>
-                                <Text style={styles.options__all}>ViewAll</Text>
+                                <Text style={styles.options__all}></Text>
                             </TouchableOpacity>
                         </View>
                         <ServiceListScreenSp />
