@@ -11,6 +11,7 @@ import { ServiceListScreenEmployee } from './employee/ServiceListScreenEmployee'
 import { useNavigation } from '@react-navigation/native';
 import { screens } from '../../../utils';
 import { styles } from '../styles/dashboard.styles';
+import { ServiceListScreenManager } from './manager/ServicesListScreenManager';
 
 export function DashboardScreen() {
     const { userInfo, isCustomer } = useAuth();
@@ -122,6 +123,17 @@ export function DashboardScreen() {
                 {!isCustomer && userInfo.type === "employee" && (
                     <>
                         <ServiceListScreenEmployee />
+                    </>
+                )}
+                 {!isCustomer && userInfo.type === "manager" && (
+                    <>
+                        <View style={styles.options}>
+                            <Text style={styles.options__title}></Text>
+                            <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
+                                <Text style={styles.options__all}></Text>
+                            </TouchableOpacity>
+                        </View>
+                        <ServiceListScreenManager />
                     </>
                 )}
             </SafeAreaView>

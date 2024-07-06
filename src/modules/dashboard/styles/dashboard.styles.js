@@ -159,6 +159,7 @@ export const styles = StyleSheet.create({
     padding: 5,
   },
   options: {
+    
     width: "100%",
     display: "flex",
     flexDirection: "row",
