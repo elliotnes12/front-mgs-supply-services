@@ -35,7 +35,7 @@ const png = {
   iconEstrella: require("./icons/estrella.png"),
   iconMaletaFocus: require("./icons/maletauno.png"),
   iconMaletaGray: require("./icons/icon-maletin-gray.png"),
-  iconEdit:require("./icons/edit.png"),
+  iconEdit:require("./icons/icon-edit.png"),
   iconMaletin: require("./icons/icon-maletin.png"),
   flechaizquierda: require("./icons/flechaizquierda.png"),
   notice: require("./icons/notice.png"),
@@ -55,10 +55,16 @@ const png = {
   iconCalendarSearch:require("./icons/icon-calendar-search.png"),
   iconoLupaWhite:require('./icons/icono-lupa-white.png'),
   iconoMenuVertical:require('./icons/menu-vertical.png'),
-  iconAddChat:require('./icons/chat-add.png'),
+  iconAddChat:require('./icons/icon-message.png'),
   iconsupportwhite:require('./icons/icon-supportwhite.png'),
   estrellados:require("./home/estrellados.png"),
-  estrellauno:require("./home/estrellauno.png")
+  estrellauno:require("./home/estrellauno.png"),
+  iconQuestion:require("./icons/icon-question.png"),
+  iconGoBack:require("./icons/icon-goback.png"),
+  iconCreateGroup:require("./icons/icon-add-group.png"),
+  iconReports:require("./icons/icon-reports.png"),
+  iconReportsFocus:require("./icons/icon-reports-focus.png"),
+  iconCancel:require("./icons/icon-cancel.png")
 };
 
 export { png };

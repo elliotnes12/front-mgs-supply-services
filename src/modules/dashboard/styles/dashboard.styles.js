@@ -126,7 +126,7 @@ export const styles = StyleSheet.create({
     bottom: 0,
   },
   tabViewContainer: {
-    flex: 1,
+    flexGrow: 1,
     marginTop: 5,
     width: "100%",
   },

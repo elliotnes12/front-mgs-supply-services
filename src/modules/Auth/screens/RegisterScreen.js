@@ -4,8 +4,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { ActivityIndicator, Image, Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { LoadingScreen } from "../../../components/core/LoadingScreen";
-import CustomModal from "../../../components/core/Modal/Modal";
 import { getIcon } from "../../../utils/util";
 import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/RegisterForm.form";
@@ -231,9 +229,6 @@ export function RegisterScreen() {
 
         </View>
       </View>
-      <CustomModal isVisible={isModalVisible} onClose={closeModal}>
-        <Text style={styles.errorlogin}>{message}</Text>
-      </CustomModal>
     </LayoutAuth>
   );
 }

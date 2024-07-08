@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Image, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useAuth } from '../../modules/Auth/hooks';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from "./BottomTabNavigation.styles";
-import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
-import { assets } from '../../assets';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SettingsNavigation, GroupsNavigation, ChatNavigation, ReportsNavigation,ProductNavigation,ChatNavigationEmployee } from '../stacks';
+import React, { useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { assets } from '../../assets';
+import { useAuth } from '../../modules/Auth/hooks';
+import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
 import { screens } from '../../utils';
+import { ChatNavigation, ChatNavigationEmployee, GroupsNavigation, ProductNavigation, ReportsNavigation, SettingsNavigation } from '../stacks';
 import { PendingEmployeeNavigation } from '../stacks/PendingEmployeeNavigation';
+import { WorkFlowNavigation } from '../stacks/WorkFlowNavigation';
+import { styles } from "./BottomTabNavigation.styles";
 
 const Tab = createBottomTabNavigator();
 
 export function BottomTabNavigation() {
-  const { user, isCustomer , userInfo} = useAuth();
+  const { isCustomer , userInfo} = useAuth();
   const navigation = useNavigation();
   const [tabBarVisible, setTabBarVisible] = useState("flex");
 
@@ -28,9 +29,7 @@ export function BottomTabNavigation() {
       { name: screens.tab.products.root, title: 'Products', iconName: 'order' },
       { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
     ];
-  } else {
-
-    
+  } else {    
     if( userInfo?.type == "supervisor"){
       baseTabs = [
         { name: screens.tab.rootSupervisor, title: 'Home', iconName: 'home' },
@@ -39,13 +38,22 @@ export function BottomTabNavigation() {
         { name: screens.tab.groups.root, title: 'Pending', iconName: 'pending' },
         { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
       ];
-    }else{
+    }else  if( userInfo?.type == "employee"){
       baseTabs = [
         { name: screens.tab.rootEmployee, title: 'Home', iconName: 'home' },
         { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
         { name: 'boton-central', title: '', iconName: 'plus' },
         { name: screens.tab.groups.pendingScreenEmployee, title: 'Pending', iconName: 'pending' },
         { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
+      ];
+    }
+    else  if( userInfo?.type == "manager"){
+      baseTabs = [
+        { name: screens.tab.rootEmployee, title: 'Home', iconName: 'home' },
+        { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
+        { name: 'boton-central', title: '', iconName: 'plus' },
+        { name: screens.tab.workFlow.root, title: 'Workflow', iconName: 'pending' },
+        { name: screens.tab.reports.root, title: 'Reports', iconName: 'reports' },
       ];
     }
 
@@ -90,6 +98,8 @@ export function BottomTabNavigation() {
         return PendingEmployeeNavigation;  
       case screens.tab.chats.chatsScreenEmployee:
         return ChatNavigationEmployee;  
+      case screens.tab.workFlow.root:
+        return WorkFlowNavigation;  
       default:
         return null;
     }
@@ -117,6 +127,10 @@ export function BottomTabNavigation() {
         return assets.image.png.iconPending;
       case 'pending-focus':
         return assets.image.png.iconPendingFocus;
+      case 'reports':
+        return assets.image.png.iconReports;  
+      case 'reports-focus':
+        return assets.image.png.iconReportsFocus;    
       default:
         return null;
     }

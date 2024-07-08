@@ -63,7 +63,7 @@ export function DashboardScreen() {
                 <View style={styles.header}>
                     <View style={styles.profile}>
                         <View style={styles.containerProfile}>
-                            <Pressable style={styles.goProfile}>
+                            <Pressable onPress={() => navigation.navigate("ProfileScreen")} style={styles.goProfile}>
                                 <Image alt='profile' style={styles.imageProfile} resizeMode="cover" source={assets.image.png.profile} />
                             </Pressable>
                         </View>

@@ -1,6 +1,6 @@
 import { View, FlatList, StyleSheet } from 'react-native';
 import React from 'react';
-import { ItemService } from '../../components/core/ItemService';
+import { ItemService } from '../../components/core/items/ItemService';
 import { Header } from '../../components/core/Header';
 
 export function ServicesScreen() {
@@ -15,7 +15,6 @@ export function ServicesScreen() {
     ];
 
     const search = (search) => {
-        console.log("tiene buscador");
     };
 
     return (

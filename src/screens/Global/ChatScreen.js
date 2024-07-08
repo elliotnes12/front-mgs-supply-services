@@ -17,7 +17,7 @@ export function ChatScreen() {
 
   return (
     <>
-      <View style={{ display: "flex", flex: 1, backgroundColor: "#f0f0f0" }}>
+      <View style={{ display: "flex", flex: 1, backgroundColor: "red" }}>
 
         <HeaderChat userName={userName} />
 

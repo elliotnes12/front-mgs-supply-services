@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView, TextInput, TouchableOpacity, ActivityIndicator, View, Text } from "react-native";
+import { Image, SafeAreaView, TextInput, TouchableOpacity, View, Text } from "react-native";
 import { useAuth } from "../../Auth/hooks";
 import { useFormik } from "formik";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
-import CustomModal from "../../../components/core/Modal/Modal";
 import { ENV } from "../../../utils";
 import { initialValues, validationSchema } from "../forms/Settings.forms";
 import { styles } from "../styles/settings.styles";
@@ -173,9 +171,6 @@ export function SettingsScreen() {
         </TouchableOpacity>
       </SafeAreaView>
 
-      <CustomModal isVisible={isModalVisible} onClose={closeModal}>
-        <Text style={styles.errorlogin}>Modal Message</Text>
-      </CustomModal>
     </View>
   );
 }

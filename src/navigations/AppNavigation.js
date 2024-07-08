@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   CreateService,
   ImageFullScreen,
@@ -16,12 +16,16 @@ import { BottomTabNavigation } from './ButtonTabNavigation/BottomTabNavigation';
 import { ChatScreen } from '../screens/Global/ChatScreen';
 import { ChatScreenSupervisor } from '../screens/Global/ChatScreenSupervisor';
 import { ServicesScreen } from '../screens/Global/ServicesScreen';
+import { ChatContactsScreenEmployee } from '../screens/Global/ChatContactsScreenEmployee';
+import { SettingsScreen } from '../modules/Settings';
+
+
 initSockets();
 
 const Stack = createNativeStackNavigator();
 
 export function AppNavigation() {
- 
+
 
   return (
     <Stack.Navigator >
@@ -42,6 +46,21 @@ export function AppNavigation() {
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
 
+
+        <Stack.Screen
+          name={"ProfileScreen"}
+          component={SettingsScreen}
+          options={{ headerShown: false }}
+        />
+
+
+
+        <Stack.Screen
+          name={screens.tab.chats.chatContactsScreenEmployee}
+          component={ChatContactsScreenEmployee}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name={screens.tab.chats.chatScreenCustomer}
           component={ChatScreenSupervisor}
@@ -54,7 +73,7 @@ export function AppNavigation() {
           options={{ headerShown: false }}
         />
 
-         <Stack.Screen
+        <Stack.Screen
           name={screens.tab.services.root}
           component={ServicesScreen}
           options={{ headerShown: false }}

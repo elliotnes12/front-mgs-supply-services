@@ -5,53 +5,86 @@ import { useNavigation } from '@react-navigation/native';
 import { assets } from '../../assets';
 import { styles } from "./styles/HeaderChat.styles";
 import { stylesGlobal } from '../../modules/styles/global.style';
+import { headers } from '../../utils';
+import { Color } from '../../utils/constantsStyle';
 
-export function Header({ search, title, subtitle, goBack }) {
+export function Header({ search, title, subtitle, goBack, headerType,totalContacts }) {
     const navigation = useNavigation();
 
     return (
-        <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.header}>
-            <SafeAreaView style={styles.header__content}>
-                {goBack &&
-                    <>
+        <>
+            {!headerType &&
 
-                        <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 35, height: 35, marginRight: 10 }}>
-                            <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.flechaizquierda} />
-                        </TouchableOpacity>
+                <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.header}>
+                    <SafeAreaView style={styles.header__content}>
+                        {goBack &&
+                            <>
 
-                    </>
-                }
+                                <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 35, height: 35, marginRight: 10 }}>
+                                    <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.flechaizquierda} />
+                                </TouchableOpacity>
 
-                <View style={stylesGlobal.itemVertical}>
-                    <Text style={styles.title}>{title}</Text>
-                    {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+                            </>
+                        }
+
+                        <View style={stylesGlobal.itemVertical}>
+                            <Text style={styles.title}>{title}</Text>
+                            {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+                        </View>
+
+                        {search &&
+                            <>
+                                <TouchableOpacity style={[stylesGlobal.imageMin, { right: 20 }]}>
+                                    <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
+                                </TouchableOpacity>
+
+                            </>
+                        }
+
+
+                        <View style={[stylesGlobal.itemHorizontal, styles.globalSearch]}>
+                            <View style={[stylesGlobal.itemHorizontal, styles.containerSearch]}>
+                                <View style={stylesGlobal.imageMin}>
+                                    <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconLupa} />
+                                </View>
+                                <TextInput style={{ flex: 1 }} />
+                            </View>
+                            <TouchableOpacity style={styles.btnSearch}>
+                                <View style={[stylesGlobal.imageMin]}>
+                                    <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendarSearch} />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+
+                    </SafeAreaView>
+                </LinearGradient>
+
+            }
+
+            {headerType == headers.HEADER_CONTACT &&
+
+                <View  style={[styles.header,{backgroundColor:"#fff",borderBottomWidth:0.4,borderBottomColor:"#ccc"}]}>
+                    <SafeAreaView style={styles.headerContacts__content}>
+                        {goBack &&
+                            <>
+
+                                <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 30, height: 30, marginRight: 10 }}>
+                                    <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconGoBack} />
+                                </TouchableOpacity>
+
+                            </>
+                        }
+
+                        <View style={[stylesGlobal.itemVertical]}>
+                            <Text style={styles.titleContact}>{title}</Text>
+                        </View>
+                        <Text style={styles.totalContacts}>{totalContacts} contacts</Text>
+                    
+                    </SafeAreaView>
                 </View>
 
-                {search &&
-                    <>
-                        <TouchableOpacity style={[stylesGlobal.imageMin, { right: 20 }]}>
-                            <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
-                        </TouchableOpacity>
+            }
 
-                    </>
-                }
-
-
-                <View style={[stylesGlobal.itemHorizontal, styles.globalSearch]}>
-                    <View style={[stylesGlobal.itemHorizontal, styles.containerSearch]}>
-                        <View style={stylesGlobal.imageMin}>
-                            <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconLupa} />
-                        </View>
-                        <TextInput style={{ flex: 1 }} />
-                    </View>
-                    <TouchableOpacity style={styles.btnSearch}>
-                        <View style={[stylesGlobal.imageMin]}>
-                            <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendarSearch} />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-
-            </SafeAreaView>
-        </LinearGradient>
+        </>
     );
 }

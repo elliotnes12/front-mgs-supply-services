@@ -13,7 +13,8 @@ export function ReportsNavigation(){
               ...styles.stackNavigationStyles
             }
          }>
-            <Stack.Screen component={ReportsScreen} name={screens.tab.reports.root} />
+            <Stack.Screen component={ReportsScreen} 
+            options={{headerShown:false}} name={screens.tab.reports.root} />
         </Stack.Navigator>
     )
 }

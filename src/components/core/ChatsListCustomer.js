@@ -49,14 +49,11 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
             return;
         }
 
-
-        console.log("Subscribing to channel:", `${chat?.idChat}_notify`);
         
         socket.emit("subscribe", `${chat?.idChat}_notify`);
         socket.on("message_notify", newMessage);
 
         return () => {
-            console.log("Unsubscribing from channel:", `${chat?.idChat}_notify`);
             socket.off("message_notify", newMessage);
         };
     }, [chat.idChat]);

@@ -1,3 +1,13 @@
+
+
+export const fontFamily = {
+    fontMedium: "Poppins_500Medium",
+    fontBold:"Poppins_700Bold",
+    fontSemiBold:"Poppins_600SemiBold",
+    fontLight:"Poppins_300Light",
+    fontRegular:"Poppins_400Regular"
+}
+
 /* font sizes */
 export const FontSize = {
     headline16_size: 16,

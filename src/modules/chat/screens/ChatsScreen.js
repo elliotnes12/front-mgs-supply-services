@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { assets } from "../../../assets";
 import { useAuth } from '../../Auth/hooks';
 import { styles } from "../styles/chatsScreen.styles";
-import { stylesGlobal } from '../../styles/global.style';
 import { screens } from '../../../utils';
 import { User } from '../../../api/user';
 import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
-import { getIcon } from '../../../utils/util';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Header } from '../../../components/core/Header';
 import { ChatItem } from '../../../components/core/ChatItem';
 

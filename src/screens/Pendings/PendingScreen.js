@@ -89,7 +89,7 @@ export function PendingScreen() {
     return (
         <>
             <Header title={"Pendings"} />
-            <View style={{ flexGrow: 1, justifyContent: "center", flexDirection: "row", alignItems: "center", paddingHorizontal: 24 }}>
+            <View style={{ flexGrow: 1, justifyContent: "center", flexDirection: "row", paddingHorizontal: 24 }}>
                 {loading && <LoadingScreen />}
                 {!loading && tasks.length > 0 && (
                     <FlatList

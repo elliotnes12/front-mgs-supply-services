@@ -3,23 +3,29 @@ import { Color, FontSize } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
     header: {
-        height: 110,
+        height: 120,
         display: "flex",
         width: "100%",
         alignItems: "flex-start",
         justifyContent: "center",
         paddingLeft: 20,
-        paddingTop: 20,
-        borderBottomRightRadius:10,
-        borderBottomLeftRadius:10,
+        paddingTop: 35,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
         position: "relative",
-        zIndex:24
     },
     header__content: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        paddingTop:10
+        justifyContent: "space-around",
+        paddingTop: 10
+    },
+    headerContacts__content: {
+        display: "flex",
+        justifyContent: "flex-start",
+        flexDirection: "row",
+        paddingTop: 10
     },
     title: {
         color: "#fff",
@@ -27,41 +33,74 @@ export const styles = StyleSheet.create({
         fontFamily: "Poppins_700Bold",
         lineHeight: 29,
         textAlign: "left",
-        color: Color.blanco,
+        fontWeight: "500",
+    },
+    titleContact: {
+        color: Color.gray1,
+        fontSize: 17,
+        fontFamily: "Poppins_700Bold",
+        lineHeight: 29,
+        textAlign: "left",
         fontWeight: "500",
     },
     subtitle: {
         color: "#fff",
         fontFamily: "Poppins_400Regular",
         fontSize: 15,
-        marginTop:-5
+        marginTop: -5
 
     },
     containerSearch: {
         backgroundColor: "#fff",
         paddingHorizontal: 15,
         height: 52,
-        borderRadius:10,
-        borderWidth:1,
-        borderColor:"#ABABAB"
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "#ABABAB"
     },
     globalSearch: {
         width: "90%",
         position: "absolute",
         left: "2.5%",
         bottom: -70,
-        display:"none"
+        display: "none"
     },
-    btnSearch:{
+    btnSearch: {
+        height: "100%",
+        width: 61,
+        paddingLeft: 7,
+        borderRadius: 10,
+        backgroundColor: "#CEDC39",
+        marginLeft: "2.5%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row"
+    },
+    profile__name: {
+        fontFamily: "Poppins_500Medium",
+        fontSize: 17,
+        lineHeight: 20,
+        fontWeight: "600",
+        color: "#fff"
+    },
+    profile__content: {
+        fontFamily: "Poppins_500Medium",
+        color: "#fff",
+        fontSize: 13
+    },
+    profile__image: {
+        padding: 3,
+        backgroundColor: "#fff",
+        borderRadius: 30,
+        marginRight: 10,
+
+    },
+    totalContacts: {
+        color: "#46526a",
+        textAlign: "left",
         height:"100%",
-        width:61,
-        paddingLeft:7,
-        borderRadius:10,
-        backgroundColor:"#CEDC39",
-        marginLeft:"2.5%",
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
-        flexDirection:"row"
+        paddingTop:2,
+        flex:2
     }
 });

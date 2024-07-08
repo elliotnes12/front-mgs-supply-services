@@ -6,8 +6,6 @@ import { Image } from "native-base";
 import React, { useState } from "react";
 import { ActivityIndicator, Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { assets } from "../../../assets";
-import { LoadingScreen } from "../../../components/core/LoadingScreen";
-import CustomModal from "../../../components/core/Modal/Modal";
 import { screens } from "../../../utils";
 import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/LoginForm.form";
@@ -134,9 +132,7 @@ export function LoginScreen() {
          
         </View>
 
-      <CustomModal isVisible={isModalVisible} onClose={closeModal}>
-        <Text style={styles.errorlogin}>Invalid username or Password</Text>
-      </CustomModal>
+      
       
     </LayoutAuth>
   );

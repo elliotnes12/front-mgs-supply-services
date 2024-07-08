@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Color } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
     chatItem: {
@@ -15,7 +16,15 @@ export const styles = StyleSheet.create({
       height: 30,
       overflow:"hidden",
       borderRadius:30,
-      backgroundColor:"purple"
+    },
+    chatItem__snImg:{
+      width: 50,
+      height: 50,
+      borderRadius: 30,
+      backgroundColor: "#7DA74D",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
     imageMin__img:{
       borderRadius:"50%"
@@ -58,7 +67,7 @@ export const styles = StyleSheet.create({
       top:5
     },
     totalMessageContainer: {
-      backgroundColor: '#7DA74D',
+      backgroundColor: '#CEDC39',
       borderRadius: 15,
       width: 30,
       height: 30,
@@ -72,7 +81,7 @@ export const styles = StyleSheet.create({
     totalMessage: {
       fontFamily: 'Poppins_400Regular',
       fontSize: 12,
-      color: '#fff',
+      color: Color.gray1,
     },
     noChats: {
       flex:1,

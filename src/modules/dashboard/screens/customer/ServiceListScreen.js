@@ -7,7 +7,7 @@ import { FlatList } from 'native-base';
 import { getIcon } from '../../../../utils/util';
 import { screens, tabIds } from '../../../../utils';
 import { useNavigation } from '@react-navigation/native';
-import { ItemService } from '../../../../components/core/ItemService';
+import { ItemService } from '../../../../components/core/items/ItemService'; 
 
 
 const data = [

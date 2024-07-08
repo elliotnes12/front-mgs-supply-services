@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, Image, TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { assets } from "../../../assets";
 import { useAuth } from '../../Auth/hooks';
 import { styles } from "../styles/chatsScreen.employees.styles";
 import { stylesGlobal } from '../../styles/global.style';
-import { screens } from '../../../utils';
 import { User } from '../../../api/user';
 import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { ChatItem } from '../../../components/core/ChatItem';
-import { LinearGradient } from 'expo-linear-gradient';
+import { HeaderChats } from '../../../components/core/HeaderChats';
+import { Color } from '../../../utils/constantsStyle';
+import { screens } from '../../../utils';
 
 export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
@@ -22,9 +22,21 @@ export function ChatsScreenEmployee() {
   const navigation = useNavigation();
   const { userInfo, isCustomer, accessToken, user } = useAuth();
   const { name } = userInfo;
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [options] = useState(['New group','settings']); 
+
   const userController = new User();
   const chatController = new Chat();
 
+
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setIsMenuVisible(false);
+      };
+    }, [])
+  );
   useEffect(() => {
     (async () => {
       const { data } = await userController.getAll(accessToken);
@@ -39,7 +51,8 @@ export function ChatsScreenEmployee() {
       (async () => {
         try {
           const response = await chatController.getAll(accessToken);
-          if (response && response.data) {
+    
+          if (response && response?.data) {
             const result = response.data.sort((a, b) => {
               const dateA = new Date(a.last_message_chat);
               const dateB = new Date(b.last_message_chat);
@@ -48,7 +61,7 @@ export function ChatsScreenEmployee() {
             setChats(result);
           }
         } catch (error) {
-          console.error(error);
+          setChats([])
         } finally {
           setLoading(false);
         }
@@ -69,55 +82,52 @@ export function ChatsScreenEmployee() {
     if (!isCustomer) setFilteredUsers(users);
   }, [isCustomer, users]);
 
-  const createChat = (idUser, name) => {
-    (async () => {
-      try {
-        await chatController.create(accessToken, user._id, idUser);
-        navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: idUser, userName: name });
-      } catch (error) {
-        console.error(error);
-      }
-    })();
+  const handleQuestionSelect = (question) => {
+    setIsMenuVisible(false);
   };
 
-  const handleSearch = (text) => {
-    setSearchQuery(text);
-    setFilteredUsers(users.filter(user => user.name === text));
+  const fnMenu = () => {
+    setIsMenuVisible(true);
+  };
+
+  const handleClickOutside = () => {
+    if (isMenuVisible) {
+      setIsMenuVisible(false);
+    }
   };
 
   return (
-    <View style={styles.background}>
-      <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.chats_header}>
-        <SafeAreaView style={styles.chats_header__content}>
-          <Text style={{ color: "#fff", fontFamily: "Poppins_600SemiBold" }}>{"mgs supply & services".toUpperCase()}</Text>
-          <View style={[styles.chatsOptions, stylesGlobal.itemHorizontal]} >
-            <TouchableOpacity style={stylesGlobal.imageMin}>
-              <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoLupaWhite} />
-            </TouchableOpacity>
-            <TouchableOpacity style={stylesGlobal.imageMin}>
-              <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconoMenuVertical} />
-            </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={handleClickOutside}>
+      <View style={styles.background}>
+        <HeaderChats fnMenu={fnMenu} />
+        {isMenuVisible && (
+          <View style={styles.menuChat}>
+            {options.map((option, index) => (
+              <TouchableOpacity style={index != options.length -1 ? styles.menuChat__item : ''} key={index} onPress={() => handleQuestionSelect(option)}>
+                <Text style={styles.menuChat__option}>{option}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
-        </SafeAreaView>
-      </LinearGradient>
-      <View style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 0 }}>
-          <View style={styles.recentChatsContainer}>
-            {loading ? <LoadingScreen /> : (
-              chats.length > 0 ? (
-                chats.map(chat => (
-                  <ChatItem upTopChat={upTopChat} key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
-                ))
-              ) : (
-                <View style={styles.noChats}><Text style={styles.noChatsText}>Empty</Text></View>
-              )
-            )}
-          </View>
-        </ScrollView>
+        )}
+        <View style={{ flex: 1 }}>
+          <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 0 }}>
+            <View style={styles.recentChatsContainer}>
+              {loading ? <LoadingScreen /> : (
+                chats.length > 0 ? (
+                  chats.map(chat => (
+                    <ChatItem upTopChat={upTopChat} setMenu key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
+                  ))
+                ) : (
+                  <View style={styles.noChats}><Text style={styles.noChatsText}>Empty</Text></View>
+                )
+              )}
+            </View>
+          </ScrollView>
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate(screens.tab.chats.chatContactsScreenEmployee) } style={styles.addChat}>
+          <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconAddChat} />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.addChat}>
-        <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconAddChat} />
-      </TouchableOpacity>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }

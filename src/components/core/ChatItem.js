@@ -45,18 +45,13 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
 
     useEffect(() => {
         if (!socket) {
-            console.error("Socket not initialized");
             return;
         }
 
-
-        console.log("Subscribing to channel:", `${chat?.idChat}_notify`);
-        
         socket.emit("subscribe", `${chat?.idChat}_notify`);
         socket.on("message_notify", newMessage);
 
         return () => {
-            console.log("Unsubscribing from channel:", `${chat?.idChat}_notify`);
             socket.off("message_notify", newMessage);
         };
     }, [chat.idChat]);
@@ -66,7 +61,7 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
             key={chat?.idChat}
             onPress={() =>
                 navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, {
-                    userId: chat.idChat,
+                    chatId: chat.idChat,
                     userName: chat.name,
                 })
             }
@@ -78,17 +73,9 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
                     </View>
                 ) : (
                     <View
-                        style={{
-                            width: 50,
-                            height: 50,
-                            borderRadius: 30,
-                            backgroundColor: "#CEDC39",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
+                        style={styles.chatItem__snImg}
                     >
-                        <Text style={{ color: "#000", fontSize: 16 }}>{chat?.name?.substring(0, 2).toUpperCase()}</Text>
+                        <Text style={{ color: "#fff", fontSize: 16 }}>{chat?.name?.substring(0, 2).toUpperCase()}</Text>
                     </View>
                 )}
                 <View style={styles.chatTextContainer}>

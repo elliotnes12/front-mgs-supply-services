@@ -25,7 +25,6 @@ export class User {
   
   async getAllSupport(accessToken){
     try {
-      console.log(accessToken)
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USER_SUPPORT}`;
       const params = {
         headers: {
@@ -47,7 +46,6 @@ export class User {
 
   async getAll(accessToken){
     try {
-      console.log(accessToken)
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USER}`;
       const params = {
         headers: {

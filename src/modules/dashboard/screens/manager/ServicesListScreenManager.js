@@ -2,12 +2,11 @@ import * as React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import { LinearGradient } from 'expo-linear-gradient';
-import { assets } from '../../../../assets';
 import { styles } from './ServiceListScreenManager.styles';
 import { screens, tabIds } from '../../../../utils';
 import { getIcon } from '../../../../utils/util';
-import { stylesGlobal } from '../../../styles/global.style';
 import { useNavigation } from '@react-navigation/native';
+import { ItemServiceManager } from '../../../../components/core/items/ItemServiceManager';
 
 const data = [
   { title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'progress' },
@@ -18,89 +17,24 @@ const data = [
 
 const initialLayout = { width: "100%" };
 
-const renderStatus = (status) => {
-  switch (status) {
 
-    case 'progress':
-      return (
-        <>
-          <View style={[stylesGlobal.itemHorizontal]}>
-            <Text style={styles.item__estatus}></Text>
-            <View style={[styles.estatus, styles.aprobado]} >
-              <Text style={{ color: "#fff" }}>in progress</Text>
-            </View>
-          </View>
-        </>
-      )
-    case 'cancel':
-      return (
-        <View style={[stylesGlobal.itemHorizontal]}>
-          <Text style={styles.item__estatus}></Text>
-          <View style={[styles.estatus, styles.canceled]} >
-            <Text style={{ color: "#fff" }}>Canceled</Text>
-          </View>
-        </View>
-      )
-    case 'success':
-      return (
-        <View style={[stylesGlobal.itemHorizontal]}>
-          <Text style={styles.item__estatus}></Text>
-          <View style={[styles.estatus, styles.success]} >
-            <Text style={{ color: "#fff" }}>Success</Text>
-          </View>
-        </View>
-      )
-  }
-}
+const RenderLastServices = ({ navigation }) => (
+  <>
 
-const renderItem = ({ item }) => {
-  return (
-    <>
-      <View style={styles.item}>
-        <View style={styles.item__img}>
-          <Image alt='categoria' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.categoriaUno} />
-        </View>
-        <View style={styles.item__text}>
-          <Text style={styles.item__title}>{item.title}</Text>
-          <Text style={styles.item_subtitle}>{item.subTitle}</Text>
+    <View style={styles.options}>
+      <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
+        <Text style={styles.options__all}>View All</Text>
+      </TouchableOpacity>
+    </View>
 
-          <View style={styles.item__date}>
-          <View style={[stylesGlobal.imageSmall]}>
-              <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
-            </View>
-            <Text style={styles.item__datetext} >{item.date}</Text>
-          </View>
-
-          {renderStatus(item.status)}
-
-          <TouchableOpacity style={styles.item__flechaContainer}>
-            <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </>
-  )
-}
-
-
-const RenderLastServices = ({navigation}) => (
- <>
- <View style={styles.options}>
-  <Text style={styles.options__title}></Text>
-  <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
-    <Text style={styles.options__all}>View All</Text>
-  </TouchableOpacity>
- </View>  
-
-  
-   <FlatList
+    <FlatList
       data={data}
-      renderItem={renderItem}
+      renderItem={ItemServiceManager}
       keyExtractor={item => item.id}
       contentContainerStyle={styles.flatListContainer}
     />
-  
- </>
+
+  </>
 );
 
 
@@ -111,30 +45,28 @@ const RenderLastProducts = () => (
 );
 
 
-
-
 export const ServiceListScreenManager = () => {
   const [index, setIndex] = React.useState(0);
- 
+
   const navigation = useNavigation();
 
   const routes = [
     { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
     { key: tabIds.TAB_ID_PRODUCTS, title: 'products', label: 'Orders' },
-    
+
   ];
-    
+
 
   const renderScene = ({ route }) => {
     switch (route.key) {
       case tabIds.TAB_ID_SERVICES:
-        return <RenderLastServices navigation={navigation}/>;
+        return <RenderLastServices navigation={navigation} />;
       case tabIds.TAB_ID_PRODUCTS:
         return <RenderLastProducts />;
       default:
         return null;
     }
-    
+
   };
 
   const renderTabBar = (props) => (
@@ -153,7 +85,7 @@ export const ServiceListScreenManager = () => {
             style={styles.gradient}
           >
 
-            <Image style={styles.iconServices} resizeMode="cover" source={getIcon(route.key+"-focus")} />
+            <Image style={styles.iconServices} resizeMode="cover" source={getIcon(route.key + "-focus")} />
             <Text style={styles.tabTextFocused}>
               {route.label}
             </Text>
@@ -163,12 +95,12 @@ export const ServiceListScreenManager = () => {
             <Image style={styles.iconServices} resizeMode="cover" source={getIcon(route.key)} />
             <Text style={styles.tabText}>
               {route.label}
-            </Text>    
-          </View>   
-           
+            </Text>
+          </View>
+
         )
       )}
-      
+
     />
   );
 
@@ -180,8 +112,6 @@ export const ServiceListScreenManager = () => {
         onIndexChange={setIndex}
         initialLayout={initialLayout}
         renderTabBar={renderTabBar}
-
-        
       />
     </View>
   );

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Color, FontSize } from "../../../utils/constantsStyle";
 
 
 export const styles = StyleSheet.create({
@@ -94,7 +95,52 @@ export const styles = StyleSheet.create({
       alignItems:"center",
       display:"flex",
       padding:10
-   }
+   },
+   btnCreateService:{
+      width: 166,
+      lineHeight: 24,
+      borderRadius:20,
+      fontSize: FontSize.headline16_size,
+      padding:7,
+      marginTop:5
+   },
+   btnCreateService__text:{
+      textAlign:"center",
+      color:"#fff"
+   },
+   menuChat: {
+      position: 'absolute',
+      width: 140,
+      top: 110,
+      zIndex: 8,
+      right: 30,
+      borderWidth: 0.4,
+      borderColor: Color.gray1,
+      backgroundColor: '#fff',
+      borderRadius: 16,
+      overflow: 'hidden',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 5,
+      },
+      elevation: 30,
+      shadowRadius: 10,
+      shadowColor: Color.gray1,
+    },
+    menuChat__item: {
+      borderBottomWidth: 0.4,
+      borderBottomColor: Color.gray1
+    },
+    menuChat__option: {
+      padding: 10,
+      fontFamily:'Poppins_500Medium',
+      fontSize:12,
+      backgroundColor: "#fff",
+      marginBottom: 5,
+      paddingLeft:15
+    }
+  
 
 
 })

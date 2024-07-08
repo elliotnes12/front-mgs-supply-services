@@ -87,7 +87,6 @@ export function AuthProvider(props) {
             setLoading(false);
 
         } catch (error) {
-            console.log("whoisit" + isCustomer)
             setLoading(false)
         }
     };

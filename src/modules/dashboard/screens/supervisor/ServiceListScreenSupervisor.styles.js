@@ -146,7 +146,7 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   tabViewContainer: {
-    flex:1,
+    flexGrow:1,
     width: "100%",
   },
   fecha: {
