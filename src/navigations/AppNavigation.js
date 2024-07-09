@@ -62,7 +62,7 @@ export function AppNavigation() {
         />
 
         <Stack.Screen
-          name={screens.tab.chats.chatScreenCustomer}
+          name={screens.tab.chats.ChatScreenSupervisor}
           component={ChatScreenSupervisor}
           options={{ headerShown: false }}
         />

@@ -65,7 +65,7 @@ export function ChatsScreen() {
     (async () => {
       try {
         await chatController.create(accessToken, user._id, idUser);
-        navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, { userId: idUser, userName: name });
+        navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.ChatScreenSupervisor, { userId: idUser, userName: name });
       } catch (error) {
         console.error(error);
       }

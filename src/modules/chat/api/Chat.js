@@ -21,11 +21,11 @@ export class Chat {
             const response = await fetch(url, params);
             const result = await response.json();
 
-            if (response.status != 200 && response.status != 201) throw result;
+            if (result?.meta?.code != 200 && result?.meta?.code != 201) throw result;
 
             return result;
         } catch (error) {
-            throw error;
+           console.log(error)
         }
     }
 

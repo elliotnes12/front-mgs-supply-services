@@ -80,7 +80,7 @@ export class ChatMessage {
       const response = await fetch(url, params);
       const result = await response.json();
 
-      if (response.status !== 201) throw result;
+      if (result.meta.code !== 200) throw result;
 
       return true;
     } catch (error) {

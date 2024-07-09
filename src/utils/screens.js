@@ -27,7 +27,7 @@ const chats = {
   chatsScreen: "ChatsScreen",
   createChatScreen: "CreateChatScreen",
   chatScreen: "ChatScreen",
-  chatScreenCustomer: "ChatScreenSupervisor",
+  ChatScreenSupervisor: "ChatScreenSupervisor",
   chatsScreenEmployee: "ChatsScreenEmployee",
   chatContactsScreenEmployee: "ChatsContactsScreenEmployee"
 };

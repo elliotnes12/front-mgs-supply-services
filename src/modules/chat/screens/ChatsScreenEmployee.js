@@ -17,7 +17,7 @@ export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const { userInfo, isCustomer, accessToken, user } = useAuth();
@@ -96,6 +96,8 @@ export function ChatsScreenEmployee() {
     }
   };
 
+
+  if(!chats) return <LoadingScreen />;
   return (
     <TouchableWithoutFeedback onPress={handleClickOutside}>
       <View style={styles.background}>
@@ -112,7 +114,7 @@ export function ChatsScreenEmployee() {
         <View style={{ flex: 1 }}>
           <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 0 }}>
             <View style={styles.recentChatsContainer}>
-              {loading ? <LoadingScreen /> : (
+              {(
                 chats.length > 0 ? (
                   chats.map(chat => (
                     <ChatItem upTopChat={upTopChat} setMenu key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />

@@ -62,7 +62,7 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
         <TouchableOpacity 
             key={chat?.idChat}
             onPress={() =>
-                navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.chatScreenCustomer, {
+                navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.ChatScreenSupervisor, {
                     userId: chat.idChat,
                     userName: chat.name,
                 })
