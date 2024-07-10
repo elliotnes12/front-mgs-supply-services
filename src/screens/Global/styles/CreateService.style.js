@@ -2,8 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
-   container: {
-   },
+ 
    header: {
       height: 155,
       display: "flex",

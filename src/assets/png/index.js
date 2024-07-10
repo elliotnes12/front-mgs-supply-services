@@ -64,7 +64,8 @@ const png = {
   iconCreateGroup:require("./icons/icon-add-group.png"),
   iconReports:require("./icons/icon-reports.png"),
   iconReportsFocus:require("./icons/icon-reports-focus.png"),
-  iconCancel:require("./icons/icon-cancel.png")
-};
+  iconCancel:require("./icons/icon-cancel.png"),
+  iconInfo:require("./icons/icon-info.png")
+}
 
 export { png };

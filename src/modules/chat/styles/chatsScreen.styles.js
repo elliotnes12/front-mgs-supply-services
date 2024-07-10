@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Color, fontFamily } from "../../../utils/constantsStyle";
 
 
 export const styles = StyleSheet.create({
@@ -109,9 +110,10 @@ export const styles = StyleSheet.create({
       marginBottom: 20,
     },
     chatsTitle: {
-      fontFamily: 'Poppins_700Bold',
-      fontSize: 19,
-      color: '#333',
+      fontFamily: fontFamily.fontSemiBold,
+      fontSize: 16,
+      marginBottom:10,
+      color: Color.gray1,
   
     },
     allChatsLink: {

@@ -1,14 +1,16 @@
+import React, { useState } from "react";
+import { ActivityIndicator, Image, Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFormik } from "formik";
-import React, { useState } from "react";
-import { ActivityIndicator, Image, Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
+import Modal from 'react-native-modal';
 import { getIcon } from "../../../utils/util";
 import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/RegisterForm.form";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/RegisterScreen.styles";
+import { Alert } from "../../../components/core/Modal/Alert";
 
 const authController = new Auth();
 
@@ -17,23 +19,20 @@ export function RegisterScreen() {
   const [userType, setUserType] = useState("customer");
   const [showIdInput, setShowIdInput] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [hide, setHide] = useState(true); // Estado para ocultar/mostrar contraseña
+  const [confirmHide, setConfirmHide] = useState(true); // Estado para ocultar/mostrar confirmación de contraseña
+  const [showAlert,setShowAlert] = useState(false)
 
   const handleRadioChange = (newValue) => {
     setUserType(newValue);
-    setShowIdInput(newValue === "company")
+    setShowIdInput(newValue === "company");
     if (newValue === "customer") {
       formik.setFieldValue("employeeNumber", undefined);
     }
     formik.setFieldValue("userType", newValue);
-  }
-
-
-
-
-  const [hide, setHide] = useState(true);
-  const [confirmHide, setConfirmHide] = useState(true);
-  const [message, setMessage] = useState("");
-  const [isModalVisible, setModalVisible] = useState(false);
+  };
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -42,34 +41,25 @@ export function RegisterScreen() {
     onSubmit: async (formValue, { resetForm }) => {
       setLoading(true);
       try {
-        await authController.register(formValue.email, formValue.password, formValue.employeeNumber,formValue.name);
+        await authController.register(formValue.email, formValue.password, formValue.employeeNumber, formValue.name);
         setLoading(false);
         setMessage("User registered successfully");
-        toggleModal();
         resetForm();
       } catch (error) {
         setLoading(false);
         setMessage(error.meta.message);
-        toggleModal();
+        setShowAlert(true)
       }
     },
   });
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  const closeModal = () => {
-    if (isModalVisible) {
-      setModalVisible(false);
-    }
-  };
-
   const handleLoginNowPress = () => {
-    // Navegar a la pantalla de inicio de sesión
-    // Suponiendo que tienes una pantalla llamada LoginScreen
     navigation.navigate('LoginScreen');
   };
+
+  const closeAlert = () =>{
+     setShowAlert(prevent => !prevent);
+  }
 
   return (
     <LayoutAuth userType={userType}>
@@ -92,9 +82,7 @@ export function RegisterScreen() {
                 <View style={{ width: 26, height: 26, marginRight: 10 }}>
                   <Image style={{ width: "100%", height: "100%" }} resizeMode="contain" source={getIcon("icon-profile-gray")} />
                 </View>
-
                 <Text style={styles.buttonText}>Customer</Text>
-
               </View>
             )}
           </TouchableOpacity>
@@ -109,14 +97,11 @@ export function RegisterScreen() {
               </LinearGradient>
             ) : (
               <View style={styles.registerButton}>
-
                 <View style={{ width: 26, height: 26, marginRight: 10 }}>
                   <Image style={{ width: "100%", height: "100%" }} resizeMode="contain" source={getIcon("icon-maletin-gray")} />
                 </View>
                 <Text style={styles.buttonText}>Company</Text>
-
               </View>
-
             )}
           </TouchableOpacity>
         </View>
@@ -201,9 +186,6 @@ export function RegisterScreen() {
                 autoCapitalize="none"
                 value={formik.values.employeeNumber}
                 onChangeText={(text) => formik.setFieldValue("employeeNumber", text)}
-                style={styles.input}
-                onFocus={() => setIsIdEmployeeFocused(true)}
-                onBlur={() => setIsIdEmployeeFocused(false)}
               />
             </View>
           </View>
@@ -211,7 +193,7 @@ export function RegisterScreen() {
 
         <Pressable onPress={formik.handleSubmit}>
           <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.signUpButton}>
-          {loading && (
+            {loading && (
               <View style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0, justifyContent: "center", alignItems: "center" }}>
                 <ActivityIndicator size="small" animating={true} color="#fff" />
               </View>
@@ -226,8 +208,15 @@ export function RegisterScreen() {
               <Text style={styles.loginNowLink}> Login Now</Text>
             </TouchableOpacity>
           </Text>
-
         </View>
+
+        <Alert
+          show={showAlert}
+          setShowAlert={setShowAlert}
+          onClose={closeAlert}
+          type="info"
+          title={message}
+        />
       </View>
     </LayoutAuth>
   );

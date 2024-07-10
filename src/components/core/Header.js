@@ -8,7 +8,7 @@ import { stylesGlobal } from '../../modules/styles/global.style';
 import { headers } from '../../utils';
 import { Color } from '../../utils/constantsStyle';
 
-export function Header({ search, title, subtitle, goBack, headerType,totalContacts }) {
+export function Header({ search, title, subtitle, goBack, headerType, totalContacts,support }) {
     const navigation = useNavigation();
 
     return (
@@ -63,7 +63,7 @@ export function Header({ search, title, subtitle, goBack, headerType,totalContac
 
             {headerType == headers.HEADER_CONTACT &&
 
-                <View  style={[styles.header,{backgroundColor:"#fff",borderBottomWidth:0.4,borderBottomColor:"#ccc"}]}>
+                <View style={[styles.header, { backgroundColor: "#fff", borderBottomWidth: 0.4, borderBottomColor: "#ccc" }]}>
                     <SafeAreaView style={styles.headerContacts__content}>
                         {goBack &&
                             <>
@@ -78,8 +78,17 @@ export function Header({ search, title, subtitle, goBack, headerType,totalContac
                         <View style={[stylesGlobal.itemVertical]}>
                             <Text style={styles.titleContact}>{title}</Text>
                         </View>
-                        <Text style={styles.totalContacts}>{totalContacts} contacts</Text>
-                    
+                        {totalContacts &&
+                            <Text style={styles.totalContacts}>{totalContacts} contacts</Text>
+                        }
+
+                        {support &&
+                           <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 30, height: 30, marginRight: 10 }}>
+                           <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconSupport} />
+                       </TouchableOpacity>
+
+                        }
+
                     </SafeAreaView>
                 </View>
 

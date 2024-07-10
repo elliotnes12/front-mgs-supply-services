@@ -49,7 +49,23 @@ export function ChatScreenSupervisor() {
   };
 
   const handleQuestionSelect = (question) => {
-    setIsMenuVisible(false);
+    (async () => {
+
+      try {
+
+        await chatMessageController.sendText(
+          accessToken,
+          chatId,
+          question
+        );
+
+
+      } catch (error) {
+
+      }
+      setIsMenuVisible(false);
+    })()
+   
   };
 
   const handleClickOutside = () => {
@@ -72,7 +88,7 @@ export function ChatScreenSupervisor() {
       openCloseDelete();
       navigation.goBack();
     } catch (e) {
-      console.error(e); 
+      console.error(e);
     }
   };
 
@@ -95,7 +111,7 @@ export function ChatScreenSupervisor() {
         setMessages(response.data.messages);
       } catch (error) {
         setMessages([]);
-        console.error(error);  
+        console.error(error);
       }
     })();
   }, []);
@@ -207,10 +223,11 @@ export function ChatScreenSupervisor() {
 
       <AlertConfirm
         show={showDelete}
+        type={'info'}
         onClose={openCloseDelete}
-        textConfirm="Eliminar"
+        textConfirm="Delete"
         onConfirm={() => deleteChat()}
-        title="¿Estas seguro de que quieres eliminar el chat?"
+        message="Are you sure you want to delete the chat?"
         isDanger
       />
     </>

@@ -32,6 +32,9 @@ export const styled = (isMe) =>{
             fontFamily: fontFamily.fontLight,
             fontSize:12,
             marginTop:5
+        },
+        you:{
+            color:"#7DA74D"
         }
     })
 }

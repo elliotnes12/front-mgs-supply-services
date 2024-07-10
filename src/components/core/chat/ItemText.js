@@ -13,6 +13,9 @@ export function ItemText({message}) {
   return (
     <View style={styles.content}>
         <View style={styles.message}>
+            {isMe && 
+              <Text style={styles.you}>You</Text>
+            }
             <Text>{message.message}</Text> 
             <Text style={styles.time}>{message.createdAtFormatted}</Text>
         </View>

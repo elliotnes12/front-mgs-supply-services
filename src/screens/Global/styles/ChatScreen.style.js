@@ -33,9 +33,18 @@ export const styles = StyleSheet.create({
         justifyContent:"space-between",
         alignItems:"center",
         backgroundColor:"#fff",
-        paddingRight:15,
+        paddingHorizontal:20,
         borderRadius:20
      },
+     containerMessages:{
+      display: "flex", 
+      flexDirection: "row", 
+      height: 50, 
+      position: "absolute", 
+      bottom: 20, 
+      left: "5%", 
+      width: "90%", 
+    },
      mensaje__input:{
       flex:1,
       height:"100%"
@@ -139,8 +148,5 @@ export const styles = StyleSheet.create({
       backgroundColor: "#fff",
       marginBottom: 5,
       paddingLeft:15
-    }
-  
-
-
+    },
 })

@@ -25,7 +25,6 @@ export function BottomTabNavigation() {
     baseTabs = [
       { name: screens.tab.rootCustomer, title: 'Home', iconName: 'home' },
       { name: screens.tab.chats.root, title: 'Chats', iconName: 'chat' },
-      { name: 'boton-central', title: '', iconName: 'plus' },
       { name: screens.tab.products.root, title: 'Products', iconName: 'order' },
       { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
     ];

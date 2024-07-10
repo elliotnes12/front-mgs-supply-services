@@ -2,13 +2,17 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { stylesGlobal } from '../../modules/styles/global.style';
-import { styles } from "./styles/ChatItem.styles";
+import { styles } from "./styles/ChatItemCustomer.styles";
 import { isEmpty } from "lodash";
 import { screens, socket } from '../../utils';
 import { Chat } from '../../modules/chat/api/Chat';
 import { useAuth } from '../../modules/Auth/hooks';
 
 export function ChatItem({ chat, isCustomer, token, upTopChat }) {
+
+    console.log("Cual es el chat")
+    console.log(chat)
+
     const navigation = useNavigation();
     const [lastMessage, setLastMessage] = useState();
     const { user } = useAuth();
@@ -29,6 +33,7 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
     }
 
     useEffect(() => {
+          
         const fetchLastMessage = async () => {
             try {
                 const response = await chatController.getLastMessage(token, chat?.idChat);
@@ -45,9 +50,11 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
 
     useEffect(() => {
         if (!socket) {
+            console.error("Socket not initialized");
             return;
         }
 
+        
         socket.emit("subscribe", `${chat?.idChat}_notify`);
         socket.on("message_notify", newMessage);
 
@@ -73,9 +80,17 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
                     </View>
                 ) : (
                     <View
-                        style={styles.chatItem__snImg}
+                        style={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: 30,
+                            backgroundColor: "#CEDC39",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
                     >
-                        <Text style={{ color: "#fff", fontSize: 16 }}>{chat?.name?.substring(0, 2).toUpperCase()}</Text>
+                        <Text style={{ color: "#000", fontSize: 16 }}>{chat?.name?.substring(0, 2).toUpperCase()}</Text>
                     </View>
                 )}
                 <View style={styles.chatTextContainer}>
@@ -88,9 +103,6 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
                        {lastMessage?.createdAtFormatted}
                      </Text>
                      }
-                    <View style={styles.totalMessageContainer}>
-                        <Text style={styles.totalMessage}>2</Text>
-                    </View>
                 </View>
             </View>
         </TouchableOpacity>

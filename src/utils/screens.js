@@ -36,7 +36,7 @@ const services = {
   root: "ServicesScreen"
 }
 const products = {
-  root: "ProductScreen",
+  root: "ProductScreenRoot",
   productScreen: "ProductScreen"
 }
 const groups = {

@@ -16,7 +16,6 @@ export function AlertConfirm(props) {
   return (
     <AlertDialog isOpen={show} onClose={onClose}>
       <AlertDialog.Content>
-        <AlertDialog.CloseButton />
 
         <AlertDialog.Header style={styles.header}>
           <Text style={styles.titleText}>{title}</Text>

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Color, fontFamily } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
     chatItem: {
@@ -36,9 +37,9 @@ export const styles = StyleSheet.create({
       color: '#333',
     },
     chatItem__message: {
-      fontFamily: 'Poppins_400Regular',
+      fontFamily: fontFamily.fontRegular,
       fontSize: 12,
-      color: '#C4C4C4',
+      color: Color.gray1,
       flex:1,
     },
     chatContainerTime: {
@@ -50,10 +51,10 @@ export const styles = StyleSheet.create({
       borderBottomColor:"#8E8E93"
     },
     chatTime: {
-      fontFamily: 'Poppins_400Regular',
+      fontFamily: fontFamily.fontRegular,
       fontSize: 12,
       position:"absolute",
-      color: '#C4C4C4',
+      color: Color.gray1,
       right:15,
       top:5
     },

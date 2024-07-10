@@ -15,7 +15,7 @@ export const styles = new StyleSheet.create({
     backgroundColor: "#fff",
   },
   messageText: {
-    color: "#fff",
+    color: Color.gray2,
     opacity: 0.6,
   },
   footer: {

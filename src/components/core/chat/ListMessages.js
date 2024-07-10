@@ -23,7 +23,7 @@ export  function ListMessages({messages}) {
               if(message.type == 'TEXT'){
                 return <ItemText  key={message.id} message={message} />
               }
-              if(messsage.type == 'IMAGE'){
+              if(message.type == 'IMAGE'){
                 return <Text key={message.id} >IMAGE</Text>
               }
              
