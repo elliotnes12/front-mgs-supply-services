@@ -1,9 +1,13 @@
 import { StyleSheet } from 'react-native';
+import { Color, fontFamily } from '../../../utils/constantsStyle';
 
 export const styles = StyleSheet.create({
   background: {
     flexGrow: 1,
-    backgroundColor: "#fff",
+    height:"100%",
+    backgroundColor:"#fff",
+    paddingHorizontal:24,
+    paddingBottom:40
   },
   container: {
     paddingLeft: 24,
@@ -122,13 +126,12 @@ export const styles = StyleSheet.create({
     height: 150,
     width: 120,
     position: "absolute",
-    right: 20,
+    right: 10,
     bottom: 0,
   },
   tabViewContainer: {
     flexGrow: 1,
     marginTop: 5,
-    width: "100%",
   },
   imageProfile: {
     width: "100%",
@@ -139,8 +142,8 @@ export const styles = StyleSheet.create({
     height: "100%",
   },
   promoText: {
-    fontFamily: 'Poppins_700Bold',
-    color: "#FFFFFF",
+    fontFamily: fontFamily.fontBold,
+    color: Color.blanco,
     fontSize: 20,
     position: "absolute",
     top: 100,
@@ -150,7 +153,7 @@ export const styles = StyleSheet.create({
     height: 30,
     width: 60,
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: Color.blanco,
     fontSize: 18,
     color: "#7EA74C",
     position: "absolute",
@@ -158,15 +161,7 @@ export const styles = StyleSheet.create({
     left: 30,
     padding: 5,
   },
-  options: {
-    
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 0,
-  },
+
   titleCategories: {
     color: "#333",
     fontFamily: "Poppins_700Bold",
@@ -175,12 +170,5 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     lineHeight: 24,
   },
-  options__all: {
-    color: '#7DA74D',
-  },
-  options__title: {
-    color: "#666",
-    fontFamily: 'Poppins_700Bold',
-    fontSize: 18,
-  },
+
 });

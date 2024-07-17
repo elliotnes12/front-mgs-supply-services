@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Color } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
   background: {
@@ -19,8 +20,8 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   imgProfile: {
-    width: 110,
-    height: 110,
+    width: 80,
+    height: 80,
     backgroundColor: "#CCC",
     borderRadius: 55,
     overflow: "hidden",
@@ -34,12 +35,12 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   field: {
-    borderColor: "#7DA74D",
+    borderColor: Color.gray1,
     borderWidth: 1,
     alignSelf: "stretch",
     marginBottom: 20,
     borderRadius: 18,
-    height: 50,
+    height: 40,
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: 'row',

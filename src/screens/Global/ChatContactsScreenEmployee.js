@@ -31,7 +31,7 @@ export function ChatContactsScreenEmployee() {
 
                 navigation.navigate(screens.tab.chats.ChatScreenSupervisor, { chatId: chatId, userName: name });
             } catch (error) {
-                console.log(error);
+                
             }
         })();
     };

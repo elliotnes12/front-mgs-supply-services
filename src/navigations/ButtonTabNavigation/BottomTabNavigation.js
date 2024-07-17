@@ -182,7 +182,7 @@ export function BottomTabNavigation() {
             tabBarItemStyle: [styles.tabBarItemOptions],
             tabBarIcon: ({ focused }) => {
 
-              const isSupervisor = !isCustomer && userInfo.type == 'supervisor'?  screens.global.createService : '';       
+              const isSupervisor = !isCustomer && userInfo.type == 'supervisor' || !isCustomer && userInfo.type == 'manager'?  screens.global.createService : '';       
 
               if (tab.name === 'boton-central') {
                 return (

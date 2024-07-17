@@ -1,6 +1,6 @@
 const png = {
   originLogo: require("./fondos/logo.png"),
-  mujer:require("./fondos/support.png"),
+  supportPerson:require("./fondos/support.png"),
   pleca:require("./fondos/pleca.png"),
   bgCustomer:require("./fondos/bgcustomer.jpg"),
   bgEmployee:require("./fondos/bgemployee.jpg"),
@@ -65,7 +65,9 @@ const png = {
   iconReports:require("./icons/icon-reports.png"),
   iconReportsFocus:require("./icons/icon-reports-focus.png"),
   iconCancel:require("./icons/icon-cancel.png"),
-  iconInfo:require("./icons/icon-info.png")
+  iconInfo:require("./icons/icon-info.png"),
+  avatar:require('./icons/avatar.png'),
+  edit:require("./icons/edit.png")
 }
 
 export { png };

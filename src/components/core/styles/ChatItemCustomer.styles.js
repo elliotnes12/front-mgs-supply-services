@@ -4,12 +4,21 @@ import { Color, fontFamily } from "../../../utils/constantsStyle";
 export const styles = StyleSheet.create({
     chatItem: {
       backgroundColor: "#fff",
-      height: 73,
+      height: 80,
       flex:1,
+      paddingHorizontal:10,
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: 0,
-      marginBottom:5
+      marginBottom:5,
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 10,
+      },
+      elevation: 3,
+      shadowRadius: 5,
+      shadowColor: "#333",
     },
     chatItem__img: {
       width: 30,
@@ -27,8 +36,6 @@ export const styles = StyleSheet.create({
       paddingTop:15,
       position: "relative",
       flexDirection:"column",
-      borderBottomWidth:0.5,
-      borderBottomColor:"#8E8E93"
     },
     chatItem__name: {
       fontFamily: 'Poppins_700Bold',
@@ -38,17 +45,15 @@ export const styles = StyleSheet.create({
     },
     chatItem__message: {
       fontFamily: fontFamily.fontRegular,
-      fontSize: 12,
+      fontSize: 10,
       color: Color.gray1,
+      marginTop:5,
       flex:1,
     },
     chatContainerTime: {
       position:"relative",
       height:"100%",
       width:50,
-      
-      borderBottomWidth:0.5,
-      borderBottomColor:"#8E8E93"
     },
     chatTime: {
       fontFamily: fontFamily.fontRegular,
@@ -66,7 +71,6 @@ export const styles = StyleSheet.create({
       marginTop: 5,
       justifyContent: "center",
       alignItems: "center",
-      position:"absolute",
       right:10,
       top:20, 
     },

@@ -10,6 +10,8 @@ import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { Header } from '../../../components/core/Header';
 import { ChatItem } from '../../../components/core/ChatItem';
+import { getIconById } from '../../../utils/util';
+import { ChatItemCustomer } from '../../../components/core/ChatItemCustomer';
 
 
 export function ChatsScreen() {
@@ -38,7 +40,7 @@ export function ChatsScreen() {
       setLoadingSupport(true)
       try {
         const { data } = await userController.getAllSupport(accessToken);
-        console.log(data)
+    
         setUsers(data);
         setFilteredUsers(data);
       } catch (error) {
@@ -72,8 +74,11 @@ export function ChatsScreen() {
   const createChat = (idUser, name) => {
     (async () => {
       try {
-        await chatController.create(accessToken, user._id, idUser);
-        navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.ChatScreenSupervisor, { userId: idUser, userName: name });
+       
+        const response = await chatController.create(accessToken, user._id, idUser);
+        const { chatId } = response.data;
+
+        navigation.navigate(screens.tab.chats.chatScreen, { chatId: chatId, userName: name });
       } catch (error) {
       }
     })();
@@ -97,16 +102,11 @@ export function ChatsScreen() {
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => createChat(item.id, item.name)}>
                   <View style={styles.userItem}>
-                    <View style={styles.userProfile}>
-                      <Image style={styles.userImage} resizeMode="contain" source={assets.image.png.profile} />
-                      <View style={[
-                        styles.userStatus,
-                        item.status === 'green' && styles.statusGreen,
-                        item.status === 'yellow' && styles.statusYellow,
-                        item.status === 'red' && styles.statusRed,
-                        item.status === 'disconnected' && styles.statusDisconnected
-                      ]} />
+                    <View style={styles.contImage}>
+                    <View style={styles.userImage}>
+                      {getIconById("avatar")}
                     </View>
+                    </View>               
                     <Text style={styles.userName}>{item.name}</Text>
                     <Text style={styles.userRole}>Support</Text>
                 
@@ -135,13 +135,15 @@ export function ChatsScreen() {
             chats?.length > 0 ? (
               chats.map(chat => (
                   
-                <ChatItem upTopChat={upTopChat} setMenu key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
-
+                <ChatItemCustomer upTopChat={upTopChat} setMenu key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
+                 
               ))
             ) : (
+              
               <View style={styles.noChats}>
                 <Text style={styles.noChatsText}>No chats not found</Text>
               </View>
+
             )
           }
         </View>

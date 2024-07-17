@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Color, fontFamily } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
 
@@ -33,13 +34,14 @@ export const styles = StyleSheet.create({
       color: "#828282"
    },
    titleServices: {
-      fontFamily: "Poppins_400Regular",
+      fontFamily: fontFamily.fontMedium,
       fontSize: 17,
-      
+      color:Color.gray1,
    },
    flatListContainer: {
       flex:1,
-      marginBottom:20
+      marginBottom:20,
+      paddingHorizontal:24
    },
    item: {
       display: "flex",
@@ -113,5 +115,18 @@ export const styles = StyleSheet.create({
       fontFamily: 'Poppins_400Regular',
       fontSize: 16,
       color: "#fff"
-   }
+   },
+   input: {
+      backgroundColor: "transparent",
+      height: 40,
+      fontSize: 14,
+      fontWeight: "500",
+      color:Color.gray3,
+      borderRadius: 50,
+      marginLeft: 5,
+      display:"flex",
+      paddingLeft:20,
+      justifyContent:"center",
+      width:200
+    },
 });

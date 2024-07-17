@@ -1,14 +1,13 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import * as React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { styles } from './ServiceListScreen.styles';
-import { FlatList } from 'native-base';
 import { getIcon } from '../../../../utils/util';
 import { screens, tabIds } from '../../../../utils';
 import { useNavigation } from '@react-navigation/native';
-import { ItemService } from '../../../../components/core/items/ItemService'; 
-
+import { ItemService } from '../../../../components/core/items/ItemService';
+import { map } from "lodash";
+import { useEffect, useState } from 'react';
 
 const data = [
   { id: '1', title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' },
@@ -16,28 +15,18 @@ const data = [
   { id: '3', title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' }
 ];
 
-
 const initialLayout = { width: "100%" };
 
-
-
-
 const RenderServices = ({ navigation }) => (
-  <>
+  <View style={{ flexGrow: 1 }}>
     <View style={styles.options}>
       <Text style={styles.options__title}>Services Used</Text>
       <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
         <Text style={styles.options__all}>View All</Text>
       </TouchableOpacity>
     </View>
-
-    <FlatList
-      data={data}
-      renderItem={({ item }) => <ItemService item={item} />}
-      keyExtractor={item => item.id}
-      contentContainerStyle={styles.flatListContainer}
-    />
-  </>
+    {map(data, (item) => <ItemService key={item.id} item={item} />)}
+  </View>
 );
 
 const RenderOrders = () => (
@@ -52,11 +41,10 @@ const RenderRaiting = () => (
   </View>
 );
 
-
 export const ServiceListScreenCt = () => {
-  const [index, setIndex] = React.useState(0);
-  
-  const navigation = useNavigation();
+  const [index, setIndex] = useState(0);
+  const [height, setHeight] = useState(0);
+  const navigation = useNavigation();  
 
   const routes = [
     { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
@@ -64,14 +52,27 @@ export const ServiceListScreenCt = () => {
     { key: tabIds.TAB_ID_RAITING, title: 'raiting', label: 'Raiting' },
   ];
 
+  useEffect(() => {
+    switch (routes[index].key) {
+      case tabIds.TAB_ID_SERVICES:
+        setHeight((data.length + 1) * 140);
+        break;
+      case tabIds.TAB_ID_PRODUCTS:
+      case tabIds.TAB_ID_RAITING:
+        setHeight(140);
+        break;
+      default:
+        setHeight(0);
+    }
+  }, [index]);
 
   const renderScene = ({ route }) => {
     switch (route.key) {
-      case 'services':
+      case tabIds.TAB_ID_SERVICES:
         return <RenderServices navigation={navigation} />;
-      case 'second':
+      case tabIds.TAB_ID_PRODUCTS:
         return <RenderOrders />;
-      case 'third':
+      case tabIds.TAB_ID_RAITING:
         return <RenderRaiting />;
       default:
         return null;
@@ -110,14 +111,13 @@ export const ServiceListScreenCt = () => {
   );
 
   return (
-    <View style={styles.tabViewContainer}>
-      <TabView
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={initialLayout}
-        renderTabBar={renderTabBar}
-      />
-    </View>
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      style={{ height: height }}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+      renderTabBar={renderTabBar}
+    />
   );
 }

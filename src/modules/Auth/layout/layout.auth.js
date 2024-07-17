@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, View, ImageBackground, SafeAreaView, ScrollView, Keyboard, ActivityIndicator } from "react-native";
 import { assets } from "../../../assets";
 import { styles } from "./layout.styles";
+import { LoadingScreen } from "../../../components/core/LoadingScreen";
 
 export default function LayoutAuth({ children, userType }) {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ export default function LayoutAuth({ children, userType }) {
     setLoading(false);
   };
 
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView
@@ -30,7 +32,7 @@ export default function LayoutAuth({ children, userType }) {
       >
         <View style={{ flex: 1 }}>
           {loading && (
-            <View style={styles.spinnerContainer}>
+            <View style={{flex:1}}>
               <ActivityIndicator size="large" color="#0000ff" />
             </View>
           )}

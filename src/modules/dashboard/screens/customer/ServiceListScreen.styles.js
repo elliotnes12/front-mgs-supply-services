@@ -158,7 +158,8 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   tabViewContainer: {
-    height: 500,
+    flex:1,
+    backgroundColor:"red",
     width: "100%",
   },
   title: {

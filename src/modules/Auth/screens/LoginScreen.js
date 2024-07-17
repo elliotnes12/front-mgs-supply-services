@@ -2,9 +2,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFormik } from "formik";
-import { Image } from "native-base";
-import React, { useState } from "react";
-import { ActivityIndicator, Pressable, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { ActivityIndicator, Pressable, Text, TextInput, TouchableOpacity, View,Image } from "react-native";
 import { assets } from "../../../assets";
 import { screens } from "../../../utils";
 import { Auth } from "../api/auth";
@@ -21,8 +20,6 @@ export function LoginScreen() {
   const [hide, setHide] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -38,10 +35,11 @@ export function LoginScreen() {
         await authController.setAccessToken(data.access);
         await authController.setRefreshToken(data.refresh);
         await login(data.access);
-        setLoading(false);
+
       } catch (error) {
+         toggleModal();
+      }finally{
         setLoading(false);
-        toggleModal();
       }
     },
   });
@@ -50,11 +48,6 @@ export function LoginScreen() {
     setModalVisible(!isModalVisible);
   };
 
-  const closeModal = () => {
-    if (isModalVisible) {
-      setModalVisible(false);
-    }
-  };
 
   const goToRegister = () => {
     navigation.navigate(screens.auth.registerScreen);
@@ -69,19 +62,14 @@ export function LoginScreen() {
       </View>
       <Text style={styles.title}>Welcome Back</Text>
       <Text style={styles.subtitle}>Enter and Keep your work day recorded.</Text>
-      
-      <View style={styles.field}>
+     <View style={styles.field}>
         <Text style={styles.label}>Email address</Text>
         <View style={[styles.inputContainer, formik.errors.email && styles.inputError]}>
           <TextInput
             style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#FFFFFF" 
             autoCapitalize="none"
             value={formik.values.email}
             onChangeText={(text) => formik.setFieldValue("email", text)}
-            onFocus={() => setIsEmailFocused(true)}
-            onBlur={() => setIsEmailFocused(false)}
           />
         </View>
       </View>
@@ -93,21 +81,17 @@ export function LoginScreen() {
             <MaterialCommunityIcons
               style={styles.icon}
               name={hide ? "eye-off" : "eye"}
-              color="#FFFFFF" // Cambiado a blanco
+              color="#FFFFFF" 
               size={30}
             />
           </TouchableOpacity>
         </View>
         <View style={[styles.inputContainer, formik.errors.password && styles.inputError]}>
           <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#FFFFFF" // Cambiado a blanco
+            style={styles.input} 
             secureTextEntry={hide}
             value={formik.values.password}
             onChangeText={(text) => formik.setFieldValue("password", text)}
-            onFocus={() => setIsPasswordFocused(true)}
-            onBlur={() => setIsPasswordFocused(false)}
           />
         </View>
       </View>

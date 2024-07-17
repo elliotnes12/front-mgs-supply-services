@@ -8,6 +8,7 @@ import { initialValues, validationSchema } from "../forms/Settings.forms";
 import { styles } from "../styles/settings.styles";
 import { LinearGradient } from 'expo-linear-gradient';
 import { assets } from "../../../assets";
+import { Color } from "../../../utils/constantsStyle";
 
 export function SettingsScreen() {
   const { logout, user: { role, active, email }, userInfo } = useAuth();
@@ -98,7 +99,7 @@ export function SettingsScreen() {
         </View>
 
         <View>
-          <View style={[styles.field, { borderColor: isNameFocused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }]}>
+          <View style={[styles.field, { borderColor: Color.gray1}]}>
             <TextInput
               editable={!active}
               placeholder="Name"
@@ -112,7 +113,7 @@ export function SettingsScreen() {
             />
           </View>
 
-          <View style={[styles.field, { borderColor: isLastNameFocused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }]}>
+          <View style={[styles.field, { borderColor: Color.gray1}]}>
             <TextInput
               editable={!active}
               placeholder="LastName"
@@ -126,7 +127,7 @@ export function SettingsScreen() {
             />
           </View>
 
-          <View style={[styles.field, { borderColor: "rgba(0, 110, 233, 0.1)" }]}>
+          <View style={[styles.field, { borderColor: Color.gray1}]}>
             <TextInput
               editable={false}
               placeholder="Email"
@@ -150,18 +151,6 @@ export function SettingsScreen() {
             </View>
           )}
 
-          {!idEmployee && !active && (
-            <View style={[styles.field, { borderColor: isCompanyFocused ? "rgba(125, 167, 77, 1)" : "rgba(0, 110, 233, 0.1)" }]}>
-              <TextInput
-                placeholder="Company"
-                placeholderTextColor="#7DA74D"
-                autoCapitalize="none"
-                style={styles.input}
-                onFocus={handleCompanyFocus}
-                onBlur={handleCompanyBlur}
-              />
-            </View>
-          )}
         </View>
 
         <TouchableOpacity  onPress={logout}>

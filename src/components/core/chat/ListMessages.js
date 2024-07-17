@@ -5,9 +5,9 @@ import { ScrollView } from 'react-native';
 import {Text, View} from  "native-base";
 import {map} from "lodash";
 import { ItemText } from './ItemText';
+import { ItemImage } from './ItemImage';
 export  function ListMessages({messages}) {
 
-  console.log(messages)
   const ScrollViewRef = useRef()
   return (
     <ScrollView style={styles.container} 
@@ -24,7 +24,7 @@ export  function ListMessages({messages}) {
                 return <ItemText  key={message.id} message={message} />
               }
               if(message.type == 'IMAGE'){
-                return <Text key={message.id} >IMAGE</Text>
+                return <ItemImage key={message.id} message={message} />
               }
              
           })}

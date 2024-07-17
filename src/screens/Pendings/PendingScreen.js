@@ -67,7 +67,7 @@ export function PendingScreen() {
             <View style={styles.options}>
                 <TouchableOpacity style={styles.options__item}>
                     <View style={stylesGlobal.imageMd}>
-                        <Image alt="icon-edit" source={assets.image.png.iconEdit} style={stylesGlobal.imageMin__img} />
+                        <Image alt="icon-edit" source={assets.image.png.edit} style={stylesGlobal.imageMin__img} />
                     </View>
                     <Text style={styles.edit}>Edit</Text>
                 </TouchableOpacity>

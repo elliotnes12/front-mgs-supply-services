@@ -60,11 +60,23 @@ export const styles = StyleSheet.create({
     userProfile: {
       position: 'relative',
       marginBottom: 10,
+      borderRadius:37.5,
+      padding:5,
+    
+    },
+    contImage:{
+      backgroundColor:"#7DA74D",
+      width:60,
+      height:60,
+      borderRadius:30,
+      flexDirection:"row",
+      alignItems:'center',
+      justifyContent:"center"
+      
     },
     userImage: {
-      width: 65,
-      height: 65,
-      borderRadius: 30,
+      width: 45,
+      height: 45,
     },
     userStatus: {
       position: 'absolute',
@@ -94,7 +106,7 @@ export const styles = StyleSheet.create({
       height: 20,
     },
     userRole: {
-      fontFamily: 'Poppins_400Regular',
+      fontFamily: fontFamily.fontMedium,
       fontSize: 13,
       color: '#666',
       lineHeight: 15,
@@ -117,7 +129,7 @@ export const styles = StyleSheet.create({
   
     },
     allChatsLink: {
-      fontFamily: 'Poppins_400Regular',
+      fontFamily: fontFamily.fontRegular,
       fontSize: 16,
       color: '#7DA74D',
       textDecorationLine: 'none',
@@ -243,12 +255,11 @@ export const styles = StyleSheet.create({
     },
     messageItem: {
       marginBottom: 15,
-      // Sombras en la parte inferior de los ítems de mensaje
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 2,
-      elevation: 5, // Para Android
+      elevation: 5, 
     },
     messageCircle: {
       width: 50,
