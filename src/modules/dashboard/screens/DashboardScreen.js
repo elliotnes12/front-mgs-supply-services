@@ -21,6 +21,7 @@ import { styles } from "../styles/dashboard.styles";
 import { ServiceListScreenManager } from "./manager/ServicesListScreenManager";
 import { getIcon, getIconById } from "../../../utils/util";
 import StyledText from "../../../utils/globalstyle";
+import { theme } from "../../../utils/theme";
 
 export function DashboardScreen() {
   const { userInfo, isCustomer } = useAuth();
@@ -108,7 +109,7 @@ export function DashboardScreen() {
           <>
             <View style={styles.promos}>
               <LinearGradient
-                colors={["#CEDC39", "#7DA74D"]}
+                colors={[theme.gradient.color1,theme.gradient.color2]}
                 style={styles.bgpromos}
               >
                 <View style={styles.promos__label}>

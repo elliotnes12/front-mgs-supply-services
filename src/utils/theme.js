@@ -7,11 +7,12 @@ export const theme = {
 
     },
     textStyles: {
-        bold: "Poppins_600SemiBold",
+        bold: "Poppins_700Bold",
         semiBold: "Poppins_600SemiBold",
         regular: 'Poppins_400Regular'
     },
-    colors: {
-
+    gradient:{
+        color1: "#CEDC39",
+        color2: "#7DA74D"
     }
 }

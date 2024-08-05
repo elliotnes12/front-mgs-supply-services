@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
     color: "#333333",
     fontSize: 15,
   },
+  boldGray:{
+    fontFamily: theme.textStyles.bold,
+    color:"#333"
+  },
   gradientButton: {
     padding: 15,
     borderRadius: 35,
@@ -38,12 +42,14 @@ export default function StyledText({
   headerBig,
   regularWhite,
   regularGray,
+  boldGray
 }) {
   const textStyles = [
     bold && styles.textBold,
     headerBig && styles.headerBig,
     regularWhite && styles.regularWhite,
     regularGray && styles.regularGray,
+    boldGray && styles.boldGray
   ];
   return <Text style={textStyles}>{children}</Text>;
 }
@@ -53,7 +59,7 @@ export function StyledGradientButton({text, action}) {
   return (
     <Pressable onPress={action}>
       <LinearGradient
-        colors={["#CEDC39", "#7DA74D"]}
+        colors={[theme.gradient.color1,theme.gradient.color2]}
         style={styles.gradientButton}
       >
         <Text style={styles.gradientButtonText}>{text}</Text>

@@ -56,13 +56,12 @@ export default function LayoutAuth({ children, userType, logo }) {
     setLoading(false);
   };
 
+  if(loading)  <ActivityIndicator size="large" color="#0000ff" />
+
+
   return (
     <SafeAreaView style={{ flexGrow: 1, justifyContent: "center" }}>
-      {loading && (
-        <View style={{ flex: 1 }}>
-          <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-      )}
+     
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
