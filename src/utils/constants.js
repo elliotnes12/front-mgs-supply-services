@@ -32,15 +32,15 @@ export const ENV = {
         GROUP_MESSAGE_TOTAL: "group/message/total",
         GROUP_MESSAGE_LAST: "group/message/last",
     },
-    JWT:{
-        ACCESS:"access",
-        REFRESH:"refresh"
+    JWT: {
+        ACCESS: "access",
+        REFRESH: "refresh"
     },
-    TYPES_USERS:{
-        CUSTOMER:"customer",
-        COMPANY:"company",
-        EMPLOYEE:"employee",
-        MANAGER:"manager"
+    TYPES_USERS: {
+        CUSTOMER: "customer",
+        COMPANY: "company",
+        EMPLOYEE: "employee",
+        MANAGER: "manager"
     },
     ACTIVE_CHAT_ID: "active_chat_id",
     ACTIVE_GROUP_ID: "active_group_id",

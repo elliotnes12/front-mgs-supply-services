@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { assets } from "../../../assets";
 import { useAuth } from '../../Auth/hooks';
 import { styles } from "../styles/chatsScreen.styles";
 import { screens } from '../../../utils';
@@ -9,9 +8,9 @@ import { User } from '../../../api/user';
 import { Chat } from '../api/Chat';
 import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { Header } from '../../../components/core/Header';
-import { ChatItem } from '../../../components/core/ChatItem';
 import { getIconById } from '../../../utils/util';
 import { ChatItemCustomer } from '../../../components/core/ChatItemCustomer';
+import StyledText from '../../../utils/globalstyle';
 
 
 export function ChatsScreen() {
@@ -40,10 +39,12 @@ export function ChatsScreen() {
       setLoadingSupport(true)
       try {
         const { data } = await userController.getAllSupport(accessToken);
-    
+
         setUsers(data);
-        setFilteredUsers(data);
       } catch (error) {
+
+        console.log("support")
+        console.log(error)
         setUsers([])
       } finally {
         setLoadingSupport(false)
@@ -56,9 +57,10 @@ export function ChatsScreen() {
       setLoading(true);
       (async () => {
         try {
-          const {data} = await chatController.getAll(accessToken);
+          const { data } = await chatController.getAll(accessToken);
           setChats(data);
         } catch (error) {
+          console.log(error)
           setChats([])
         } finally {
           setLoading(false);
@@ -74,7 +76,7 @@ export function ChatsScreen() {
   const createChat = (idUser, name) => {
     (async () => {
       try {
-       
+
         const response = await chatController.create(accessToken, user._id, idUser);
         const { chatId } = response.data;
 
@@ -83,6 +85,23 @@ export function ChatsScreen() {
       }
     })();
   };
+
+  const RenderItemUser = ({ item }) => {
+    return (
+      <TouchableOpacity key={item?.id} onPress={() => createChat(item.id, item.name)}>
+        <View style={styles.userItem}>
+          <View style={styles.contImage}>
+            <View style={styles.userImage}>
+              {getIconById("avatar")}
+            </View>
+          </View>
+          <StyledText regularGray>{item.name}</StyledText>
+          <Text style={styles.userRole}>Support</Text>
+
+        </View>
+      </TouchableOpacity>
+    )
+  }
 
 
   if (!users) return <LoadingScreen />;
@@ -93,26 +112,13 @@ export function ChatsScreen() {
       <View style={styles.container}>
         <Text style={styles.chatsTitle}>Support Team</Text>
         <View style={styles.usersContainer}>
-          {users?.length > 0 ? (
+          {users && users?.length > 0 ? (
             <FlatList
               horizontal
-              data={!isCustomer ? filteredUsers : users}
-              keyExtractor={(item) => item.id.toString()}
+              data={users}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <RenderItemUser item={item} />}
               contentContainerStyle={styles.usersList}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => createChat(item.id, item.name)}>
-                  <View style={styles.userItem}>
-                    <View style={styles.contImage}>
-                    <View style={styles.userImage}>
-                      {getIconById("avatar")}
-                    </View>
-                    </View>               
-                    <Text style={styles.userName}>{item.name}</Text>
-                    <Text style={styles.userRole}>Support</Text>
-                
-                  </View>
-                </TouchableOpacity>
-              )}
               showsHorizontalScrollIndicator={false}
               onEndReachedThreshold={0.5}
             />
@@ -132,14 +138,14 @@ export function ChatsScreen() {
 
         <View style={styles.recentChatsContainer}>
           {
-            chats?.length > 0 ? (
+            chats && chats?.length > 0 ? (
               chats.map(chat => (
-                  
+
                 <ChatItemCustomer upTopChat={upTopChat} setMenu key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
-                 
+
               ))
             ) : (
-              
+
               <View style={styles.noChats}>
                 <Text style={styles.noChatsText}>No chats not found</Text>
               </View>

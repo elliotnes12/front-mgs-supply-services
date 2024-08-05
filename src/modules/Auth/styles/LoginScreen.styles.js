@@ -7,23 +7,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
   },
-  logo:{
+  logo: {
+    width: 270,
+    height: 160,
+    position: "absolute",
+    top: 0
+  },
 
-     width:270,
-     height:100,
-     marginTop:40
-  },
-  title: {
-    fontFamily: "Poppins_600SemiBold",
-    fontSize: 32,
-    marginTop: 120,
-    color: "#FFFFFF",
-  },
-  subtitle: {
-    color: "#FFFFFF",
-    fontFamily: 'Poppins_400Regular',
-    marginBottom: 25
-  },
   field: {
     marginBottom: 20,
     width: 320,
@@ -47,12 +37,6 @@ export const styles = StyleSheet.create({
   },
   inputError: {
     borderColor: '#dc3545',
-  },
-  label: {
-    color: "#FFFFFF",
-    fontSize: 15,
-    fontFamily: 'Poppins_400Regular',
-    marginBottom: 5,
   },
   labelContainer: {
     flexDirection: "row",
@@ -91,15 +75,15 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
     textDecorationLine: 'underline',
   },
-  loginNowContainer:{
-    marginTop:15,
-    display:"flex"
+  loginNowContainer: {
+    marginTop: 15,
+    display: "flex"
   },
-  loginNowText:{
-    color:"#fff"
+  loginNowText: {
+    color: "#fff"
   },
-  loginNowLink:{
-    color:"#fff",
+  loginNowLink: {
+    color: "#fff",
     textDecorationLine: "underline",
   }
 });

@@ -2,14 +2,18 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
   },
   scrollViewContent: {
     flexGrow: 1,
+    alignItems: "center"
   },
   content: {
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
+  },
+  logo: {
+    width: 270,
+    height: 160,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,

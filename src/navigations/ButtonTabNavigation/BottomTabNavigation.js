@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { assets } from '../../assets';
 import { useAuth } from '../../modules/Auth/hooks';
@@ -15,7 +16,7 @@ import { styles } from "./BottomTabNavigation.styles";
 const Tab = createBottomTabNavigator();
 
 export function BottomTabNavigation() {
-  const { isCustomer , userInfo} = useAuth();
+  const { isCustomer, userInfo } = useAuth();
   const navigation = useNavigation();
   const [tabBarVisible, setTabBarVisible] = useState("flex");
 
@@ -28,8 +29,8 @@ export function BottomTabNavigation() {
       { name: screens.tab.products.root, title: 'Products', iconName: 'order' },
       { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
     ];
-  } else {    
-    if( userInfo?.type == "supervisor"){
+  } else {
+    if (userInfo?.type == "supervisor") {
       baseTabs = [
         { name: screens.tab.rootSupervisor, title: 'Home', iconName: 'home' },
         { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
@@ -37,7 +38,7 @@ export function BottomTabNavigation() {
         { name: screens.tab.groups.root, title: 'Pending', iconName: 'pending' },
         { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
       ];
-    }else  if( userInfo?.type == "employee"){
+    } else if (userInfo?.type == "employee") {
       baseTabs = [
         { name: screens.tab.rootEmployee, title: 'Home', iconName: 'home' },
         { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
@@ -46,7 +47,7 @@ export function BottomTabNavigation() {
         { name: screens.tab.settings.root, title: 'Setting', iconName: 'cog-outline' },
       ];
     }
-    else  if( userInfo?.type == "manager"){
+    else if (userInfo?.type == "manager") {
       baseTabs = [
         { name: screens.tab.rootEmployee, title: 'Home', iconName: 'home' },
         { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
@@ -56,7 +57,7 @@ export function BottomTabNavigation() {
       ];
     }
 
-  
+
   }
 
 
@@ -94,11 +95,11 @@ export function BottomTabNavigation() {
       case screens.tab.products.root:
         return ProductNavigation;
       case screens.tab.groups.pendingScreenEmployee:
-        return PendingEmployeeNavigation;  
+        return PendingEmployeeNavigation;
       case screens.tab.chats.chatsScreenEmployee:
-        return ChatNavigationEmployee;  
+        return ChatNavigationEmployee;
       case screens.tab.workFlow.root:
-        return WorkFlowNavigation;  
+        return WorkFlowNavigation;
       default:
         return null;
     }
@@ -127,9 +128,9 @@ export function BottomTabNavigation() {
       case 'pending-focus':
         return assets.image.png.iconPendingFocus;
       case 'reports':
-        return assets.image.png.iconReports;  
+        return assets.image.png.iconReports;
       case 'reports-focus':
-        return assets.image.png.iconReportsFocus;    
+        return assets.image.png.iconReportsFocus;
       default:
         return null;
     }
@@ -160,10 +161,10 @@ export function BottomTabNavigation() {
             return <TouchableOpacity {...props} disabled />;
           }
           if (route.name === screens.tab.settings.root) {
-            return <TouchableOpacity onPressIn={handleSettingsPress} {...props} />;
+            return <TouchableOpacity onPress={handleSettingsPress} {...props} />;
           }
-          else if(route.name === screens.tab.chats.chatScreen){
-            return <TouchableOpacity onPressIn={handleSettingsPress} {...props} />;
+          else if (route.name === screens.tab.chats.chatScreen) {
+            return <TouchableOpacity onPress={handleSettingsPress} {...props} />;
           }
 
           return <TouchableOpacity {...props} />;
@@ -182,7 +183,7 @@ export function BottomTabNavigation() {
             tabBarItemStyle: [styles.tabBarItemOptions],
             tabBarIcon: ({ focused }) => {
 
-              const isSupervisor = !isCustomer && userInfo.type == 'supervisor' || !isCustomer && userInfo.type == 'manager'?  screens.global.createService : '';       
+              const isSupervisor = !isCustomer && userInfo.type == 'supervisor' || !isCustomer && userInfo.type == 'manager' ? screens.global.createService : '';
 
               if (tab.name === 'boton-central') {
                 return (
@@ -193,7 +194,7 @@ export function BottomTabNavigation() {
                       source={assets.image.png.union}
                       alt="icon"
                     />
-                    <TouchableOpacity onPress={() => navigation.navigate(isSupervisor) }  style={styles.centralButton}>
+                    <TouchableOpacity onPress={() => navigation.navigate(isSupervisor)} style={styles.centralButton}>
                       <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.registerOrder}>
                         <Image
                           style={styles.img}

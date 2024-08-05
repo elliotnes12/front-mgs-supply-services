@@ -20,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "../styles/dashboard.styles";
 import { ServiceListScreenManager } from "./manager/ServicesListScreenManager";
 import { getIcon, getIconById } from "../../../utils/util";
+import StyledText from "../../../utils/globalstyle";
 
 export function DashboardScreen() {
   const { userInfo, isCustomer } = useAuth();
@@ -67,43 +68,41 @@ export function DashboardScreen() {
 
   return (
     <ScrollView
-    style={{ flexGrow: 1, padding: 0, margin: 0,backgroundColor:"#fff",height:"100%" }}
-    alwaysBounceVertical={false}
-  >
-    <View style={styles.background}>
-        <SafeAreaView>
-          <View style={styles.header}>
-            <View style={styles.profile}>
-              <View style={styles.containerProfile}>
-                <Pressable
-                  onPress={() => navigation.navigate("ProfileScreen")}
-                  style={styles.goProfile}
-                >
-                  <View style={styles.imageProfile}>
-                    {getIconById("profile")}
-                  </View>
-                </Pressable>
-              </View>
-              <View style={styles.userInfo}>
-                <Text style={styles.userInfo__hello}>Hello,</Text>
-                <Text style={styles.userInfo__name}>{name}</Text>
-              </View>
-            </View>
-            <Animated.View style={{ transform: [{ rotate: swing }] }}>
-              <TouchableOpacity style={styles.alerts} onPress={startSwing}>
-                <View style={styles.alerts__count}>
-                  <Text style={styles.alert__text}>3</Text>
+      style={{ flexGrow: 1, padding: 0, margin: 0, backgroundColor: "#fff", height: "100%" }}
+      alwaysBounceVertical={false}
+    >
+      <View style={styles.background}>
+        <View style={styles.header}>
+          <View style={styles.profile}>
+            <View style={styles.containerProfile}>
+              <Pressable
+                onPress={() => navigation.navigate("ProfileScreen")}
+                style={styles.goProfile}
+              >
+                <View style={styles.imageProfile}>
+                  {getIconById("profile")}
                 </View>
-                <Image
-                  alt="alerts"
-                  style={styles.imageAlerts}
-                  resizeMode="cover"
-                  source={assets.image.png.alerts}
-                />
-              </TouchableOpacity>
-            </Animated.View>
+              </Pressable>
+            </View>
+            <View style={styles.userInfo}>
+              <StyledText regularGray>Hello,</StyledText>
+              <Text style={styles.userInfo__name}>{name}</Text>
+            </View>
           </View>
-        </SafeAreaView>
+          <Animated.View style={{ transform: [{ rotate: swing }] }}>
+            <TouchableOpacity style={styles.alerts} onPress={startSwing}>
+              <View style={styles.alerts__count}>
+                <Text style={styles.alert__text}>3</Text>
+              </View>
+              <Image
+                alt="alerts"
+                style={styles.imageAlerts}
+                resizeMode="cover"
+                source={assets.image.png.alerts}
+              />
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
 
         {isCustomer && (
           <>
@@ -129,7 +128,7 @@ export function DashboardScreen() {
 
             <View style={styles.tabViewContainer}>
               <Text style={styles.titleCategories}>Choose a category</Text>
-             
+
             </View>
             <ServiceListScreenCt />
           </>
@@ -144,8 +143,8 @@ export function DashboardScreen() {
         {!isCustomer && userInfo.type === "manager" && (
           <ServiceListScreenManager />
         )}
-    
-    </View>
+
+      </View>
     </ScrollView>
   );
 }

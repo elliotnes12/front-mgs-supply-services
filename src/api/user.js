@@ -22,8 +22,8 @@ export class User {
   }
 
 
-  
-  async getAllSupport(accessToken){
+
+  async getAllSupport(accessToken) {
     try {
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USER_SUPPORT}`;
       const params = {
@@ -35,16 +35,15 @@ export class User {
       const response = await fetch(url, params);
       const result = await response.json();
 
-      if (result.meta.code !== 200) throw result;
+      if (result?.meta?.code !== 200) throw result;
 
       return result;
     } catch (error) {
-      throw error;
     }
   }
 
 
-  async getAll(accessToken){
+  async getAll(accessToken) {
     try {
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USER}`;
       const params = {

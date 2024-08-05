@@ -1,13 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { Color, fontFamily } from '../../../utils/constantsStyle';
+import Constants from "expo-constants";
 
 export const styles = StyleSheet.create({
   background: {
     flexGrow: 1,
-    height:"100%",
-    backgroundColor:"#fff",
-    paddingHorizontal:24,
-    paddingBottom:40
+    height: "100%",
+    backgroundColor: "#fff",
+    paddingHorizontal: 24,
+    paddingBottom: 40
   },
   container: {
     paddingLeft: 24,
@@ -24,6 +25,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 70,
     marginBottom: 20,
+    marginTop: Constants.statusBarHeight
   },
   profile: {
     flexDirection: "row",
@@ -79,7 +81,7 @@ export const styles = StyleSheet.create({
   userInfo__hello: {
     fontFamily: "Poppins_400Regular",
     color: "#333333",
-    fontSize: 16,
+    fontSize: 15,
   },
   userInfo__name: {
     fontFamily: "Poppins_700Bold",

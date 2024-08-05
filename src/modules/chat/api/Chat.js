@@ -31,7 +31,7 @@ export class Chat {
     async getAll(token) {
         try {
 
-          
+
             const url = `${ENV.API_URL}/${ENV.ENDPOINTS.CHAT}`;
             const params = {
                 headers: {
@@ -42,8 +42,9 @@ export class Chat {
             const response = await fetch(url, params);
             const result = await response.json();
 
+            console.log(result)
 
-            if (result.meta.code != 200 ) throw result;
+            if (result.meta.code != 200) throw result;
 
             return result;
         } catch (error) {
@@ -51,8 +52,8 @@ export class Chat {
         }
     }
 
-    
-    async getLastMessage(token,chatId) {
+
+    async getLastMessage(token, chatId) {
         try {
 
             const url = `${ENV.API_URL}/${ENV.ENDPOINTS.CHAT_MESSAGE_LAST}/${chatId}`;
@@ -65,7 +66,7 @@ export class Chat {
             const response = await fetch(url, params);
             const result = await response.json();
 
-            if (result.meta.code != 200 ) throw result;
+            if (result.meta.code != 200) throw result;
 
             return result;
         } catch (error) {
@@ -74,12 +75,12 @@ export class Chat {
     }
 
 
-    async deleteChat(token,chatId) {
+    async deleteChat(token, chatId) {
         try {
 
             const url = `${ENV.API_URL}/${ENV.ENDPOINTS.CHAT}/${chatId}`;
             const params = {
-                method:"delete",
+                method: "delete",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -88,7 +89,7 @@ export class Chat {
             const response = await fetch(url, params);
             const result = await response.json();
 
-            if (result.meta.code != 200 ) throw result;
+            if (result.meta.code != 200) throw result;
 
             return result;
         } catch (error) {
