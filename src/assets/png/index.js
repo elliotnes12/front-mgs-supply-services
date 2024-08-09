@@ -67,7 +67,8 @@ const png = {
   iconCancel:require("./icons/icon-cancel.png"),
   iconInfo:require("./icons/icon-info.png"),
   avatar:require('./icons/avatar.png'),
-  edit:require("./icons/edit.png")
+  edit:require("./icons/edit.png"),
+  Group:require("./icons/Group.png")
 }
 
 export { png };
