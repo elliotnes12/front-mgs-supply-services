@@ -94,16 +94,15 @@ export function LoginScreen() {
           </View>
         </View>
 
-        <StyledGradientButton text={"Login"} action={() => formik.handleSubmit()} />
-
+        <View style={{ justifyContent: "center" }}>
+          <StyledGradientButton text={"Login"} action={() => formik.handleSubmit()} />
+        </View>
 
         <View style={styles.loginNowContainer}>
-          <Text style={styles.loginNowText}>Don't have an account?
-            <TouchableOpacity onPress={goToRegister}>
-              <Text style={styles.loginNowLink}> Sign up</Text>
-            </TouchableOpacity>
-          </Text>
-
+          <Text style={styles.loginNowText}>Don't have an account</Text>
+          <TouchableOpacity onPress={goToRegister}>
+            <Text style={styles.loginNowLink}> Sign up</Text>
+          </TouchableOpacity>
         </View>
 
       </View>

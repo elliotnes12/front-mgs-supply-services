@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -57,13 +58,9 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontSize: 14,
     lineHeight: 21,
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: theme.textStyles.regular,
     letterSpacing: 0.25,
     color: 'white',
-  },
-  buttonSpinner: {
-    position: 'absolute',
-    left: 16,
   },
   errorlogin: {
     color: '#dc3545',
@@ -77,7 +74,9 @@ export const styles = StyleSheet.create({
   },
   loginNowContainer: {
     marginTop: 15,
-    display: "flex"
+    textAlign: "center",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   loginNowText: {
     color: "#fff"

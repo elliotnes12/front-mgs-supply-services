@@ -1,20 +1,12 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
-  title: {
-    fontFamily: "Poppins_600SemiBold",
-    fontSize: 32,
-    marginTop:135,
-    color: "#FFFFFF",
-  },
-  subtitle:{
-    color:"#ffffff",
-    fontFamily:'Poppins_400Regular'
-  },
+
   cuestion: {
     alignSelf: "flex-start",
-    fontFamily:'Poppins_400Regular',
-    color:"#ffffff",
+    fontFamily: 'Poppins_400Regular',
+    color: "#ffffff",
     marginTop: 32,
     marginBottom: 10,
   },
@@ -25,13 +17,13 @@ export const styles = StyleSheet.create({
   registerButton: {
     width: 155,
     height: 50,
-    fontFamily:'Poppins_400Regular',
+    fontFamily: 'Poppins_400Regular',
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    flexDirection:"row",
-    display:"flex"
+    flexDirection: "row",
+    display: "flex"
   },
   register: {
     color: "#0891b2",
@@ -56,7 +48,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    height:"100%",
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -100,14 +92,14 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     lineHeight: 21,
-    fontFamily:'Poppins_400Regular',
+    fontFamily: 'Poppins_400Regular',
     letterSpacing: 0.25,
     color: 'white',
   },
   label: {
     color: "#FFFFFF",
     fontSize: 15,
-    fontFamily:'Poppins_400Regular',
+    fontFamily: 'Poppins_400Regular',
     marginBottom: 5,
   },
   labelContainer: {
@@ -127,23 +119,24 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    width:220
+    width: 220
   },
   loginNowContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
-    marginBottom:20,
-    width:220
+    marginBottom: 20,
+    width: 220
   },
   loginNowText: {
-    fontSize: 16,
+    fontFamily: theme.textStyles.regular,
     color: "#fff",
   },
   loginNowLink: {
     color: "#fff",
+    fontFamily: theme.textStyles.regular,
     textDecorationLine: "underline",
   },
-  
+
 });
