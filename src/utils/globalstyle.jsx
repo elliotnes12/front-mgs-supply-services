@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     width: 125,
+    marginEnd: 10,
     height: 35,
-    marginLeft: 5,
   },
   gradientButtonText: {
     fontFamily: theme.textStyles.regular,

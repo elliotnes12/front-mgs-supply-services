@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {
-  ActivityIndicator,
   Image,
-  Pressable,
   Text,
   TextInput,
   TouchableOpacity,
@@ -12,7 +10,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFormik } from "formik";
-import { getIcon } from "../../../utils/util";
+import { getIcon, getIconById } from "../../../utils/util";
 import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/RegisterForm.form";
 import LayoutAuth from "../layout/layout.auth";
@@ -20,6 +18,8 @@ import { styles } from "../styles/RegisterScreen.styles";
 import { Alert } from "../../../components/core/Modal/Alert";
 import { stylesGlobal } from "../../styles/global.style";
 import { ENV } from "../../../utils";
+import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
+import { theme } from "../../../utils/theme";
 
 const authController = new Auth();
 
@@ -83,8 +83,8 @@ export function RegisterScreen() {
   return (
     <LayoutAuth userType={userType}>
       <View style={styles.container}>
-        <Text style={styles.title}>Registration</Text>
-        <Text style={styles.subtitle}>Create your account and start today</Text>
+        <StyledText headerBig>Registration</StyledText>
+        <StyledText regularWhite>Create your account and start today</StyledText>
         <Text style={styles.cuestion}>How do you identify yourself?</Text>
 
         <View style={styles.actions}>
@@ -94,15 +94,11 @@ export function RegisterScreen() {
           >
             {userType === "customer" ? (
               <LinearGradient
-                colors={["#CEDC39", "#7DA74D"]}
+                colors={[theme.gradient.color1, theme.gradient.color2]}
                 style={styles.registerButton}
               >
                 <View style={{ width: 26, height: 26, marginRight: 10 }}>
-                  <Image
-                    style={stylesGlobal.imageMin__img}
-                    resizeMode="contain"
-                    source={getIcon("icon-profile-white")}
-                  />
+                  {getIconById("iconProfileWhite")}
                 </View>
                 <Text style={[{ color: "#fff" }, styles.buttonText]}>
                   Customer
@@ -111,11 +107,7 @@ export function RegisterScreen() {
             ) : (
               <View style={styles.registerButton}>
                 <View style={{ width: 26, height: 26, marginRight: 10 }}>
-                  <Image
-                    style={stylesGlobal.imageMin__img}
-                    resizeMode="contain"
-                    source={getIcon("icon-profile-gray")}
-                  />
+                  {getIconById("iconProfileGray")}
                 </View>
                 <Text style={styles.buttonText}>Customer</Text>
               </View>
@@ -129,11 +121,8 @@ export function RegisterScreen() {
                 style={styles.registerButton}
               >
                 <View style={{ width: 25, height: 25, marginRight: 10 }}>
-                  <Image
-                    style={stylesGlobal.imageMin__img}
-                    resizeMode="contain"
-                    source={getIcon("icon-maletin-white")}
-                  />
+
+                  {getIconById("iconMaletaWhite")}
                 </View>
                 <Text style={[{ color: "#fff" }, styles.buttonText]}>
                   Company
@@ -155,7 +144,7 @@ export function RegisterScreen() {
         </View>
 
         <View style={styles.field}>
-          <Text style={styles.label}>Email address</Text>
+          <StyledText regularWhite>Email address</StyledText>
           <View
             style={[
               styles.inputContainer,
@@ -173,7 +162,7 @@ export function RegisterScreen() {
 
         {!showIdInput && (
           <View style={styles.field}>
-            <Text style={styles.label}>Name</Text>
+            <StyledText regularWhite>Name</StyledText>
             <View
               style={[
                 styles.inputContainer,
@@ -192,7 +181,7 @@ export function RegisterScreen() {
 
         <View style={styles.field}>
           <View style={styles.labelContainer}>
-            <Text style={styles.label}>Your password</Text>
+            <StyledText regularWhite>Your password</StyledText>
             <TouchableOpacity onPress={() => setHide(!hide)}>
               <MaterialCommunityIcons
                 style={styles.icon}
@@ -220,7 +209,7 @@ export function RegisterScreen() {
 
         <View style={styles.field}>
           <View style={styles.labelContainer}>
-            <Text style={styles.label}>Confirm your password</Text>
+            <StyledText regularWhite>Confirm your password</StyledText>
             <TouchableOpacity onPress={() => setConfirmHide(!confirmHide)}>
               <MaterialCommunityIcons
                 style={styles.icon}
@@ -250,7 +239,7 @@ export function RegisterScreen() {
 
         {showIdInput && (
           <View style={styles.field}>
-            <Text style={styles.label}>Company</Text>
+            <StyledText regularWhite>Confirm your password</StyledText>
             <View
               style={[
                 styles.inputContainer,
@@ -268,29 +257,7 @@ export function RegisterScreen() {
           </View>
         )}
 
-        <Pressable onPress={formik.handleSubmit}>
-          <LinearGradient
-            colors={["#CEDC39", "#7DA74D"]}
-            style={styles.signUpButton}
-          >
-            {loading && (
-              <View
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <ActivityIndicator size="small" animating={true} color="#fff" />
-              </View>
-            )}
-            <Text style={styles.text}>Sign Up</Text>
-          </LinearGradient>
-        </Pressable>
+        <StyledGradientButton text={"Sign Up"} action={() => formik.handleSubmit()} />
 
         <View style={styles.loginNowContainer}>
           <Text style={styles.loginNowText}>
