@@ -2,31 +2,40 @@ import React, { useState } from "react";
 import { useAuth } from "../../modules/Auth/hooks";
 import { styles } from "./ReportsScreen.Styles";
 import { Header } from "../../components/core/Header";
-import { Image, View, Dimensions, ScrollView, Text, TouchableOpacity } from "react-native";
+import {
+  Image,
+  View,
+  Dimensions,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { assets } from "../../assets";
 import StyledText, { StyledGradientButtonSmall } from "../../utils/globalstyle";
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 
 export function ReportsScreen() {
   const { logout } = useAuth();
 
-  const initialLayout = { width: Dimensions.get('window').width };
-
+  const initialLayout = { width: Dimensions.get("window").width };
 
   const CreatedRoute = () => (
     <ScrollView style={styles.Container}>
-            
+      <View style={{ marginLeft: 15 }}>
         <StyledText medium> Services </StyledText>
-        
-      <TouchableOpacity >
-        <Text  style={styles.Textgreen}>services traking  </Text>
+      </View>
+
+      <TouchableOpacity>
+        <Text style={styles.Textgreen}>services traking </Text>
       </TouchableOpacity>
 
-
-      <View style={{ flexDirection: 'column', }}>
+      <View style={{ flexDirection: "column" }}>
         <View style={styles.containertwo}>
-          <Image alt='categoria' style={styles.categoriauno} source={assets.image.png.categoriaUno} />
+          <Image
+            alt="categoria"
+            style={styles.categoriauno}
+            source={assets.image.png.categoriaUno}
+          />
           <View style={styles.containerText}>
             <StyledText boldGray>services in progress</StyledText>
             <StyledText regularGray>Cleaning the lobby area</StyledText>
@@ -38,7 +47,11 @@ export function ReportsScreen() {
         </View>
 
         <View style={styles.containertwo}>
-          <Image alt='categoria' style={styles.categoriauno} source={assets.image.png.categoriaUno} />
+          <Image
+            alt="categoria"
+            style={styles.categoriauno}
+            source={assets.image.png.categoriaUno}
+          />
           <View style={styles.containerText}>
             <StyledText boldGray>Cancelled Services</StyledText>
             <StyledText regularGray>Cleaning the lobby area</StyledText>
@@ -49,13 +62,21 @@ export function ReportsScreen() {
           </View>
         </View>
 
-        <View style={styles.containertwo}>
-          <Image alt='categoria' style={styles.categoriauno} source={assets.image.png.categoriaUno} />
+        <View style={styles.container__start}>
+          <Image
+            alt="categoria"
+            style={styles.categoriauno}
+            source={assets.image.png.categoriaUno}
+          />
           <View style={styles.containerText}>
             <StyledText boldGray>Qualified Services</StyledText>
             <View style={styles.containerStart}>
               <StyledText regularGray>Cleaning the lobby area</StyledText>
-              <Image alt='start' style={styles.start} source={assets.image.png.iconEstrella} />
+              <Image
+                alt="start"
+                style={styles.start}
+                source={assets.image.png.iconEstrella}
+              />
             </View>
             <View style={styles.ContenidoMontly}>
               <StyledText regularGray>Monthly Total : </StyledText>
@@ -64,38 +85,46 @@ export function ReportsScreen() {
           </View>
         </View>
 
+        <View style={{ marginLeft: 15, marginTop: 15 }}>
+          <StyledText medium> Attended Services</StyledText>
+        </View>
         <View style={styles.Containertree}>
+          <Text style={styles.Textgreen2}>Montly</Text>
           <View>
-            <StyledText medium> Attended Services</StyledText>
-          </View>
-          <Text style={styles.Textgreen}>Montly</Text>
-          <View >
             <StyledText boldGray> Montly Services</StyledText>
             <Image source={assets.image.png.Group} />
           </View>
-          <Text style={styles.Textgreen}>Weekly</Text>
-          <View >
+          <Text style={styles.Textgreen2}>Weekly</Text>
+          <View>
             <StyledText boldGray> Weekly Services</StyledText>
             <Image source={assets.image.png.Group} />
           </View>
-          <Text style={styles.Textgreen}>Day</Text>
-          <View >
+          <Text style={styles.Textgreen2}>Day</Text>
+          <View>
             <StyledText boldGray> Day Services</StyledText>
             <Image source={assets.image.png.Group} />
           </View>
         </View>
 
+        <View style={{ marginLeft: 15, marginTop: 15 }}>
+          <StyledText medium>Most Ordered Products</StyledText>
+        </View>
+
         <View style={styles.Containerforth}>
-          <View>
-            <StyledText medium >Most Ordered Products</StyledText>
-          </View>
           <View style={styles.containertwo}>
-            <Image alt='categoria' style={styles.categoriauno} source={assets.image.png.categoriaUno} />
+            <Image
+              alt="categoria"
+              style={styles.categoriauno}
+              source={assets.image.png.categoriaUno}
+            />
             <View style={styles.containerText}>
               <StyledText boldGray>Product 1</StyledText>
               <StyledText regularGray>Lorem Ipsum simply</StyledText>
               <View style={styles.Contenidoranking}>
-                <Image style={styles.startranking} source={assets.image.png.iconEstrella} />
+                <Image
+                  style={styles.startranking}
+                  source={assets.image.png.iconEstrella}
+                />
                 <Text style={styles.ranking}>4.8 </Text>
               </View>
               <View style={styles.Container__Total}>
@@ -106,12 +135,19 @@ export function ReportsScreen() {
           </View>
 
           <View style={styles.containertwo}>
-            <Image alt='categoria' style={styles.categoriauno} source={assets.image.png.categoriaUno} />
+            <Image
+              alt="categoria"
+              style={styles.categoriauno}
+              source={assets.image.png.categoriaUno}
+            />
             <View style={styles.containerText}>
               <StyledText boldGray>Product 2</StyledText>
               <StyledText regularGray>Lorem Ipsum simply</StyledText>
               <View style={styles.Contenidoranking}>
-                <Image style={styles.startranking} source={assets.image.png.iconEstrella} />
+                <Image
+                  style={styles.startranking}
+                  source={assets.image.png.iconEstrella}
+                />
                 <Text style={styles.ranking}>4.8 </Text>
               </View>
               <View style={styles.Container__Total}>
@@ -122,12 +158,19 @@ export function ReportsScreen() {
           </View>
 
           <View style={styles.containertwo}>
-            <Image alt='categoria' style={styles.categoriauno} source={assets.image.png.categoriaUno} />
+            <Image
+              alt="categoria"
+              style={styles.categoriauno}
+              source={assets.image.png.categoriaUno}
+            />
             <View style={styles.containerText}>
               <StyledText boldGray>Product 3</StyledText>
               <StyledText regularGray>Lorem Ipsum simply</StyledText>
               <View style={styles.Contenidoranking}>
-                <Image style={styles.startranking} source={assets.image.png.iconEstrella} />
+                <Image
+                  style={styles.startranking}
+                  source={assets.image.png.iconEstrella}
+                />
                 <Text style={styles.ranking}>4.8 </Text>
               </View>
               <View style={styles.Container__Total}>
@@ -141,7 +184,6 @@ export function ReportsScreen() {
     </ScrollView>
   );
 
-
   const CancelledRoute = () => (
     <View style={styles.Container}>
       <Text>Contanido de cancelled</Text>
@@ -150,15 +192,15 @@ export function ReportsScreen() {
 
   const RankingsRoute = () => (
     <View style={styles.Container}>
-      <Text>Rankings  contenido</Text>
+      <Text>Rankings contenido</Text>
     </View>
   );
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'created', title: 'Created' },
-    { key: 'cancelled', title: 'Cancelled' },
-    { key: 'rankings', title: 'Rankings' },
+    { key: "created", title: "Created" },
+    { key: "cancelled", title: "Cancelled" },
+    { key: "rankings", title: "Rankings" },
   ]);
 
   const renderScene = SceneMap({
@@ -169,24 +211,30 @@ export function ReportsScreen() {
 
   return (
     <>
-      <Header title={"Tracking and Reporting"} subtitle={"MGS Supply & Services"} />
-     
+      <Header
+        title={"Tracking and Reporting"}
+        subtitle={"MGS Supply & Services"}
+      />
+
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
         onIndexChange={setIndex}
         initialLayout={initialLayout}
-        renderTabBar={props => (
+        renderTabBar={(props) => (
           <TabBar
             {...props}
-            indicatorStyle={{ backgroundColor: 'transparent', height: 0 }}
-            style={{ backgroundColor: '#fff', elevation: 0, shadowOpacity: 0, borderBottomWidth: 0 }}
+            indicatorStyle={{ backgroundColor: "transparent", height: 0 }}
+            style={{
+              backgroundColor: "#fff",
+              elevation: 0,
+              shadowOpacity: 0,
+              borderBottomWidth: 0,
+            }}
+            pressColor="transparent"
+            pressOpacity={1}
             renderLabel={({ route, focused, color }) => (
-
-              <StyledGradientButtonSmall
-                text={route.title}
-                focused={focused}
-              />
+              <StyledGradientButtonSmall text={route.title} focused={focused} />
             )}
           />
         )}
