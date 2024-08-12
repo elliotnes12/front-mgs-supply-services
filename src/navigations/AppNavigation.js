@@ -18,6 +18,7 @@ import { ChatScreenSupervisor } from '../screens/Global/ChatScreenSupervisor';
 import { ServicesScreen } from '../screens/Global/ServicesScreen';
 import { ChatContactsScreenEmployee } from '../screens/Global/ChatContactsScreenEmployee';
 import { SettingsScreen } from '../modules/Settings';
+import { EmailTokenVerificationScreen } from '../modules/Auth/screens/EmailTokenVerificationScreen';
 
 
 initSockets();
@@ -46,14 +47,18 @@ export function AppNavigation() {
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
 
+        <Stack.Screen
+          name={"EmailTokenVerificationScreen"}
+          component={EmailTokenVerificationScreen}
+          options={{ headerShown: false }}
+        />
+
 
         <Stack.Screen
           name={"ProfileScreen"}
           component={SettingsScreen}
           options={{ headerShown: false }}
         />
-
-
 
         <Stack.Screen
           name={screens.tab.chats.chatContactsScreenEmployee}

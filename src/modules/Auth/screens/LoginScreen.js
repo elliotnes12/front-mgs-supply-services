@@ -4,12 +4,15 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { screens } from "../../../utils";
+import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
 import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/LoginForm.form";
 import { useAuth } from "../hooks";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/LoginScreen.styles";
-import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
+import { AlertConfirm } from "../../../components/core/Modal/AlertConfirm";
+import { Alert } from "../../../components/core/Modal/Alert";
+import { Response } from "../../../utils/Response";
 
 const authController = new Auth();
 
@@ -20,8 +23,12 @@ export function LoginScreen() {
   const [isModalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [marginTopContent, setMarginTopContent] = useState(20)
+  const [message, setMessage] = useState("");
+
+  const objectResponse = new Response();
 
   const formik = useFormik({
+
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     validateOnChange: false,
@@ -29,14 +36,24 @@ export function LoginScreen() {
       setLoading(true);
       try {
         const { email, password } = formValue;
+        const response = await authController.login(email, password);
 
-        const { data } = await authController.login(email, password);
+        const { code, message, data } = objectResponse.getResponse(response);
+        console.log("mensajsada" + message)
+        if (code != 200) {
+          throw Error(message);
+        }
 
-        await authController.setAccessToken(data.access);
-        await authController.setRefreshToken(data.refresh);
-        await login(data.access);
+
+        await authController.setAccessToken(data?.access);
+        await authController.setRefreshToken(data?.refresh);
+        await login(data?.access);
+
+        setLoading(false)
 
       } catch (error) {
+        setMessage(error.message)
+        setLoading(false)
         toggleModal();
       } finally {
         setLoading(false);
@@ -45,7 +62,7 @@ export function LoginScreen() {
   });
 
   const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+    setModalVisible(prevState => !prevState);
   };
 
 
@@ -95,7 +112,10 @@ export function LoginScreen() {
         </View>
 
         <View style={{ justifyContent: "center" }}>
-          <StyledGradientButton text={"Login"} action={() => formik.handleSubmit()} />
+          <StyledGradientButton text={"Login"} action={() => {
+
+            formik.handleSubmit()
+          }} />
         </View>
 
         <View style={styles.loginNowContainer}>
@@ -106,6 +126,18 @@ export function LoginScreen() {
         </View>
 
       </View>
+
+      <Alert
+        show={isModalVisible}
+        type={"info"}
+        onClose={toggleModal}
+        textConfirm="Delete"
+        onConfirm={() => { }}
+        message={message}
+        isDanger
+        loading={loading}
+      />
     </LayoutAuth>
+
   );
 }

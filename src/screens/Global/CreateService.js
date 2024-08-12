@@ -52,7 +52,7 @@ export function CreateService() {
     } else if (label === "Painting") {
       return assets.image.png.iconBotePintura;
     } else if (label === "Polishing") {
-      return assets.image.png.destellos;
+      return assets.image.png.iconBotePintura;
     }
   };
 
@@ -150,7 +150,7 @@ export function CreateService() {
 
   return (
     <>
-      <Header goBack={true}  title={"Create a Service"} subtitle={"Create of the generated services"}/>
+      <Header goBack={true} title={"Create a Service"} subtitle={"Create of the generated services"} />
       <FlatList
         style={styles.container}
         ListHeaderComponent={

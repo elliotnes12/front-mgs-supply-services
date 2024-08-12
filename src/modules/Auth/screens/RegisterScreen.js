@@ -20,8 +20,10 @@ import { stylesGlobal } from "../../styles/global.style";
 import { ENV } from "../../../utils";
 import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
+import { Response } from "../../../utils/Response";
 
 const authController = new Auth();
+const objectResponse = new Response();
 
 export function RegisterScreen() {
   const navigation = useNavigation();
@@ -32,6 +34,7 @@ export function RegisterScreen() {
   const [hide, setHide] = useState(true);
   const [confirmHide, setConfirmHide] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleRadioChange = (newValue) => {
     if (newValue != userType) {
@@ -50,27 +53,41 @@ export function RegisterScreen() {
   const formik = useFormik({
     initialValues: initialValues(),
 
+
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue, { resetForm }) => {
       setLoading(true);
       try {
-        await authController.register(
+
+        const response = await authController.register(
           formValue.email,
           formValue.password,
           formValue.employeeNumber,
           formValue.name
         );
         setLoading(false);
-        setMessage("User registered successfully");
+
+        const { code, message, data } = objectResponse.getResponse(response);
+
+        if (code != 200) {
+          throw Error(message);
+        }
+
         resetForm();
+
+
       } catch (error) {
-        setLoading(false);
-        setMessage(error.meta.message);
-        setShowAlert(true);
+        setMessage(error.message)
+        setLoading(false)
+        toggleModal();
       }
     },
   });
+
+  const toggleModal = () => {
+    setModalVisible(prevState => !prevState);
+  };
 
   const handleLoginNowPress = () => {
     navigation.navigate("LoginScreen");
@@ -131,11 +148,7 @@ export function RegisterScreen() {
             ) : (
               <View style={styles.registerButton}>
                 <View style={{ width: 26, height: 26, marginRight: 10 }}>
-                  <Image
-                    style={stylesGlobal.imageMin__img}
-                    resizeMode="contain"
-                    source={getIcon("icon-maletin-gray")}
-                  />
+                  {getIconById("iconMaletaGray")}
                 </View>
                 <Text style={styles.buttonText}>Company</Text>
               </View>
@@ -269,11 +282,14 @@ export function RegisterScreen() {
         </View>
 
         <Alert
-          show={showAlert}
-          setShowAlert={setShowAlert}
-          onClose={closeAlert}
-          type="info"
-          title={message}
+          show={isModalVisible}
+          type={"info"}
+          onClose={toggleModal}
+          textConfirm="Delete"
+          onConfirm={() => { }}
+          message={message}
+          isDanger
+          loading={loading}
         />
       </View>
     </LayoutAuth>

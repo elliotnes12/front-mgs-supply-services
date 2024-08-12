@@ -1,11 +1,11 @@
 import React from 'react'
 import { RenderStatusService } from './RenderStatusService';
-import {styles} from "../styles/ItemServive.style";
+import { styles } from "../styles/ItemServive.style";
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { stylesGlobal } from '../../../modules/styles/global.style';
 import { assets } from '../../../assets';
 
-export function ItemServiceManager({item}) {
+export function ItemServiceManager({ item }) {
     return (
         <View style={styles.item}>
             <View style={styles.item__img}>
@@ -22,7 +22,7 @@ export function ItemServiceManager({item}) {
                     <Text style={styles.item__datetext} >{item.date}</Text>
                 </View>
 
-                <RenderStatusService status={item.status}  />
+                <RenderStatusService status={item.status} />
 
                 <TouchableOpacity style={styles.item__flechaContainer}>
                     <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />

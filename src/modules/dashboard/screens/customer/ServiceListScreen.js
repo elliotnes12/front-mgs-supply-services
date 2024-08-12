@@ -44,12 +44,12 @@ const RenderRaiting = () => (
 export const ServiceListScreenCt = () => {
   const [index, setIndex] = useState(0);
   const [height, setHeight] = useState(0);
-  const navigation = useNavigation();  
+  const navigation = useNavigation();
 
   const routes = [
-    { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services' },
-    { key: tabIds.TAB_ID_PRODUCTS, title: 'products', label: 'Orders' },
-    { key: tabIds.TAB_ID_RAITING, title: 'raiting', label: 'Raiting' },
+    { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services', icon: 'icon-service' },
+    { key: tabIds.TAB_ID_PRODUCTS, title: 'products', label: 'Orders', icon: 'icon-order' },
+    { key: tabIds.TAB_ID_RAITING, title: 'raiting', label: 'Raiting', icon: 'icon-raiting' },
   ];
 
   useEffect(() => {
@@ -93,14 +93,12 @@ export const ServiceListScreenCt = () => {
             colors={['#CEDC39', '#7DA74D']}
             style={styles.gradient}
           >
-            <Image style={styles.iconServices} resizeMode="cover" source={getIcon(route.key + "-focus")} />
             <Text style={styles.tabTextFocused}>
               {route.title}
             </Text>
           </LinearGradient>
         ) : (
           <View style={styles.tabItem}>
-            <Image style={styles.iconServices} resizeMode="cover" source={getIcon(route.key)} />
             <Text style={styles.tabText}>
               {route.title}
             </Text>

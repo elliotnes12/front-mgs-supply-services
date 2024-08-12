@@ -4,11 +4,12 @@ import { TabView, TabBar } from "react-native-tab-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { styles } from "./ServiceListScreenManager.styles";
 import { screens, tabIds } from "../../../../utils";
-import { getIcon } from "../../../../utils/util";
+import { getIconById } from "../../../../utils/util";
 import { useNavigation } from "@react-navigation/native";
 import { ItemServiceManager } from "../../../../components/core/items/ItemServiceManager";
 import { useEffect } from "react";
 import { useState } from "react";
+import { theme } from "../../../../utils/theme";
 
 const data = [
   {
@@ -104,23 +105,19 @@ export const ServiceListScreenManager = () => {
       renderLabel={({ route, focused }) =>
         focused ? (
           <LinearGradient
-            colors={["#CEDC39", "#7DA74D"]}
+            colors={[theme.gradient.color1, theme.gradient.color2]}
             style={styles.gradient}
           >
-            <Image
-              style={styles.iconServices}
-              resizeMode="cover"
-              source={getIcon(route.key + "-focus")}
-            />
+            <View style={{ width: 22, height: 22, marginRight: 5 }}>
+              {getIconById("iconDocument")}
+            </View>
             <Text style={styles.tabTextFocused}>{route.label}</Text>
           </LinearGradient>
         ) : (
           <View style={styles.tabItem}>
-            <Image
-              style={styles.iconServices}
-              resizeMode="cover"
-              source={getIcon(route.key)}
-            />
+            <View style={{ width: 22, height: 22, marginRight: 5 }}>
+              {getIconById("iconDocumentGray")}
+            </View>
             <Text style={styles.tabText}>{route.label}</Text>
           </View>
         )
@@ -130,12 +127,12 @@ export const ServiceListScreenManager = () => {
 
   return (
     <TabView
-    navigationState={{ index, routes }}
-    renderScene={renderScene}
-    style={{ height: height }}
-    onIndexChange={setIndex}
-    initialLayout={initialLayout}
-    renderTabBar={renderTabBar}
-  />
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      style={{ height: height }}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+      renderTabBar={renderTabBar}
+    />
   );
 };

@@ -10,7 +10,6 @@ import {
   ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { assets } from "../../../assets";
 import { useAuth } from "../../Auth/hooks";
 import { ServiceListScreenCt } from "./customer/ServiceListScreen";
@@ -19,7 +18,7 @@ import { ServiceListScreenEmployee } from "./employee/ServiceListScreenEmployee"
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../styles/dashboard.styles";
 import { ServiceListScreenManager } from "./manager/ServicesListScreenManager";
-import { getIcon, getIconById } from "../../../utils/util";
+import { getIconById } from "../../../utils/util";
 import StyledText from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
 
@@ -109,7 +108,7 @@ export function DashboardScreen() {
           <>
             <View style={styles.promos}>
               <LinearGradient
-                colors={[theme.gradient.color1,theme.gradient.color2]}
+                colors={[theme.gradient.color1, theme.gradient.color2]}
                 style={styles.bgpromos}
               >
                 <View style={styles.promos__label}>
