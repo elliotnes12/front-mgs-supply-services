@@ -9,7 +9,7 @@ export function ItemServiceManager({ item }) {
     return (
         <View style={styles.item}>
             <View style={styles.item__img}>
-                <Image alt='categoria' style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.categoriaUno} />
+                <Image alt='categoria' style={stylesGlobal.imageMin__img} resizeMode="contain" source={assets.image.png.minService} />
             </View>
             <View style={styles.item__text}>
                 <Text style={styles.item__title}>{item.title}</Text>

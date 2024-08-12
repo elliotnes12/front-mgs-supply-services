@@ -8,11 +8,11 @@ import {
   Dimensions,
   ScrollView,
   Text,
-  TouchableOpacity,
 } from "react-native";
 import { assets } from "../../assets";
 import StyledText, { StyledGradientButtonSmall } from "../../utils/globalstyle";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { getIconById } from "../../utils/util";
 
 export function ReportsScreen() {
   const { logout } = useAuth();
@@ -20,162 +20,142 @@ export function ReportsScreen() {
   const initialLayout = { width: Dimensions.get("window").width };
 
   const CreatedRoute = () => (
-    <ScrollView style={styles.Container}>
-      <View style={{ marginLeft: 15 }}>
-        <StyledText medium> Services </StyledText>
-      </View>
+    <ScrollView>
+      <View style={{ paddingHorizontal: 20, flex: 1, paddingBottom: 30 }}>
+        <StyledText headerGray> Services </StyledText>
 
-      <TouchableOpacity>
-        <Text style={styles.Textgreen}>services traking </Text>
-      </TouchableOpacity>
+        <StyledText font14pt regularGreen>Services Traking</StyledText>
 
-      <View style={{ flexDirection: "column" }}>
-        <View style={styles.containertwo}>
-          <Image
-            alt="categoria"
-            style={styles.categoriauno}
-            source={assets.image.png.categoriaUno}
-          />
-          <View style={styles.containerText}>
-            <StyledText boldGray>services in progress</StyledText>
-            <StyledText regularGray>Cleaning the lobby area</StyledText>
-            <View style={styles.ContenidoMontly}>
-              <StyledText regularGray>Monthly Total : </StyledText>
-              <Text style={styles.numero1}>100</Text>
+
+        <View style={{ flexDirection: "column" }}>
+          <View style={styles.item}>
+
+            <View style={styles.minImg}>
+              {getIconById("minService")}
             </View>
-          </View>
-        </View>
-
-        <View style={styles.containertwo}>
-          <Image
-            alt="categoria"
-            style={styles.categoriauno}
-            source={assets.image.png.categoriaUno}
-          />
-          <View style={styles.containerText}>
-            <StyledText boldGray>Cancelled Services</StyledText>
-            <StyledText regularGray>Cleaning the lobby area</StyledText>
-            <View style={styles.ContenidoMontly}>
-              <StyledText regularGray>Monthly Total : </StyledText>
-              <Text style={styles.numero2}>120</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.container__start}>
-          <Image
-            alt="categoria"
-            style={styles.categoriauno}
-            source={assets.image.png.categoriaUno}
-          />
-          <View style={styles.containerText}>
-            <StyledText boldGray>Qualified Services</StyledText>
-            <View style={styles.containerStart}>
+            <View style={styles.containerText}>
+              <StyledText boldGray>Services in progress</StyledText>
               <StyledText regularGray>Cleaning the lobby area</StyledText>
-              <Image
-                alt="start"
-                style={styles.start}
-                source={assets.image.png.iconEstrella}
-              />
-            </View>
-            <View style={styles.ContenidoMontly}>
-              <StyledText regularGray>Monthly Total : </StyledText>
-              <Text style={styles.numero3}>146</Text>
+              <View style={styles.ContenidoMontly}>
+                <StyledText regularGray>Monthly Total : </StyledText>
+                <StyledText bold gold>120</StyledText>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={{ marginLeft: 15, marginTop: 15 }}>
-          <StyledText medium> Attended Services</StyledText>
-        </View>
-        <View style={styles.Containertree}>
-          <Text style={styles.Textgreen2}>Montly</Text>
-          <View>
-            <StyledText boldGray> Montly Services</StyledText>
-            <Image source={assets.image.png.Group} />
-          </View>
-          <Text style={styles.Textgreen2}>Weekly</Text>
-          <View>
-            <StyledText boldGray> Weekly Services</StyledText>
-            <Image source={assets.image.png.Group} />
-          </View>
-          <Text style={styles.Textgreen2}>Day</Text>
-          <View>
-            <StyledText boldGray> Day Services</StyledText>
-            <Image source={assets.image.png.Group} />
-          </View>
-        </View>
-
-        <View style={{ marginLeft: 15, marginTop: 15 }}>
-          <StyledText medium>Most Ordered Products</StyledText>
-        </View>
-
-        <View style={styles.Containerforth}>
-          <View style={styles.containertwo}>
-            <Image
-              alt="categoria"
-              style={styles.categoriauno}
-              source={assets.image.png.categoriaUno}
-            />
+          <View style={styles.item}>
+            <View style={styles.minImg}>
+              {getIconById("minService")}
+            </View>
             <View style={styles.containerText}>
-              <StyledText boldGray>Product 1</StyledText>
-              <StyledText regularGray>Lorem Ipsum simply</StyledText>
-              <View style={styles.Contenidoranking}>
-                <Image
-                  style={styles.startranking}
-                  source={assets.image.png.iconEstrella}
-                />
-                <Text style={styles.ranking}>4.8 </Text>
-              </View>
-              <View style={styles.Container__Total}>
-                <StyledText regularGray>Total:</StyledText>
-                <Text style={styles.Num__Total}>146</Text>
+              <StyledText boldGray>Cancelled Services</StyledText>
+              <StyledText regularGray>Cleaning the lobby area</StyledText>
+              <View style={styles.ContenidoMontly}>
+                <StyledText regularGray>Monthly Total : </StyledText>
+                <StyledText bold brightRed>120</StyledText>
               </View>
             </View>
           </View>
 
-          <View style={styles.containertwo}>
-            <Image
-              alt="categoria"
-              style={styles.categoriauno}
-              source={assets.image.png.categoriaUno}
-            />
+          <View style={styles.item}>
+            <View style={styles.minImg}>
+              {getIconById("minService")}
+            </View>
             <View style={styles.containerText}>
-              <StyledText boldGray>Product 2</StyledText>
-              <StyledText regularGray>Lorem Ipsum simply</StyledText>
-              <View style={styles.Contenidoranking}>
-                <Image
-                  style={styles.startranking}
-                  source={assets.image.png.iconEstrella}
-                />
-                <Text style={styles.ranking}>4.8 </Text>
-              </View>
-              <View style={styles.Container__Total}>
-                <StyledText regularGray>Total:</StyledText>
-                <Text style={styles.Num__Total}>119</Text>
+              <StyledText boldGray>Qualified Services</StyledText>
+              <StyledText regularGray>Cleaning the lobby area</StyledText>
+              <View style={styles.ContenidoMontly}>
+                <StyledText regularGray>Monthly Total : </StyledText>
+                <StyledText bold brightBlue>120</StyledText>
               </View>
             </View>
           </View>
 
-          <View style={styles.containertwo}>
-            <Image
-              alt="categoria"
-              style={styles.categoriauno}
-              source={assets.image.png.categoriaUno}
-            />
-            <View style={styles.containerText}>
-              <StyledText boldGray>Product 3</StyledText>
-              <StyledText regularGray>Lorem Ipsum simply</StyledText>
-              <View style={styles.Contenidoranking}>
-                <Image
-                  style={styles.startranking}
-                  source={assets.image.png.iconEstrella}
-                />
-                <Text style={styles.ranking}>4.8 </Text>
+
+          <View style={{ marginTop: 15 }}>
+            <StyledText headerGray> Attended Services</StyledText>
+          </View>
+          <View style={styles.Containertree}>
+            <StyledText font14pt regularGreen>Montly</StyledText>
+            <View>
+              <StyledText boldGray> Montly Services</StyledText>
+              <Image source={assets.image.png.Group} />
+            </View>
+            <StyledText font14pt regularGreen>Weekly</StyledText>
+            <View>
+              <StyledText boldGray> Weekly Services</StyledText>
+              <Image source={assets.image.png.Group} />
+            </View>
+            <StyledText font14pt regularGreen>Day</StyledText>
+            <View>
+              <StyledText boldGray> Day Services</StyledText>
+              <Image source={assets.image.png.Group} />
+            </View>
+          </View>
+
+          <View style={{ marginTop: 25 }}>
+            <StyledText headerGray>Most Ordered Products</StyledText>
+          </View>
+
+          <View style={styles.Containerforth}>
+            <View style={styles.item}>
+              <View style={styles.minImg}>
+                {getIconById("minService")}
               </View>
-              <View style={styles.Container__Total}>
-                <StyledText regularGray>Total:</StyledText>
-                <Text style={styles.Num__Total}>95</Text>
+              <View style={styles.containerText}>
+                <StyledText boldGray>Product 1</StyledText>
+                <StyledText regularGray>Lorem Ipsum simply</StyledText>
+                <View style={styles.Contenidoranking}>
+                  <Image
+                    style={styles.startranking}
+                    source={assets.image.png.iconRaiting}
+                  />
+                  <Text style={styles.ranking}>4.8 </Text>
+                </View>
+                <View style={styles.item__total}>
+                  <StyledText regularGray>Total:</StyledText>
+                  <Text style={styles.Num__Total}>146</Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.item}>
+              <View style={styles.minImg}>
+                {getIconById("minService")}
+              </View>
+              <View style={styles.containerText}>
+                <StyledText boldGray>Product 2</StyledText>
+                <StyledText regularGray>Lorem Ipsum simply</StyledText>
+                <View style={styles.Contenidoranking}>
+                  <View style={styles.startranking}>
+                    {getIconById("iconRaiting")}
+                  </View>
+                  <Text style={styles.ranking}>4.8</Text>
+                </View>
+                <View style={styles.item__total}>
+                  <StyledText regularGray>Total:</StyledText>
+                  <Text style={styles.Num__Total}>119</Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.item}>
+              <View style={styles.minImg}>
+                {getIconById("minService")}
+              </View>
+              <View style={styles.containerText}>
+                <StyledText boldGray>Product 3</StyledText>
+                <StyledText regularGray>Lorem Ipsum simply</StyledText>
+                <View style={styles.Contenidoranking}>
+                  <View style={styles.startranking}>
+                    {getIconById("iconRaiting")}
+                  </View>
+                  <Text style={styles.ranking}>4.8 </Text>
+                </View>
+                <View style={styles.item__total}>
+                  <StyledText regularGray>Total:</StyledText>
+                  <Text style={styles.Num__Total}>95</Text>
+                </View>
               </View>
             </View>
           </View>
@@ -225,6 +205,7 @@ export function ReportsScreen() {
           <TabBar
             {...props}
             indicatorStyle={{ backgroundColor: "transparent", height: 0 }}
+            tabStyle={{ paddingLeft: 30 }}
             style={{
               backgroundColor: "#fff",
               elevation: 0,

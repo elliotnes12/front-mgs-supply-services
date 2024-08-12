@@ -4,7 +4,8 @@ export const theme = {
     fontSizes: {
         big: 32,
         regular: 16,
-        medium_size: 24
+        medium_size: 24,
+        header: 20
     },
     colors: {
         primary: "#333",
@@ -18,6 +19,9 @@ export const theme = {
         colorLightsteelblue: "#9db2ce",
         colorSecundario: "#7da74d",
         colorGray_100: "#fafafa",
+        brightBlue: "#3984DC",
+        brightRed: "#DC3939",
+        goldenYellow: "#FCD036",
         gray3: "#828282",
         monochromaticToBeRemovedMidDark: "#818181",
         secondaryColor: "#080c2f",
