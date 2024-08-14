@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -53,13 +47,11 @@ export function RegisterScreen() {
   const formik = useFormik({
     initialValues: initialValues(),
 
-
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue, { resetForm }) => {
       setLoading(true);
       try {
-
         const response = await authController.register(
           formValue.email,
           formValue.password,
@@ -70,23 +62,22 @@ export function RegisterScreen() {
 
         const { code, message, data } = objectResponse.getResponse(response);
 
-        if (code != 200) {
+        if (code != 201) {
           throw Error(message);
         }
 
-        resetForm();
-
-
+        navigation.navigate("EmailTokenVerificationScreen");
       } catch (error) {
-        setMessage(error.message)
-        setLoading(false)
+        console.log(error);
+        setMessage(error.message);
+        setLoading(false);
         toggleModal();
       }
     },
   });
 
   const toggleModal = () => {
-    setModalVisible(prevState => !prevState);
+    setModalVisible((prevState) => !prevState);
   };
 
   const handleLoginNowPress = () => {
@@ -101,7 +92,9 @@ export function RegisterScreen() {
     <LayoutAuth userType={userType}>
       <View style={styles.container}>
         <StyledText headerBig>Registration</StyledText>
-        <StyledText regularWhite>Create your account and start today</StyledText>
+        <StyledText regularWhite>
+          Create your account and start today
+        </StyledText>
         <Text style={styles.cuestion}>How do you identify yourself?</Text>
 
         <View style={styles.actions}>
@@ -138,7 +131,6 @@ export function RegisterScreen() {
                 style={styles.registerButton}
               >
                 <View style={{ width: 25, height: 25, marginRight: 10 }}>
-
                   {getIconById("iconMaletaWhite")}
                 </View>
                 <Text style={[{ color: "#fff" }, styles.buttonText]}>
@@ -270,7 +262,12 @@ export function RegisterScreen() {
           </View>
         )}
 
-        <StyledGradientButton text={"Sign Up"} action={() => formik.handleSubmit()} />
+        <StyledGradientButton
+          text={"Sign Up"}
+          action={() => {
+            formik.handleSubmit();
+          }}
+        />
 
         <View style={styles.loginNowContainer}>
           <Text style={styles.loginNowText}>
@@ -286,7 +283,7 @@ export function RegisterScreen() {
           type={"info"}
           onClose={toggleModal}
           textConfirm="Delete"
-          onConfirm={() => { }}
+          onConfirm={() => {}}
           message={message}
           isDanger
           loading={loading}

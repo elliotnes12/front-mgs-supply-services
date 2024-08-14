@@ -1,41 +1,34 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-import {
-  CreateService,
-  ImageFullScreen,
-} from "../screens/Global";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import { CreateService, ImageFullScreen } from "../screens/Global";
 import {
   AddUserGroupScreen,
   ChangeNameGroupScreen,
   GroupProfileScreen,
   GroupScreen,
 } from "../screens/Groups";
-import { initSockets, screens } from '../utils';
+import { initSockets, screens } from "../utils";
 import { styles } from "./Styles.style";
-import { BottomTabNavigation } from './ButtonTabNavigation/BottomTabNavigation';
-import { ChatScreen } from '../screens/Global/ChatScreen';
-import { ChatScreenSupervisor } from '../screens/Global/ChatScreenSupervisor';
-import { ServicesScreen } from '../screens/Global/ServicesScreen';
-import { ChatContactsScreenEmployee } from '../screens/Global/ChatContactsScreenEmployee';
-import { SettingsScreen } from '../modules/Settings';
-import { EmailTokenVerificationScreen } from '../modules/Auth/screens/EmailTokenVerificationScreen';
-
+import { BottomTabNavigation } from "./ButtonTabNavigation/BottomTabNavigation";
+import { ChatScreen } from "../screens/Global/ChatScreen";
+import { ChatScreenSupervisor } from "../screens/Global/ChatScreenSupervisor";
+import { ServicesScreen } from "../screens/Global/ServicesScreen";
+import { ChatContactsScreenEmployee } from "../screens/Global/ChatContactsScreenEmployee";
+import { SettingsScreen } from "../modules/Settings";
+import { EmailTokenVerificationScreen } from "../modules/Auth/screens/EmailTokenVerificationScreen";
 
 initSockets();
 
 const Stack = createNativeStackNavigator();
 
 export function AppNavigation() {
-
-
   return (
-    <Stack.Navigator >
+    <Stack.Navigator>
       <Stack.Screen
         name={screens.tab.root}
         options={{ headerShown: false, ...styles.stackNavigationStyles }}
         component={BottomTabNavigation}
       />
-
 
       <Stack.Screen
         name={screens.global.groupScreen}
@@ -46,14 +39,6 @@ export function AppNavigation() {
       <Stack.Group
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
-
-        <Stack.Screen
-          name={"EmailTokenVerificationScreen"}
-          component={EmailTokenVerificationScreen}
-          options={{ headerShown: false }}
-        />
-
-
         <Stack.Screen
           name={"ProfileScreen"}
           component={SettingsScreen}
@@ -83,7 +68,6 @@ export function AppNavigation() {
           component={ServicesScreen}
           options={{ headerShown: false }}
         />
-
 
         <Stack.Screen
           name={screens.global.createService}

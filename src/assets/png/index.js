@@ -48,10 +48,10 @@ const png = {
   iconguinos: require("./icons/guinos.png"),
   iconsuccess: require("./icons/success.png"),
   iconCalendarSearch: require("./icons/icon-calendar-search.png"),
-  iconoLupaWhite: require('./icons/icono-lupa-white.png'),
-  iconoMenuVertical: require('./icons/menu-vertical.png'),
-  iconAddChat: require('./icons/icon-message.png'),
-  iconsupportwhite: require('./icons/icon-supportwhite.png'),
+  iconoLupaWhite: require("./icons/icono-lupa-white.png"),
+  iconoMenuVertical: require("./icons/menu-vertical.png"),
+  iconAddChat: require("./icons/icon-message.png"),
+  iconsupportwhite: require("./icons/icon-supportwhite.png"),
   estrellados: require("./home/estrellados.png"),
   estrellauno: require("./home/estrellauno.png"),
   iconQuestion: require("./icons/icon-question.png"),
@@ -63,9 +63,11 @@ const png = {
   iconDocument: require("./icons/icon-document.png"),
   iconDocumentGray: require("./icons/icon-document-gray.png"),
   iconInfo: require("./icons/icon-info.png"),
-  avatar: require('./icons/avatar.png'),
+  avatar: require("./icons/avatar.png"),
   edit: require("./icons/edit.png"),
-  Group: require("./icons/Group.png")
-}
+  Group: require("./icons/Group.png"),
+  minCancelled: require("./servicios/cancelled.png"),
+  messageVerfication: require("./icons/icon-message-verification.png"),
+};
 
 export { png };

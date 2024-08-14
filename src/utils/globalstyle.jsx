@@ -1,12 +1,17 @@
-import {Pressable, StyleSheet, Text} from "react-native";
-import {theme} from "./theme";
-import {LinearGradient} from "expo-linear-gradient";
+import { Pressable, StyleSheet, Text } from "react-native";
+import { theme } from "./theme";
+import { LinearGradient } from "expo-linear-gradient";
 
 const styles = StyleSheet.create({
   headerBig: {
     fontFamily: theme.textStyles.semiBold,
     fontSize: theme.fontSizes.big,
     color: "#fff",
+  },
+  titlleBig: {
+    fontFamily: theme.textStyles.bold,
+    fontSize: theme.fontSizes.big,
+    color: "#000",
   },
   regularWhite: {
     fontFamily: theme.textStyles.regular,
@@ -87,6 +92,7 @@ export default function StyledText({
   brightBlue,
   brightRed,
   gold,
+  titlleBig,
 }) {
   const textStyles = [
     bold && styles.textBold,
@@ -100,11 +106,12 @@ export default function StyledText({
     brightBlue && styles.brightBlue,
     brightRed && styles.brightRed,
     gold && styles.gold,
+    titlleBig && styles.titlleBig,
   ];
   return <Text style={textStyles}>{children}</Text>;
 }
 
-export function StyledGradientButton({text, action}) {
+export function StyledGradientButton({ text, action }) {
   const buttonStyles = [];
   return (
     <Pressable onPress={action}>
@@ -117,7 +124,7 @@ export function StyledGradientButton({text, action}) {
     </Pressable>
   );
 }
-export function StyledGradientButtonSmall({text, action, focused}) {
+export function StyledGradientButtonSmall({ text, action, focused }) {
   const buttonStyles = [];
   const gradientColors = focused
     ? [theme.gradientsmall.color1Focused, theme.gradientsmall.color2Focused]
@@ -131,7 +138,7 @@ export function StyledGradientButtonSmall({text, action, focused}) {
         colors={gradientColors}
         style={styles.gradientButtonSmall}
       >
-        <Text style={[styles.gradientButtonTextsmall, {color: textColor}]}>
+        <Text style={[styles.gradientButtonTextsmall, { color: textColor }]}>
           {text}
         </Text>
       </LinearGradient>

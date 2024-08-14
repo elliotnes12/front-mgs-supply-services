@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Image
+  Image,
 } from "react-native";
 import { assets } from "../../../assets";
 import { styles } from "./layout.styles";
@@ -25,16 +25,22 @@ export default function LayoutAuth({ children, userType, logo }) {
   }, [logo]);
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      setMarginContent(-40);
-    });
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      if (logo) {
-        setMarginContent(80);
-      } else {
-        setMarginContent(10); // or any other default margin when the logo is not present
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setMarginContent(-40);
       }
-    });
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        if (logo) {
+          setMarginContent(80);
+        } else {
+          setMarginContent(10); // or any other default margin when the logo is not present
+        }
+      }
+    );
 
     return () => {
       keyboardDidShowListener.remove();
@@ -56,15 +62,12 @@ export default function LayoutAuth({ children, userType, logo }) {
     setLoading(false);
   };
 
-  if(loading)  <ActivityIndicator size="large" color="#0000ff" />
-
+  if (loading) <ActivityIndicator size="large" color="#0000ff" />;
 
   return (
     <SafeAreaView style={{ flexGrow: 1, justifyContent: "center" }}>
-     
-
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
