@@ -23,10 +23,10 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tabStyle: {
-    marginBottom:5,
+    marginBottom: 5,
     width: 130,
     height: '100%',
-    marginRight:5
+    marginRight: 5
   },
   tabText: {
     color: '#ABABAB',
@@ -52,11 +52,11 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
     flexDirection: 'row',
   },
-  flatListContainer:{
-     flex: 1,
-     margin:0,
-     padding:0,
-     height:'auto'
+  flatListContainer: {
+    flex: 1,
+    margin: 0,
+    padding: 0,
+    height: 'auto'
   },
   indicatorStyle: {
     backgroundColor: 'transparent',
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 0,
   },
-  
+
   item__img: {
     width: 100,
     height: 100,
@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   tabViewContainer: {
-    flex:1,
+    flex: 1,
     width: "100%",
   },
   fecha: {
@@ -88,24 +88,24 @@ export const styles = StyleSheet.create({
     color: "#C4C4C4",
     fontFamily: 'Poppins_400Regular',
   },
-  
-  options:{
-    width:"100%",
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"flex-end",
-    alignItems:"center",
-    marginBottom:15,
+
+  options: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: 15,
   },
-  options__title:{
+  options__title: {
     color: Color.gray1,
     fontFamily: 'Poppins_700Bold',
     fontSize: FontSize.h3_size,
     textTransform: "capitalize",
     fontWeight: "500",
-    lineHeight: 24, 
+    lineHeight: 24,
   },
-  options__all:{
+  options__all: {
     color: Color.colorSecundario,
     fontFamily: fontFamily.fontRegular,
     fontWeight: "500",

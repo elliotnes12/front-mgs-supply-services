@@ -1,14 +1,13 @@
-import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
-import { TabView, TabBar } from "react-native-tab-view";
-import { LinearGradient } from "expo-linear-gradient";
-import { styles } from "./ServiceListScreenSupervisor.styles";
-import { screens, tabIds } from "../../../../utils";
-import { getIcon } from "../../../../utils/util";
 import { useNavigation } from "@react-navigation/native";
-import { ItemServiceSupervisor } from "../../../../components/core/items/ItemServiceSupervisor";
-import { useState } from "react";
-import { useEffect } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import { map } from "lodash";
+import { useEffect, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { TabBar, TabView } from "react-native-tab-view";
+import { ItemServiceSupervisor } from "../../../../components/core/items/ItemServiceSupervisor";
+import { screens, tabIds } from "../../../../utils";
+import { getIconById } from "../../../../utils/util";
+import { styles } from "./ServiceListScreenSupervisor.styles";
 
 const data = [
   {
@@ -105,20 +104,12 @@ export const ServiceListScreenSp = () => {
             colors={["#CEDC39", "#7DA74D"]}
             style={styles.gradient}
           >
-            <Image
-              style={styles.iconServices}
-              resizeMode="cover"
-              source={getIcon(route.key + "-focus")}
-            />
+            {getIconById("")}
             <Text style={styles.tabTextFocused}>{route.label}</Text>
           </LinearGradient>
         ) : (
           <View style={styles.tabItem}>
-            <Image
-              style={styles.iconServices}
-              resizeMode="cover"
-              source={getIcon(route.key)}
-            />
+
             <Text style={styles.tabText}>{route.label}</Text>
           </View>
         )

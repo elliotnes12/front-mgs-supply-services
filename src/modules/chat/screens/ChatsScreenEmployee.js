@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { assets } from "../../../assets";
-import { useAuth } from '../../Auth/hooks';
-import { styles } from "../styles/chatsScreen.employees.styles";
-import { stylesGlobal } from '../../styles/global.style';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { User } from '../../../api/user';
-import { Chat } from '../api/Chat';
-import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { ChatItem } from '../../../components/core/ChatItem';
 import { HeaderChats } from '../../../components/core/HeaderChats';
-import { Color } from '../../../utils/constantsStyle';
+import { LoadingScreen } from '../../../components/core/LoadingScreen';
 import { screens } from '../../../utils';
+import { getIconById } from '../../../utils/util';
+import { useAuth } from '../../Auth/hooks';
+import { Chat } from '../api/Chat';
+import { styles } from "../styles/chatsScreen.employees.styles";
 
 export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
@@ -23,7 +21,7 @@ export function ChatsScreenEmployee() {
   const { userInfo, isCustomer, accessToken, user } = useAuth();
   const { name } = userInfo;
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [options] = useState(['New group','settings']); 
+  const [options] = useState(['New group', 'settings']);
 
   const userController = new User();
   const chatController = new Chat();
@@ -51,7 +49,7 @@ export function ChatsScreenEmployee() {
       (async () => {
         try {
           const response = await chatController.getAll(accessToken);
-    
+
           if (response && response?.data) {
             const result = response.data.sort((a, b) => {
               const dateA = new Date(a.last_message_chat);
@@ -97,7 +95,7 @@ export function ChatsScreenEmployee() {
   };
 
 
-  if(!chats) return <LoadingScreen />;
+  if (!chats) return <LoadingScreen />;
   return (
     <TouchableWithoutFeedback onPress={handleClickOutside}>
       <View style={styles.background}>
@@ -105,7 +103,7 @@ export function ChatsScreenEmployee() {
         {isMenuVisible && (
           <View style={styles.menuChat}>
             {options.map((option, index) => (
-              <TouchableOpacity style={index != options.length -1 ? styles.menuChat__item : ''} key={index} onPress={() => handleQuestionSelect(option)}>
+              <TouchableOpacity style={index != options.length - 1 ? styles.menuChat__item : ''} key={index} onPress={() => handleQuestionSelect(option)}>
                 <Text style={styles.menuChat__option}>{option}</Text>
               </TouchableOpacity>
             ))}
@@ -126,8 +124,8 @@ export function ChatsScreenEmployee() {
             </View>
           </ScrollView>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate(screens.tab.chats.chatContactsScreenEmployee) } style={styles.addChat}>
-          <Image style={stylesGlobal.imageMin__img} source={assets.image.png.iconAddChat} />
+        <TouchableOpacity onPress={() => navigation.navigate(screens.tab.chats.chatContactsScreenEmployee)} style={styles.addChat}>
+          {getIconById("iconAddChat")}
         </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>

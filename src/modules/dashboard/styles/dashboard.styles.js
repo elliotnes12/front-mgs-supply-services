@@ -78,17 +78,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     minWidth: 100,
   },
-  userInfo__hello: {
-    fontFamily: "Poppins_400Regular",
-    color: "#333333",
-    fontSize: 15,
-  },
-  userInfo__name: {
-    fontFamily: "Poppins_700Bold",
-    color: "#333",
-    lineHeight: 20,
-    fontSize: 17,
-  },
   promos: {
     height: 150,
     marginTop: 15,

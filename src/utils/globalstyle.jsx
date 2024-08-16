@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, Text } from "react-native";
-import { theme } from "./theme";
-import { LinearGradient } from "expo-linear-gradient";
+import {Pressable, StyleSheet, Text} from "react-native";
+import {theme} from "./theme";
+import {LinearGradient} from "expo-linear-gradient";
 
 const styles = StyleSheet.create({
   headerBig: {
@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 15,
   },
+  line20: {
+    lineHeight: 20,
+  },
   regularGray: {
     fontFamily: theme.textStyles.regular,
     color: "#333333",
@@ -26,10 +29,14 @@ const styles = StyleSheet.create({
   regularGreen: {
     color: theme.colors.colorSecundario,
     fontFamily: theme.textStyles.regular,
+    margin: 0,
+    padding: 0,
   },
   boldGray: {
     fontFamily: theme.textStyles.bold,
     color: "#333",
+    margin: 0,
+    padding: 0,
   },
   headerGray: {
     fontFamily: theme.textStyles.bold,
@@ -56,6 +63,12 @@ const styles = StyleSheet.create({
   },
   font14pt: {
     fontSize: 14,
+  },
+  font17pt: {
+    fontSize: 17,
+  },
+  font20pt: {
+    fontSize: 17,
   },
   brightRed: {
     color: theme.colors.brightRed,
@@ -89,10 +102,13 @@ export default function StyledText({
   headerGray,
   regularGreen,
   font14pt,
+  font17pt,
+  font20pt,
   brightBlue,
   brightRed,
   gold,
   titlleBig,
+  line20,
 }) {
   const textStyles = [
     bold && styles.textBold,
@@ -103,15 +119,18 @@ export default function StyledText({
     headerGray && styles.headerGray,
     regularGreen && styles.regularGreen,
     font14pt && styles.font14pt,
+    font17pt && styles.font17pt,
+    font20pt && styles.font20pt,
     brightBlue && styles.brightBlue,
     brightRed && styles.brightRed,
     gold && styles.gold,
     titlleBig && styles.titlleBig,
+    line20 && styles.line20,
   ];
   return <Text style={textStyles}>{children}</Text>;
 }
 
-export function StyledGradientButton({ text, action }) {
+export function StyledGradientButton({text, action}) {
   const buttonStyles = [];
   return (
     <Pressable onPress={action}>
@@ -124,7 +143,7 @@ export function StyledGradientButton({ text, action }) {
     </Pressable>
   );
 }
-export function StyledGradientButtonSmall({ text, action, focused }) {
+export function StyledGradientButtonSmall({text, action, focused}) {
   const buttonStyles = [];
   const gradientColors = focused
     ? [theme.gradientsmall.color1Focused, theme.gradientsmall.color2Focused]
@@ -138,7 +157,7 @@ export function StyledGradientButtonSmall({ text, action, focused }) {
         colors={gradientColors}
         style={styles.gradientButtonSmall}
       >
-        <Text style={[styles.gradientButtonTextsmall, { color: textColor }]}>
+        <Text style={[styles.gradientButtonTextsmall, {color: textColor}]}>
           {text}
         </Text>
       </LinearGradient>

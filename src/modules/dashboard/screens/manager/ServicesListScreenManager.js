@@ -1,15 +1,14 @@
-import * as React from "react";
-import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
-import { TabView, TabBar } from "react-native-tab-view";
-import { LinearGradient } from "expo-linear-gradient";
-import { styles } from "./ServiceListScreenManager.styles";
-import { screens, tabIds } from "../../../../utils";
-import { getIconById } from "../../../../utils/util";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import * as React from "react";
+import { useEffect, useState } from "react";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { TabBar, TabView } from "react-native-tab-view";
 import { ItemServiceManager } from "../../../../components/core/items/ItemServiceManager";
-import { useEffect } from "react";
-import { useState } from "react";
+import { screens, tabIds } from "../../../../utils";
 import { theme } from "../../../../utils/theme";
+import { getIconById } from "../../../../utils/util";
+import { styles } from "./ServiceListScreenManager.styles";
 
 const data = [
   {

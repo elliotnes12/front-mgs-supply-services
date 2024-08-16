@@ -1,15 +1,15 @@
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import { Text, TextInput, TouchableOpacity, View, Alert, ActivityIndicator, ScrollView } from "react-native";
+import MapView, { Marker } from "react-native-maps";
+import Modal from "react-native-modal";
+import * as Location from "expo-location";
 import { LinearGradient } from "expo-linear-gradient";
-import { FlatList, Image } from "native-base";
-import React, { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { assets } from "../../assets";
 import { styles } from "./styles/CreateService.style";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Modal from "react-native-modal";
-import MapView, { Marker } from "react-native-maps";
 import { getIconById } from "../../utils/util";
 import { Header } from "../../components/core/Header";
+import StyledText from "../../utils/globalstyle";
+import { stylesGlobal } from "../../modules/styles/global.style";
 
 const data = [
   { id: "1", title: "Cleaning" },
@@ -24,26 +24,70 @@ const dataEmployees = [
 
 export function CreateService() {
   const [selectedId, setSelectedId] = useState(data[0].id);
-  const [location, setLocation] = useState(
-    "Av. 3 Calle 4 with corner 24, reference cc Rodeo"
-  );
-  const [bussinessName, setBussinessName] = useState(
-    "CORPORATION VILLA NUEVA LLC"
-  );
+  const [location, setLocation] = useState("Av. 3 Calle 4 with corner 24, reference cc Rodeo");
+  const [bussinessName, setBussinessName] = useState("CORPORATION VILLA NUEVA LLC");
   const [searchText, setSearchText] = useState("");
   const [filteredEmployees, setFilteredEmployees] = useState(dataEmployees);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const navigation = useNavigation();
+  const [origin, setOrigin] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState("Aquí va la dirección");
+  const [mapClicked, setMapClicked] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          Alert.alert("Permission to access location was denied");
+          return;
+        }
+
+        let currentLocation = await Location.getCurrentPositionAsync({});
+        setOrigin({
+          latitude: currentLocation.coords.latitude,
+          longitude: currentLocation.coords.longitude,
+        });
+
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
+    if (isModalVisible) {
+      setMapClicked(false);
+    }
   };
 
-  const handleMapPress = (e) => {
-    const { latitude, longitude } = e.nativeEvent.coordinate;
-    setLocation(`${latitude}, ${longitude}`);
-    toggleModal();
+  const handleMapPress = async (e) => {
+    if (!mapClicked) {
+      setMapClicked(true);
+
+      const { latitude, longitude } = e.nativeEvent.coordinate;
+      setOrigin({
+        latitude: latitude,
+        longitude: longitude
+      })
+
+      try {
+        const geocode = await Location.reverseGeocodeAsync({ latitude, longitude });
+
+        if (geocode.length > 0) {
+          const { street, city, region, postalCode } = geocode[0];
+          const address = `${street}, ${city}, ${region} ${postalCode}`;
+
+          setSelectedAddress(address);
+          toggleModal();
+        }
+      } catch (error) {
+        console.error("Error al obtener la dirección:", error);
+      }
+    }
   };
 
   const getImage = (label) => {
@@ -54,89 +98,6 @@ export function CreateService() {
     } else if (label === "Polishing") {
       return assets.image.png.iconBotePintura;
     }
-  };
-
-  const renderItem = ({ item }) => {
-    const isSelected = item.id === selectedId;
-    return (
-      <TouchableOpacity
-        style={{ marginHorizontal: 5, marginTop: 20 }}
-        onPress={() => setSelectedId(item.id)}
-      >
-        {isSelected ? (
-          <LinearGradient
-            style={{
-              borderRadius: 20,
-              height: 45,
-              width: 110,
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "row",
-            }}
-            colors={["#CEDC39", "#7DA74D"]}
-          >
-            <View style={{ width: 20, height: 20, marginRight: 5 }}>
-              <Image
-                alt="tabs"
-                style={{ width: "100%", height: "100%" }}
-                resizeMode="contain"
-                source={getImage(item.title)}
-              />
-            </View>
-            <Text style={{ color: "#fff" }}>{item.title}</Text>
-          </LinearGradient>
-        ) : (
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: "#4F4F4F",
-              borderRadius: 20,
-              height: 45,
-              width: 110,
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "row",
-              backgroundColor: "#fff",
-            }}
-          >
-            <View style={{ width: 20, height: 20, marginRight: 5 }}>
-              <Image
-                alt="tabs"
-                style={{ width: "100%", height: "100%" }}
-                resizeMode="contain"
-                source={getImage(item.title)}
-              />
-            </View>
-            <Text style={styles.unselectedButtonText}>{item.title}</Text>
-          </View>
-        )}
-      </TouchableOpacity>
-    );
-  };
-
-  const renderEmployee = ({ item }) => {
-    return (
-      <View key={item.id} style={[styles.item, { height: 44 }]}>
-        <View
-          style={{
-            width: 30,
-            height: 30,
-            marginRight: 15,
-            marginLeft: 5,
-            borderRadius: 40,
-            overflow: "hidden",
-          }}
-        >
-          {getIconById("profile")}
-        </View>
-        <Text>{item.name}</Text>
-        <TouchableOpacity
-          style={{ width: 15, height: 15, position: "absolute", right: 10 }}
-        >
-          {getIconById("iconClose")}
-        </TouchableOpacity>
-      </View>
-    );
   };
 
   const handleSearch = () => {
@@ -151,146 +112,118 @@ export function CreateService() {
   return (
     <>
       <Header goBack={true} title={"Create a Service"} subtitle={"Create of the generated services"} />
-      <FlatList
-        style={styles.container}
-        ListHeaderComponent={
-          <>
-            <View>
-              <Text
-                style={[
-                  styles.textGray,
-                  styles.titleServices,
-                  { paddingLeft: 24, marginTop: 20 },
-                ]}
+
+      <ScrollView>
+        <View>
+          <View style={{ marginTop: 20, paddingHorizontal: 24 }}>
+            <Text style={[styles.titleServices]}>
+              Set date & time
+            </Text>
+            <TouchableOpacity style={styles.item}>
+              <View style={{ width: 40, height: 40, marginRight: 10 }}>
+                {getIconById("calendar")}
+              </View>
+              <Text>Choose a date</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
+              <View style={{ width: 40, height: 40, marginRight: 10 }}>
+                {getIconById("calendar")}
+              </View>
+              <Text>Schedule</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.item]}>
+              <View
+                style={{
+                  width: 30,
+                  height: 30,
+                  marginRight: 15,
+                  marginLeft: 7,
+                }}
               >
-                Select a service
+                {getIconById("iconLupa")}
+              </View>
+              <Text>Search by name or id employee</Text>
+            </TouchableOpacity>
+            <View style={styles.employees}>
+              <Text style={[styles.titleServices, { marginBottom: 5 }]}>
+                Employees
               </Text>
-              <FlatList
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.flatListContainer}
+            </View>
+            <Text style={[styles.textGray, styles.titleServices]}>
+              Service Location
+            </Text>
+            <View style={[styles.item, stylesGlobal.itemVertical]}>
+              <Text>{selectedAddress}</Text>
+              <TouchableOpacity onPress={toggleModal}>
+                <Text style={styles.street__googleMaps}>SET GOOGLE MAP</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bussiness}>
+              <Text style={styles.bussiness__title}>Bussiness Details</Text>
+              <Text style={[styles.textGray, styles.titleServices]}>
+                Bussiness Name
+              </Text>
+              <Text style={styles.bussiness__name}>{bussinessName}</Text>
+
+              <Text style={[styles.textGray, styles.titleServices]}>
+                Additional Message
+              </Text>
+              <TextInput
+                style={styles.textArea}
+                multiline={true}
+                numberOfLines={4}
+                onChangeText={(text) => setBussinessAdditional(text)}
+                placeholder="Enter your text here"
               />
             </View>
-
-            <View style={{ marginTop: 20, paddingHorizontal: 24 }}>
-              <Text style={[styles.textGray, styles.titleServices]}>
-                Set date & time
-              </Text>
-              <TouchableOpacity style={styles.item}>
-                <View style={{ width: 40, height: 40, marginRight: 10 }}>
-                  {getIconById("calendar")}
-                </View>
-                <Text>Choose a date</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.item}>
-                <View style={{ width: 40, height: 40, marginRight: 10 }}>
-                  {getIconById("calendar")}
-                </View>
-                <Text>Schedule</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.item]}>
-                <View
-                  style={{
-                    width: 30,
-                    height: 30,
-                    marginRight: 15,
-                    marginLeft: 7,
-                  }}
+            <View style={styles.submit}>
+              <TouchableOpacity>
+                <LinearGradient
+                  colors={["#CEDC39", "#7DA74D"]}
+                  style={styles.button}
                 >
-                  {getIconById("iconLupa")}
-                </View>
-                <Text>Search by name or id employee</Text>
+                  <Text style={styles.button__text}>Appoinment a Service</Text>
+                </LinearGradient>
               </TouchableOpacity>
-              <View style={styles.employees}>
-                <Text style={[styles.titleServices, { marginBottom: 5 }]}>
-                  Employees
-                </Text>
-                <FlatList
-                  data={filteredEmployees}
-                  renderItem={renderEmployee}
-                  keyExtractor={(item) => item.id}
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={styles.flatListContainer}
-                />
-              </View>
-              <Text style={[styles.textGray, styles.titleServices]}>
-                Service Location
-              </Text>
-              <View style={styles.item}>
-                <View style={styles.street}>
-                  <Text style={styles.street__label}>{location}</Text>
-                </View>
-                <TouchableOpacity onPress={toggleModal}>
-                  <Text style={styles.street__googleMaps}>SET GOOGLE MAP</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.bussiness}>
-                <Text style={styles.bussiness__title}>Bussiness Details</Text>
-                <Text style={[styles.textGray, styles.titleServices]}>
-                  Bussiness Name
-                </Text>
-                <Text style={styles.bussiness__name}>{bussinessName}</Text>
-
-                <Text style={[styles.textGray, styles.titleServices]}>
-                  Additional Message
-                </Text>
-                <TextInput
-                  style={styles.textArea}
-                  multiline={true}
-                  numberOfLines={4}
-                  onChangeText={(text) => setBussinessAdditional(text)}
-                  placeholder="Enter your text here"
-                />
-              </View>
-              <View style={styles.submit}>
-                <TouchableOpacity>
-                  <LinearGradient
-                    colors={["#CEDC39", "#7DA74D"]}
-                    style={styles.button}
-                  >
-                    <Text style={styles.button__text}>
-                      Appoinment a Service
-                    </Text>
-                  </LinearGradient>
-                </TouchableOpacity>
-              </View>
             </View>
-          </>
-        }
-      />
-
-      <Modal isVisible={isModalVisible}>
-        <View style={{ flex: 1 }}>
-          <MapView
-            style={{ flex: 1 }}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            onPress={handleMapPress}
-          >
-            <Marker
-              coordinate={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-              }}
-              title="Selected Location"
-              description={location}
-            />
-          </MapView>
-          <TouchableOpacity
-            onPress={toggleModal}
-            style={{ position: "absolute", top: 40, right: 20 }}
-          >
-            <Text style={{ color: "white", fontSize: 18 }}>Close</Text>
-          </TouchableOpacity>
+          </View>
+          <Modal style={{ padding: 0, margin: 0 }} isVisible={isModalVisible}>
+            <View style={{ flex: 1, backgroundColor: "#fff" }}>
+              {origin && (
+                <MapView
+                  style={{ flexGrow: 1 }}
+                  initialRegion={{
+                    latitude: origin.latitude,
+                    longitude: origin.longitude,
+                    latitudeDelta: 0.005,
+                    longitudeDelta: 0.005,
+                  }}
+                  onPress={handleMapPress}
+                >
+                  <Marker
+                    draggable
+                    coordinate={origin}
+                    onDragEnd={(direction) =>
+                      setOrigin(direction.nativeEvent.coordinate)
+                    }
+                  />
+                </MapView>
+              )}
+              {!origin && (
+                <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                  <ActivityIndicator size="large" color="#CEDC39" />
+                </View>
+              )}
+              <TouchableOpacity
+                onPress={toggleModal}
+                style={{ position: "absolute", top: 40, right: 20 }}
+              >
+                <StyledText>Close</StyledText>
+              </TouchableOpacity>
+            </View>
+          </Modal>
         </View>
-      </Modal>
+      </ScrollView>
     </>
   );
 }

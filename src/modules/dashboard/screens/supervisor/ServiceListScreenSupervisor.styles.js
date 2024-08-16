@@ -9,11 +9,11 @@ export const styles = StyleSheet.create({
     position: "relative",
 
   },
-  flatListContainer:{
-     flex: 1,
-     margin:0,
-     padding:0,
-     height:'auto'
+  flatListContainer: {
+    flex: 1,
+    margin: 0,
+    padding: 0,
+    height: 'auto'
   },
   backgroundWhite: {
     backgroundColor: '#fff',
@@ -32,10 +32,10 @@ export const styles = StyleSheet.create({
     paddingRight: 0,
   },
   tabStyle: {
-    marginBottom:5,
+    marginBottom: 5,
     width: 130,
     height: '100%',
-    marginRight:5
+    marginRight: 5
   },
   tabItem: {
     backgroundColor: "#F5F5F5",
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'hidden',
     flexDirection: "row",
-   
+
 
   },
   gradient: {
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     borderRadius: Border.br_3xs,
     height: 120,
     backgroundColor: Color.blanco,
-    paddingTop:10
+    paddingTop: 10
   },
   item__title: {
     fontFamily: 'Poppins_600SemiBold',
@@ -118,7 +118,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins_300Light',
     fontSize: FontSize.paragraphRegularSmall_size,
   },
-  item__estatus:{
+  item__estatus: {
     color: Color.fontWhite,
     fontWeight: "300",
     lineHeight: 24,
@@ -146,7 +146,7 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   tabViewContainer: {
-    flexGrow:1,
+    flexGrow: 1,
     width: "100%",
   },
   fecha: {
@@ -201,25 +201,25 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: 5,
   },
-  options:{
-    width:"100%",
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"space-between",
-    alignItems:"center",
-    marginBottom:15
+  options: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15
   },
-  options__title:{
+  options__title: {
     color: Color.gray1,
     fontFamily: 'Poppins_700Bold',
     fontSize: FontSize.h3_size,
     textTransform: "capitalize",
     fontWeight: "500",
-    lineHeight: 24, 
+    lineHeight: 24,
   },
-  options__all:{
+  options__all: {
     color: Color.colorSecundario,
-    fontFamily:"Poppins_500Medium",
+    fontFamily: "Poppins_500Medium",
     fontWeight: "500",
     textTransform: "capitalize",
     lineHeight: 24,

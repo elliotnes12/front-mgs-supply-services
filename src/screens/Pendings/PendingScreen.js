@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Image } from 'native-base';
-import { assets } from "../../assets";
-import { styles } from "./styles/PendingScreen.styles";
-import { stylesGlobal } from '../../modules/styles/global.style';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { Header } from '../../components/core/Header';
+import { stylesGlobal } from '../../modules/styles/global.style';
+import { getIconById } from '../../utils/util';
+import { styles } from "./styles/PendingScreen.styles";
 
 export function PendingScreen() {
     const [tasks, setTasks] = useState([]);
@@ -44,11 +43,11 @@ export function PendingScreen() {
 
     const renderItem = ({ item }) => (
         <View key={item.id} style={styles.container_item}>
-            <View style={{flex:1}}>
+            <View style={{ flex: 1 }}>
                 <Text style={styles.office}>{item.title}</Text>
                 <View style={styles.notice}>
                     <View style={stylesGlobal.imageMin}>
-                        <Image source={assets.image.png.notice} style={stylesGlobal.imageMin__img} />
+                        {getIconById("notice")}
                     </View>
                     <Text style={{ fontSize: 15 }}>{item.description}</Text>
                 </View>
@@ -57,7 +56,7 @@ export function PendingScreen() {
                     {item.employees.map((employee) => (
                         <View key={employee.idEmployee} style={styles.item}>
                             <View style={styles.item__img}>
-                                <Image alt="icon-employee" source={assets.image.png.profile} style={{ width: "100%", height: "100%" }} />
+                                {getIconById("profile")}
                             </View>
                             <Text style={styles.personalName}>{employee.name}</Text>
                         </View>
@@ -67,13 +66,13 @@ export function PendingScreen() {
             <View style={styles.options}>
                 <TouchableOpacity style={styles.options__item}>
                     <View style={stylesGlobal.imageMd}>
-                        <Image alt="icon-edit" source={assets.image.png.edit} style={stylesGlobal.imageMin__img} />
+                        {getIconById("edit")}
                     </View>
                     <Text style={styles.edit}>Edit</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.options__item}>
                     <View style={stylesGlobal.imageMd}>
-                        <Image alt="icon-cancel" source={assets.image.png.decline} style={{ width: "100%", height: "100%" }} />
+                        {getIconById("decline")}
                     </View>
                     <Text style={styles.decline}>Cancel</Text>
                 </TouchableOpacity>

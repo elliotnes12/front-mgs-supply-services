@@ -86,7 +86,7 @@ export function DashboardScreen() {
             </View>
             <View style={styles.userInfo}>
               <StyledText regularGray>Hello,</StyledText>
-              <Text style={styles.userInfo__name}>{name}</Text>
+              <StyledText boldGray line20 font17pt>{name}</StyledText>
             </View>
           </View>
           <Animated.View style={{ transform: [{ rotate: swing }] }}>
