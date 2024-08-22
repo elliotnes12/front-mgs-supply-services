@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
-import { assets } from '../../../../assets';
 import { styles } from './ServiceListScreenEmployee.styles';
-import { stylesGlobal } from '../../../styles/global.style';
 import { useNavigation } from '@react-navigation/native';
 import { screens } from '../../../../utils';
-import { ItemServiceEmployee } from '../../../../components/core/items/ItemServiceEmployee';
+import { ItemServiceEmployee } from '../../../../components/core/items/ItemService';
 
 const data = [
   { title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", status: 'progress' },

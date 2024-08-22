@@ -2,13 +2,14 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { TabBar, TabView } from "react-native-tab-view";
-import { ItemServiceManager } from "../../../../components/core/items/ItemServiceManager";
+import { ItemServiceManager } from "../../../../components/core/items/ItemService";
 import { screens, tabIds } from "../../../../utils";
 import { theme } from "../../../../utils/theme";
 import { getIconById } from "../../../../utils/util";
 import { styles } from "./ServiceListScreenManager.styles";
+import { map } from "lodash";
 
 const data = [
   {
@@ -43,12 +44,10 @@ const RenderLastServices = ({ navigation }) => (
       </TouchableOpacity>
     </View>
 
-    <FlatList
-      data={data}
-      renderItem={ItemServiceManager}
-      keyExtractor={(item) => item.id}
-      contentContainerStyle={styles.flatListContainer}
-    />
+    {map(data, (element, id) => {
+      return <ItemServiceManager key={id} item={element} />;
+    })}
+
   </>
 );
 

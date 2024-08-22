@@ -4,7 +4,7 @@ import { map } from "lodash";
 import { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { TabBar, TabView } from "react-native-tab-view";
-import { ItemServiceSupervisor } from "../../../../components/core/items/ItemServiceSupervisor";
+import { ItemServiceSupervisor } from "../../../../components/core/items/ItemService";
 import { screens, tabIds } from "../../../../utils";
 import { getIconById } from "../../../../utils/util";
 import { styles } from "./ServiceListScreenSupervisor.styles";

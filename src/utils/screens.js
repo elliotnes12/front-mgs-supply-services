@@ -7,26 +7,22 @@ const auth = {
 const global = {
   dashboard: "DashboardScreen",
   createService: "CreateService",
-  cameraScreen: "CameraScreen",
   imageFullScreen: "ImageFullScreen",
-  chatScreen: "ChatScreen",
   groupScreen: "GroupScreen",
   groupProfileScreen: "GroupProfileScreen",
   addUserGroupScreen: "AddUserGroupScreen",
-  changeNameGroupScreen: "ChangeNameGroupScreen",
+  settingScreen: "SettingsScreen"
 };
 
-
 const workFlow = {
-  root:"WorkFlowRoot",
-
+  root: "WorkFlowRoot",
 }
 
 const chats = {
   root: "ChatsRoot",
-  chatsScreen: "ChatsScreen",
   createChatScreen: "CreateChatScreen",
   chatScreen: "ChatScreen",
+  chatsScreenCustomer: "ChatsScreenCustomer",
   ChatScreenSupervisor: "ChatScreenSupervisor",
   chatsScreenEmployee: "ChatsScreenEmployee",
   chatContactsScreenEmployee: "ChatsContactsScreenEmployee"
@@ -39,11 +35,12 @@ const products = {
   root: "ProductScreenRoot",
   productScreen: "ProductScreen"
 }
-const groups = {
-  root: "GroupsRoot",
+const pedings = {
+  pendingSupervisorScreen: "PendingSupervisorScreen",
   groupsScreen: "GroupsScreen",
   pendingScreen: "PendingScreen",
   pendingScreenEmployee: "PendingScreenEmployee",
+  workFlowAdmin: "WorkFlowAdminScreen",
   createGroupScreen: "CreateGroupScreen",
 };
 
@@ -51,23 +48,17 @@ const reports = {
   root: "ReportsRoot"
 }
 
-const settings = {
-  root: "SettingsRoot",
-  settingScreen: "SettingsScreen"
-};
-
 export const screens = {
   auth,
   global,
   tab: {
     root: "BottomTabRoot",
-    rootEmployee: "BottomTabRoot",
-    rootCustomer: "BottomTabRoot",
-    rootSupervisor: "BottomTabRoot",
+    rootEmployee: "BottomTabEmployeeRoot",
+    rootCustomer: "BottomTabCustomerRoot",
+    rootSupervisor: "BottomTabSupervisorRoot",
     chats,
-    groups,
+    pedings,
     products,
-    settings,
     reports,
     services,
     workFlow

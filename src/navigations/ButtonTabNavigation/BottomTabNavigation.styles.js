@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../utils/theme";
 
 export const styles = StyleSheet.create({
     goBack: {
@@ -23,7 +24,6 @@ export const styles = StyleSheet.create({
     tabBar: {
         height: 100,
         width: "100%",
-        backgroundColor: "#F9FCDE",
         alignItems: "center",
         justifyContent: "space-around",
         flexDirection: "column",
@@ -51,10 +51,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     tabText: {
-        color: "rgba(34, 33, 40, 1)",
         marginTop: 5,
         fontSize: 13,
-        fontFamily: "Poppins_400Regular"
+        fontFamily: theme.textStyles.regular
     },
     border: { 
         position: "absolute",

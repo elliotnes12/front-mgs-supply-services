@@ -21,6 +21,7 @@ import { ServiceListScreenManager } from "./manager/ServicesListScreenManager";
 import { getIconById } from "../../../utils/util";
 import StyledText from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
+import { screens } from "../../../utils";
 
 export function DashboardScreen() {
   const { userInfo, isCustomer } = useAuth();
@@ -76,7 +77,7 @@ export function DashboardScreen() {
           <View style={styles.profile}>
             <View style={styles.containerProfile}>
               <Pressable
-                onPress={() => navigation.navigate("ProfileScreen")}
+                onPress={() => navigation.navigate(screens.global.settingScreen)}
                 style={styles.goProfile}
               >
                 <View style={styles.imageProfile}>

@@ -40,7 +40,7 @@ export function AppNavigation() {
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
         <Stack.Screen
-          name={"ProfileScreen"}
+          name={screens.global.settingScreen}
           component={SettingsScreen}
           options={{ headerShown: false }}
         />
@@ -84,11 +84,7 @@ export function AppNavigation() {
           component={AddUserGroupScreen}
           options={{ title: "Añadir participante" }}
         />
-        <Stack.Screen
-          name={screens.global.changeNameGroupScreen}
-          component={ChangeNameGroupScreen}
-          options={{ title: "Cambiar nombre del grupo" }}
-        />
+
         <Stack.Screen
           name={screens.global.imageFullScreen}
           component={ImageFullScreen}

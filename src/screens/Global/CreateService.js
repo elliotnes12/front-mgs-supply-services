@@ -10,6 +10,8 @@ import { getIconById } from "../../utils/util";
 import { Header } from "../../components/core/Header";
 import StyledText from "../../utils/globalstyle";
 import { stylesGlobal } from "../../modules/styles/global.style";
+import { useLocation } from "../../contexts";
+
 
 const data = [
   { id: "1", title: "Cleaning" },
@@ -23,40 +25,20 @@ const dataEmployees = [
 ];
 
 export function CreateService() {
+
+
   const [selectedId, setSelectedId] = useState(data[0].id);
-  const [location, setLocation] = useState("Av. 3 Calle 4 with corner 24, reference cc Rodeo");
   const [bussinessName, setBussinessName] = useState("CORPORATION VILLA NUEVA LLC");
   const [searchText, setSearchText] = useState("");
   const [filteredEmployees, setFilteredEmployees] = useState(dataEmployees);
-  const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [origin, setOrigin] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState("Aquí va la dirección");
   const [mapClicked, setMapClicked] = useState(false);
+  const { location, loading } = useLocation(); // Obtiene la ubicación y el estado de carga
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          Alert.alert("Permission to access location was denied");
-          return;
-        }
 
-        let currentLocation = await Location.getCurrentPositionAsync({});
-        setOrigin({
-          latitude: currentLocation.coords.latitude,
-          longitude: currentLocation.coords.longitude,
-        });
-
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
-
+  console.log(location)
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
     if (isModalVisible) {
@@ -69,10 +51,6 @@ export function CreateService() {
       setMapClicked(true);
 
       const { latitude, longitude } = e.nativeEvent.coordinate;
-      setOrigin({
-        latitude: latitude,
-        longitude: longitude
-      })
 
       try {
         const geocode = await Location.reverseGeocodeAsync({ latitude, longitude });
@@ -89,6 +67,8 @@ export function CreateService() {
       }
     }
   };
+
+
 
   const getImage = (label) => {
     if (label === "Cleaning") {
@@ -189,12 +169,12 @@ export function CreateService() {
           </View>
           <Modal style={{ padding: 0, margin: 0 }} isVisible={isModalVisible}>
             <View style={{ flex: 1, backgroundColor: "#fff" }}>
-              {origin && (
+              {location && (
                 <MapView
                   style={{ flexGrow: 1 }}
                   initialRegion={{
-                    latitude: origin.latitude,
-                    longitude: origin.longitude,
+                    latitude: location.latitude,
+                    longitude: location.longitude,
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005,
                   }}
@@ -202,14 +182,14 @@ export function CreateService() {
                 >
                   <Marker
                     draggable
-                    coordinate={origin}
+                    coordinate={location}
                     onDragEnd={(direction) =>
                       setOrigin(direction.nativeEvent.coordinate)
                     }
                   />
                 </MapView>
               )}
-              {!origin && (
+              {!location && (
                 <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                   <ActivityIndicator size="large" color="#CEDC39" />
                 </View>

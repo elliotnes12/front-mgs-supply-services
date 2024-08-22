@@ -81,7 +81,7 @@ export function RegisterScreen() {
   };
 
   const handleLoginNowPress = () => {
-    navigation.navigate("LoginScreen");
+    navigation.navigate(screens.auth.loginScreen);
   };
 
   const closeAlert = () => {

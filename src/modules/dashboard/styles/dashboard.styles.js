@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Color, fontFamily } from '../../../utils/constantsStyle';
 import Constants from "expo-constants";
+import { theme } from '../../../utils/theme';
 
 export const styles = StyleSheet.create({
   background: {
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 70,
     marginBottom: 20,
-    marginTop: Constants.statusBarHeight
+    marginTop: Constants.statusBarHeight,
   },
   profile: {
     flexDirection: "row",
@@ -86,7 +87,7 @@ export const styles = StyleSheet.create({
   },
   promos__title: {
     color: "#fff",
-    fontFamily: "Poppins_600SemiBold",
+    fontFamily: theme.textStyles.semiBold,
     textTransform: "capitalize",
     width: 201,
     fontSize: 23,

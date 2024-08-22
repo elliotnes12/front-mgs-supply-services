@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { Color, FontSize } from "../../../utils/constantsStyle";
+import { Color } from "../../../utils/constantsStyle";
+import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
     header: {
@@ -30,7 +31,7 @@ export const styles = StyleSheet.create({
     title: {
         color: "#fff",
         fontSize: 22,
-        fontFamily: "Poppins_700Bold",
+        fontFamily: theme.textStyles.bold,
         lineHeight: 29,
         textAlign: "left",
         fontWeight: "500",
@@ -38,17 +39,15 @@ export const styles = StyleSheet.create({
     titleContact: {
         color: Color.gray1,
         fontSize: 17,
-        fontFamily: "Poppins_700Bold",
+        fontFamily: theme.textStyles.bold,
         lineHeight: 29,
         textAlign: "left",
         fontWeight: "500",
     },
     subtitle: {
         color: "#fff",
-        fontFamily: "Poppins_400Regular",
+        fontFamily: theme.textStyles.regular,
         fontSize: 15,
-        marginTop: -5
-
     },
     containerSearch: {
         backgroundColor: "#fff",
@@ -78,14 +77,14 @@ export const styles = StyleSheet.create({
         flexDirection: "row"
     },
     profile__name: {
-        fontFamily: "Poppins_500Medium",
+        fontFamily: theme.textStyles.semiBold,
         fontSize: 17,
         lineHeight: 20,
         fontWeight: "600",
         color: "#fff"
     },
     profile__content: {
-        fontFamily: "Poppins_500Medium",
+        fontFamily: theme.textStyles.semiBold,
         color: "#fff",
         fontSize: 13
     },

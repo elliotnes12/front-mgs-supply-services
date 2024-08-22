@@ -37,9 +37,9 @@ export const ENV = {
   },
   TYPES_USERS: {
     CUSTOMER: "customer",
-    COMPANY: "company",
     EMPLOYEE: "employee",
     MANAGER: "manager",
+    SUPERVISOR: "supervisor"
   },
   ACTIVE_CHAT_ID: "active_chat_id",
   ACTIVE_GROUP_ID: "active_group_id",

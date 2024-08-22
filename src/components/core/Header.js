@@ -6,7 +6,6 @@ import { assets } from '../../assets';
 import { styles } from "./styles/HeaderChat.styles";
 import { stylesGlobal } from '../../modules/styles/global.style';
 import { headers } from '../../utils';
-import { Color } from '../../utils/constantsStyle';
 
 export function Header({ search, title, subtitle, goBack, headerType, totalContacts,support }) {
     const navigation = useNavigation();
