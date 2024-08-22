@@ -68,6 +68,7 @@ const png = {
   Group: require("./icons/Group.png"),
   minCancelled: require("./servicios/cancelled.png"),
   messageVerfication: require("./icons/icon-message-verification.png"),
+  icontime: require("./icons/icon-time.png"),
 };
 
 export { png };
