@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -8,12 +8,13 @@ import {
   Easing,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { assets } from "../../../assets";
 import { useAuth } from "../../Auth/hooks";
 import { ServiceListScreenCt } from "./customer/ServiceListScreen";
-import { ServiceListScreenSp } from "./supervisor/ServiceListScreenSupervisor";
+import { ServiceListScreenSupervisor } from "./supervisor/ServiceListScreenSupervisor";
 import { ServiceListScreenEmployee } from "./employee/ServiceListScreenEmployee";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../styles/dashboard.styles";
@@ -21,13 +22,16 @@ import { ServiceListScreenManager } from "./manager/ServicesListScreenManager";
 import { getIconById } from "../../../utils/util";
 import StyledText from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
-import { screens } from "../../../utils";
+import { ENV, screens } from "../../../utils";
+import { Service } from "../../../api/service";
 
 export function DashboardScreen() {
   const { userInfo, isCustomer } = useAuth();
+  const [services, setServices] = useState([])
   const { name } = userInfo;
   const swingAnim = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
+  const controllerService = new Service();
 
   const animateAlert = () => {
     Animated.sequence([
@@ -67,81 +71,114 @@ export function DashboardScreen() {
     outputRange: ["-15deg", "15deg"],
   });
 
+
+  useEffect(() => {
+
+    loadServices();
+  }, [])
+
+
+  /**
+   *  
+   *
+   */
+  const loadServices = async () => {
+
+    if (!isCustomer) {
+
+      try {
+
+        const response = await controllerService.findAllServices();
+      } catch (e) {
+
+      }
+    }
+  }
+
+  const DashboardHeader = () => {
+    return (
+      <View style={styles.header}>
+        <View style={styles.profile}>
+          <View style={styles.containerProfile}>
+            <Pressable
+              onPress={() => navigation.navigate(screens.global.settingScreen)}
+              style={styles.goProfile}
+            >
+              <View style={styles.imageProfile}>
+                {getIconById("profile")}
+              </View>
+            </Pressable>
+          </View>
+          <View style={styles.userInfo}>
+            <StyledText regularGray>Hello,</StyledText>
+            <StyledText boldGray line20 font17pt>{name}</StyledText>
+          </View>
+        </View>
+        <Animated.View style={{ transform: [{ rotate: swing }] }}>
+          <TouchableOpacity style={styles.alerts} onPress={startSwing}>
+            <View style={styles.alerts__count}>
+              <Text style={styles.alert__text}>3</Text>
+            </View>
+            {getIconById("alerts")}
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
+
+    )
+  }
+
+  const Banner = () => {
+    return (
+      <View style={styles.banner}>
+        <LinearGradient
+          colors={[theme.gradient.color1, theme.gradient.color2]}
+          style={styles.bgbanner}
+        >
+          <View style={styles.promos__label}>
+            <Text style={{ color: "#7EA74C" }}>New</Text>
+          </View>
+          <Text style={styles.promos__title}>
+            Register Your service via chat
+          </Text>
+
+          {getIconById("pleca")}
+
+          <View style={styles.bg_person}>
+            {getIconById("supportPerson")}
+          </View>
+        </LinearGradient>
+      </View>
+    )
+  }
+
   return (
     <ScrollView
-      style={{ flexGrow: 1, padding: 0, margin: 0, backgroundColor: "#fff", height: "100%" }}
+      style={{ flexGrow: 1, padding: 0, margin: 0, backgroundColor: "#fff" }}
       alwaysBounceVertical={false}
     >
+      {<DashboardHeader />}
       <View style={styles.background}>
-        <View style={styles.header}>
-          <View style={styles.profile}>
-            <View style={styles.containerProfile}>
-              <Pressable
-                onPress={() => navigation.navigate(screens.global.settingScreen)}
-                style={styles.goProfile}
-              >
-                <View style={styles.imageProfile}>
-                  {getIconById("profile")}
-                </View>
-              </Pressable>
-            </View>
-            <View style={styles.userInfo}>
-              <StyledText regularGray>Hello,</StyledText>
-              <StyledText boldGray line20 font17pt>{name}</StyledText>
-            </View>
-          </View>
-          <Animated.View style={{ transform: [{ rotate: swing }] }}>
-            <TouchableOpacity style={styles.alerts} onPress={startSwing}>
-              <View style={styles.alerts__count}>
-                <Text style={styles.alert__text}>3</Text>
-              </View>
-              <Image
-                alt="alerts"
-                style={styles.imageAlerts}
-                resizeMode="cover"
-                source={assets.image.png.alerts}
-              />
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
 
         {isCustomer && (
           <>
-            <View style={styles.promos}>
-              <LinearGradient
-                colors={[theme.gradient.color1, theme.gradient.color2]}
-                style={styles.bgpromos}
-              >
-                <View style={styles.promos__label}>
-                  <Text style={{ color: "#7EA74C" }}>New</Text>
-                </View>
-                <Text style={styles.promos__title}>
-                  Register Your service via chat
-                </Text>
+            {<Banner />}
 
-                {getIconById("pleca")}
-
-                <View style={styles.bg_person}>
-                  {getIconById("supportPerson")}
-                </View>
-              </LinearGradient>
+            <View style={{ marginVertical: 10 }}>
+              <StyledText bold font20pt>Choose a category</StyledText>
             </View>
 
-            <View style={styles.tabViewContainer}>
-              <Text style={styles.titleCategories}>Choose a category</Text>
 
-            </View>
             <ServiceListScreenCt />
           </>
         )}
-        {!isCustomer && userInfo.type === "supervisor" && (
-          <ServiceListScreenSp />
+        {!isCustomer && userInfo.type === ENV.TYPES_USERS.SUPERVISOR && (
+          <ServiceListScreenSupervisor />
         )}
 
-        {!isCustomer && userInfo.type === "employee" && (
+        {!isCustomer && userInfo.type === ENV.TYPES_USERS.EMPLOYEE && (
           <ServiceListScreenEmployee />
         )}
-        {!isCustomer && userInfo.type === "manager" && (
+        {!isCustomer && userInfo.type === ENV.TYPES_USERS.MANAGER && (
           <ServiceListScreenManager />
         )}
 

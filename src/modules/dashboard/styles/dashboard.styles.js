@@ -26,7 +26,8 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 70,
     marginBottom: 20,
-    marginTop: Constants.statusBarHeight,
+    paddingHorizontal: 20,
+    marginTop: Constants.statusBarHeight + 25,
   },
   profile: {
     flexDirection: "row",
@@ -79,11 +80,17 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     minWidth: 100,
   },
-  promos: {
+  banner: {
     height: 150,
     marginTop: 15,
     width: "100%",
     position: "relative",
+  },
+  bgbanner: {
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    borderRadius: 10,
   },
   promos__title: {
     color: "#fff",
@@ -108,12 +115,6 @@ export const styles = StyleSheet.create({
     top: 20,
     left: 20,
   },
-  bgpromos: {
-    width: "100%",
-    height: "100%",
-    position: "relative",
-    borderRadius: 10,
-  },
   bg_person: {
     height: 150,
     width: 120,
@@ -123,7 +124,7 @@ export const styles = StyleSheet.create({
   },
   tabViewContainer: {
     flexGrow: 1,
-    marginTop: 5,
+    marginTop: 15,
   },
   imageProfile: {
     width: "100%",
@@ -152,15 +153,6 @@ export const styles = StyleSheet.create({
     top: 20,
     left: 30,
     padding: 5,
-  },
-
-  titleCategories: {
-    color: "#333",
-    fontFamily: "Poppins_700Bold",
-    fontSize: 20,
-    marginBottom: 10,
-    marginTop: 15,
-    lineHeight: 24,
   },
 
 });

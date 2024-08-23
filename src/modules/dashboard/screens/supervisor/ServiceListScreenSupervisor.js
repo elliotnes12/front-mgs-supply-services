@@ -55,7 +55,7 @@ const RenderLastProducts = () => (
   </View>
 );
 
-export const ServiceListScreenSp = () => {
+export const ServiceListScreenSupervisor = () => {
   const [index, setIndex] = useState(0);
   const [height, setHeight] = useState(0);
 
