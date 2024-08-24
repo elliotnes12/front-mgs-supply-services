@@ -1,23 +1,23 @@
+import { LinearGradient } from "expo-linear-gradient";
+import * as Location from "expo-location";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator,
-  ScrollView,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Modal from "react-native-modal";
-import * as Location from "expo-location";
-import { LinearGradient } from "expo-linear-gradient";
 import { assets } from "../../assets";
-import { styles } from "./styles/CreateService.style";
-import { getIconById } from "../../utils/util";
 import { Header } from "../../components/core/Header";
-import StyledText from "../../utils/globalstyle";
-import { stylesGlobal } from "../../modules/styles/global.style";
 import { useLocation } from "../../contexts";
+import { stylesGlobal } from "../../modules/styles/global.style";
+import StyledText from "../../utils/globalstyle";
+import { getIconById } from "../../utils/util";
+import { styles } from "./styles/CreateService.style";
 
 
 const data = [

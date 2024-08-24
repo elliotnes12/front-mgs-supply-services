@@ -1,36 +1,36 @@
 import {
-  TextInput,
-  TouchableOpacity,
-  View,
-  Platform,
-  Keyboard,
-} from "react-native";
-import React, {useEffect, useState} from "react";
-import {LinearGradient} from "expo-linear-gradient";
-import {assets} from "../../assets";
-import {Image} from "react-native";
-import {styles} from "./styles/ChatScreen.style";
-import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import {Text} from "native-base";
-import {HeaderChat} from "../../components/core/HeaderChat";
-import {Color} from "../../utils/constantsStyle";
-import {TouchableWithoutFeedback} from "react-native";
-import {Chat} from "../../modules/chat/api/Chat";
-import {useAuth} from "../../modules/Auth/hooks";
-import {AlertConfirm} from "../../components/core/Modal/AlertConfirm";
-import {ChatMessage} from "../../modules/chat/api/chatMessage";
-import {LoadingScreen} from "../../components/core/LoadingScreen";
-import {ListMessages} from "../../components/core/chat/ListMessages";
-import {socket} from "../../utils";
+import { LinearGradient } from "expo-linear-gradient";
+import { useFormik } from "formik";
+import { Text } from "native-base";
+import React, { useEffect, useState } from "react";
+import {
+  Image,
+  Keyboard,
+  Platform,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import { assets } from "../../assets";
+import { HeaderChat } from "../../components/core/HeaderChat";
+import { LoadingScreen } from "../../components/core/LoadingScreen";
+import { AlertConfirm } from "../../components/core/Modal/AlertConfirm";
 import {
   initialValues,
   validationSchema,
 } from "../../components/core/chat/ChatForm.form";
-import {useFormik} from "formik";
-import {UnreadMessages} from "../../modules/chat/api/unreadMessages";
+import { ListMessages } from "../../components/core/chat/ListMessages";
+import { useAuth } from "../../modules/Auth/hooks";
+import { Chat } from "../../modules/chat/api/Chat";
+import { ChatMessage } from "../../modules/chat/api/chatMessage";
+import { UnreadMessages } from "../../modules/chat/api/unreadMessages";
+import { socket } from "../../utils";
+import { Color } from "../../utils/constantsStyle";
+import { styles } from "./styles/ChatScreen.style";
 
 export function ChatScreenSupervisor() {
   const {accessToken, user} = useAuth();
@@ -234,11 +234,7 @@ export function ChatScreenSupervisor() {
                   <TouchableOpacity
                     style={{marginHorizontal: 15, width: 25, height: 25}}
                   >
-                    <Image
-                      alt="icon clip"
-                      style={{width: "100%", height: "100%"}}
-                      source={assets.image.png.iconguinos}
-                    />
+                    {getIconById("iconSuitCaseEmoji")}
                   </TouchableOpacity>
                   <TextInput
                     placeholder="Message"

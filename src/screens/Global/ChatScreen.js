@@ -18,6 +18,7 @@ import { ListMessages } from '../../components/core/chat/ListMessages';
 import { socket } from '../../utils';
 import { initialValues, validationSchema } from "../../components/core/chat/ChatForm.form";
 import { useFormik } from 'formik';
+import { getIconById } from '../../utils/util';
 
 export function ChatScreen({chat}) {
   const { accessToken } = useAuth();
@@ -153,7 +154,7 @@ export function ChatScreen({chat}) {
               <View style={styles.containerMessages}>
                 <View style={styles.mensaje}>
                   <TouchableOpacity style={{ marginHorizontal: 15, width: 25, height: 25 }}>
-                    <Image alt="icon clip" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconguinos} />
+                    {getIconById("iconSuitCaseEmoji")}
                   </TouchableOpacity>
                   <TextInput
                     placeholder='Message'

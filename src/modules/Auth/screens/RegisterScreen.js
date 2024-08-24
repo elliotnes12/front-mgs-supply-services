@@ -142,7 +142,7 @@ export function RegisterScreen() {
             ) : (
               <View style={styles.registerButton}>
                 <View style={{ width: 26, height: 26, marginRight: 10 }}>
-                  {getIconById("iconMaletaGray")}
+                    {getIconById("iconSuitCaseGray")}
                 </View>
                 <Text style={styles.buttonText}>Company</Text>
               </View>

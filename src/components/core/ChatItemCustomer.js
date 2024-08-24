@@ -1,17 +1,15 @@
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import React, { useCallback, useEffect, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
-import { stylesGlobal } from "../../modules/styles/global.style";
-import { styles } from "./styles/ChatItemCustomer.styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { isEmpty } from "lodash";
-import { ENV, screens, socket } from "../../utils";
-import { Chat } from "../../modules/chat/api/Chat";
+import React, { useEffect, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../../modules/Auth/hooks";
+import { Chat } from "../../modules/chat/api/Chat";
 import { ChatMessage } from "../../modules/chat/api/chatMessage";
 import { UnreadMessages } from "../../modules/chat/api/unreadMessages";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useIsFocused } from '@react-navigation/native';
+import { ENV, screens, socket } from "../../utils";
 import { getIconById } from "../../utils/util";
+import { styles } from "./styles/ChatItemCustomer.styles";
 
 
 export function ChatItemCustomer({ chat, isCustomer, upTopChat }) {
