@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
   ActivityIndicator,
   ScrollView,
-  Dimensions,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Modal from "react-native-modal";
@@ -17,7 +15,7 @@ import { assets } from "../../assets";
 import { styles } from "./styles/CreateService.style";
 import { getIconById } from "../../utils/util";
 import { Header } from "../../components/core/Header";
-import StyledText, { StyledGradientButtonSmall } from "../../utils/globalstyle";
+import StyledText from "../../utils/globalstyle";
 import { stylesGlobal } from "../../modules/styles/global.style";
 import { useLocation } from "../../contexts";
 
@@ -86,7 +84,7 @@ export function CreateService() {
 
   const getImage = (label) => {
     if (label === "Cleaning") {
-      return assets.image.png.iconEscoba;
+      return assets.image.png.iconBroom;
     } else if (label === "Painting") {
       return assets.image.png.iconBotePintura;
     } else if (label === "Polishing") {
@@ -247,12 +245,12 @@ export function CreateService() {
             {origin && (
               <MapView
                 style={{ flexGrow: 1 }}
-                initialRegion={{
-                  latitude: origin.latitude,
-                  longitude: origin.longitude,
-                  latitudeDelta: 0.005,
-                  longitudeDelta: 0.005,
-                }}
+                region={location}
+                onRegionChangeComplete={(region) => setLocation(region)}
+                cacheEnabled={true} // Habilita la caché
+                showsUserLocation={true} // Muestra la ubicación actual
+                showsMyLocationButton={true} // Muestra el botón de ubicación
+                loadingEnabled={true}
                 onPress={handleMapPress}
               >
                 <Marker

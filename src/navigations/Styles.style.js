@@ -21,7 +21,7 @@ export const styles = new StyleSheet.create({
       zIndex:10,
       position:"relative"
     },
-    headerStyle: {
+    tyle: {
       backgroundColor: "#fff",
     },
     headerTitleStyle: {

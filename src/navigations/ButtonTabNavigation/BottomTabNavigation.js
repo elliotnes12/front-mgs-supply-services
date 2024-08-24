@@ -18,6 +18,7 @@ import {
 } from '../stacks';
 import { WorkFlowNavigation } from '../stacks/WorkFlowNavigation';
 import { styles } from './BottomTabNavigation.styles';
+import { getIconById } from '../../utils/util';
 
 const Tab = createBottomTabNavigator();
 
@@ -80,13 +81,13 @@ export function BottomTabNavigation() {
 
   const getIconByName = (name, focused) => {
     const iconMap = {
-      'home': assets.image.png.home,
-      'home-focus': assets.image.png.homeFocus,
-      'chat': assets.image.png.chat,
-      'chat-focus': assets.image.png.chatFocus,
-      'order': assets.image.png.order,
-      'order-focus': assets.image.png.orderFocus,
-      'cog-outline': assets.image.png.setting,
+      'home': assets.image.png.iconHome,
+      'home-focus': assets.image.png.iconHomeFocus,
+      'chat': assets.image.png.iconChat,
+      'chat-focus': assets.image.png.iconChatFocus,
+      'order': assets.image.png.iconOrder,
+      'order-focus': assets.image.png.iconOrderFocus,
+      'cog-outline': assets.image.png.iconSetting,
       'plus': assets.image.png.plus,
       'pending': assets.image.png.iconPending,
       'pending-focus': assets.image.png.iconPendingFocus,
@@ -146,7 +147,8 @@ export function BottomTabNavigation() {
             tabBarItemStyle: [styles.tabBarItemOptions],
             tabBarIcon: ({ focused }) => (
               tab.name === 'boton-central' ? (
-                <View>
+                <View style={styles.centralButtonContainer}>
+
                   <Image
                     style={styles.border}
                     resizeMode="contain"
@@ -154,10 +156,19 @@ export function BottomTabNavigation() {
                     alt="icon"
                   />
                   <TouchableOpacity
-                    onPress={() => navigation.navigate(userType === 'supervisor' || userType === 'manager' ? screens.global.createService : '')}
+                    onPress={() =>
+                      navigation.navigate(
+                        userType === 'supervisor' || userType === 'manager'
+                          ? screens.global.createService
+                          : ''
+                      )
+                    }
                     style={styles.centralButton}
                   >
-                    <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.registerOrder}>
+                    <LinearGradient
+                      colors={['#CEDC39', '#7DA74D']}
+                      style={styles.registerOrder}
+                    >
                       <Image
                         style={styles.img}
                         resizeMode="contain"
@@ -175,7 +186,9 @@ export function BottomTabNavigation() {
                       source={getIconByName(tab.iconName, focused)}
                       alt="icon"
                     />
-                    <Text style={[styles.tabText, { color: focused ? '#7DA74D' : '#ABABAB' }]}>{tab.title}</Text>
+                    <Text style={[styles.tabText, { color: focused ? '#7DA74D' : '#ABABAB' }]}>
+                      {tab.title}
+                    </Text>
                   </View>
               )
             ),

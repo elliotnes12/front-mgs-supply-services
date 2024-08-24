@@ -1,11 +1,11 @@
-const IP = "192.168.100.44";
-const SERVER = `${IP}:3977`;
+const IP = "192.168.56.1";
+const SERVER = `server-mgs-supply-services-1.onrender.com`;
 
 export const ENV = {
   SERVER_IP: SERVER,
-  BASE_PATH: `http://${SERVER}`,
-  API_URL: `http://${SERVER}/api`,
-  SOCKET_URL: `http://${SERVER}`,
+  BASE_PATH: `https://${SERVER}`,
+  API_URL: `https://${SERVER}/api`,
+  SOCKET_URL: `https://${SERVER}`,
   ENDPOINTS: {
     AUTH: {
       REGISTER: "auth/register",
@@ -30,11 +30,15 @@ export const ENV = {
     GROUP_MESSAGE_IMAGE: "group/message/image",
     GROUP_MESSAGE_TOTAL: "group/message/total",
     GROUP_MESSAGE_LAST: "group/message/last",
-    GET_ALL_SERVICES: "service-order"
+    GET_ALL_SERVICES_SUPERVISOR: "services/orders/supervisor",
+    GET_ALL_SERVICES: "services/orders/supervisor"
   },
   JWT: {
     ACCESS: "access",
     REFRESH: "refresh",
+  },
+  REGISTER_TABS: {
+    COMPANY: "company"
   },
   TYPES_USERS: {
     CUSTOMER: "customer",
@@ -45,6 +49,7 @@ export const ENV = {
   ACTIVE_CHAT_ID: "active_chat_id",
   ACTIVE_GROUP_ID: "active_group_id",
 };
+
 
 export const tabIds = {
   TAB_ID_SERVICES: "services",

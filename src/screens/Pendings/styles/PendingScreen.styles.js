@@ -28,8 +28,8 @@ export const styles = StyleSheet.create({
         width: "100%",
         borderRadius: Border.br_3xs,
         shadowOpacity: 1,
-        elevation: 30,
-        shadowRadius: 30,
+        elevation: 5,
+        shadowRadius: 5,
         shadowOffset: {
             width: 0,
             height: 5,

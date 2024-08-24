@@ -22,8 +22,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     tabBar: {
-        height: 100,
+        backgroundColor: "#F9FCDE",
         width: "100%",
+        height: 100,
         alignItems: "center",
         justifyContent: "space-around",
         flexDirection: "column",
@@ -58,7 +59,7 @@ export const styles = StyleSheet.create({
     border: { 
         position: "absolute",
         bottom:-25,
-        left:-50
+        left: -20
     },
     registerOrder: {
         width: 65,
@@ -70,6 +71,28 @@ export const styles = StyleSheet.create({
         position: "absolute",
         bottom: 0,
         left: -32.5
+    },
+    centralButtonContainer: {
+        position: 'absolute',
+        bottom: 40,
+        zIndex: 10, // Ensures it's on top
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    centralButton: {
+        width: "auto",
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 10, // Prioritize touch events
+    },
+    registerOrder: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
 });

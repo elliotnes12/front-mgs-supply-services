@@ -62,8 +62,6 @@ export default function LayoutAuth({ children, userType, logo }) {
     setLoading(false);
   };
 
-  if (loading) <ActivityIndicator size="large" color="#0000ff" />;
-
   return (
     <SafeAreaView style={{ flexGrow: 1, justifyContent: "center" }}>
       <KeyboardAvoidingView
@@ -71,32 +69,41 @@ export default function LayoutAuth({ children, userType, logo }) {
         style={styles.container}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ImageBackground
-            source={backgroundImage}
-            style={styles.container}
-            resizeMode="cover"
-            onLoad={handleImageLoad}
-          >
-            <ScrollView
-              contentContainerStyle={styles.scrollViewContent}
-              keyboardShouldPersistTaps="handled"
+          <View style={styles.container}>
+            {loading && (
+              <ActivityIndicator
+                size="large"
+                color="#0000ff"
+                style={styles.loadingIndicator}
+              />
+            )}
+            <ImageBackground
+              source={backgroundImage}
+              style={styles.container}
+              resizeMode="cover"
+              onLoad={handleImageLoad}
             >
-              <View style={styles.overlay} />
-              {logo && (
-                <View style={[styles.logo]}>
-                  <Image
-                    style={{ width: "100%", height: "100%" }}
-                    alt="Logo-MgsSupplyServices"
-                    resizeMode="contain"
-                    source={assets.image.png.originLogo}
-                  />
+              <ScrollView
+                contentContainerStyle={styles.scrollViewContent}
+                keyboardShouldPersistTaps="handled"
+              >
+                <View style={styles.overlay} />
+                {logo && (
+                  <View style={[styles.logo]}>
+                    <Image
+                      style={{ width: "100%", height: "100%" }}
+                      alt="Logo-MgsSupplyServices"
+                      resizeMode="contain"
+                      source={assets.image.png.originLogo}
+                    />
+                  </View>
+                )}
+                <View style={[styles.content, { marginTop: marginContent }]}>
+                  {children}
                 </View>
-              )}
-              <View style={[styles.content, { marginTop: marginContent }]}>
-                {children}
-              </View>
-            </ScrollView>
-          </ImageBackground>
+              </ScrollView>
+            </ImageBackground>
+          </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>

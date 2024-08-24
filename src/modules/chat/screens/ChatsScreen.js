@@ -92,7 +92,7 @@ export function ChatsScreen() {
         <View style={styles.userItem}>
           <View style={styles.contImage}>
             <View style={styles.userImage}>
-              {getIconById("avatar")}
+              {getIconById("iconAvatar")}
             </View>
           </View>
           <StyledText regularGray>{item.name}</StyledText>

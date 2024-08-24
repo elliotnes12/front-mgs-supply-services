@@ -15,7 +15,6 @@ import { ChatScreenSupervisor } from "../screens/Global/ChatScreenSupervisor";
 import { ServicesScreen } from "../screens/Global/ServicesScreen";
 import { ChatContactsScreenEmployee } from "../screens/Global/ChatContactsScreenEmployee";
 import { SettingsScreen } from "../modules/Settings";
-import { EmailTokenVerificationScreen } from "../modules/Auth/screens/EmailTokenVerificationScreen";
 
 initSockets();
 

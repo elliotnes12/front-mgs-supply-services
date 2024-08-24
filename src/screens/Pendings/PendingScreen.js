@@ -56,7 +56,7 @@ export function PendingScreen() {
                     {item.employees.map((employee) => (
                         <View key={employee.idEmployee} style={styles.item}>
                             <View style={styles.item__img}>
-                                {getIconById("profile")}
+                                {getIconById("iconProfile")}
                             </View>
                             <Text style={styles.personalName}>{employee.name}</Text>
                         </View>
@@ -66,7 +66,7 @@ export function PendingScreen() {
             <View style={styles.options}>
                 <TouchableOpacity style={styles.options__item}>
                     <View style={stylesGlobal.imageMd}>
-                        {getIconById("edit")}
+                        {getIconById("iconEdit")}
                     </View>
                     <Text style={styles.edit}>Edit</Text>
                 </TouchableOpacity>

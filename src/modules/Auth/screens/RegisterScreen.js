@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFormik } from "formik";
-import { getIcon, getIconById } from "../../../utils/util";
+import { getIconById } from "../../../utils/util";
 import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/RegisterForm.form";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/RegisterScreen.styles";
 import { Alert } from "../../../components/core/Modal/Alert";
-import { stylesGlobal } from "../../styles/global.style";
-import { ENV } from "../../../utils";
+import { ENV, screens } from "../../../utils";
 import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
 import { Response } from "../../../utils/Response";
@@ -36,21 +35,26 @@ export function RegisterScreen() {
     }
 
     setUserType(newValue);
-    setShowIdInput(newValue === ENV.TYPES_USERS.COMPANY);
+    setShowIdInput(newValue === ENV.REGISTER_TABS.COMPANY);
 
-    if (newValue === ENV.TYPES_USERS.COMPANY) {
+    if (newValue === ENV.REGISTER_TABS.COMPANY) {
       formik.setFieldValue("employeeNumber", undefined);
     }
     formik.setFieldValue("userType", newValue);
   };
 
   const formik = useFormik({
+
+
     initialValues: initialValues(),
 
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue, { resetForm }) => {
       setLoading(true);
+      setMessage("");
+      setModalVisible(true)
+
       try {
         const response = await authController.register(
           formValue.email,
@@ -58,20 +62,18 @@ export function RegisterScreen() {
           formValue.employeeNumber,
           formValue.name
         );
-        setLoading(false);
 
         const { code, message, data } = objectResponse.getResponse(response);
 
         if (code != 201) {
           throw Error(message);
         }
-
-        navigation.navigate("EmailTokenVerificationScreen");
+        toggleModal();
+        setLoading(false);
+        navigation.navigate(screens.global.tokenVerification);
       } catch (error) {
-        console.log(error);
         setMessage(error.message);
         setLoading(false);
-        toggleModal();
       }
     },
   });
@@ -124,7 +126,7 @@ export function RegisterScreen() {
             )}
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handleRadioChange("company")}>
+          <TouchableOpacity onPress={() => handleRadioChange(ENV.REGISTER_TABS.COMPANY)}>
             {userType === "company" ? (
               <LinearGradient
                 colors={["#CEDC39", "#7DA74D"]}
@@ -244,7 +246,7 @@ export function RegisterScreen() {
 
         {showIdInput && (
           <View style={styles.field}>
-            <StyledText regularWhite>Confirm your password</StyledText>
+            <StyledText regularWhite>Company</StyledText>
             <View
               style={[
                 styles.inputContainer,
@@ -285,8 +287,8 @@ export function RegisterScreen() {
           textConfirm="Delete"
           onConfirm={() => {}}
           message={message}
-          isDanger
           loading={loading}
+          isDanger={loading ? false : true}
         />
       </View>
     </LayoutAuth>

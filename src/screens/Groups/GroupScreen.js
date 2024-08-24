@@ -15,7 +15,7 @@ export function GroupScreen() {
 
   const getImage = (label) => {
     if (label === "Cleaning") {
-      return assets.image.png.iconEscoba;
+      return assets.image.png.iconBroom;
     } else if (label === "Painting") {
       return assets.image.png.iconBotePintura;
     }

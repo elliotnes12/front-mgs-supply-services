@@ -24,13 +24,13 @@ export function ItemService({ item }) {
 
                     <View style={styles.item__date}>
                         <View style={[stylesGlobal.imageSmall]}>
-                            <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
+                            <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendar} />
                         </View>
                         <Text style={styles.item__datetext} >{item.date}</Text>
                     </View>
 
                     <TouchableOpacity style={styles.item__flechaContainer}>
-                        <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+                        <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.iconFlecha} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -51,7 +51,7 @@ export function ItemServiceManager({ item }) {
 
                 <View style={styles.item__date}>
                     <View style={[stylesGlobal.imageSmall]}>
-                        <Image alt='icon-calendar' resizeMode="contain" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
+                        <Image alt='icon-calendar' resizeMode="contain" style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendar} />
                     </View>
                     <Text style={styles.item__datetext} >{item.date}</Text>
                 </View>
@@ -59,7 +59,7 @@ export function ItemServiceManager({ item }) {
                 <RenderStatusService status={item.status} />
 
                 <TouchableOpacity style={styles.item__flechaContainer}>
-                    <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+                    <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.iconFlecha} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -81,7 +81,7 @@ export function ItemServiceSupervisor({ item }) {
 
                 <View style={styles.item__date}>
                     <View style={[stylesGlobal.imageSmall]}>
-                        <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
+                        <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendar} />
                     </View>
                     <Text style={styles.item__datetext} >{item.date}</Text>
                 </View>
@@ -89,7 +89,7 @@ export function ItemServiceSupervisor({ item }) {
                 <RenderStatusService status={item.status} />
 
                 <TouchableOpacity style={styles.item__flechaContainer}>
-                    <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+                    <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.iconFlecha} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -108,7 +108,7 @@ export function ItemServiceEmployee({ item }) {
 
                 <View style={styles.item__date}>
                     <View style={[stylesGlobal.imageSmall]}>
-                        <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.calendar} />
+                        <Image alt='icon-calendar' resizeMode="cover" style={stylesGlobal.imageMin__img} source={assets.image.png.iconCalendar} />
                     </View>
                     <Text style={styles.item__datetext} >{item.date}</Text>
                 </View>
@@ -116,7 +116,7 @@ export function ItemServiceEmployee({ item }) {
                 <RenderStatusService status={item.status} />
 
                 <TouchableOpacity style={styles.item__flechaContainer}>
-                    <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.flecha} />
+                    <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.iconFlecha} />
                 </TouchableOpacity>
             </View>
         </View>

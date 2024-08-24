@@ -133,7 +133,7 @@ export function ChatItemCustomer({ chat, isCustomer, upTopChat }) {
                             }}
                         >
                             <View style={{ width: 35, height: 35 }}>
-                                {getIconById("avatar")}
+                                {getIconById("iconAvatar")}
                             </View>
                         </View>
 

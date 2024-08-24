@@ -254,14 +254,14 @@ export function ChatScreenSupervisor() {
                       <Image
                         alt="icon clip"
                         style={{width: "100%", height: "100%"}}
-                        source={assets.image.png.clip}
+                        source={assets.image.png.iconClip}
                       />
                     </TouchableOpacity>
                     <TouchableOpacity style={{width: 25, height: 25}}>
                       <Image
                         alt="icon camera"
                         style={{width: "100%", height: "100%"}}
-                        source={assets.image.png.camera}
+                        source={assets.image.png.iconCamera}
                       />
                     </TouchableOpacity>
                   </View>

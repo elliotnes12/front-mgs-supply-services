@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, KeyboardAvoidingView } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import { style } from "../styles/EmailTokenVerificationStyle";
 import { getIconById } from "../../../utils/util";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,6 +7,18 @@ import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
 import { TextInput } from "react-native-gesture-handler";
 
 export function EmailTokenVerificationScreen() {
+
+  const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+
+  const handleTextChange = (text, index) => {
+    if (text.length === 1) {
+      const nextIndex = index + 1;
+      if (nextIndex < inputRefs.length) {
+        inputRefs[nextIndex].current.focus();
+      }
+    }
+  };
+
   return (
     <SafeAreaView styles={style.emailcontainer}>
       <KeyboardAvoidingView
@@ -30,10 +42,16 @@ export function EmailTokenVerificationScreen() {
           </View>
 
           <View style={style.contenidoInput}>
-            <TextInput maxLength={1} style={style.input} />
-            <TextInput maxLength={1} style={style.input} />
-            <TextInput maxLength={1} style={style.input} />
-            <TextInput maxLength={1} style={style.input} />
+            {inputRefs.map((ref, index) => (
+              <TextInput
+                key={index}
+                ref={ref}
+                maxLength={1}
+                style={style.input}
+                keyboardType="numeric"
+                onChangeText={(text) => handleTextChange(text, index)}
+              />
+            ))}
           </View>
           <View style={style.buttom}>
             <StyledGradientButton text={"send"} />

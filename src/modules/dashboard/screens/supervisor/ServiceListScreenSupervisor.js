@@ -2,64 +2,25 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { map } from "lodash";
 import { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { TabBar, TabView } from "react-native-tab-view";
 import { ItemServiceSupervisor } from "../../../../components/core/items/ItemService";
 import { screens, tabIds } from "../../../../utils";
 import { getIconById } from "../../../../utils/util";
 import { styles } from "./ServiceListScreenSupervisor.styles";
+import { Service } from "../../../../api/service";
+import { useAuth } from "../../../Auth/hooks";
 
-const data = [
-  {
-    title: "Office Cleaning",
-    subTitle: "Cleaning the lobby area",
-    date: "May 12, 2024",
-    status: "progress",
-  },
-  {
-    title: "Office Cleaning 2",
-    subTitle: "Cleaning the lobby area",
-    date: "May 12, 2024",
-    status: "cancel",
-  },
-  {
-    title: "Office Cleaning 2",
-    subTitle: "Cleaning the lobby area",
-    date: "May 12, 2024",
-    status: "success",
-  },
-];
 
-const initialLayout = { width: "100%" };
-
-const RenderLastServices = ({ navigation }) => (
-  <>
-    <View style={styles.options}>
-      <Text style={styles.options__title}>Services Generated</Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate(screens.tab.services.root)}
-      >
-        <Text style={styles.options__all}>View All</Text>
-      </TouchableOpacity>
-    </View>
-
-    {map(data, (element, id) => {
-      return <ItemServiceSupervisor key={id} item={element} />;
-    })}
-  </>
-);
-
-const RenderLastProducts = () => (
-  <View style={[styles.scene, styles.backgroundWhite]}>
-    <Text>Contenido de la segunda pestaña</Text>
-  </View>
-);
 
 export const ServiceListScreenSupervisor = () => {
   const [index, setIndex] = useState(0);
   const [height, setHeight] = useState(0);
-
+  const controllerService = new Service();
+  const [services, setServices] = useState([])
   const navigation = useNavigation();
+  const { accessToken } = useAuth();
+  const initialLayout = { width: "100%" };
 
   const routes = [
     { key: tabIds.TAB_ID_SERVICES, title: "services", label: "services" },
@@ -67,9 +28,26 @@ export const ServiceListScreenSupervisor = () => {
   ];
 
   useEffect(() => {
+
+    (async () => {
+      try {
+
+        const { data } = await controllerService.findAllServices(accessToken);
+
+        setServices(data)
+
+
+      } catch (error) {
+        setServices([]);
+      }
+    })();
+
+  }, []);
+
+  useEffect(() => {
     switch (routes[index].key) {
       case tabIds.TAB_ID_SERVICES:
-        setHeight((data.length + 1) * 130);
+        setHeight((services.length + 1) * 130);
         break;
       case tabIds.TAB_ID_PRODUCTS:
       case tabIds.TAB_ID_RAITING:
@@ -91,6 +69,31 @@ export const ServiceListScreenSupervisor = () => {
     }
   };
 
+
+  const RenderLastProducts = () => (
+    <View style={[styles.scene, styles.backgroundWhite]}>
+      <Text>Contenido de la segunda pestaña</Text>
+    </View>
+  );
+
+
+  const RenderLastServices = ({ navigation }) => (
+    <>
+      <View style={styles.options}>
+        <Text style={styles.options__title}>Services Generated</Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(screens.tab.services.root)}
+        >
+          <Text style={styles.options__all}>View All</Text>
+        </TouchableOpacity>
+      </View>
+      {map(services, (element, id) => {
+        return <ItemServiceSupervisor key={id} item={element} />;
+      })}
+    </>
+  );
+
+
   const renderTabBar = (props) => (
     <TabBar
       {...props}
@@ -104,7 +107,6 @@ export const ServiceListScreenSupervisor = () => {
             colors={["#CEDC39", "#7DA74D"]}
             style={styles.gradient}
           >
-            {getIconById("")}
             <Text style={styles.tabTextFocused}>{route.label}</Text>
           </LinearGradient>
         ) : (

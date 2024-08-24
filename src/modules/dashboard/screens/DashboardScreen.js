@@ -6,12 +6,9 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
-  Image,
   ScrollView,
-  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { assets } from "../../../assets";
 import { useAuth } from "../../Auth/hooks";
 import { ServiceListScreenCt } from "./customer/ServiceListScreen";
 import { ServiceListScreenSupervisor } from "./supervisor/ServiceListScreenSupervisor";
@@ -23,15 +20,13 @@ import { getIconById } from "../../../utils/util";
 import StyledText from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
 import { ENV, screens } from "../../../utils";
-import { Service } from "../../../api/service";
 
 export function DashboardScreen() {
-  const { userInfo, isCustomer } = useAuth();
-  const [services, setServices] = useState([])
+  const { userInfo, isCustomer, accessToken } = useAuth();
+
   const { name } = userInfo;
   const swingAnim = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
-  const controllerService = new Service();
 
   const animateAlert = () => {
     Animated.sequence([
@@ -72,28 +67,13 @@ export function DashboardScreen() {
   });
 
 
-  useEffect(() => {
-
-    loadServices();
-  }, [])
 
 
   /**
    *  
    *
    */
-  const loadServices = async () => {
 
-    if (!isCustomer) {
-
-      try {
-
-        const response = await controllerService.findAllServices();
-      } catch (e) {
-
-      }
-    }
-  }
 
   const DashboardHeader = () => {
     return (
@@ -105,7 +85,7 @@ export function DashboardScreen() {
               style={styles.goProfile}
             >
               <View style={styles.imageProfile}>
-                {getIconById("profile")}
+                {getIconById("iconProfile")}
               </View>
             </Pressable>
           </View>
@@ -119,7 +99,7 @@ export function DashboardScreen() {
             <View style={styles.alerts__count}>
               <Text style={styles.alert__text}>3</Text>
             </View>
-            {getIconById("alerts")}
+            {getIconById("iconAlerts")}
           </TouchableOpacity>
         </Animated.View>
       </View>
@@ -141,10 +121,10 @@ export function DashboardScreen() {
             Register Your service via chat
           </Text>
 
-          {getIconById("pleca")}
+          {getIconById("bgPleca")}
 
           <View style={styles.bg_person}>
-            {getIconById("supportPerson")}
+            {getIconById("iconSupportPerson")}
           </View>
         </LinearGradient>
       </View>

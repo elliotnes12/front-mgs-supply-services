@@ -5,15 +5,16 @@ export class Service {
 
     async findAllServices(accessToken) {
 
-        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GET_ALL_SERVICES}`;
+        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.GET_ALL_SERVICES_SUPERVISOR}`;
         const params = {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json', 
             },
         };
 
-        return await fetch(url, params);
-
+        const response = await fetch(url, params);
+        return await response.json();
     }
 
 }

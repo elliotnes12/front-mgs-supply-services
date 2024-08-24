@@ -11,7 +11,8 @@ const global = {
   groupScreen: "GroupScreen",
   groupProfileScreen: "GroupProfileScreen",
   addUserGroupScreen: "AddUserGroupScreen",
-  settingScreen: "SettingsScreen"
+  settingScreen: "SettingsScreen",
+  tokenVerification: "EmailTokenVerificationScreen"
 };
 
 const workFlow = {

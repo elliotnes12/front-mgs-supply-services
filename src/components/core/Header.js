@@ -20,7 +20,7 @@ export function Header({ search, title, subtitle, goBack, headerType, totalConta
                             <>
 
                                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ width: 35, height: 35, marginRight: 10 }}>
-                                    <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.flechaizquierda} />
+                                <Image alt="icon goBack" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconLeftArrow} />
                                 </TouchableOpacity>
 
                             </>

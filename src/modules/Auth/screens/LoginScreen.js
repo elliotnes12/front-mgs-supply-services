@@ -10,7 +10,6 @@ import { initialValues, validationSchema } from "../forms/LoginForm.form";
 import { useAuth } from "../hooks";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/LoginScreen.styles";
-import { AlertConfirm } from "../../../components/core/Modal/AlertConfirm";
 import { Alert } from "../../../components/core/Modal/Alert";
 import { Response } from "../../../utils/Response";
 
@@ -22,49 +21,44 @@ export function LoginScreen() {
   const [hide, setHide] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [marginTopContent, setMarginTopContent] = useState(20)
   const [message, setMessage] = useState("");
 
   const objectResponse = new Response();
 
   const formik = useFormik({
-
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       setLoading(true);
+      setMessage("");
+      setModalVisible(true)
       try {
         const { email, password } = formValue;
         const response = await authController.login(email, password);
 
         const { code, message, data } = objectResponse.getResponse(response);
-        console.log("mensajsada" + message)
-        if (code != 200) {
-          throw Error(message);
+        if (code !== 200) {
+          throw new Error(message);
         }
-
 
         await authController.setAccessToken(data?.access);
         await authController.setRefreshToken(data?.refresh);
         await login(data?.access);
 
-        setLoading(false)
+        setMessage("Login successful!");
+        setLoading(false);
 
       } catch (error) {
-        setMessage(error.message)
-        setLoading(false)
-        toggleModal();
-      } finally {
+        setMessage(error.message);
         setLoading(false);
       }
     },
   });
 
   const toggleModal = () => {
-    setModalVisible(prevState => !prevState);
+    setModalVisible((prevState) => !prevState);
   };
-
 
   const goToRegister = () => {
     navigation.navigate(screens.auth.registerScreen);
@@ -72,7 +66,6 @@ export function LoginScreen() {
 
   return (
     <LayoutAuth logo={true} userType={"login"}>
-
       <StyledText headerBig>Welcome Back</StyledText>
       <StyledText regularWhite>Enter and Keep your work day recorded.</StyledText>
 
@@ -112,10 +105,7 @@ export function LoginScreen() {
         </View>
 
         <View style={{ justifyContent: "center" }}>
-          <StyledGradientButton text={"Login"} action={() => {
-
-            formik.handleSubmit()
-          }} />
+          <StyledGradientButton text={"Login"} action={() => formik.handleSubmit()} />
         </View>
 
         <View style={styles.loginNowContainer}>
@@ -124,20 +114,18 @@ export function LoginScreen() {
             <Text style={styles.loginNowLink}> Sign up</Text>
           </TouchableOpacity>
         </View>
-
       </View>
 
       <Alert
         show={isModalVisible}
         type={"info"}
-        onClose={toggleModal}
-        textConfirm="Delete"
-        onConfirm={() => { }}
-        message={message}
-        isDanger
         loading={loading}
+        onClose={toggleModal}
+        textConfirm="OK"
+        onConfirm={() => setModalVisible(false)}
+        message={message}
+        isDanger={loading ? false : true}
       />
     </LayoutAuth>
-
   );
 }

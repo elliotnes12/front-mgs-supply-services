@@ -21,6 +21,8 @@ export function LocationProvider({ children }) {
                 setLocation({
                     latitude: currentLocation.coords.latitude,
                     longitude: currentLocation.coords.longitude,
+                    latitudeDelta: 0.05, // Ajusta para definir el zoom de la región inicial
+                    longitudeDelta: 0.05,
                 });
 
                 setLoading(false);

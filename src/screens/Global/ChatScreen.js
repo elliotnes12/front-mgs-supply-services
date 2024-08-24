@@ -165,10 +165,10 @@ export function ChatScreen({chat}) {
                   />
                   <View style={styles.contente__icons}>
                     <TouchableOpacity style={{ width: 28, height: 28, marginRight: 15 }}>
-                      <Image alt="icon clip" style={{ width: "100%", height: "100%" }} source={assets.image.png.clip} />
+                      <Image alt="icon clip" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconClip} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{ width: 25, height: 25,marginRight:15 }}>
-                      <Image alt="icon camera" style={{ width: "100%", height: "100%" }} source={assets.image.png.camera} />
+                      <Image alt="icon camera" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconCamera} />
                     </TouchableOpacity>
                   </View>
                 </View>
