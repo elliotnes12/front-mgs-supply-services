@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    content: {
-        padding: 10,
-    },
+    list: {
+        flex: 1, 
+        paddingBottom: 80,
+        marginTop: 10
+    }
     
 })

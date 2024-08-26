@@ -18,14 +18,15 @@ export function ListMessages({ messages }) {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "red" }}>
+    <View style={styles.list}>
       <FlatList
         data={messages}
-        keyboardShouldPersistTaps="always"
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-
+        contentContainerStyle={{ flexGrow: 1 }}
         ref={flatListRef}
+        onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
+        keyboardShouldPersistTaps="handled"
       />
     </View>
   );

@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import {styled} from "../styles/ItemText.styles";
 import { useAuth } from "../../../modules/Auth/hooks";
 import {DateTime} from "luxon";
@@ -11,7 +11,7 @@ export function ItemText({message}) {
   const createMessage = new Date(message.createdAt);
 
   return (
-    <View style={styles.content}>
+    <TouchableOpacity activeOpacity={1} style={styles.content}>
         <View style={styles.message}>
             {isMe && 
               <Text style={styles.you}>You</Text>
@@ -19,6 +19,6 @@ export function ItemText({message}) {
             <Text>{message.message}</Text> 
             <Text style={styles.time}>{message.createdAtFormatted}</Text>
         </View>
-    </View>
+    </TouchableOpacity>
   )
 }

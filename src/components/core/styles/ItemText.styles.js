@@ -4,8 +4,8 @@ import { fontFamily } from "../../../utils/constantsStyle";
 export const styled = (isMe) =>{
     return new StyleSheet.create({
         content:{
-            flexDirection:"row",
-            backgroundColor: "green",
+
+            flexDirection: "row",
             justifyContent:isMe? "flex-end" : "flex-start",
             marginHorizontal:10,
             marginBottom:10
