@@ -5,6 +5,7 @@ export const styled = (isMe) =>{
     return new StyleSheet.create({
         content:{
             flexDirection:"row",
+            backgroundColor: "green",
             justifyContent:isMe? "flex-end" : "flex-start",
             marginHorizontal:10,
             marginBottom:10
@@ -18,12 +19,7 @@ export const styled = (isMe) =>{
             paddingHorizontal:15,
             marginBottom:10,
             fontFamily: fontFamily.fontRegular,
-            shadowOpacity: 1,
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            elevation: 2,
+
             shadowRadius: 2,
             shadowColor: "#333",
         },

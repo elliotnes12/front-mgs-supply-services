@@ -10,7 +10,7 @@ import {
 import { initSockets, screens } from "../utils";
 import { styles } from "./Styles.style";
 import { BottomTabNavigation } from "./ButtonTabNavigation/BottomTabNavigation";
-import { ChatScreen } from "../screens/Global/ChatScreen";
+import { ChatScreenCustomer } from "../screens/Global/ChatScreenCustomer";
 import { ChatScreenSupervisor } from "../screens/Global/ChatScreenSupervisor";
 import { ServicesScreen } from "../screens/Global/ServicesScreen";
 import { ChatContactsScreenEmployee } from "../screens/Global/ChatContactsScreenEmployee";
@@ -57,8 +57,8 @@ export function AppNavigation() {
         />
 
         <Stack.Screen
-          name={screens.tab.chats.chatScreen}
-          component={ChatScreen}
+          name={screens.tab.chats.customer.chatScreenCustomer}
+          component={ChatScreenCustomer}
           options={{ headerShown: false }}
         />
 

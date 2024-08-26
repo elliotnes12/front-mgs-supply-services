@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Text } from "react-native";
 import { AlertDialog, Button } from "native-base";
 import { styles } from "./AlertConfirm.styles";
+import StyledText from "../../../utils/globalstyle";
 
 export function AlertConfirm(props) {
   const { show, onClose, title, message, textConfirm, onConfirm, isDanger } =
@@ -17,13 +18,17 @@ export function AlertConfirm(props) {
     <AlertDialog isOpen={show} onClose={onClose}>
       <AlertDialog.Content>
 
+        {title &&
         <AlertDialog.Header style={styles.header}>
-          <Text style={styles.titleText}>{title}</Text>
-        </AlertDialog.Header>
+            <Text style={styles.titleText}>{title}</Text>
+          </AlertDialog.Header>
+        }
 
-        <AlertDialog.Body style={styles.body}>
-          <Text style={styles.messageText}>{message}</Text>
-        </AlertDialog.Body>
+        {message &&
+          <AlertDialog.Body style={styles.body}>
+            <StyledText regularGray >{message}</StyledText>
+          </AlertDialog.Body>
+        }
 
         <AlertDialog.Footer style={styles.footer}>
           <Button.Group space={2}>

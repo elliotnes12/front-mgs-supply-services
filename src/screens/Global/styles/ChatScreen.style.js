@@ -4,8 +4,7 @@ import { Color, FontSize } from "../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
 
-     contente__items:{
-      backgroundColor:'red',
+   contente__items: {
       display:'flex',
       flexDirection:'row',
       paddingLeft:10,
@@ -13,8 +12,7 @@ export const styles = StyleSheet.create({
       padding:10
       
      },
-     contente__item:{
-      backgroundColor:'red',
+   contente__item: {
       display:'flex',
       flexDirection:'row',
       paddingLeft:10,
@@ -129,22 +127,15 @@ export const styles = StyleSheet.create({
       borderRadius: 16,
       overflow: 'hidden',
       shadowOpacity: 1,
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      elevation: 30,
       shadowRadius: 10,
       shadowColor: Color.gray1,
     },
     menuChat__item: {
-      borderBottomWidth: 0.4,
+       borderBottomWidth: 1,
       borderBottomColor: Color.gray1
     },
     menuChat__option: {
-      padding: 10,
-      fontFamily:'Poppins_500Medium',
-      fontSize:12,
+       padding: 10,
       backgroundColor: "#fff",
       marginBottom: 5,
       paddingLeft:15

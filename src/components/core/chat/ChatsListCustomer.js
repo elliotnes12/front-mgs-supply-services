@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { stylesGlobal } from '../../modules/styles/global.style';
-import { styles } from "./styles/ChatItemCustomer.styles";
+import { stylesGlobal } from '../../../modules/styles/global.style';
+import { styles } from "../styles/ChatItemCustomer.styles";
 import { isEmpty } from "lodash";
-import { screens, socket } from '../../utils';
-import { Chat } from '../../modules/chat/api/Chat';
-import { useAuth } from '../../modules/Auth/hooks';
+import { screens, socket } from '../../../utils';
+import { Chat } from '../../../modules/chat/api/Chat';
+import { useAuth } from '../../../modules/Auth/hooks';
 
 export function ChatItem({ chat, isCustomer, token, upTopChat }) {
     const navigation = useNavigation();
@@ -17,14 +17,14 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
 
     const newMessage = (message) => {
 
-        if(message.chat == chat?.idChat){
+        if (message.chat == chat?.idChat) {
 
-        if(user._id !== message.user._id){
-            upTopChat(message.chat);
-            setLastMessage(message);
-            
-        }
-        
+            if (user._id !== message.user._id) {
+                upTopChat(message.chat);
+                setLastMessage(message);
+
+            }
+
         }
     }
 
@@ -49,7 +49,7 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
             return;
         }
 
-        
+
         socket.emit("subscribe", `${chat?.idChat}_notify`);
         socket.on("message_notify", newMessage);
 
@@ -59,7 +59,7 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
     }, [chat.idChat]);
 
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             key={chat?.idChat}
             onPress={() =>
                 navigation.navigate(isCustomer ? screens.tab.chats.chatScreen : screens.tab.chats.ChatScreenSupervisor, {
@@ -93,11 +93,11 @@ export function ChatItem({ chat, isCustomer, token, upTopChat }) {
                     <Text style={styles.chatItem__message}>{lastMessage?.message || "No recent message"}</Text>
                 </View>
                 <View style={styles.chatContainerTime}>
-                    {lastMessage && 
-                     <Text style={styles.chatTime}>
-                       {lastMessage?.createdAtFormatted}
-                     </Text>
-                     }
+                    {lastMessage &&
+                        <Text style={styles.chatTime}>
+                            {lastMessage?.createdAtFormatted}
+                        </Text>
+                    }
                     <View style={styles.totalMessageContainer}>
                         <Text style={styles.totalMessage}>2</Text>
                     </View>

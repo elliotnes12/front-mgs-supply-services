@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { useAuth } from '../../Auth/hooks';
-import { styles } from "../styles/chatsScreen.styles";
-import { screens } from '../../../utils';
-import { User } from '../../../api/user';
-import { Chat } from '../api/Chat';
-import { LoadingScreen } from '../../../components/core/LoadingScreen';
-import { Header } from '../../../components/core/Header';
-import { getIconById } from '../../../utils/util';
-import { ChatItemCustomer } from '../../../components/core/ChatItemCustomer';
-import StyledText from '../../../utils/globalstyle';
+import { useAuth } from '../../../Auth/hooks';
+import { styles } from "./chatScreen.customer.styles";
+import { screens } from '../../../../utils';
+import { User } from '../../../../api/user';
+import { Chat } from '../../api/Chat';
+import { LoadingScreen } from '../../../../components/core/LoadingScreen';
+import { Header } from '../../../../components/core/Header';
+import { getIconById } from '../../../../utils/util';
+import { ChatItemCustomer } from '../../../../components/core/chat/ChatItemCustomer';
+import StyledText from '../../../../utils/globalstyle';
 
 
-export function ChatsScreen() {
+export function ChatsScreenCustomer() {
   const [users, setUsers] = useState(null);
-  const [filteredUsers, setFilteredUsers] = useState(null);
   const [chats, setChats] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loadingSupport, setLoadingSupport] = useState(false)
@@ -43,8 +42,6 @@ export function ChatsScreen() {
         setUsers(data);
       } catch (error) {
 
-        console.log("support")
-        console.log(error)
         setUsers([])
       } finally {
         setLoadingSupport(false)
@@ -58,9 +55,9 @@ export function ChatsScreen() {
       (async () => {
         try {
           const { data } = await chatController.getAll(accessToken);
+
           setChats(data);
         } catch (error) {
-          console.log(error)
           setChats([])
         } finally {
           setLoading(false);
@@ -77,11 +74,23 @@ export function ChatsScreen() {
     (async () => {
       try {
 
+        console.log(accessToken)
+        console.log(user._id)
+        console.log(idUser)
         const response = await chatController.create(accessToken, user._id, idUser);
-        const { chatId } = response.data;
 
-        navigation.navigate(screens.tab.chats.chatScreen, { chatId: chatId, userName: name });
+        const { meta: { code, message }, data } = response;
+
+
+        if (code == 200) {
+
+          navigation.navigate(screens.tab.chats.customer.chatScreenCustomer, { chatId: data.chatId, userName: name });
+
+        }
+
+
       } catch (error) {
+        console.log(error)
       }
     })();
   };

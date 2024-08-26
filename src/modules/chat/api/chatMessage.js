@@ -54,7 +54,7 @@ export class ChatMessage {
       const response = await fetch(url, params);
       const result = await response.json();
 
-      if (result.meta.code !== 200) throw result;
+      if (result.meta.code !== 200 && result.meta.code !== 404) throw result;
 
       return result;
     } catch (error) {
@@ -65,6 +65,7 @@ export class ChatMessage {
   async sendText(token, chatId, message) {
     try {
       const url = `${ENV.API_URL}/${ENV.ENDPOINTS.CHAT_MESSAGE}`;
+
       const params = {
         method: "POST",
         headers: {

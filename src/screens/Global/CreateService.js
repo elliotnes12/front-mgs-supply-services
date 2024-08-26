@@ -47,7 +47,6 @@ export function CreateService() {
   const { location, loading } = useLocation(); // Obtiene la ubicación y el estado de carga
 
 
-  console.log(location)
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
     if (isModalVisible) {

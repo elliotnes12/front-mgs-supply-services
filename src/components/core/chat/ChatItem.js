@@ -1,24 +1,25 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { stylesGlobal } from "../../../modules/styles/global.style";
+import { styles } from "../styles/ChatItem.styles";
 import { isEmpty } from "lodash";
-import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { useAuth } from "../../modules/Auth/hooks";
-import { Chat } from "../../modules/chat/api/Chat";
-import { ChatMessage } from "../../modules/chat/api/chatMessage";
-import { UnreadMessages } from "../../modules/chat/api/unreadMessages";
-import { ENV, screens, socket } from "../../utils";
-import { getIconById } from "../../utils/util";
-import { styles } from "./styles/ChatItemCustomer.styles";
+import { ENV, screens, socket } from "../../../utils";
+import { Chat } from "../../../modules/chat/api/Chat";
+import { useAuth } from "../../../modules/Auth/hooks";
+import { ChatMessage } from "../../../modules/chat/api/chatMessage";
+import { UnreadMessages } from "../../../modules/chat/api/unreadMessages";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from '@react-navigation/native';
 
 
-export function ChatItemCustomer({ chat, isCustomer, upTopChat }) {
+export function ChatItem({ chat, isCustomer, upTopChat }) {
     const navigation = useNavigation();
     const [lastMessage, setLastMessage] = useState();
     const { user, accessToken } = useAuth();
     const [totalUnreadMessages, setTotalUnreadMessages] = useState(0);
-    const isFocused = useIsFocused();
     const [totalMessages, setTotalMessages] = useState(0)
+    const isFocused = useIsFocused();
 
 
     const chatController = new Chat();
@@ -26,11 +27,11 @@ export function ChatItemCustomer({ chat, isCustomer, upTopChat }) {
     const unreadMessagesController = new UnreadMessages();
 
     const newMessage = async (message) => {
-
+        setLastMessage(message);
         if (message.chat == chat?.idChat) {
             if (user._id !== message.user._id) {
                 upTopChat(message.chat);
-                setLastMessage(message);
+
 
                 const activeChatId = await AsyncStorage.getItem(ENV.ACTIVE_CHAT_ID);
 
@@ -44,20 +45,20 @@ export function ChatItemCustomer({ chat, isCustomer, upTopChat }) {
 
     useEffect(() => {
         if (isFocused) {
+            //Ejecuta la cache no manda llamar de nuevo a los servicios cuando hago go back
 
             (async () => {
                 try {
-                    const totalMessages = await chatControllerMessage.getTotal(
+                    const { data } = await chatControllerMessage.getTotal(
                         accessToken,
                         chat.idChat
                     );
 
-                    setTotalMessages(totalMessages.data.total)
+                    setTotalMessages(data.total);
 
                     const totalReadMessages =
                         await unreadMessagesController.getTotalReadMessages(chat.idChat);
 
-                    setTotalUnreadMessages(totalMessages.data.total - totalReadMessages);
                 } catch (error) {
                     console.error(error);
                 }
@@ -118,36 +119,49 @@ export function ChatItemCustomer({ chat, isCustomer, upTopChat }) {
                     }
                 >
                     <View key={chat?.idChat} style={styles.chatItem}>
-
-                        <View
-                            style={{
-                                width: 50,
-                                height: 50,
-                                borderRadius: 30,
-                                backgroundColor: "#CEDC39",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-                            <View style={{ width: 35, height: 35 }}>
-                                {getIconById("iconAvatar")}
+                        {chat?.image ? (
+                            <View style={styles.chatItem__img}>
+                                <Image
+                                    alt="icon-profile"
+                                    style={stylesGlobal.imageMin__img}
+                                    resizeMode="contain"
+                                    source={assets.image.png.profile}
+                                />
                             </View>
-                        </View>
-
+                        ) : (
+                            <View
+                                style={{
+                                    width: 50,
+                                    height: 50,
+                                    borderRadius: 30,
+                                    backgroundColor: "#CEDC39",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <Text style={{ color: "#000", fontSize: 16 }}>
+                                    {chat?.name?.substring(0, 2).toUpperCase()}
+                                </Text>
+                            </View>
+                        )}
                         <View style={styles.chatTextContainer}>
                             <Text style={styles.chatItem__name}>{chat.name}</Text>
                             <Text style={styles.chatItem__message}>
-                                {lastMessage?.message? lastMessage.message : chat.message}
+                                {lastMessage?.message || "No recent message"}
                             </Text>
                         </View>
                         <View style={styles.chatContainerTime}>
                             {lastMessage && (
                                 <Text style={styles.chatTime}>
-                                    {lastMessage?.createdAtFormatted ? lastMessage.createdAtFormatted : chat?.createdAtFormatted}
+                                    {lastMessage?.createdAtFormatted}
                                 </Text>
                             )}
-
+                            {totalUnreadMessages > 0 && (
+                                <View style={styles.totalMessageContainer}>
+                                    <Text style={styles.totalMessage}>{totalUnreadMessages}</Text>
+                                </View>
+                            )}
                         </View>
                     </View>
                 </TouchableOpacity>

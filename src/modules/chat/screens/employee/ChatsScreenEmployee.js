@@ -1,15 +1,16 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import { User } from '../../../api/user';
-import { ChatItem } from '../../../components/core/ChatItem';
-import { HeaderChats } from '../../../components/core/HeaderChats';
-import { LoadingScreen } from '../../../components/core/LoadingScreen';
-import { screens } from '../../../utils';
-import { getIconById } from '../../../utils/util';
-import { useAuth } from '../../Auth/hooks';
-import { Chat } from '../api/Chat';
-import { styles } from "../styles/chatsScreen.employees.styles";
+import { User } from '../../../../api/user';
+import { ChatItem } from '../../../../components/core/chat/ChatItem';
+import { HeaderChats } from '../../../../components/core/HeaderChats';
+import { LoadingScreen } from '../../../../components/core/LoadingScreen';
+import { screens } from '../../../../utils';
+import { getIconById } from '../../../../utils/util';
+import { useAuth } from '../../../Auth/hooks';
+import { Chat } from '../../api/Chat';
+import { styles } from "../../styles/chatsScreen.employees.styles";
+import { socket } from '../../../../utils';
 
 export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
@@ -25,8 +26,6 @@ export function ChatsScreenEmployee() {
 
   const userController = new User();
   const chatController = new Chat();
-
-
 
   useFocusEffect(
     useCallback(() => {

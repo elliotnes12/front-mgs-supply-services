@@ -1,4 +1,4 @@
-const IP = "192.168.56.1";
+const IP = "192.168.100.71";
 const SERVER = `server-mgs-supply-services-1.onrender.com`;
 
 export const ENV = {

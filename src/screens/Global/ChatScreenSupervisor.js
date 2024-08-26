@@ -53,7 +53,6 @@ export function ChatScreenSupervisor() {
   const [inputValue, setInputValue] = useState("");
   const unreadMessagesController = new UnreadMessages();
 
-  console.log(user.role.name);
 
   const openCloseDelete = () => setShowDelete(prevState => !prevState);
 
@@ -126,12 +125,6 @@ export function ChatScreenSupervisor() {
           chatId,
           data.total
         );
-
-        console.log("---------Chat-----------------")
-        console.log("id::::"+chatId)
-        console.log("Mensajes leidos: "+data.total)
-        console.log("Mensajes totales : "+data.total)
-
 
       } catch (error) {
         console.error(error);

@@ -19,11 +19,15 @@ const workFlow = {
   root: "WorkFlowRoot",
 }
 
+const chatCustomer = {
+  chatsScreenCustomer: "ChatsScreenCustomer",
+  chatScreenCustomer: "ChatScreen",
+}
+
 const chats = {
+  customer: chatCustomer,
   root: "ChatsRoot",
   createChatScreen: "CreateChatScreen",
-  chatScreen: "ChatScreen",
-  chatsScreenCustomer: "ChatsScreenCustomer",
   ChatScreenSupervisor: "ChatScreenSupervisor",
   chatsScreenEmployee: "ChatsScreenEmployee",
   chatContactsScreenEmployee: "ChatsContactsScreenEmployee"

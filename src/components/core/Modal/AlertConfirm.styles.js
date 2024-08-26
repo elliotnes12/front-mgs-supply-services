@@ -1,22 +1,14 @@
 import { StyleSheet } from "react-native";
-import { Color } from "../../../utils/constantsStyle";
+import { theme } from "../../../utils/theme";
 
 export const styles = new StyleSheet.create({
   header: {
     backgroundColor: "#fff",
     borderBottomColor: "#fff",
   },
-  titleText: {
-    color: Color.gray1,
-    fontWeight: "bold",
-    fontSize: 16,
-  },
   body: {
-    backgroundColor: "#fff",
-  },
-  messageText: {
-    color: Color.gray2,
-    opacity: 0.6,
+    minHeight: 80,
+    justifyContent: "center"
   },
   footer: {
     backgroundColor: "#fff",
@@ -24,6 +16,6 @@ export const styles = new StyleSheet.create({
   },
   cancel: {
     backgroundColor: "#7DA74D",
-  
+    fontFamily: theme.textStyles.regular
   },
 });

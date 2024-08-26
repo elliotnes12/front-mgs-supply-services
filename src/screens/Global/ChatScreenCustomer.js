@@ -1,17 +1,14 @@
-import { TextInput, TouchableOpacity, View, Platform, Keyboard } from 'react-native';
+import { TextInput, TouchableOpacity, View, Platform, Keyboard, KeyboardAvoidingView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
 import { assets } from '../../assets';
 import { Image } from 'react-native';
 import { styles } from "./styles/ChatScreen.style";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text } from 'native-base';
 import { HeaderChat } from '../../components/core/HeaderChat';
-import { Color } from '../../utils/constantsStyle';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Chat } from '../../modules/chat/api/Chat';
 import { useAuth } from '../../modules/Auth/hooks';
-import { AlertConfirm } from '../../components/core/Modal/AlertConfirm';
 import { ChatMessage } from '../../modules/chat/api/chatMessage';
 import { LoadingScreen } from '../../components/core/LoadingScreen';
 import { ListMessages } from '../../components/core/chat/ListMessages';
@@ -19,15 +16,16 @@ import { socket } from '../../utils';
 import { initialValues, validationSchema } from "../../components/core/chat/ChatForm.form";
 import { useFormik } from 'formik';
 import { getIconById } from '../../utils/util';
+import { AlertConfirm } from "../../components/core/Modal/AlertConfirm";
+import StyledText from '../../utils/globalstyle';
 
-export function ChatScreen({chat}) {
+export function ChatScreenCustomer({ chat }) {
   const { accessToken } = useAuth();
   const navigation = useNavigation();
   const route = useRoute();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isMenuSettings, setIsMenuSettings] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [questions] = useState(['What service do you need?', 'How can we help you?', 'We have services available for you?']);
   const [optionsSettings] = useState(['Delete Chat', 'Settings']);
   const { chatId, userName } = route.params;
   const [messages, setMessages] = useState(null);
@@ -38,9 +36,6 @@ export function ChatScreen({chat}) {
 
   const openCloseDelete = () => setShowDelete((prevState) => !prevState);
 
-  const toggleMenu = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
 
   const toggleMenuSettings = (option) => {
     if (option === 'Delete Chat') {
@@ -69,7 +64,7 @@ export function ChatScreen({chat}) {
       openCloseDelete();
       navigation.goBack();
     } catch (e) {
-      console.error(e); 
+      console.error(e);
     }
   };
 
@@ -88,11 +83,11 @@ export function ChatScreen({chat}) {
   useEffect(() => {
     (async () => {
       try {
-        const {data} = await chatMessageController.getAll(accessToken, chatId);
-         setMessages(data.messages);
-        
+        const { data } = await chatMessageController.getAll(accessToken, chatId);
+        setMessages(data.messages);
+
       } catch (error) {
-        setMessages([]);  
+        setMessages([]);
       }
     })();
   }, []);
@@ -133,7 +128,12 @@ export function ChatScreen({chat}) {
   if (!messages) return <LoadingScreen />;
 
   return (
-    <>
+
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+
       <TouchableWithoutFeedback onPress={handleClickOutside}>
         <View style={{ position: "relative", flexGrow: 1 }}>
           <HeaderChat fnMenu={toggleMenuSettings} userName={userName} />
@@ -141,16 +141,17 @@ export function ChatScreen({chat}) {
             <View style={styles.menuChat}>
               {optionsSettings.map((option, index) => (
                 <TouchableOpacity style={index !== optionsSettings.length - 1 ? styles.menuChat__item : ''} key={index} onPress={() => toggleMenuSettings(option)}>
-                  <Text style={styles.menuChat__option}>{option}</Text>
+                  <View style={styles.menuChat__option}>
+                    <StyledText regularGray font14pt  >{option}</StyledText>
+                  </View>
                 </TouchableOpacity>
               ))}
             </View>
           )}
           <View style={{ display: "flex", flex: 1, backgroundColor: "#f1eee9" }}>
             <View style={{ display: "flex", flexDirection: "row", flex: 1, backgroundColor: "transparent", position: "relative" }}>
-              <View style={{ display: "flex", flex: 1, marginBottom: 90, paddingTop: 40, position: "relative" }}>
-                <ListMessages  messages={messages} />
-              </View>
+              <ListMessages messages={messages} />
+
               <View style={styles.containerMessages}>
                 <View style={styles.mensaje}>
                   <TouchableOpacity style={{ marginHorizontal: 15, width: 25, height: 25 }}>
@@ -168,14 +169,14 @@ export function ChatScreen({chat}) {
                     <TouchableOpacity style={{ width: 28, height: 28, marginRight: 15 }}>
                       <Image alt="icon clip" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconClip} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ width: 25, height: 25,marginRight:15 }}>
+                    <TouchableOpacity style={{ width: 25, height: 25, marginRight: 15 }}>
                       <Image alt="icon camera" style={{ width: "100%", height: "100%" }} source={assets.image.png.iconCamera} />
                     </TouchableOpacity>
                   </View>
                 </View>
               </View>
             </View>
-            
+
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -186,9 +187,13 @@ export function ChatScreen({chat}) {
         onClose={openCloseDelete}
         textConfirm="Delete"
         onConfirm={() => deleteChat()}
-        title="Are you sure you want to delete the chat?"
+        message={"Are you sure you want to delete the chat?"}
         isDanger
       />
-    </>
+
+    </KeyboardAvoidingView>
+
   );
 }
+
+

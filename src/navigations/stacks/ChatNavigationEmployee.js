@@ -2,7 +2,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { screens } from "../../utils";
 import { styles } from "../Styles.style";
-import { ChatsScreenEmployee } from '../../modules/chat/screens/ChatsScreenEmployee';
+import { ChatsScreenEmployee } from '../../modules/chat/screens/employee/ChatsScreenEmployee';
 const Stack = createNativeStackNavigator();
 
 

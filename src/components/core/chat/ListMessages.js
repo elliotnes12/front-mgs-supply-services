@@ -1,34 +1,32 @@
-
-import React, { useRef } from 'react'
-import {styles} from "../styles/ListMessages.styles";
-import { ScrollView } from 'react-native';
-import {Text, View} from  "native-base";
-import {map} from "lodash";
+import React, { useRef } from 'react';
+import { FlatList, View } from 'react-native';
 import { ItemText } from './ItemText';
 import { ItemImage } from './ItemImage';
-export  function ListMessages({messages}) {
+import { styles } from '../styles/ListMessages.styles';
 
-  const ScrollViewRef = useRef()
+export function ListMessages({ messages }) {
+  const flatListRef = useRef();
+
+  const renderItem = ({ item }) => {
+    if (item.type === 'TEXT') {
+      return <ItemText message={item} />;
+    }
+    if (item.type === 'IMAGE') {
+      return <ItemImage message={item} />;
+    }
+    return null;
+  };
+
   return (
-    <ScrollView style={styles.container} 
-    alwaysBounceVertical={false}
-    ref={ScrollViewRef}
-    onContentSizeChange={() =>{
-        ScrollViewRef.current.scrollToEnd({animated:true});
-    }}
-    >
-       <View styles={styles.content}>
-          {map(messages,(message,id) =>{
+    <View style={{ flex: 1, backgroundColor: "red" }}>
+      <FlatList
+        data={messages}
+        keyboardShouldPersistTaps="always"
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
 
-              if(message.type == 'TEXT'){
-                return <ItemText  key={message.id} message={message} />
-              }
-              if(message.type == 'IMAGE'){
-                return <ItemImage key={message.id} message={message} />
-              }
-             
-          })}
-       </View>
-    </ScrollView>
-  )
+        ref={flatListRef}
+      />
+    </View>
+  );
 }

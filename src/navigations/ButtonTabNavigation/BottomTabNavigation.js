@@ -8,7 +8,7 @@ import { useAuth } from '../../modules/Auth/hooks';
 import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
 import { ENV, screens } from '../../utils';
 import {
-  ChatNavigation,
+  ChatNavigationCustomer,
   ChatNavigationEmployee,
   PendingSupervisorNavigation,
   ProductNavigation,
@@ -67,7 +67,7 @@ export function BottomTabNavigation() {
       [screens.tab.rootSupervisor]: DashboardScreen,
       [screens.tab.rootEmployee]: DashboardScreen,
       [screens.tab.rootCustomer]: DashboardScreen,
-      [screens.tab.chats.root]: ChatNavigation,
+      [screens.tab.chats.root]: ChatNavigationCustomer,
       [screens.tab.pedings.pendingSupervisorScreen]: PendingSupervisorNavigation,
       [screens.global.settingScreen]: SettingsNavigation,
       [screens.tab.reports.root]: ReportsNavigation,

@@ -1,5 +1,5 @@
 export * from "./AuthNavigations";
-export * from "./ChatNavigation";
+export * from "./ChatNavigationCustomer";
 export * from "./WorkFlowNavigation";
 export * from "./SettingsNavigation";
 export * from "./ReportsNavigations";

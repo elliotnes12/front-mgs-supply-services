@@ -14,10 +14,7 @@ export function ItemImage({ message }) {
 
   const imageUrl = `${ENV.BASE_PATH}/${message.message}`;
 
-  console.log("Image URL:", imageUrl);
-
   const onOpenImage = () => {
-    console.log("Opening image:", imageUrl);
     navigation.navigate(screens.global.imageFullScreen, { uri: imageUrl });
   };
 
