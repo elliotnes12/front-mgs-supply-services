@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 import { Color } from "../../../utils/constantsStyle";
 import { theme } from "../../../utils/theme";
+import { PixelRatio } from "react-native";
+
+const fontSize = PixelRatio.getFontScale() * 15; 
 
 export const styles = StyleSheet.create({
   header: {
@@ -78,16 +81,16 @@ export const styles = StyleSheet.create({
   },
   profile__name: {
     fontFamily: theme.textStyles.semiBold,
-    fontSize: 17,
-    lineHeight: 20,
+    fontSize: fontSize,
+    lineHeight: fontSize * 1.2, 
     fontWeight: "600",
     color: "#fff",
   },
   profile__content: {
     fontFamily: theme.textStyles.semiBold,
     color: "#fff",
-    fontSize: 13,
-    flex: 2
+    fontSize: PixelRatio.getFontScale() * 13,
+    flex: 2,
   },
   profile__image: {
     padding: 3,
