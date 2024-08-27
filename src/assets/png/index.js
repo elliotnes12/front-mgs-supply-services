@@ -11,6 +11,7 @@ const png = {
   iconProfile: require("./home/profile.png"),
   iconCalendar: require("./icons/calendar.png"),
   iconSetting: require("./buttonmenu/setting.png"),
+  iconSettingFocus: require("./buttonmenu/settingfocus.png"),
   iconChat: require("./buttonmenu/chatuno.png"),
   iconChatFocus: require("./buttonmenu/chatFocus.png"),
   iconHome: require("./buttonmenu/home.png"),

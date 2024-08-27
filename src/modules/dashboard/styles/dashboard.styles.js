@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
-import { Color, fontFamily } from '../../../utils/constantsStyle';
+import { StyleSheet } from "react-native";
+import { Color, fontFamily } from "../../../utils/constantsStyle";
 import Constants from "expo-constants";
-import { theme } from '../../../utils/theme';
+import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
   background: {
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#fff",
     paddingHorizontal: 24,
-    paddingBottom: 40
+    paddingBottom: 40,
   },
   container: {
     paddingLeft: 24,
@@ -99,9 +99,8 @@ export const styles = StyleSheet.create({
     width: 201,
     fontSize: 23,
     lineHeight: 24,
-    position: "absolute",
-    bottom: 40,
-    left: 20,
+    marginLeft: 20,
+    top: 20,
   },
   promos__label: {
     borderRadius: 10,
@@ -111,9 +110,8 @@ export const styles = StyleSheet.create({
     width: 50,
     height: 30,
     backgroundColor: "rgba(255, 255, 255, 0.76)",
-    position: "absolute",
-    top: 20,
-    left: 20,
+    marginLeft: 20,
+    top: 10,
   },
   bg_person: {
     height: 150,
@@ -154,5 +152,4 @@ export const styles = StyleSheet.create({
     left: 30,
     padding: 5,
   },
-
 });
