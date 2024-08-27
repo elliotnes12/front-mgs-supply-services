@@ -42,7 +42,7 @@ export function HeaderChat({ userName, fnMenu }) {
               source={assets.image.png.iconAvatar}
             />
           </View>
-          <View>
+          <View style={{ flex: 2, justifyContent: "center" }}>
             <Text style={styles.profile__name}>{userName}</Text>
             <Text style={styles.profile__content}>
               Send a message to this chat
@@ -52,7 +52,7 @@ export function HeaderChat({ userName, fnMenu }) {
             onPress={fnMenu}
             style={[
               stylesGlobal.imageMin,
-              { position: "absolute", right: -50 },
+              styles.menuVertical
             ]}
           >
             <Image

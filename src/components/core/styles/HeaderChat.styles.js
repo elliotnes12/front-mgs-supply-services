@@ -86,7 +86,8 @@ export const styles = StyleSheet.create({
   profile__content: {
     fontFamily: theme.textStyles.semiBold,
     color: "#fff",
-    fontSize: 10,
+    fontSize: 13,
+    flex: 2
   },
   profile__image: {
     padding: 3,
@@ -101,4 +102,7 @@ export const styles = StyleSheet.create({
     paddingTop: 2,
     flex: 2,
   },
+  menuVertical: {
+    paddingRight: 20
+  }
 });
