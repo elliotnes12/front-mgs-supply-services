@@ -10,7 +10,8 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { assets } from "../../assets";
-import { stylesGlobal } from "../../modules/styles/global.style";
+import { getIconById } from "../../utils/util";
+import StyledText from "../../utils/globalstyle";
 
 export function HeaderChat({ userName, fnMenu }) {
   const navigation = useNavigation();
@@ -29,36 +30,16 @@ export function HeaderChat({ userName, fnMenu }) {
               source={assets.image.png.iconLeftArrow}
             />
           </TouchableOpacity>
-          <View style={[stylesGlobal.imageLg, styles.profile__image]}>
-            <Image
-              alt="profile"
-              style={{
-                height: "100%",
-                width: "100%",
-                borderRadius: 30,
-                backgroundColor: "#CEDC39",
-              }}
-              resizeMode="contain"
-              source={assets.image.png.iconAvatar}
-            />
+          <View style={[styles.profile__image]}>
+            {getIconById("iconAvatar")}
           </View>
-          <View style={{ flex: 2, justifyContent: "center" }}>
-            <Text style={styles.profile__name}>{userName}</Text>
-            <Text style={styles.profile__content}>
-              Send a message to this chat
-            </Text>
+          <View style={{ flex: 2, justifyContent: "center", paddingLeft: 5 }}>
+            <StyledText regularWhite bold font17pt line20 >{userName}</StyledText>
+            <StyledText white font14pt line20 >Support</StyledText>
           </View>
-          <TouchableOpacity
-            onPress={fnMenu}
-            style={[
-              stylesGlobal.imageMin,
-              styles.menuVertical
-            ]}
-          >
-            <Image
-              style={stylesGlobal.imageMin__img}
-              source={assets.image.png.iconoMenuVertical}
-            />
+          <TouchableOpacity onPress={fnMenu}
+            style={[styles.menuVertical]}>
+            {getIconById("iconVertical")}
           </TouchableOpacity>
         </SafeAreaView>
       </LinearGradient>

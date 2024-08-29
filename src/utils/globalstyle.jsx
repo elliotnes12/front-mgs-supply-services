@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
   gold: {
     color: theme.colors.goldenYellow,
   },
+  white: {
+    color: "#fff",
+  },
   textBold: {
     fontFamily: theme.textStyles.bold,
   },
@@ -109,6 +112,7 @@ export default function StyledText({
   gold,
   titlleBig,
   line20,
+  white,
 }) {
   const textStyles = [
     bold && styles.textBold,
@@ -126,6 +130,7 @@ export default function StyledText({
     gold && styles.gold,
     titlleBig && styles.titlleBig,
     line20 && styles.line20,
+    white && styles.white,
   ];
   return <Text style={textStyles}>{children}</Text>;
 }

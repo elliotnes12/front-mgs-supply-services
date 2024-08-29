@@ -34,8 +34,23 @@ export function ChatScreenCustomer({ chat }) {
   const chatMessageController = new ChatMessage();
   const [inputValue, setInputValue] = useState('');
 
+
   const openCloseDelete = () => setShowDelete((prevState) => !prevState);
 
+  useEffect(() => {
+    const showKeyboardSub = Keyboard.addListener("keyboardDidShow", (e) => {
+      setKeyboardHeight(e.endCoordinates.height);
+    });
+
+    const hideKeyboardSub = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardHeight(0);
+    });
+
+    return () => {
+      showKeyboardSub.remove();
+      hideKeyboardSub.remove();
+    };
+  }, []);
 
   const toggleMenuSettings = (option) => {
     if (option === 'Delete Chat') {
@@ -131,6 +146,7 @@ export function ChatScreenCustomer({ chat }) {
 
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0} 
       style={{ flex: 1 }}
     >
 
@@ -150,7 +166,7 @@ export function ChatScreenCustomer({ chat }) {
           )}
           <View style={{ display: "flex", flex: 1, backgroundColor: "#f1eee9" }}>
             <View style={{ display: "flex", flexDirection: "row", flex: 1, backgroundColor: "transparent", position: "relative" }}>
-              <ListMessages messages={messages} />
+              <ListMessages messages={messages} keyboardHeight={keyboardHeight} />
 
               <View style={styles.containerMessages}>
                 <View style={styles.mensaje}>

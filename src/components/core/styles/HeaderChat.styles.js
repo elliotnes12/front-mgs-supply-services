@@ -89,14 +89,18 @@ export const styles = StyleSheet.create({
   profile__content: {
     fontFamily: theme.textStyles.semiBold,
     color: "#fff",
-    fontSize: PixelRatio.getFontScale() * 13,
+    fontSize: PixelRatio.getFontScale() * 9,
     flex: 2,
   },
   profile__image: {
     padding: 3,
-    backgroundColor: "#fff",
+    backgroundColor: "#CEDC39",
     borderRadius: 30,
+    width: 60,
+    height: 60,
+    padding: 5,
     marginRight: 10,
+    overflow: "hidden",
   },
   totalContacts: {
     color: "#46526a",
@@ -106,6 +110,8 @@ export const styles = StyleSheet.create({
     flex: 2,
   },
   menuVertical: {
+    width: 45,
+    height: 45,
     paddingRight: 20
   }
 });

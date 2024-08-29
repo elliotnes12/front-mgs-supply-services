@@ -43,7 +43,7 @@ const png = {
   iconsuccess: require("./icons/success.png"),
   iconCalendarSearch: require("./icons/icon-calendar-search.png"),
   iconoLupaWhite: require("./icons/icono-lupa-white.png"),
-  iconoMenuVertical: require("./icons/menu-vertical.png"),
+  iconVertical: require("./icons/menu-vertical.png"),
   iconAddChat: require("./icons/icon-message.png"),
   iconsupportwhite: require("./icons/icon-supportwhite.png"),
   iconQuestion: require("./icons/icon-question.png"),

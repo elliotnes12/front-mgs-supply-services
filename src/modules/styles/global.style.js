@@ -9,7 +9,6 @@ export const stylesGlobal = StyleSheet.create({
   imageMin: {
     width: 25,
     height: 25,
-    marginRight: 5,
   },
   imageMd: {
     width: 40,
