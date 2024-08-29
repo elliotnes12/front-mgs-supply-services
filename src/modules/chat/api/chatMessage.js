@@ -56,6 +56,7 @@ export class ChatMessage {
 
       if (result.meta.code !== 200 && result.meta.code !== 404) throw result;
 
+      console.log(result)
       return result;
     } catch (error) {
       throw error;

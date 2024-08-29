@@ -106,14 +106,10 @@ export const styles = StyleSheet.create({
    btnCreateService:{
       width: 166,
       lineHeight: 24,
-      borderRadius:20,
-      fontSize: FontSize.headline16_size,
+      borderRadius: 20,
       padding:7,
-      marginTop:5
-   },
-   btnCreateService__text:{
-      textAlign:"center",
-      color:"#fff"
+      marginTop: 5,
+      alignItems: "center"
    },
    menuChat: {
       position: 'absolute',
@@ -140,4 +136,12 @@ export const styles = StyleSheet.create({
       marginBottom: 5,
       paddingLeft:15
     },
+   menu__questions: {
+      position: "absolute",
+      bottom: 80,
+      right: 10,
+      backgroundColor: "#fff",
+      padding: 10,
+      borderRadius: 5,
+   }
 })

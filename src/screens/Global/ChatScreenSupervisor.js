@@ -28,9 +28,11 @@ import { useAuth } from "../../modules/Auth/hooks";
 import { Chat } from "../../modules/chat/api/Chat";
 import { ChatMessage } from "../../modules/chat/api/chatMessage";
 import { UnreadMessages } from "../../modules/chat/api/unreadMessages";
-import { socket } from "../../utils";
+import { ENV, socket } from "../../utils";
 import { Color } from "../../utils/constantsStyle";
 import { styles } from "./styles/ChatScreen.style";
+import { getIconById } from "../../utils/util";
+import StyledText from "../../utils/globalstyle";
 
 export function ChatScreenSupervisor() {
   const {accessToken, user} = useAuth();
@@ -46,11 +48,11 @@ export function ChatScreenSupervisor() {
   ]);
   const [optionsSettings] = useState(["Delete Chat", "Settings"]);
   const {chatId, userName} = route.params;
-  const [messages, setMessages] = useState(null);
+  const [messages, setMessages] = useState([]);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const chatController = new Chat();
   const chatMessageController = new ChatMessage();
-  const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false)
   const unreadMessagesController = new UnreadMessages();
 
 
@@ -68,11 +70,12 @@ export function ChatScreenSupervisor() {
   };
 
   const handleQuestionSelect = question => {
+    setIsMenuVisible(false);
     (async () => {
       try {
         await chatMessageController.sendText(accessToken, chatId, question);
       } catch (error) {}
-      setIsMenuVisible(false);
+
     })();
   };
 
@@ -115,19 +118,24 @@ export function ChatScreenSupervisor() {
   useEffect(() => {
     (async () => {
       try {
-        const {data} = await chatMessageController.getAll(
+        setLoading(true)
+        const { data } = await chatMessageController.getAll(
           accessToken,
           chatId
         );
-        
-        setMessages(data.messages);
-        unreadMessagesController.setTotalReadMessages(
-          chatId,
-          data.total
-        );
+        if (data?.messages) {
+
+          setMessages(messages);
+          unreadMessagesController.setTotalReadMessages(
+            chatId,
+            data.total
+          );
+        }
+
 
       } catch (error) {
-        console.error(error);
+      } finally {
+        setLoading(false)
       }
     })();
 
@@ -166,7 +174,7 @@ export function ChatScreenSupervisor() {
     },
   });
 
-  if (!messages) return <LoadingScreen />;
+  if (loading) return <LoadingScreen />;
 
   return (
     <>
@@ -190,27 +198,9 @@ export function ChatScreenSupervisor() {
               ))}
             </View>
           )}
-          <View style={{display: "flex", flex: 1, backgroundColor: "#f1eee9"}}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flex: 1,
-                backgroundColor: "transparent",
-                position: "relative",
-              }}
-            >
-              <View
-                style={{
-                  display: "flex",
-                  flex: 1,
-                  marginBottom: 90,
-                  paddingTop: 40,
-                  position: "relative",
-                }}
-              >
-                <ListMessages messages={messages} />
-              </View>
+          <View style={{ flex: 1, backgroundColor: "#f1eee9" }}>
+
+            <ListMessages messages={messages} />
               <View
                 style={{
                   display: "flex",
@@ -240,26 +230,17 @@ export function ChatScreenSupervisor() {
                   <View style={styles.contente__icons}>
                     <TouchableOpacity
                       style={{width: 28, height: 28, marginRight: 15}}>
-                      <Image
-                        alt="icon clip"
-                        style={{width: "100%", height: "100%"}}
-                        source={assets.image.png.iconClip}
-                      />
+                    {getIconById("iconClip")}
                     </TouchableOpacity>
                     <TouchableOpacity style={{width: 25, height: 25}}>
-                      <Image
-                        alt="icon camera"
-                        style={{width: "100%", height: "100%"}}
-                        source={assets.image.png.iconCamera}
-                      />
+                    {getIconById("iconCamera")}
                     </TouchableOpacity>
                   </View>
                 </View>
-                {user.role.name != "employee" && (
+              {user.role.name != ENV.TYPES_USERS.EMPLOYEE && (
                   <>
                     <View
-                      style={{
-                        display: "flex",
+                    style={{
                         alignItems: "center",
                         flexDirection: "row",
                         justifyContent: "center",
@@ -288,44 +269,28 @@ export function ChatScreenSupervisor() {
                           }}
                           colors={["#CEDC39", "#7DA74D"]}
                         >
-                          <Image
-                            alt="icon question"
-                            style={{width: "100%", height: "100%"}}
-                            resizeMode="contain"
-                            source={assets.image.png.iconQuestion}
-                          />
+                        {getIconById("iconQuestion")}
                         </LinearGradient>
                       </TouchableOpacity>
                     </View>
                   </>
-                )}
-              </View>
+              )}
             </View>
             {isMenuVisible && (
               <View
-                style={{
-                  position: "absolute",
-                  bottom: 80,
-                  right: 10,
-                  backgroundColor: "#fff",
-                  padding: 10,
-                  borderRadius: 5,
-                }}
+                style={styles.menu__questions}
               >
                 {questions.map((question, index) => (
                   <TouchableOpacity
                     key={index}
                     onPress={() => handleQuestionSelect(question)}
+                    style={{
+                      padding: 14,
+                      backgroundColor: Color.colorWhitesmoke_100,
+                      marginBottom: 5,
+                    }}
                   >
-                    <Text
-                      style={{
-                        padding: 14,
-                        backgroundColor: Color.colorWhitesmoke_100,
-                        marginBottom: 5,
-                      }}
-                    >
-                      {question}
-                    </Text>
+                    <StyledText>{question}</StyledText>
                   </TouchableOpacity>
                 ))}
                 <View>
@@ -334,10 +299,7 @@ export function ChatScreenSupervisor() {
                       style={styles.btnCreateService}
                       colors={["#CEDC39", "#7DA74D"]}
                     >
-                      <Text style={styles.btnCreateService__text}>
-                        {" "}
-                        Create Service
-                      </Text>
+                      <StyledText regularWhite>Create Service</StyledText>
                     </LinearGradient>
                   </TouchableOpacity>
                 </View>
