@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { assets } from '../../assets';
-import { useAuth } from '../../modules/Auth/hooks';
-import { DashboardScreen } from '../../modules/dashboard/screens/DashboardScreen';
-import { ENV, screens } from '../../utils';
+import React, { useState } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { assets } from "../../assets";
+import { useAuth } from "../../modules/Auth/hooks";
+import { DashboardScreen } from "../../modules/dashboard/screens/DashboardScreen";
+import { ENV, screens } from "../../utils";
 import {
   ChatNavigationCustomer,
   ChatNavigationEmployee,
@@ -14,11 +14,11 @@ import {
   ProductNavigation,
   ReportsNavigation,
   SettingsNavigation,
-  PendingEmployeeNavigation
-} from '../stacks';
-import { WorkFlowNavigation } from '../stacks/WorkFlowNavigation';
-import { styles } from './BottomTabNavigation.styles';
-import { getIconById } from '../../utils/util';
+  PendingEmployeeNavigation,
+} from "../stacks";
+import { WorkFlowNavigation } from "../stacks/WorkFlowNavigation";
+import { styles } from "./BottomTabNavigation.styles";
+import { getIconById } from "../../utils/util";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,36 +31,80 @@ export function BottomTabNavigation() {
 
   const baseTabs = isCustomer
     ? [
-      { name: screens.tab.rootCustomer, title: 'Home', iconName: 'home' },
-      { name: screens.tab.chats.root, title: 'Chats', iconName: 'chat' },
-      { name: screens.tab.products.root, title: 'Products', iconName: 'order' },
-      { name: screens.global.settingScreen, title: 'Setting', iconName: 'cog-outline' },
-    ]
-    : userType === ENV.TYPES_USERS.SUPERVISOR
-      ? [
-        { name: screens.tab.rootSupervisor, title: 'Home', iconName: 'home' },
-        { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
-        { name: 'boton-central', title: '', iconName: 'plus' },
-        { name: screens.tab.pedings.pendingSupervisorScreen, title: 'Pending', iconName: 'pending' },
-        { name: screens.global.settingScreen, title: 'Setting', iconName: 'cog-outline' },
+        { name: screens.tab.rootCustomer, title: "Home", iconName: "home" },
+        { name: screens.tab.chats.root, title: "Chats", iconName: "chat" },
+        {
+          name: screens.tab.products.root,
+          title: "Products",
+          iconName: "order",
+        },
+        {
+          name: screens.global.settingScreen,
+          title: "Setting",
+          iconName: "setting",
+        },
       ]
-      : userType === ENV.TYPES_USERS.EMPLOYEE
-        ? [
-        { name: screens.tab.rootEmployee, title: 'Home', iconName: 'home' },
-        { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
-        { name: 'boton-central', title: '', iconName: 'plus' },
-          { name: screens.tab.pedings.pendingScreenEmployee, title: 'Pending', iconName: 'pending' },
-          { name: screens.global.settingScreen, title: 'Setting', iconName: 'cog-outline' },
-        ]
-        : userType === ENV.TYPES_USERS.MANAGER
-          ? [
-        { name: screens.tab.rootEmployee, title: 'Home', iconName: 'home' },
-        { name: screens.tab.chats.chatsScreenEmployee, title: 'Chats', iconName: 'chat' },
-        { name: 'boton-central', title: '', iconName: 'plus' },
-        { name: screens.tab.workFlow.root, title: 'Workflow', iconName: 'pending' },
-        { name: screens.tab.reports.root, title: 'Reports', iconName: 'reports' },
-          ]
-          : [];
+    : userType === ENV.TYPES_USERS.SUPERVISOR
+    ? [
+        { name: screens.tab.rootSupervisor, title: "Home", iconName: "home" },
+        {
+          name: screens.tab.chats.chatsScreenEmployee,
+          title: "Chats",
+          iconName: "chat",
+        },
+        { name: "boton-central", title: "", iconName: "plus" },
+        {
+          name: screens.tab.pedings.pendingSupervisorScreen,
+          title: "Pending",
+          iconName: "pending",
+        },
+        {
+          name: screens.global.settingScreen,
+          title: "Setting",
+          iconName: "setting",
+        },
+      ]
+    : userType === ENV.TYPES_USERS.EMPLOYEE
+    ? [
+        { name: screens.tab.rootEmployee, title: "Home", iconName: "home" },
+        {
+          name: screens.tab.chats.chatsScreenEmployee,
+          title: "Chats",
+          iconName: "chat",
+        },
+
+        {
+          name: screens.tab.pedings.pendingScreenEmployee,
+          title: "Pending",
+          iconName: "pending",
+        },
+        {
+          name: screens.global.settingScreen,
+          title: "Setting",
+          iconName: "setting",
+        },
+      ]
+    : userType === ENV.TYPES_USERS.MANAGER
+    ? [
+        { name: screens.tab.rootEmployee, title: "Home", iconName: "home" },
+        {
+          name: screens.tab.chats.chatsScreenEmployee,
+          title: "Chats",
+          iconName: "chat",
+        },
+        { name: "boton-central", title: "", iconName: "plus" },
+        {
+          name: screens.tab.workFlow.root,
+          title: "Workflow",
+          iconName: "pending",
+        },
+        {
+          name: screens.tab.reports.root,
+          title: "Reports",
+          iconName: "reports",
+        },
+      ]
+    : [];
 
   const getComponentByName = (name) => {
     const components = {
@@ -68,7 +112,8 @@ export function BottomTabNavigation() {
       [screens.tab.rootEmployee]: DashboardScreen,
       [screens.tab.rootCustomer]: DashboardScreen,
       [screens.tab.chats.root]: ChatNavigationCustomer,
-      [screens.tab.pedings.pendingSupervisorScreen]: PendingSupervisorNavigation,
+      [screens.tab.pedings.pendingSupervisorScreen]:
+        PendingSupervisorNavigation,
       [screens.global.settingScreen]: SettingsNavigation,
       [screens.tab.reports.root]: ReportsNavigation,
       [screens.tab.products.root]: ProductNavigation,
@@ -81,18 +126,19 @@ export function BottomTabNavigation() {
 
   const getIconByName = (name, focused) => {
     const iconMap = {
-      'home': assets.image.png.iconHome,
-      'home-focus': assets.image.png.iconHomeFocus,
-      'chat': assets.image.png.iconChat,
-      'chat-focus': assets.image.png.iconChatFocus,
-      'order': assets.image.png.iconOrder,
-      'order-focus': assets.image.png.iconOrderFocus,
-      'cog-outline': assets.image.png.iconSetting,
-      'plus': assets.image.png.plus,
-      'pending': assets.image.png.iconPending,
-      'pending-focus': assets.image.png.iconPendingFocus,
-      'reports': assets.image.png.iconReports,
-      'reports-focus': assets.image.png.iconReportsFocus,
+      home: assets.image.png.iconHome,
+      "home-focus": assets.image.png.iconHomeFocus,
+      chat: assets.image.png.iconChat,
+      "chat-focus": assets.image.png.iconChatFocus,
+      order: assets.image.png.iconOrder,
+      "order-focus": assets.image.png.iconOrderFocus,
+      setting: assets.image.png.iconSetting,
+      "setting-focus": assets.image.png.iconSettingFocus,
+      plus: assets.image.png.plus,
+      pending: assets.image.png.iconPending,
+      "pending-focus": assets.image.png.iconPendingFocus,
+      reports: assets.image.png.iconReports,
+      "reports-focus": assets.image.png.iconReportsFocus,
     };
     return iconMap[focused ? `${name}-focus` : name];
   };
@@ -109,8 +155,8 @@ export function BottomTabNavigation() {
       screenOptions={({ route }) => ({
         headerTitle: false,
         headerShown: route.name === screens.global.settingScreen,
-        tabBarLabelStyle: { display: 'none' },
-        tabBarActiveTintColor: 'green',
+        tabBarLabelStyle: { display: "none" },
+        tabBarActiveTintColor: "green",
         tabBarStyle: [{ display: tabBarVisible }, styles.tabBar],
         headerStyle: [styles.headerGoback],
         headerLeft: () =>
@@ -121,15 +167,20 @@ export function BottomTabNavigation() {
                 navigation.goBack();
               }}
             >
-              <View style={styles.goBack} />
+              <View />
             </TouchableOpacity>
           ) : null,
         tabBarButton: (props) => {
-          if (route.name === 'boton-central') {
+          if (route.name === "boton-central") {
             return <TouchableOpacity {...props} disabled />;
           }
-          if (route.name === screens.global.settingScreen || route.name === screens.tab.chats.chatScreen) {
-            return <TouchableOpacity onPress={handleSettingsPress} {...props} />;
+          if (
+            route.name === screens.global.settingScreen ||
+            route.name === screens.tab.chats.chatScreen
+          ) {
+            return (
+              <TouchableOpacity onPress={handleSettingsPress} {...props} />
+            );
           }
           return <TouchableOpacity {...props} />;
         },
@@ -139,16 +190,19 @@ export function BottomTabNavigation() {
         <Tab.Screen
           key={tab.name}
           name={tab.name}
-          component={tab.name !== "boton-central" ? getComponentByName(tab.name) : CentralComponent}
+          component={
+            tab.name !== "boton-central"
+              ? getComponentByName(tab.name)
+              : CentralComponent
+          }
           options={{
             title: tab.title,
             headerTitleAlign: "center",
             headerTintColor: "rgba(71, 71, 71, 1)",
             tabBarItemStyle: [styles.tabBarItemOptions],
-            tabBarIcon: ({ focused }) => (
-              tab.name === 'boton-central' ? (
+            tabBarIcon: ({ focused }) =>
+              tab.name === "boton-central" ? (
                 <View style={styles.centralButtonContainer}>
-
                   <Image
                     style={styles.border}
                     resizeMode="contain"
@@ -158,15 +212,15 @@ export function BottomTabNavigation() {
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate(
-                        userType === 'supervisor' || userType === 'manager'
+                        userType === "supervisor" || userType === "manager"
                           ? screens.global.createService
-                          : ''
+                          : ""
                       )
                     }
                     style={styles.centralButton}
                   >
                     <LinearGradient
-                      colors={['#CEDC39', '#7DA74D']}
+                      colors={["#CEDC39", "#7DA74D"]}
                       style={styles.registerOrder}
                     >
                       <Image
@@ -182,16 +236,20 @@ export function BottomTabNavigation() {
                 <View style={styles.iconContainer}>
                   <Image
                     style={styles.img}
-                      resizeMode="contain"
-                      source={getIconByName(tab.iconName, focused)}
-                      alt="icon"
-                    />
-                    <Text style={[styles.tabText, { color: focused ? '#7DA74D' : '#ABABAB' }]}>
-                      {tab.title}
-                    </Text>
-                  </View>
-              )
-            ),
+                    resizeMode="contain"
+                    source={getIconByName(tab.iconName, focused)}
+                    alt="icon"
+                  />
+                  <Text
+                    style={[
+                      styles.tabText,
+                      { color: focused ? "#7DA74D" : "#ABABAB" },
+                    ]}
+                  >
+                    {tab.title}
+                  </Text>
+                </View>
+              ),
           }}
         />
       ))}

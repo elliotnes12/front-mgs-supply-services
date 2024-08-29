@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     height: 60,
     position: "relative",
+    backgroundColor: "#F2F2F2",
   },
   employees: {
     width: "100%",
@@ -75,9 +76,12 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bussiness__name: {
+    color: "#BDBDBD",
     fontFamily: "Poppins_400Regular",
     padding: 10,
     fontSize: 15,
+    flexGrow: 1,
+    backgroundColor: "#F2F2F2",
   },
   bussiness__additional: {
     fontFamily: "Poppins_400Regular",

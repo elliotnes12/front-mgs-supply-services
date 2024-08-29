@@ -42,6 +42,7 @@ const png = {
   iconSuitCaseEmoji: require("./icons/guinos.png"),
   iconsuccess: require("./icons/success.png"),
   iconCalendarSearch: require("./icons/icon-calendar-search.png"),
+  iconlupa: require("./icons/icon-lupa.png"),
   iconoLupaWhite: require("./icons/icono-lupa-white.png"),
   iconVertical: require("./icons/menu-vertical.png"),
   iconAddChat: require("./icons/icon-message.png"),
@@ -61,6 +62,8 @@ const png = {
   minCancelled: require("./servicios/cancelled.png"),
   messageVerfication: require("./icons/icon-message-verification.png"),
   icontime: require("./icons/icon-time.png"),
+  iconLupa: require("./icons/icon-lupa.png"),
+  iconSentingFocus: require("./buttonmenu/settingfocus.png"),
 };
 
 export { png };

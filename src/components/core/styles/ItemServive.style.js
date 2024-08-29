@@ -2,13 +2,11 @@ import { StyleSheet } from "react-native";
 import { Border, Color, FontSize } from "../../../utils/constantsStyle";
 import { theme } from "../../../utils/theme";
 
-
 export const styles = StyleSheet.create({
-
   item: {
-    flexDirection: 'row',
-    width: '100%',
-    position: 'relative',
+    flexDirection: "row",
+    width: "100%",
+    position: "relative",
     marginBottom: 10,
     shadowOpacity: 1,
     shadowOffset: {
@@ -40,11 +38,12 @@ export const styles = StyleSheet.create({
     fontSize: FontSize.headline16_size,
     color: theme.colors.secondaryColor,
     fontFamily: theme.textStyles.semiBold,
-    fontWeight: "500"
+    fontWeight: "500",
   },
   item_subtitle: {
     color: "#0F0F0F",
     fontFamily: theme.textStyles.light,
+    fontSize: 12,
   },
   item__raiting: {
     display: "flex",
@@ -57,7 +56,7 @@ export const styles = StyleSheet.create({
   item__date: {
     position: "absolute",
     right: 0,
-    bottom: 0,
+    bottom: -10,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -74,17 +73,20 @@ export const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginRight: 5,
-    position: 'absolute',
+    position: "absolute",
     right: 0,
-    top: '50%',
+    top: "50%",
+  },
+  imageFullSize: {
+    width: 20,
+    height: 20,
   },
   item__ratingContainer: {
     width: 24,
     height: 24,
     marginRight: 20,
-    position: 'relative',
+    position: "relative",
     left: 15,
-    bottom: '15%',
+    bottom: "15%",
   },
-
 });
