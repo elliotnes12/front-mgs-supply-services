@@ -143,5 +143,13 @@ export const styles = StyleSheet.create({
       backgroundColor: "#fff",
       padding: 10,
       borderRadius: 5,
+   },
+   btn_questions: {
+      width: "100%",
+      height: "100%",
+      padding: 8,
+      borderRadius: 22.5,
+      justifyContent: "center",
+      alignItems: "center",
    }
 })

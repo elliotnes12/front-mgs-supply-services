@@ -33,6 +33,7 @@ import { Color } from "../../utils/constantsStyle";
 import { styles } from "./styles/ChatScreen.style";
 import { getIconById } from "../../utils/util";
 import StyledText from "../../utils/globalstyle";
+import { LABEL } from "../../utils/labels";
 
 export function ChatScreenSupervisor() {
   const {accessToken, user} = useAuth();
@@ -202,14 +203,12 @@ export function ChatScreenSupervisor() {
 
             <ListMessages messages={messages} />
               <View
-                style={{
-                  display: "flex",
+              style={{
                   flexDirection: "row",
                   height: 50,
                   position: "absolute",
                   bottom: 20,
-                  left: 10,
-                
+                left: 10,
                   width: "95%",
                 }}
               >
@@ -258,15 +257,7 @@ export function ChatScreenSupervisor() {
                         }}
                       >
                         <LinearGradient
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            padding: 8,
-                            borderRadius: 22.5,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
+                        style={styles.btn_questions}
                           colors={["#CEDC39", "#7DA74D"]}
                         >
                         {getIconById("iconQuestion")}
@@ -299,7 +290,7 @@ export function ChatScreenSupervisor() {
                       style={styles.btnCreateService}
                       colors={["#CEDC39", "#7DA74D"]}
                     >
-                      <StyledText regularWhite>Create Service</StyledText>
+                      <StyledText regularWhite>{LABEL.CHAT_SUPERVISOR_BTN_CREATE_SERVICE}</StyledText>
                     </LinearGradient>
                   </TouchableOpacity>
                 </View>
