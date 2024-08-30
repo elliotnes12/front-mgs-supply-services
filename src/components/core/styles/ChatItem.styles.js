@@ -35,8 +35,6 @@ export const styles = StyleSheet.create({
     paddingTop: 15,
     position: "relative",
     flexDirection: "column",
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#8E8E93",
   },
   chatItem__message: {
     flex: 1,
@@ -45,14 +43,16 @@ export const styles = StyleSheet.create({
     position: "relative",
     height: "100%",
     width: 50,
+  },
+  chatContent: {
+    flex: 1,
+    flexDirection: "row",
     borderBottomWidth: 0.5,
     borderBottomColor: "#8E8E93",
+    paddingBottom: 15
   },
   chatTime: {
-    fontFamily: "Poppins_400Regular",
-    fontSize: 12,
     position: "absolute",
-    color: "#C4C4C4",
     right: 15,
     top: 5,
   },
@@ -111,3 +111,4 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+

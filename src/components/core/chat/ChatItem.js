@@ -128,6 +128,7 @@ export function ChatItem({ chat, isCustomer, upTopChat }) {
                 </StyledText>
               </View>
             )}
+            <View style={styles.chatContent}>
             <View style={styles.chatTextContainer}>
               <StyledText bold>{chat.name}</StyledText>
               <StyledText font12pt lightGray regularGray>
@@ -146,6 +147,7 @@ export function ChatItem({ chat, isCustomer, upTopChat }) {
                   <Text style={styles.totalMessage}>{totalUnreadMessages}</Text>
                 </View>
               )}
+            </View>
             </View>
           </View>
         </TouchableOpacity>
