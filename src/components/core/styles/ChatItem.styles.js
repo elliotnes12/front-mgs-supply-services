@@ -4,7 +4,8 @@ import { Color } from "../../../utils/constantsStyle";
 export const styles = StyleSheet.create({
   chatItem: {
     backgroundColor: "#fff",
-    height: 73,
+    minHeight: 90,
+    overflow: "hidden",
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -49,7 +50,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     borderBottomWidth: 0.5,
     borderBottomColor: "#8E8E93",
-    paddingBottom: 15
   },
   chatTime: {
     position: "absolute",
@@ -111,4 +111,3 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
