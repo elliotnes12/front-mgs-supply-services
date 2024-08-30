@@ -13,7 +13,7 @@ import StyledText from "../../../../utils/globalstyle";
 
 export const ServiceListScreenSupervisor = () => {
   const [index, setIndex] = useState(0);
-  const [height, setHeight] = useState(Dimensions.get('window').height); 
+  const [height, setHeight] = useState(Dimensions.get("window").height);
   const controllerService = new Service();
   const [services, setServices] = useState([]);
   const navigation = useNavigation();
@@ -91,7 +91,7 @@ export const ServiceListScreenSupervisor = () => {
     <TabBar
       {...props}
       indicatorStyle={styles.indicatorStyle}
-      pressColor="transparent"
+      pressColor="white"
       style={styles.tabBarStyle}
       tabStyle={styles.tabStyle}
       renderLabel={({ route, focused }) =>

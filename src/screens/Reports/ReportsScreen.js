@@ -205,7 +205,7 @@ export function ReportsScreen() {
               shadowOpacity: 0,
               borderBottomWidth: 0,
             }}
-            pressColor="transparent"
+            pressColor="white"
             pressOpacity={1}
             renderLabel={({ route, focused, color }) => (
               <StyledGradientButtonSmall text={route.title} focused={focused} />
