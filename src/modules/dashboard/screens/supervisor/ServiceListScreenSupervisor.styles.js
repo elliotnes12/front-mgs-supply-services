@@ -1,75 +1,72 @@
-import { StyleSheet } from 'react-native';
-import { Border, Color, FontSize } from '../../../../utils/constantsStyle';
+import { StyleSheet } from "react-native";
+import { Border, Color, FontSize } from "../../../../utils/constantsStyle";
 
 export const styles = StyleSheet.create({
   scene: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    flexDirection: "column",
+    justifyContent: "flex-start",
     position: "relative",
-
   },
   flatListContainer: {
     flex: 1,
     margin: 0,
     padding: 0,
-    height: 'auto'
+    height: "auto",
   },
   backgroundWhite: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   backgroundOrange: {
-    backgroundColor: '#ff9800',
+    backgroundColor: "#ff9800",
   },
   indicatorStyle: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   tabBarStyle: {
-    backgroundColor: '#fff',
-    width: '100%',
-    shadowColor: '#fff',
+    backgroundColor: "#fff",
+    width: "100%",
+    shadowColor: "#fff",
     paddingLeft: 0,
     paddingRight: 0,
   },
   tabStyle: {
     marginBottom: 5,
     width: 130,
-    height: '100%',
-    marginRight: 5
+    height: "100%",
+    marginRight: 5,
   },
   tabItem: {
     backgroundColor: "#F5F5F5",
-    height: '100%',
+    height: "100%",
     width: 130,
     margin: 0,
     paddingBottom: 8,
     paddingTop: 8,
     marginLeft: 0,
     borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
     flexDirection: "row",
-
-
   },
   gradient: {
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 25,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   tabText: {
-    color: '#ABABAB',
-    fontFamily: 'Poppins_400Regular',
+    color: "#ABABAB",
+    fontFamily: "Poppins_400Regular",
     fontSize: FontSize.headline16_size,
     lineHeight: 24,
   },
   tabTextFocused: {
-    color: '#fff',
+    color: "#fff",
     lineHeight: 24,
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: "Poppins_400Regular",
     fontSize: 16,
   },
   iconServices: {
@@ -88,9 +85,9 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    flexDirection: 'row',
-    width: '100%',
-    position: 'relative',
+    flexDirection: "row",
+    width: "100%",
+    position: "relative",
     marginBottom: 5,
     shadowOpacity: 1,
     shadowOffset: {
@@ -103,10 +100,10 @@ export const styles = StyleSheet.create({
     borderRadius: Border.br_3xs,
     height: 120,
     backgroundColor: Color.blanco,
-    paddingTop: 10
+    paddingTop: 10,
   },
   item__title: {
-    fontFamily: 'Poppins_600SemiBold',
+    fontFamily: "Poppins_600SemiBold",
     color: Color.secondaryColor,
     lineHeight: 18,
     letterSpacing: 0.3,
@@ -115,7 +112,7 @@ export const styles = StyleSheet.create({
   },
   item_subtitle: {
     color: "#0F0F0F",
-    fontFamily: 'Poppins_300Light',
+    fontFamily: "Poppins_300Light",
     fontSize: FontSize.paragraphRegularSmall_size,
   },
   item__estatus: {
@@ -129,21 +126,21 @@ export const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginRight: 0,
-    position: 'absolute',
+    position: "absolute",
     right: 0,
-    top: '50%',
+    top: "50%",
   },
   item__ratingContainer: {
     width: 24,
     height: 24,
     marginRight: 20,
-    position: 'relative',
+    position: "relative",
     left: 15,
-    bottom: '15%',
+    bottom: "15%",
   },
   imageFullSize: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   tabViewContainer: {
     flexGrow: 1,
@@ -152,21 +149,21 @@ export const styles = StyleSheet.create({
   fecha: {
     left: 15,
     color: "#C4C4C4",
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: "Poppins_400Regular",
   },
   item__calendario: {
     width: 15,
     height: 15,
     left: 0,
     top: 66,
-    position: 'absolute'
+    position: "absolute",
   },
   progress: {
     fontSize: 17,
     color: "#FFFFFF",
     top: -37,
     left: 85,
-    position: 'absolute',
+    position: "absolute",
   },
   estatus: {
     width: 110,
@@ -207,11 +204,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15
+    marginBottom: 15,
   },
   options__title: {
     color: Color.gray1,
-    fontFamily: 'Poppins_700Bold',
+    fontFamily: "Poppins_700Bold",
     fontSize: FontSize.h3_size,
     textTransform: "capitalize",
     fontWeight: "500",

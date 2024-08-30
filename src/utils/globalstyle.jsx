@@ -57,23 +57,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    width: 125,
+    width: 120,
     marginEnd: 10,
-    height: 35,
+    height: 42.5,
+  },
+  font8pt: {
+    fontSize: 8,
+  },
+  font10pt: {
+    fontSize: 10,
+  },
+  font12pt: {
+    fontSize: 12,
   },
   font14pt: {
     fontSize: 14,
   },
   font16pt: {
-    fontFamily: theme.textStyles.regular,
-    fontSize: theme.fontSizes.regular,
-    color: "#ABABAB",
+    fontSize: 16,
   },
   font17pt: {
     fontSize: 17,
   },
   font20pt: {
-    fontSize: 17,
+    fontSize: 20,
   },
   brightRed: {
     color: theme.colors.brightRed,
@@ -84,8 +91,17 @@ const styles = StyleSheet.create({
   gold: {
     color: theme.colors.goldenYellow,
   },
+  lightGray: {
+    color: "#c3c3c3",
+  },
   white: {
     color: "#fff",
+  },
+  asparagus: {
+    color: "#7DA74D",
+  },
+  graySilver: {
+    color: "#ABABAB",
   },
   textBold: {
     fontFamily: theme.textStyles.bold,
@@ -109,6 +125,12 @@ export default function StyledText({
   boldGray,
   headerGray,
   regularGreen,
+  lightGray,
+  asparagus,
+  graySilver,
+  font8pt,
+  font10pt,
+  font12pt,
   font14pt,
   font16pt,
   font17pt,
@@ -128,6 +150,9 @@ export default function StyledText({
     boldGray && styles.boldGray,
     headerGray && styles.headerGray,
     regularGreen && styles.regularGreen,
+    font8pt && styles.font8pt,
+    font10pt && styles.font10pt,
+    font12pt && styles.font12pt,
     font14pt && styles.font14pt,
     font16pt && styles.font16pt,
     font17pt && styles.font17pt,
@@ -136,8 +161,11 @@ export default function StyledText({
     brightRed && styles.brightRed,
     gold && styles.gold,
     titlleBig && styles.titlleBig,
+    asparagus && styles.asparagus,
+    graySilver && styles.graySilver,
     line20 && styles.line20,
     white && styles.white,
+    lightGray && styles.lightGray,
   ];
   return <Text style={textStyles}>{children}</Text>;
 }
@@ -155,7 +183,11 @@ export function StyledGradientButton({ text, action }) {
     </Pressable>
   );
 }
-export function StyledGradientButtonSmall({ text, action, focused }) {
+export function StyledGradientButtonSmall({
+  text,
+  action = () => {},
+  focused,
+}) {
   const buttonStyles = [];
   const gradientColors = focused
     ? [theme.gradientsmall.color1Focused, theme.gradientsmall.color2Focused]

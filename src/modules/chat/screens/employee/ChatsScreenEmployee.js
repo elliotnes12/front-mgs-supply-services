@@ -1,20 +1,26 @@
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import { User } from '../../../../api/user';
-import { ChatItem } from '../../../../components/core/chat/ChatItem';
-import { HeaderChats } from '../../../../components/core/HeaderChats';
-import { LoadingScreen } from '../../../../components/core/LoadingScreen';
-import { screens } from '../../../../utils';
-import { getIconById } from '../../../../utils/util';
-import { useAuth } from '../../../Auth/hooks';
-import { Chat } from '../../api/Chat';
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import { User } from "../../../../api/user";
+import { ChatItem } from "../../../../components/core/chat/ChatItem";
+import { HeaderChats } from "../../../../components/core/HeaderChats";
+import { LoadingScreen } from "../../../../components/core/LoadingScreen";
+import { screens } from "../../../../utils";
+import { getIconById } from "../../../../utils/util";
+import { useAuth } from "../../../Auth/hooks";
+import { Chat } from "../../api/Chat";
 import { styles } from "../../styles/chatsScreen.employees.styles";
-import { socket } from '../../../../utils';
+import { socket } from "../../../../utils";
 
 export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [chats, setChats] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -22,7 +28,7 @@ export function ChatsScreenEmployee() {
   const { userInfo, isCustomer, accessToken, user } = useAuth();
   const { name } = userInfo;
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [options] = useState(['New group', 'settings']);
+  const [options] = useState(["New group", "settings"]);
 
   const userController = new User();
   const chatController = new Chat();
@@ -58,7 +64,7 @@ export function ChatsScreenEmployee() {
             setChats(result);
           }
         } catch (error) {
-          setChats([])
+          setChats([]);
         } finally {
           setLoading(false);
         }
@@ -73,7 +79,7 @@ export function ChatsScreenEmployee() {
     const element = data.splice(formIndex, 1)[0];
     data.splice(toIndex, 0, element);
     setChats([...data]);
-  }
+  };
 
   useEffect(() => {
     if (!isCustomer) setFilteredUsers(users);
@@ -93,7 +99,6 @@ export function ChatsScreenEmployee() {
     }
   };
 
-
   if (!chats) return <LoadingScreen />;
   return (
     <TouchableWithoutFeedback onPress={handleClickOutside}>
@@ -102,7 +107,11 @@ export function ChatsScreenEmployee() {
         {isMenuVisible && (
           <View style={styles.menuChat}>
             {options.map((option, index) => (
-              <TouchableOpacity style={index != options.length - 1 ? styles.menuChat__item : ''} key={index} onPress={() => handleQuestionSelect(option)}>
+              <TouchableOpacity
+                style={index != options.length - 1 ? styles.menuChat__item : ""}
+                key={index}
+                onPress={() => handleQuestionSelect(option)}
+              >
                 <Text style={styles.menuChat__option}>{option}</Text>
               </TouchableOpacity>
             ))}
@@ -111,19 +120,31 @@ export function ChatsScreenEmployee() {
         <View style={{ flex: 1 }}>
           <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 0 }}>
             <View style={styles.recentChatsContainer}>
-              {(
-                chats.length > 0 ? (
-                  chats.map(chat => (
-                    <ChatItem upTopChat={upTopChat} setMenu key={chat?.idChat?.toString()} chat={chat} isCustomer={isCustomer} token={accessToken} />
-                  ))
-                ) : (
-                  <View style={styles.noChats}><Text style={styles.noChatsText}>Empty</Text></View>
-                )
+              {chats.length > 0 ? (
+                chats.map((chat) => (
+                  <ChatItem
+                    upTopChat={upTopChat}
+                    setMenu
+                    key={chat?.idChat?.toString()}
+                    chat={chat}
+                    isCustomer={isCustomer}
+                    token={accessToken}
+                  />
+                ))
+              ) : (
+                <View style={styles.noChats}>
+                  <Text style={styles.noChatsText}>Empty</Text>
+                </View>
               )}
             </View>
           </ScrollView>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate(screens.tab.chats.chatContactsScreenEmployee)} style={styles.addChat}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(screens.tab.chats.chatContactsScreenEmployee)
+          }
+          style={styles.addChat}
+        >
           {getIconById("iconAddChat")}
         </TouchableOpacity>
       </View>

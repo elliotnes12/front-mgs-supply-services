@@ -10,14 +10,13 @@ import { getIconById } from "../../../../utils/util";
 import { styles } from "./ServiceListScreenSupervisor.styles";
 import { Service } from "../../../../api/service";
 import { useAuth } from "../../../Auth/hooks";
-
-
+import StyledText from "../../../../utils/globalstyle";
 
 export const ServiceListScreenSupervisor = () => {
   const [index, setIndex] = useState(0);
   const [height, setHeight] = useState(0);
   const controllerService = new Service();
-  const [services, setServices] = useState([])
+  const [services, setServices] = useState([]);
   const navigation = useNavigation();
   const { accessToken } = useAuth();
   const initialLayout = { width: "100%" };
@@ -28,20 +27,15 @@ export const ServiceListScreenSupervisor = () => {
   ];
 
   useEffect(() => {
-
     (async () => {
       try {
-
         const { data } = await controllerService.findAllServices(accessToken);
 
-        setServices(data)
-
-
+        setServices(data);
       } catch (error) {
         setServices([]);
       }
     })();
-
   }, []);
 
   useEffect(() => {
@@ -69,22 +63,24 @@ export const ServiceListScreenSupervisor = () => {
     }
   };
 
-
   const RenderLastProducts = () => (
     <View style={[styles.scene, styles.backgroundWhite]}>
       <Text>Contenido de la segunda pestaña</Text>
     </View>
   );
 
-
   const RenderLastServices = ({ navigation }) => (
     <>
       <View style={styles.options}>
-        <Text style={styles.options__title}>Services Generated</Text>
+        <StyledText font16pt bold>
+          Services Generated
+        </StyledText>
         <TouchableOpacity
           onPress={() => navigation.navigate(screens.tab.services.root)}
         >
-          <Text style={styles.options__all}>View All</Text>
+          <StyledText font12pt regularGreen>
+            View All
+          </StyledText>
         </TouchableOpacity>
       </View>
       {map(services, (element, id) => {
@@ -92,7 +88,6 @@ export const ServiceListScreenSupervisor = () => {
       })}
     </>
   );
-
 
   const renderTabBar = (props) => (
     <TabBar
@@ -107,12 +102,13 @@ export const ServiceListScreenSupervisor = () => {
             colors={["#CEDC39", "#7DA74D"]}
             style={styles.gradient}
           >
-            <Text style={styles.tabTextFocused}>{route.label}</Text>
+            <StyledText regularWhite>{route.label}</StyledText>
           </LinearGradient>
         ) : (
           <View style={styles.tabItem}>
-
-            <Text style={styles.tabText}>{route.label}</Text>
+            <StyledText graySilver regularWhite>
+              {route.label}
+            </StyledText>
           </View>
         )
       }

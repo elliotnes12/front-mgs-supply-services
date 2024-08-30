@@ -47,7 +47,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     height: 60,
     position: "relative",
-    backgroundColor: "#F2F2F2",
   },
   employees: {
     width: "100%",
