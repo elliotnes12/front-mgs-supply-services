@@ -130,7 +130,7 @@ export function ChatItem({ chat, isCustomer, upTopChat }) {
             )}
             <View style={styles.chatTextContainer}>
               <StyledText bold>{chat.name}</StyledText>
-              <StyledText font10pt lightGray regularGray>
+              <StyledText font12pt lightGray regularGray>
                 {lastMessage?.message || "No recent message"}
               </StyledText>
               <Text style={styles.chatItem__message}></Text>

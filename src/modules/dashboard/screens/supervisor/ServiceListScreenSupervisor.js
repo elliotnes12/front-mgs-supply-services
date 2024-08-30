@@ -2,11 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { map } from "lodash";
 import { useEffect, useState } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, Dimensions } from "react-native";
 import { TabBar, TabView } from "react-native-tab-view";
 import { ItemServiceSupervisor } from "../../../../components/core/items/ItemService";
 import { screens, tabIds } from "../../../../utils";
-import { getIconById } from "../../../../utils/util";
 import { styles } from "./ServiceListScreenSupervisor.styles";
 import { Service } from "../../../../api/service";
 import { useAuth } from "../../../Auth/hooks";
@@ -14,7 +13,7 @@ import StyledText from "../../../../utils/globalstyle";
 
 export const ServiceListScreenSupervisor = () => {
   const [index, setIndex] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [height, setHeight] = useState(Dimensions.get('window').height); 
   const controllerService = new Service();
   const [services, setServices] = useState([]);
   const navigation = useNavigation();
@@ -30,7 +29,6 @@ export const ServiceListScreenSupervisor = () => {
     (async () => {
       try {
         const { data } = await controllerService.findAllServices(accessToken);
-
         setServices(data);
       } catch (error) {
         setServices([]);
@@ -50,7 +48,7 @@ export const ServiceListScreenSupervisor = () => {
       default:
         setHeight(0);
     }
-  }, [index]);
+  }, [index, services]);
 
   const renderScene = ({ route }) => {
     switch (route.key) {
@@ -70,15 +68,15 @@ export const ServiceListScreenSupervisor = () => {
   );
 
   const RenderLastServices = ({ navigation }) => (
-    <>
+    <View style={{ flex: 1 }}>
       <View style={styles.options}>
-        <StyledText font16pt bold>
+        <StyledText font17pt bold>
           Services Generated
         </StyledText>
         <TouchableOpacity
           onPress={() => navigation.navigate(screens.tab.services.root)}
         >
-          <StyledText font12pt regularGreen>
+          <StyledText font14pt regularGreen>
             View All
           </StyledText>
         </TouchableOpacity>
@@ -86,7 +84,7 @@ export const ServiceListScreenSupervisor = () => {
       {map(services, (element, id) => {
         return <ItemServiceSupervisor key={id} item={element} />;
       })}
-    </>
+    </View>
   );
 
   const renderTabBar = (props) => (
