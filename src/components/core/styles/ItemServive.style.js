@@ -53,10 +53,14 @@ export const styles = StyleSheet.create({
     marginTop: 5,
     justifyContent: "space-between",
   },
+  raiting: {
+    width: 12.5,
+    height: 12.5,
+  },
   item__date: {
     position: "absolute",
     right: 0,
-    bottom: -10,
+    bottom: -15,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -70,8 +74,8 @@ export const styles = StyleSheet.create({
   },
 
   item__flechaContainer: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     marginRight: 5,
     position: "absolute",
     right: 0,

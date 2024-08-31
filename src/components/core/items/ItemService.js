@@ -4,50 +4,40 @@ import { styles } from "../styles/ItemServive.style";
 import { assets } from "../../../assets";
 import { stylesGlobal } from "../../../modules/styles/global.style";
 import { RenderStatusService } from "./RenderStatusService";
+import StyledText from "../../../utils/globalstyle";
+import { getIconById } from "../../../utils/util";
 
 export function ItemService({ item }) {
   return (
     <>
       <View style={styles.item}>
-        <View style={styles.item__img}>
-          <Image
-            alt="categoria"
-            style={stylesGlobal.imageMin__img}
-            resizeMode="contain"
-            source={assets.image.png.minService}
-          />
-        </View>
+        <View style={styles.item__img}>{getIconById("minService")}</View>
         <View style={styles.item__text}>
-          <Text style={styles.item__title}>{item.title}</Text>
-          <Text style={styles.item_subtitle}>{item.subTitle}</Text>
+          <StyledText font16pt bold>
+            {item.title}
+          </StyledText>
+          <StyledText font12pt regularGray>
+            {item.subTitle}
+          </StyledText>
           <View style={styles.item__raiting}>
-            <Image
-              alt="icon-star-raiting"
-              resizeMode="cover"
-              source={assets.image.png.iconRaiting}
-            />
-            <Text style={styles.item__raitingtext}>{item.raiting}</Text>
+            <View style={styles.raiting}>{getIconById("iconRaiting")}</View>
+
+            <StyledText font10pt regularGray>
+              {item.raiting}
+            </StyledText>
           </View>
 
           <View style={styles.item__date}>
             <View style={[stylesGlobal.imageSmall]}>
-              <Image
-                alt="icon-calendar"
-                resizeMode="cover"
-                style={stylesGlobal.imageMin__img}
-                source={assets.image.png.iconCalendar}
-              />
+              {getIconById("iconCalendar")}
             </View>
-            <Text style={styles.item__datetext}>{item.date}</Text>
+            <StyledText font8pt regularGray>
+              {item.date}
+            </StyledText>
           </View>
 
           <TouchableOpacity style={styles.item__flechaContainer}>
-            <Image
-              alt="flecha"
-              style={styles.imageFullSize}
-              resizeMode="cover"
-              source={assets.image.png.iconFlecha}
-            />
+            {getIconById("iconFlecha")}
           </TouchableOpacity>
         </View>
       </View>
@@ -58,39 +48,28 @@ export function ItemService({ item }) {
 export function ItemServiceManager({ item }) {
   return (
     <View style={styles.item}>
-      <View style={styles.item__img}>
-        <Image
-          alt="categoria"
-          style={stylesGlobal.imageMin__img}
-          resizeMode="contain"
-          source={assets.image.png.minService}
-        />
-      </View>
+      <View style={styles.item__img}>{getIconById("minService")}</View>
       <View style={styles.item__text}>
-        <Text style={styles.item__title}>{item.title}</Text>
-        <Text style={styles.item_subtitle}>{item.subTitle}</Text>
+        <StyledText font16pt bold>
+          {item.title}
+        </StyledText>
+        <StyledText font12pt regularGray>
+          {item.subTitle}
+        </StyledText>
 
         <View style={styles.item__date}>
           <View style={[stylesGlobal.imageSmall]}>
-            <Image
-              alt="icon-calendar"
-              resizeMode="contain"
-              style={stylesGlobal.imageMin__img}
-              source={assets.image.png.iconCalendar}
-            />
+            {getIconById("iconCalendar")}
           </View>
-          <Text style={styles.item__datetext}>{item.date}</Text>
+          <StyledText font10pt regularGray>
+            {item.date}
+          </StyledText>
         </View>
 
         <RenderStatusService status={item.status} />
 
         <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image
-            alt="flecha"
-            style={styles.imageFullSize}
-            resizeMode="cover"
-            source={assets.image.png.iconFlecha}
-          />
+          {getIconById("iconFlecha")}
         </TouchableOpacity>
       </View>
     </View>
@@ -100,39 +79,26 @@ export function ItemServiceManager({ item }) {
 export function ItemServiceSupervisor({ item }) {
   return (
     <View style={styles.item}>
-      <View style={styles.item__img}>
-        <Image
-          alt="categoria"
-          style={stylesGlobal.imageMin__img}
-          resizeMode="contain"
-          source={assets.image.png.minService}
-        />
-      </View>
+      <View style={styles.item__img}>{getIconById("minService")}</View>
       <View style={styles.item__text}>
         <Text style={styles.item__title}>{item.title}</Text>
         <Text style={styles.item_subtitle}>{item.subTitle}</Text>
 
         <View style={styles.item__date}>
           <View style={[stylesGlobal.imageSmall]}>
-            <Image
-              alt="icon-calendar"
-              resizeMode="cover"
-              style={stylesGlobal.imageMin__img}
-              source={assets.image.png.iconCalendar}
-            />
+            {getIconById("iconCalendar")}
           </View>
-          <Text style={styles.item__datetext}>{item.date}</Text>
+          <View style={styles.item__datetext}>
+            <StyledText font10pt regularGray>
+              {item.date}
+            </StyledText>
+          </View>
         </View>
 
         <RenderStatusService status={item.status} />
 
         <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image
-            alt="flecha"
-            style={styles.imageFullSize}
-            resizeMode="cover"
-            source={assets.image.png.iconFlecha}
-          />
+          {getIconById("iconFlecha")}
         </TouchableOpacity>
       </View>
     </View>
@@ -142,39 +108,28 @@ export function ItemServiceSupervisor({ item }) {
 export function ItemServiceEmployee({ item }) {
   return (
     <View style={styles.item}>
-      <View style={styles.item__img}>
-        <Image
-          alt="categoria"
-          style={stylesGlobal.imageMin__img}
-          resizeMode="contain"
-          source={assets.image.png.minService}
-        />
-      </View>
+      <View style={styles.item__img}>{getIconById("minService")}</View>
       <View style={styles.item__text}>
-        <Text style={styles.item__title}>{item.title}</Text>
-        <Text style={styles.item_subtitle}>{item.subTitle}</Text>
+        <StyledText font14pt bold>
+          {item.title}
+        </StyledText>
+        <StyledText font12pt regularGray>
+          {item.subTitle}
+        </StyledText>
 
         <View style={styles.item__date}>
           <View style={[stylesGlobal.imageSmall]}>
-            <Image
-              alt="icon-calendar"
-              resizeMode="cover"
-              style={stylesGlobal.imageMin__img}
-              source={assets.image.png.iconCalendar}
-            />
+            {getIconById("iconCalendar")}
           </View>
-          <Text style={styles.item__datetext}>{item.date}</Text>
+          <StyledText font8pt regularGray style={styles.item__datetext}>
+            {item.date}
+          </StyledText>
         </View>
 
         <RenderStatusService status={item.status} />
 
         <TouchableOpacity style={styles.item__flechaContainer}>
-          <Image
-            alt="flecha"
-            style={styles.imageFullSize}
-            resizeMode="cover"
-            source={assets.image.png.iconFlecha}
-          />
+          {getIconById("iconFlecha")}
         </TouchableOpacity>
       </View>
     </View>
