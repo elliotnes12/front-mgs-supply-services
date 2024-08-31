@@ -1,6 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import * as Location from "expo-location";
 import React, { useState } from "react";
+import { default as CalendarRange } from "../../components/DatePicker";
+
 import {
   ActivityIndicator,
   Dimensions,
@@ -10,21 +12,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Calendar } from "react-native-calendars";
 import MapView, { Marker } from "react-native-maps";
 import Modal from "react-native-modal";
-import { assets } from "../../assets";
 import { Header } from "../../components/core/Header";
 import { useLocation } from "../../contexts";
 import { stylesGlobal } from "../../modules/styles/global.style";
 import StyledText, {
   StyledGradientButton,
-  StyledGradientButtonSmall,
+  StyledGradientButtonSmall
 } from "../../utils/globalstyle";
 import { getIconById } from "../../utils/util";
 import { styles, themeCalendar } from "./styles/CreateService.style";
-import { SceneMap, TabBar, TabView } from "react-native-tab-view";
-import { Calendar } from "react-native-calendars";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 const data = [
   { id: "1", title: "Cleaning" },
@@ -38,12 +37,10 @@ const dataEmployees = [
 ];
 
 export function CreateService() {
-  const initialLayout = { width: Dimensions.get("window").width };
-  const [selectedId, setSelectedId] = useState(data[0].id);
   const [bussinessName, setBussinessName] = useState(
     "CORPORATION VILLA NUEVA LLC"
   );
-  const [searchText, setSearchText] = useState("");
+
   const [filteredEmployees, setFilteredEmployees] = useState(dataEmployees);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [origin, setOrigin] = useState(null);
@@ -51,20 +48,25 @@ export function CreateService() {
     "Aquí va la dirección"
   );
   const [mapClicked, setMapClicked] = useState(false);
-  const { location, loading } = useLocation(); // Obtiene la ubicación y el estado de carga
-
-  console.log(location);
+  const { location } = useLocation();
   const [selectedDate, setSelectedDate] = useState(null);
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+  const [isModalCalendar, setIsModalCalendar] = useState(false)
   const [selectedTime, setSelectedTime] = useState(null);
   const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState('cleaning');
+
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
     if (isModalVisible) {
       setMapClicked(false);
     }
+  };
+
+
+  const toggleModalCalendar = () => {
+    setIsModalVisible(!isModalCalendar);
   };
 
   const handleMapPress = async (e) => {
@@ -108,14 +110,6 @@ export function CreateService() {
     return date.toLocaleDateString("en-US", options);
   };
 
-  const handleTimeChange = (event, selectedDate) => {
-    setIsTimePickerVisible(Platform.OS === "ios");
-    if (selectedDate) {
-      const currentTime = new Date(selectedDate);
-      currentTime.setSeconds(0);
-      setSelectedTime(currentTime);
-    }
-  };
   const showTimePicker = () => {
     setIsTimePickerVisible(true);
   };
@@ -129,14 +123,6 @@ export function CreateService() {
     });
   };
 
-  const handleSearch = () => {
-    const results = dataEmployees.filter(
-      (employee) =>
-        employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        employee.id.includes(searchText)
-    );
-    setFilteredEmployees(results);
-  };
 
   const handleButtonPress = (buttonName) => {
     setSelectedButton(buttonName);
@@ -150,7 +136,7 @@ export function CreateService() {
           subtitle={"Schedule a service with us"}
           goBack={true}
         />
-        <View style={{ flexDirection: "row" }}>
+        <View style={styles.categories}>
           <StyledGradientButtonSmall
             action={() => handleButtonPress("cleaning")}
             focused={selectedButton === "cleaning"}
@@ -168,7 +154,10 @@ export function CreateService() {
             focused={selectedButton === "polishing"}
             text={"polishing"}
           />
+
+
         </View>
+
 
         <View>
           <View style={{ marginTop: 20, paddingHorizontal: 24 }}>
@@ -178,32 +167,12 @@ export function CreateService() {
               style={[styles.item, { backgroundColor: "#FAFAFA" }]}
               onPress={toggleCalendarVisibility}
             >
-              <View
-                style={{
-                  width: 40,
-                  height: 40,
-                  marginRight: 10,
-                }}
-              >
+              <View style={{ width: 30, height: 30, marginRight: 10, }}>
                 {getIconById("iconCalendar")}
               </View>
               <StyledText font16pt>{formatDate(selectedDate)}</StyledText>
             </TouchableOpacity>
-            {isCalendarVisible && (
-              <View style={[styles.item, { zIndex: 1 }]}>
-                <Calendar
-                  onDayPress={handleDateChange}
-                  markedDates={{
-                    [selectedDate]: {
-                      selected: true,
-                      selectedColor: "#CEDC39",
-                    },
-                  }}
-                  style={{ borderRadius: 10, padding: 0 }}
-                  theme={themeCalendar}
-                />
-              </View>
-            )}
+
 
             <TouchableOpacity
               style={[styles.item, { backgroundColor: "#FAFAFA" }]}
@@ -215,15 +184,6 @@ export function CreateService() {
               <StyledText font16pt>{formatTime(selectedTime)}</StyledText>
             </TouchableOpacity>
 
-            {isTimePickerVisible && (
-              <DateTimePicker
-                value={selectedTime || new Date()}
-                mode="time"
-                is24Hour={false}
-                display="default"
-                onChange={handleTimeChange}
-              />
-            )}
 
             <TouchableOpacity
               style={[styles.item, { backgroundColor: "#FAFAFA" }]}
@@ -286,6 +246,18 @@ export function CreateService() {
               </TouchableOpacity>
             </View>
           </View>
+
+          <Modal isVisible={isModalCalendar}>
+            <View style={{ flex: 1, justifyContent: "center" }}>
+              <CalendarRange />
+
+              <StyledGradientButton text={"Confirm"} action={() => console.log("confirm")} />
+
+            </View>
+
+          </Modal>
+
+
           <Modal style={{ padding: 0, margin: 0 }} isVisible={isModalVisible}>
             <View style={{ flex: 1, backgroundColor: "#fff" }}>
               {location && (

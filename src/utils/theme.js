@@ -15,6 +15,7 @@ export const theme = {
         success: "#4BAE4F",
         opacity: "#413F3F",
         blanco: "#fff",
+        green: "#7DA74D",
         colorDarkgray: "#ababab",
         colorLightsteelblue: "#9db2ce",
         colorSecundario: "#7da74d",

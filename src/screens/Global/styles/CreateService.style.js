@@ -17,16 +17,13 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  title: {
-    fontFamily: "Poppins_600SemiBold",
-    color: "#fff",
-    fontSize: 24,
-    lineHeight: 25,
-  },
-  subTitle: {
-    fontFamily: "Poppins_400Regular",
-    color: "#fff",
-    fontSize: 15,
+  categories: {
+    flexDirection: "row",
+    flex: 1,
+    paddingVertical: 15,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center",
   },
   textGray: {
     color: "#828282",

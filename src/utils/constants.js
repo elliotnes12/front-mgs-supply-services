@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 const IP = "192.168.100.71";
 const SERVER = `server-mgs-supply-services-1.onrender.com`;
 
@@ -6,6 +8,25 @@ export const ENV = {
   BASE_PATH: `https://${SERVER}`,
   API_URL: `https://${SERVER}/api`,
   SOCKET_URL: `https://${SERVER}`,
+
+  MONTHS: [
+    '',        // Deja el primer índice vacío para que el índice 1 corresponda a enero.
+    'Enero',   // 1
+    'Febrero', // 2
+    'Marzo',   // 3
+    'Abril',   // 4
+    'Mayo',    // 5
+    'Junio',   // 6
+    'Julio',   // 7
+    'Agosto',  // 8
+    'Septiembre', // 9
+    'Octubre', // 10
+    'Noviembre', // 11
+    'Diciembre'  // 12
+  ],
+  DISPOSITIVO: {
+    isIphone: Platform.OS === 'ios' ? true : false
+  },
   ENDPOINTS: {
     AUTH: {
       REGISTER: "auth/register",
@@ -60,3 +81,4 @@ export const tabIds = {
 export const headers = {
   HEADER_CONTACT: "headerContact",
 };
+

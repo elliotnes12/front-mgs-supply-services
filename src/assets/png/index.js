@@ -10,6 +10,7 @@ const png = {
   bglogin: require("./fondos/bglogin.jpg"),
   iconProfile: require("./home/profile.png"),
   iconCalendar: require("./icons/calendar.png"),
+  icontime: require("./icons/icon-time.png"),
   iconSetting: require("./buttonmenu/setting.png"),
   iconSettingFocus: require("./buttonmenu/settingfocus.png"),
   iconChat: require("./buttonmenu/chatuno.png"),
@@ -61,7 +62,6 @@ const png = {
   Group: require("./icons/Group.png"),
   minCancelled: require("./servicios/cancelled.png"),
   messageVerfication: require("./icons/icon-message-verification.png"),
-  icontime: require("./icons/icon-time.png"),
   iconLupa: require("./icons/icon-lupa.png"),
   iconSentingFocus: require("./buttonmenu/settingfocus.png"),
 };
