@@ -93,14 +93,10 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
   },
   promos__title: {
-    color: "#fff",
-    fontFamily: theme.textStyles.semiBold,
-    textTransform: "capitalize",
     width: 201,
-    fontSize: 23,
     lineHeight: 24,
     marginLeft: 20,
-    top: 20,
+    top: 10,
   },
   promos__label: {
     borderRadius: 10,

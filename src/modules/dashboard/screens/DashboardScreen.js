@@ -66,14 +66,10 @@ export function DashboardScreen() {
     outputRange: ["-15deg", "15deg"],
   });
 
-
-
-
   /**
-   *  
+   *
    *
    */
-
 
   const DashboardHeader = () => {
     return (
@@ -91,7 +87,9 @@ export function DashboardScreen() {
           </View>
           <View style={styles.userInfo}>
             <StyledText regularGray>Hello,</StyledText>
-            <StyledText boldGray line20 font17pt>{name}</StyledText>
+            <StyledText boldGray line20 font17pt>
+              {name}
+            </StyledText>
           </View>
         </View>
         <Animated.View style={{ transform: [{ rotate: swing }] }}>
@@ -103,9 +101,8 @@ export function DashboardScreen() {
           </TouchableOpacity>
         </Animated.View>
       </View>
-
-    )
-  }
+    );
+  };
 
   const Banner = () => {
     return (
@@ -115,11 +112,15 @@ export function DashboardScreen() {
           style={styles.bgbanner}
         >
           <View style={styles.promos__label}>
-            <Text style={{ color: "#7EA74C" }}>New</Text>
+            <StyledText font12pt textGreen2 bold>
+              New
+            </StyledText>
           </View>
-          <Text style={styles.promos__title}>
-            Register Your service via chat
-          </Text>
+          <View style={styles.promos__title}>
+            <StyledText font20pt headerBig>
+              Register Your service via chat
+            </StyledText>
+          </View>
 
           {getIconById("bgPleca")}
 
@@ -128,8 +129,8 @@ export function DashboardScreen() {
           </View>
         </LinearGradient>
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <ScrollView
@@ -138,15 +139,15 @@ export function DashboardScreen() {
     >
       {<DashboardHeader />}
       <View style={styles.background}>
-
         {isCustomer && (
           <>
             {<Banner />}
 
             <View style={{ marginVertical: 10 }}>
-              <StyledText bold font20pt>Choose a category</StyledText>
+              <StyledText bold font20pt>
+                Choose a category
+              </StyledText>
             </View>
-
 
             <ServiceListScreenCt />
           </>
@@ -161,7 +162,6 @@ export function DashboardScreen() {
         {!isCustomer && userInfo.type === ENV.TYPES_USERS.MANAGER && (
           <ServiceListScreenManager />
         )}
-
       </View>
     </ScrollView>
   );

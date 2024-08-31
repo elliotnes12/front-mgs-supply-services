@@ -103,6 +103,15 @@ const styles = StyleSheet.create({
   graySilver: {
     color: "#ABABAB",
   },
+  orangeText: {
+    color: "#FFBD12",
+  },
+  redText: {
+    color: "#FF8585",
+  },
+  textGreen2: {
+    color: "#7EA74C",
+  },
   textBold: {
     fontFamily: theme.textStyles.bold,
   },
@@ -128,6 +137,9 @@ export default function StyledText({
   lightGray,
   asparagus,
   graySilver,
+  orangeText,
+  redText,
+  textGreen2,
   font8pt,
   font10pt,
   font12pt,
@@ -163,6 +175,9 @@ export default function StyledText({
     titlleBig && styles.titlleBig,
     asparagus && styles.asparagus,
     graySilver && styles.graySilver,
+    orangeText && styles.orangeText,
+    redText && styles.redText,
+    textGreen2 && styles.textGreen2,
     line20 && styles.line20,
     white && styles.white,
     lightGray && styles.lightGray,

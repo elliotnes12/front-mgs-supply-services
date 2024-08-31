@@ -1,18 +1,37 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { TabBar, TabView } from 'react-native-tab-view';
-import { styles } from './ServiceListScreen.styles';
-import { getIcon } from '../../../../utils/util';
-import { screens, tabIds } from '../../../../utils';
-import { useNavigation } from '@react-navigation/native';
-import { ItemService } from '../../../../components/core/items/ItemService';
+import { LinearGradient } from "expo-linear-gradient";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { TabBar, TabView } from "react-native-tab-view";
+import { styles } from "./ServiceListScreen.styles";
+import { getIcon } from "../../../../utils/util";
+import { screens, tabIds } from "../../../../utils";
+import { useNavigation } from "@react-navigation/native";
+import { ItemService } from "../../../../components/core/items/ItemService";
 import { map } from "lodash";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import StyledText from "../../../../utils/globalstyle";
 
 const data = [
-  { id: '1', title: "Office Cleaning", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' },
-  { id: '2', title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' },
-  { id: '3', title: "Office Cleaning 2", subTitle: "Cleaning the lobby area", date: "May 12, 2024", raiting: '4.8' }
+  {
+    id: "1",
+    title: "Office Cleaning",
+    subTitle: "Cleaning the lobby area",
+    date: "May 12, 2024",
+    raiting: "4.8",
+  },
+  {
+    id: "2",
+    title: "Office Cleaning 2",
+    subTitle: "Cleaning the lobby area",
+    date: "May 12, 2024",
+    raiting: "4.8",
+  },
+  {
+    id: "3",
+    title: "Office Cleaning 2",
+    subTitle: "Cleaning the lobby area",
+    date: "May 12, 2024",
+    raiting: "4.8",
+  },
 ];
 
 const initialLayout = { width: "100%" };
@@ -20,12 +39,20 @@ const initialLayout = { width: "100%" };
 const RenderServices = ({ navigation }) => (
   <View style={{ flexGrow: 1 }}>
     <View style={styles.options}>
-      <Text style={styles.options__title}>Services Used</Text>
-      <TouchableOpacity onPress={() => navigation.navigate(screens.tab.services.root)}>
-        <Text style={styles.options__all}>View All</Text>
+      <StyledText font17pt bold>
+        Services Used
+      </StyledText>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(screens.tab.services.root)}
+      >
+        <StyledText font14pt regularGreen>
+          View All
+        </StyledText>
       </TouchableOpacity>
     </View>
-    {map(data, (item) => <ItemService key={item.id} item={item} />)}
+    {map(data, (item) => (
+      <ItemService key={item.id} item={item} />
+    ))}
   </View>
 );
 
@@ -47,9 +74,24 @@ export const ServiceListScreenCt = () => {
   const navigation = useNavigation();
 
   const routes = [
-    { key: tabIds.TAB_ID_SERVICES, title: 'services', label: 'services', icon: 'icon-service' },
-    { key: tabIds.TAB_ID_PRODUCTS, title: 'products', label: 'Orders', icon: 'icon-order' },
-    { key: tabIds.TAB_ID_RAITING, title: 'raiting', label: 'Raiting', icon: 'icon-raiting' },
+    {
+      key: tabIds.TAB_ID_SERVICES,
+      title: "services",
+      label: "services",
+      icon: "icon-service",
+    },
+    {
+      key: tabIds.TAB_ID_PRODUCTS,
+      title: "products",
+      label: "Orders",
+      icon: "icon-order",
+    },
+    {
+      key: tabIds.TAB_ID_RAITING,
+      title: "raiting",
+      label: "Raiting",
+      icon: "icon-raiting",
+    },
   ];
 
   useEffect(() => {
@@ -83,28 +125,28 @@ export const ServiceListScreenCt = () => {
     <TabBar
       {...props}
       indicatorStyle={styles.indicatorStyle}
-      pressColor='transparent'
+      pressColor="transparent"
       style={styles.tabBarStyle}
       scrollEnabled
       tabStyle={styles.tabStyle}
-      renderLabel={({ route, focused }) => (
+      renderLabel={({ route, focused }) =>
         focused ? (
           <LinearGradient
-            colors={['#CEDC39', '#7DA74D']}
+            colors={["#CEDC39", "#7DA74D"]}
             style={styles.gradient}
           >
-            <Text style={styles.tabTextFocused}>
+            <StyledText font16pt white regularGray>
               {route.title}
-            </Text>
+            </StyledText>
           </LinearGradient>
         ) : (
           <View style={styles.tabItem}>
-            <Text style={styles.tabText}>
+            <StyledText font16pt graySilver regularGray>
               {route.title}
-            </Text>
+            </StyledText>
           </View>
         )
-      )}
+      }
     />
   );
 
@@ -118,4 +160,4 @@ export const ServiceListScreenCt = () => {
       renderTabBar={renderTabBar}
     />
   );
-}
+};

@@ -10,6 +10,7 @@ import { Header } from "../../components/core/Header";
 import { stylesGlobal } from "../../modules/styles/global.style";
 import { getIconById } from "../../utils/util";
 import { styles } from "./styles/PendingScreen.styles";
+import StyledText from "../../utils/globalstyle";
 
 export function PendingScreen() {
   const [tasks, setTasks] = useState([]);
@@ -46,19 +47,25 @@ export function PendingScreen() {
   const renderItem = ({ item }) => (
     <View key={item.id} style={styles.container_item}>
       <View style={{ flex: 1 }}>
-        <Text style={styles.office}>{item.title}</Text>
+        <StyledText font16pt bold>
+          {item.title}
+        </StyledText>
         <View style={styles.notice}>
           <View style={stylesGlobal.imageMin}>{getIconById("notice")}</View>
-          <Text style={{ fontSize: 15 }}>{item.description}</Text>
+          <StyledText font12pt regularGray>
+            {item.description}
+          </StyledText>
         </View>
-        <Text style={styles.assigned}>
+        <StyledText font14pt regularGray>
           Assigned employees: {item.employees.length}
-        </Text>
+        </StyledText>
         <View style={styles.employeeList}>
           {item.employees.map((employee) => (
             <View key={employee.idEmployee} style={styles.item}>
               <View style={styles.item__img}>{getIconById("iconProfile")}</View>
-              <Text style={styles.personalName}>{employee.name}</Text>
+              <StyledText font12pt regularGray>
+                {employee.name}
+              </StyledText>
             </View>
           ))}
         </View>
@@ -66,11 +73,15 @@ export function PendingScreen() {
       <View style={styles.options}>
         <TouchableOpacity style={styles.options__item}>
           <View style={stylesGlobal.imageMd}>{getIconById("iconEdit")}</View>
-          <Text style={styles.edit}>Edit</Text>
+          <StyledText font12pt regularGray orangeText>
+            Edit
+          </StyledText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.options__item}>
           <View style={stylesGlobal.imageMd}>{getIconById("decline")}</View>
-          <Text style={styles.decline}>Cancel</Text>
+          <StyledText font12pt regularGray redText>
+            Cancel
+          </StyledText>
         </TouchableOpacity>
       </View>
     </View>

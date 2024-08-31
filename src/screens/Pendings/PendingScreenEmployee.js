@@ -13,6 +13,7 @@ import { stylesGlobal } from "../../modules/styles/global.style";
 import { Header } from "../../components/core/Header";
 import { LoadingScreen } from "../../components/core/LoadingScreen";
 import { getIconById } from "../../utils/util";
+import StyledText from "../../utils/globalstyle";
 
 export function PendingScreenEmployee() {
   const [tasks, setTasks] = useState([]);
@@ -49,25 +50,25 @@ export function PendingScreenEmployee() {
   const renderItem = ({ item }) => (
     <View key={item.id} style={styles.container_item}>
       <View>
-        <Text style={styles.office}>{item.title}</Text>
+        <StyledText font16pt bold style={styles.office}>
+          {item.title}
+        </StyledText>
         <View style={styles.notice}>
-          <View style={stylesGlobal.imageMin}>
-            <Image
-              alt="icon-notice"
-              source={assets.image.png.notice}
-              style={stylesGlobal.imageMin__img}
-            />
-          </View>
-          <Text style={styles.notice_description}>{item.description}</Text>
+          <View style={stylesGlobal.imageMin}>{getIconById("notice")}</View>
+          <StyledText font12pt regularGray>
+            {item.description}
+          </StyledText>
         </View>
-        <Text style={styles.assigned}>
+        <StyledText font14pt regularGray>
           Assigned employees: {item.employees.length}
-        </Text>
+        </StyledText>
         <View style={styles.employeeList}>
           {item.employees.map((employee) => (
             <View key={employee.idEmployee} style={styles.item}>
               <View style={styles.item__img}>{getIconById("iconProfile")}</View>
-              <Text style={styles.personalName}>{employee.name}</Text>
+              <StyledText font12pt regularGray>
+                {employee.name}
+              </StyledText>
             </View>
           ))}
         </View>
@@ -80,7 +81,9 @@ export function PendingScreenEmployee() {
               style={{ width: "100%", height: "100%" }}
             />
           </View>
-          <Text style={styles.complet}>Complet</Text>
+          <StyledText font12pt asparagus regularGray>
+            Complet
+          </StyledText>
         </TouchableOpacity>
       </View>
     </View>
