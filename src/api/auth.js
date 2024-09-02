@@ -1,4 +1,4 @@
-import { ENV } from "../../../utils";
+import { ENV } from "../utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 

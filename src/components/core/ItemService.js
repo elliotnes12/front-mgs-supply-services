@@ -29,7 +29,7 @@ export function ItemService({ item }) {
                     </View>
 
                     <TouchableOpacity style={styles.item__flechaContainer}>
-                        <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.iconFlecha} />
+                        <Image alt='flecha' style={styles.imageFullSize} resizeMode="cover" source={assets.image.png.icon} />
                     </TouchableOpacity>
                 </View>
             </View>

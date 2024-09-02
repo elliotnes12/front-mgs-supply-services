@@ -5,25 +5,24 @@ import { default as CalendarRange } from "../../components/DatePicker";
 
 import {
   ActivityIndicator,
-  Dimensions,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
-import { Calendar } from "react-native-calendars";
 import MapView, { Marker } from "react-native-maps";
 import Modal from "react-native-modal";
 import { Header } from "../../components/core/Header";
+import EmployeeSelectorModal from "../../components/core/Modal/EmployeeSelectorModal";
 import { useLocation } from "../../contexts";
-import { stylesGlobal } from "../../modules/styles/global.style";
 import StyledText, {
   StyledGradientButton,
   StyledGradientButtonSmall
 } from "../../utils/globalstyle";
 import { getIconById } from "../../utils/util";
-import { styles, themeCalendar } from "./styles/CreateService.style";
+import { styles } from "./styles/CreateService.style";
+import { MapModal } from "../../components/core/Modal/MapModal";
 
 const data = [
   { id: "1", title: "Cleaning" },
@@ -38,10 +37,9 @@ const dataEmployees = [
 
 export function CreateService() {
   const [bussinessName, setBussinessName] = useState(
-    "CORPORATION VILLA NUEVA LLC"
+    ""
   );
 
-  const [filteredEmployees, setFilteredEmployees] = useState(dataEmployees);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [origin, setOrigin] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(
@@ -49,12 +47,28 @@ export function CreateService() {
   );
   const [mapClicked, setMapClicked] = useState(false);
   const { location } = useLocation();
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [isModalCalendar, setIsModalCalendar] = useState(false)
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
-  const [selectedButton, setSelectedButton] = useState('cleaning');
+  const [selectedButton, setSelectedButton] = useState('Cleaning');
+  const [assignedEmployees, setAssignedEmployees] = useState([])
+  const timeOptions = [
+    { id: "1", icon: "iconCalendar", label: "Choose a Date", callback: () => console.log("") },
+    { id: "2", icon: "icontime", label: "Choose a Time", callback: () => console.log("") },
+    { id: "3", icon: "iconlupa", label: "Assign Employee", callback: () => handleOpenModal() },
+  ];
+
+  const [modalEmployeeVisible, setModalEmployeeVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalEmployeeVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalEmployeeVisible(false);
+  };
+
+  const handleConfirmSelection = (selected) => {
+    setAssignedEmployees(selected)
+  };
 
 
   const toggleModal = () => {
@@ -65,9 +79,6 @@ export function CreateService() {
   };
 
 
-  const toggleModalCalendar = () => {
-    setIsModalVisible(!isModalCalendar);
-  };
 
   const handleMapPress = async (e) => {
     if (!mapClicked) {
@@ -94,35 +105,13 @@ export function CreateService() {
     }
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date.dateString);
-    setIsCalendarVisible(false);
-  };
 
-  const toggleCalendarVisibility = () => {
-    setIsCalendarVisible(!isCalendarVisible);
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "Choose a date";
-    const date = new Date(dateString);
-    const options = { day: "numeric", month: "short" };
-    return date.toLocaleDateString("en-US", options);
-  };
-
-  const showTimePicker = () => {
-    setIsTimePickerVisible(true);
-  };
-
-  const formatTime = (date) => {
-    if (!date) return "Schedule";
-    return date.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  };
-
+  const confirmDate = () => {
+    toggleModalCalendar();
+  }
+  const toggleModalCalendar = () => {
+    setIsModalCalendar(prevStatus => !prevStatus)
+  }
 
   const handleButtonPress = (buttonName) => {
     setSelectedButton(buttonName);
@@ -130,95 +119,145 @@ export function CreateService() {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
         <Header
           title={"Create a Service"}
           subtitle={"Schedule a service with us"}
           goBack={true}
         />
-        <View style={styles.categories}>
-          <StyledGradientButtonSmall
-            action={() => handleButtonPress("cleaning")}
-            focused={selectedButton === "cleaning"}
-            text={"cleaning"}
-          />
 
-          <StyledGradientButtonSmall
-            action={() => handleButtonPress("painting")}
-            focused={selectedButton === "painting"}
-            text={"painting"}
-          />
 
-          <StyledGradientButtonSmall
-            action={() => handleButtonPress("polishing")}
-            focused={selectedButton === "polishing"}
-            text={"polishing"}
+
+        <View style={{ paddingTop: 20, paddingHorizontal: 24 }}>
+
+          <View style={{ marginVertical: 15 }}>
+            <StyledText font17pt neutralGray bold>Select a service</StyledText>
+          </View>
+
+          <View style={styles.categories}>
+            <StyledGradientButtonSmall
+              action={() => handleButtonPress("Cleaning")}
+              focused={selectedButton === "Cleaning"}
+              text={"Cleaning"}
+            />
+
+            <StyledGradientButtonSmall
+              action={() => handleButtonPress("Painting")}
+              focused={selectedButton === "Painting"}
+              text={"Painting"}
+            />
+
+            <StyledGradientButtonSmall
+              action={() => handleButtonPress("Polishing")}
+              focused={selectedButton === "Polishing"}
+              text={"Polishing"}
           />
 
 
         </View>
 
+          <View style={{ marginVertical: 15 }}>
+            <StyledText font17pt neutralGray bold>Set date & time</StyledText>
+          </View>
 
-        <View>
-          <View style={{ marginTop: 20, paddingHorizontal: 24 }}>
-            <StyledText bold>Set date & time</StyledText>
 
+          {timeOptions.map((item) => (
             <TouchableOpacity
-              style={[styles.item, { backgroundColor: "#FAFAFA" }]}
-              onPress={toggleCalendarVisibility}
+              onPress={item.callback}
+              key={item.id}
+              style={[{ backgroundColor: "#FAFAFA", marginBottom: 10, borderRadius: 10 }]}
             >
-              <View style={{ width: 30, height: 30, marginRight: 10, }}>
-                {getIconById("iconCalendar")}
+              <View style={[styles.item, { paddingLeft: 15 }]}>
+                <View style={{ width: 30, height: 30, marginRight: 10 }}>
+                  {getIconById(item.icon)}
               </View>
-              <StyledText font16pt>{formatDate(selectedDate)}</StyledText>
-            </TouchableOpacity>
-
-
-            <TouchableOpacity
-              style={[styles.item, { backgroundColor: "#FAFAFA" }]}
-              onPress={showTimePicker}
-            >
-              <View style={{ width: 30, height: 30, marginRight: 10 }}>
-                {getIconById("icontime")}
+                <StyledText graySilver font16pt>{item.label}</StyledText>
               </View>
-              <StyledText font16pt>{formatTime(selectedTime)}</StyledText>
             </TouchableOpacity>
+          ))}
 
 
-            <TouchableOpacity
-              style={[styles.item, { backgroundColor: "#FAFAFA" }]}
-            >
+
+          <View style={{ marginVertical: 15 }}>
+            <StyledText font17pt neutralGray bold>Employees</StyledText>
+          </View>
+
+          <View>
+
+            {assignedEmployees.length > 0 &&
+
+              assignedEmployees.map((item) => (
+                <View
+                  key={item.id}
+                  style={[{
+                    backgroundColor: "#FAFAFA",
+                    marginBottom: 10, borderRadius: 10
+                  }]}>
+
+                  <View style={[styles.item, { paddingLeft: 15 }]}>
+                    <View style={styles.avatarAssingEmployee}>
+                      {getIconById("iconAvatar")}
+                    </View>
+                    <StyledText graySilver font16pt>{item.name}</StyledText>
+                  </View>
+                </View>
+              ))
+
+            }
+            {assignedEmployees.length == 0 &&
               <View
-                style={{
-                  width: 30,
-                  height: 30,
-                  marginRight: 15,
-                  marginLeft: 7,
-                }}
-              >
-                {getIconById("iconlupa")}
+                style={[{
+                  backgroundColor: "#FAFAFA",
+                  marginBottom: 10, borderRadius: 10,
+                  paddingVertical: 15
+                }]}>
+
+                <View style={[{ paddingLeft: 15 }]}>
+                  <StyledText graySilver font16pt>No Employees Assigned</StyledText>
+                </View>
               </View>
-              <StyledText font16pt>Search employee</StyledText>
-            </TouchableOpacity>
-            <View style={styles.employees}>
-              <Text style={[styles.titleServices, { marginBottom: 5 }]}>
-                Employees
-              </Text>
-            </View>
-            <StyledText
-              font16pt
-              style={[styles.textGray, styles.titleServices]}
-            >
-              Service Location
-            </StyledText>
-            <View style={[styles.item, stylesGlobal.itemVertical]}>
-              <Text>{selectedAddress}</Text>
+            }
+
+          </View>
+
+
+          <View style={{ marginVertical: 15 }}>
+            <StyledText font17pt neutralGray bold>Service Location</StyledText>
+          </View>
+
+          <View
+            style={[{
+              backgroundColor: "#FAFAFA",
+              marginBottom: 10, borderRadius: 10,
+              paddingVertical: 15
+            }]}>
+
+            <View style={[{ paddingLeft: 15 }, styles.item]}>
+              <View style={{ flex: 2 }}>
+                <StyledText graySilver font16pt>{selectedAddress}</StyledText>
+              </View>
               <TouchableOpacity onPress={toggleModal}>
                 <Text style={styles.street__googleMaps}>SET GOOGLE MAP</Text>
               </TouchableOpacity>
             </View>
+          </View>
+
             <View style={styles.bussiness}>
-              <Text style={styles.bussiness__title}>Bussiness Details</Text>
+            <StyledText font17pt bold >Bussiness Details</StyledText>
+
+            <TouchableOpacity
+              style={[{ backgroundColor: "#FAFAFA", marginBottom: 10, borderRadius: 10 }]}
+            >
+              <View style={[styles.item, { paddingLeft: 15 }]}>
+                <View style={{ width: 30, height: 30, marginRight: 10 }}>
+                  {getIconById("iconlupa")}
+                </View>
+                <StyledText graySilver font16pt>Assing Customer</StyledText>
+              </View>
+            </TouchableOpacity>
+
+
+
               <Text font16pt style={[styles.textGray, styles.titleServices]}>
                 Bussiness Name
               </Text>
@@ -245,60 +284,32 @@ export function CreateService() {
                 </LinearGradient>
               </TouchableOpacity>
             </View>
-          </View>
+
 
           <Modal isVisible={isModalCalendar}>
             <View style={{ flex: 1, justifyContent: "center" }}>
               <CalendarRange />
 
-              <StyledGradientButton text={"Confirm"} action={() => console.log("confirm")} />
+              <StyledGradientButton text={"Confirm"} action={() => confirmDate()} />
 
             </View>
 
           </Modal>
 
+          <EmployeeSelectorModal
+            visible={modalEmployeeVisible}
+            onClose={handleCloseModal}
+            onConfirm={handleConfirmSelection}
+          />
 
-          <Modal style={{ padding: 0, margin: 0 }} isVisible={isModalVisible}>
-            <View style={{ flex: 1, backgroundColor: "#fff" }}>
-              {location && (
-                <MapView
-                  style={{ flexGrow: 1 }}
-                  initialRegion={{
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                    latitudeDelta: 0.005,
-                    longitudeDelta: 0.005,
-                  }}
-                  onPress={handleMapPress}
-                >
-                  <Marker
-                    draggable
-                    coordinate={location}
-                    onDragEnd={(direction) =>
-                      setOrigin(direction.nativeEvent.coordinate)
-                    }
-                  />
-                </MapView>
-              )}
-              {!location && (
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ActivityIndicator size="large" color="#CEDC39" />
-                </View>
-              )}
-              <TouchableOpacity
-                onPress={toggleModal}
-                style={{ position: "absolute", top: 40, right: 20 }}
-              >
-                <StyledText>Close</StyledText>
-              </TouchableOpacity>
-            </View>
-          </Modal>
+          <MapModal
+            isVisible={isModalVisible}
+            location={location}
+            origin={origin}
+            setOrigin={setOrigin}
+            handleMapPress={handleMapPress}
+            toggleModal={toggleModal}
+          />
         </View>
       </ScrollView>
     </>

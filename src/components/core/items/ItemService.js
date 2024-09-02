@@ -1,11 +1,10 @@
 import React from "react";
-import { Image, View, Text, TouchableOpacity } from "react-native";
-import { styles } from "../styles/ItemServive.style";
-import { assets } from "../../../assets";
+import { Text, TouchableOpacity, View } from "react-native";
 import { stylesGlobal } from "../../../modules/styles/global.style";
-import { RenderStatusService } from "./RenderStatusService";
 import StyledText from "../../../utils/globalstyle";
 import { getIconById } from "../../../utils/util";
+import { styles } from "../styles/ItemServive.style";
+import { RenderStatusService } from "./RenderStatusService";
 
 export function ItemService({ item }) {
   return (
@@ -37,7 +36,7 @@ export function ItemService({ item }) {
           </View>
 
           <TouchableOpacity style={styles.item__flechaContainer}>
-            {getIconById("iconFlecha")}
+            {getIconById("iconArrowWhite")}
           </TouchableOpacity>
         </View>
       </View>
@@ -69,7 +68,7 @@ export function ItemServiceManager({ item }) {
         <RenderStatusService status={item.status} />
 
         <TouchableOpacity style={styles.item__flechaContainer}>
-          {getIconById("iconFlecha")}
+          {getIconById("iconArrowWhite")}
         </TouchableOpacity>
       </View>
     </View>
@@ -98,7 +97,7 @@ export function ItemServiceSupervisor({ item }) {
         <RenderStatusService status={item.status} />
 
         <TouchableOpacity style={styles.item__flechaContainer}>
-          {getIconById("iconFlecha")}
+          {getIconById("iconArrowWhite")}
         </TouchableOpacity>
       </View>
     </View>
@@ -129,7 +128,7 @@ export function ItemServiceEmployee({ item }) {
         <RenderStatusService status={item.status} />
 
         <TouchableOpacity style={styles.item__flechaContainer}>
-          {getIconById("iconFlecha")}
+          {getIconById("iconArrowWhite")}
         </TouchableOpacity>
       </View>
     </View>

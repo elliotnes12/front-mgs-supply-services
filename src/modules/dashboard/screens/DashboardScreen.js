@@ -1,25 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRef } from "react";
 import {
-  View,
-  Text,
-  Pressable,
-  TouchableOpacity,
   Animated,
   Easing,
+  Pressable,
   ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useAuth } from "../../Auth/hooks";
-import { ServiceListScreenCt } from "./customer/ServiceListScreen";
-import { ServiceListScreenSupervisor } from "./supervisor/ServiceListScreenSupervisor";
-import { ServiceListScreenEmployee } from "./employee/ServiceListScreenEmployee";
-import { useNavigation } from "@react-navigation/native";
-import { styles } from "../styles/dashboard.styles";
-import { ServiceListScreenManager } from "./manager/ServicesListScreenManager";
-import { getIconById } from "../../../utils/util";
+import { ENV, screens } from "../../../utils";
 import StyledText from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
-import { ENV, screens } from "../../../utils";
+import { getIconById } from "../../../utils/util";
+import { useAuth } from "../../Auth/hooks";
+import { styles } from "../styles/dashboard.styles";
+import { ServiceListScreenCt } from "./customer/ServiceListScreen";
+import { ServiceListScreenEmployee } from "./employee/ServiceListScreenEmployee";
+import { ServiceListScreenManager } from "./manager/ServicesListScreenManager";
+import { ServiceListScreenSupervisor } from "./supervisor/ServiceListScreenSupervisor";
 
 export function DashboardScreen() {
   const { userInfo, isCustomer, accessToken } = useAuth();
@@ -65,11 +65,6 @@ export function DashboardScreen() {
     inputRange: [-1, 1],
     outputRange: ["-15deg", "15deg"],
   });
-
-  /**
-   *
-   *
-   */
 
   const DashboardHeader = () => {
     return (

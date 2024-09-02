@@ -29,7 +29,7 @@ export function EmailTokenVerificationScreen() {
           {getIconById("iconGoBack")}
         </TouchableOpacity>
         <View style={style.contenido}>
-          <View style={style.message}>{getIconById("messageVerfication")}</View>
+          <View style={style.message}>{getIconById("imgVerificationCode")}</View>
           <View style={style.contened__text}>
             <View style={style.text}>
               <StyledText titlleBig> Verify your email</StyledText>

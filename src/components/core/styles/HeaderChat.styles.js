@@ -7,7 +7,7 @@ const fontSize = PixelRatio.getFontScale() * 15;
 
 export const styles = StyleSheet.create({
   header: {
-    height: 120,
+    height: 140,
     display: "flex",
     width: "100%",
     alignItems: "flex-start",

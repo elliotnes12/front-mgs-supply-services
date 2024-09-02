@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFormik } from "formik";
 import { getIconById } from "../../../utils/util";
-import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/RegisterForm.form";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/RegisterScreen.styles";
@@ -14,6 +13,8 @@ import { ENV, screens } from "../../../utils";
 import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
 import { Response } from "../../../utils/Response";
+import { Auth } from "../../../api/auth";
+import { Picker } from '@react-native-picker/picker';
 
 const authController = new Auth();
 const objectResponse = new Response();
@@ -28,6 +29,8 @@ export function RegisterScreen() {
   const [confirmHide, setConfirmHide] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [typeBussiness, setTypeBussiness] = useState('NOTBUSSINESS')
+  const [etqName, setEtqName] = useState('Name');
 
   const handleRadioChange = (newValue) => {
     if (newValue != userType) {
@@ -168,22 +171,87 @@ export function RegisterScreen() {
         </View>
 
         {!showIdInput && (
-          <View style={styles.field}>
-            <StyledText regularWhite>Name</StyledText>
-            <View
-              style={[
-                styles.inputContainer,
-                formik.errors.name && styles.inputError,
-              ]}
-            >
-              <TextInput
-                autoCapitalize="none"
-                value={formik.values.name}
-                onChangeText={(text) => formik.setFieldValue("name", text)}
-                style={styles.input}
-              />
+          <>
+
+
+            <View style={styles.field}>
+              <StyledText regularWhite>Type Bussiness</StyledText>
+              <View
+                style={[
+                  styles.inputContainer,
+                  formik.errors.typeBussiness && styles.inputError,
+                ]}>
+
+                <Picker
+                  selectedValue={formik.values.typeBussiness}
+                  style={styles.picker}
+                  onValueChange={(itemValue) => {
+
+                    formik.setFieldValue("typeBussiness", itemValue);
+
+                    setTypeBussiness(itemValue)
+                    if (itemValue != "NOTBUSSINESS") {
+                      setEtqName('Contact Name')
+                    } else {
+                      setEtqName('Name')
+                    }
+                  }}
+                >
+                  <Picker.Item label="Select a option" value="" />
+                  <Picker.Item label="Not a Business" value="NOTBUSSINESS" />
+                  <Picker.Item label="Hotel" value="Hotel" />
+                  <Picker.Item label="Office" value="Office" />
+                </Picker>
+
+              </View>
             </View>
-          </View>
+
+            {typeBussiness != 'NOTBUSSINESS' &&
+
+              <>
+
+                <View style={styles.field}>
+                  <StyledText regularWhite>Bussiness Name</StyledText>
+                  <View
+                    style={[
+                      styles.inputContainer,
+                      formik.errors.name && styles.inputError,
+                    ]}
+                  >
+                    <TextInput
+                      autoCapitalize="none"
+                      value={formik.values.name}
+                      onChangeText={(text) => formik.setFieldValue("name", text)}
+                      style={styles.input}
+                    />
+                  </View>
+                </View>
+
+
+              </>
+            }
+            <View style={styles.field}>
+              <StyledText regularWhite>{etqName}</StyledText>
+              <View
+                style={[
+                  styles.inputContainer,
+                  formik.errors.name && styles.inputError,
+                ]}
+              >
+                <TextInput
+                  autoCapitalize="none"
+                  value={formik.values.name}
+                  onChangeText={(text) => formik.setFieldValue("name", text)}
+                  style={styles.input}
+                />
+              </View>
+            </View>
+
+
+
+
+          </>
+
         )}
 
         <View style={styles.field}>

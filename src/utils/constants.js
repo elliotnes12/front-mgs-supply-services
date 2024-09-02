@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 
-const IP = "192.168.100.71";
+const IP = "192.168.56.1";
 const SERVER = `server-mgs-supply-services-1.onrender.com`;
 
 export const ENV = {
@@ -35,8 +35,9 @@ export const ENV = {
     },
     ME: "user/me",
     USER: "users",
+    EMPLOYEE: "employees?page={page}&limit={limit}",
     USER_SUPPORT: "users-support",
-    EMPLOYEES: "employees-by-users",
+    EMPLOYEE_BY_USER: "employees-by-users",
     USER_EXCEPT_PARTICIPANTS_GROUP: "users_exept_participants_group",
     CHAT: "chat",
     CHAT_MESSAGE: "chat/message",

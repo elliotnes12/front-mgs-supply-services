@@ -16,14 +16,14 @@ export const theme = {
         opacity: "#413F3F",
         blanco: "#fff",
         green: "#7DA74D",
-        colorDarkgray: "#ababab",
         colorLightsteelblue: "#9db2ce",
         colorSecundario: "#7da74d",
-        colorGray_100: "#fafafa",
+        lightGray: "#FAFAFA",
         brightBlue: "#3984DC",
         brightRed: "#DC3939",
         goldenYellow: "#FCD036",
         gray3: "#828282",
+        graySilver: "#ABABAB",
         monochromaticToBeRemovedMidDark: "#818181",
         secondaryColor: "#080c2f",
         colorGray_200: "rgba(255, 255, 255, 0.01)",
@@ -32,9 +32,10 @@ export const theme = {
         colorWhitesmoke_100: "#f5f5f5",
         gray6: "#f2f2f2",
         colorGainsboro_100: "#dcdcdc",
-        gray2: "#4f4f4f",
+        darkGray: "#4f4f4f",
         colorSilver_100: "#c4c4c4",
         gray4: "#bdbdbd",
+        neutralGray: "#828282"
     },
     textStyles: {
         bold: "Poppins_700Bold",
@@ -48,8 +49,8 @@ export const theme = {
 
     },
     gradientsmall: {
-        color1: "#F4F4F4",
-        color2: "#F4F4F4",
+        color1: "#fff",
+        color2: "#fff",
         color1Focused: "#CEDC39",
         color2Focused: "#7DA74D",
 

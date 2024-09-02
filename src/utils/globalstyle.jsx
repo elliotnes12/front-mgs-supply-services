@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizes.big,
     color: "#000",
   },
+  regular: {
+    fontFamily: theme.textStyles.regular,
+  },
   regularWhite: {
     fontFamily: theme.textStyles.regular,
     color: "#fff",
@@ -53,12 +56,12 @@ const styles = StyleSheet.create({
   },
   gradientButtonSmall: {
     padding: 5,
-    borderRadius: 35,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
     width: 120,
     marginEnd: 10,
-    height: 35.5,
+    height: 45.5,
   },
   font8pt: {
     fontSize: 8,
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     color: "#7DA74D",
   },
   graySilver: {
-    color: "#ABABAB",
+    color: theme.colors.graySilver,
   },
   orangeText: {
     color: "#FFBD12",
@@ -108,6 +111,10 @@ const styles = StyleSheet.create({
   redText: {
     color: "#FF8585",
   },
+  neutralGray: {
+    color: theme.colors.neutralGray,
+  },
+
   textGreen2: {
     color: "#7EA74C",
   },
@@ -121,6 +128,7 @@ const styles = StyleSheet.create({
   },
   gradientButtonTextsmall: {
     fontFamily: theme.textStyles.regular,
+    fontSize: 15,
   },
 });
 
@@ -139,6 +147,7 @@ export default function StyledText({
   orangeText,
   redText,
   textGreen2,
+  regular,
   font8pt,
   font10pt,
   font12pt,
@@ -148,10 +157,12 @@ export default function StyledText({
   font20pt,
   brightBlue,
   brightRed,
+  neutralGray,
   gold,
   titlleBig,
   line20,
   white,
+  paraStyles,
 }) {
   const textStyles = [
     bold && styles.textBold,
@@ -161,6 +172,7 @@ export default function StyledText({
     boldGray && styles.boldGray,
     headerGray && styles.headerGray,
     regularGreen && styles.regularGreen,
+    regular && styles.regular,
     font8pt && styles.font8pt,
     font10pt && styles.font10pt,
     font12pt && styles.font12pt,
@@ -180,11 +192,13 @@ export default function StyledText({
     line20 && styles.line20,
     white && styles.white,
     lightGray && styles.lightGray,
+    neutralGray && styles.neutralGray,
   ];
-  return <Text style={textStyles}>{children}</Text>;
+
+  return <Text style={[textStyles, paraStyles]}>{children}</Text>;
 }
 
-export function StyledGradientButton({ text, action }) {
+export function StyledGradientButton({text, action}) {
   const buttonStyles = [];
   return (
     <Pressable onPress={action}>
@@ -197,17 +211,12 @@ export function StyledGradientButton({ text, action }) {
     </Pressable>
   );
 }
-export function StyledGradientButtonSmall({
-  text,
-  action = () => {},
-  focused,
-}) {
-  const buttonStyles = [];
+export function StyledGradientButtonSmall({text, action = () => {}, focused}) {
   const gradientColors = focused
     ? [theme.gradientsmall.color1Focused, theme.gradientsmall.color2Focused]
     : [theme.gradientsmall.color1, theme.gradientsmall.color2];
 
-  const textColor = focused ? "#fff" : "#ABABAB";
+  const textColor = focused ? "#fff" : theme.colors.darkGray;
 
   return (
     <Pressable onPress={action}>
@@ -215,7 +224,7 @@ export function StyledGradientButtonSmall({
         colors={gradientColors}
         style={styles.gradientButtonSmall}
       >
-        <Text style={[styles.gradientButtonTextsmall, { color: textColor }]}>
+        <Text style={[styles.gradientButtonTextsmall, {color: textColor}]}>
           {text}
         </Text>
       </LinearGradient>

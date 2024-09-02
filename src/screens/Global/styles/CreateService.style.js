@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Color, fontFamily } from "../../../utils/constantsStyle";
+import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
   header: {
@@ -12,31 +12,11 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
   },
-  header__content: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
   categories: {
     flexDirection: "row",
     flex: 1,
-    paddingVertical: 15,
-    marginTop: 15,
     justifyContent: "center",
     alignItems: "center",
-  },
-  textGray: {
-    color: "#828282",
-  },
-  titleServices: {
-    fontFamily: fontFamily.fontMedium,
-    fontSize: 17,
-    color: Color.gray1,
-  },
-  flatListContainer: {
-    flex: 1,
-    marginBottom: 20,
-    paddingHorizontal: 24,
   },
   item: {
     display: "flex",
@@ -45,44 +25,32 @@ export const styles = StyleSheet.create({
     height: 60,
     position: "relative",
   },
-  employees: {
-    width: "100%",
-    marginTop: 10,
-    marginBottom: 15,
-  },
-  street: {
-    flex: 1,
-    paddingRight: 20,
+  avatarAssingEmployee: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
+    backgroundColor: "red",
+    padding: 6,
+    borderRadius: 20,
   },
   street__googleMaps: {
-    fontFamily: "Poppins_400Regular",
-    color: "#7DA74D",
+    fontFamily: theme.textStyles.regular,
+    color: theme.colors.green,
+    paddingRight: 10,
     textDecorationLine: "underline",
-  },
-  street__label: {
-    fontFamily: "Poppins_400Regular",
   },
   bussiness: {
     marginTop: 10,
     marginBottom: 15,
   },
-  bussiness__title: {
-    fontFamily: "Poppins_700Bold",
-    fontSize: 19,
-    marginBottom: 10,
-  },
   bussiness__name: {
     color: "#BDBDBD",
-    fontFamily: "Poppins_400Regular",
+    fontFamily: theme.textStyles.regular,
     padding: 10,
+    marginBottom: 10,
     fontSize: 15,
     flexGrow: 1,
-    backgroundColor: "#F2F2F2",
-  },
-  bussiness__additional: {
-    fontFamily: "Poppins_400Regular",
-    padding: 10,
-    fontSize: 15,
+    backgroundColor: theme.colors.lightGray,
   },
   textArea: {
     height: 100,
@@ -114,41 +82,4 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "#fff",
   },
-  input: {
-    backgroundColor: "transparent",
-    height: 40,
-    fontSize: 14,
-    fontWeight: "500",
-    color: Color.gray3,
-    borderRadius: 50,
-    marginLeft: 5,
-    display: "flex",
-    paddingLeft: 20,
-    justifyContent: "center",
-    width: 200,
-  },
 });
-export const themeCalendar = {
-  backgroundColor: "black",
-  calendarBackground: "#ffffff",
-  textSectionTitleColor: "#CEDC39",
-  selectedDayBackgroundColor: "#7DA74D",
-  selectedDayTextColor: "#ffffff",
-  todayTextColor: "#CEDC39",
-  dayTextColor: "#7DA74D",
-  textDisabledColor: "#ABABAB",
-  dotColor: "#7DA74D",
-  selectedDotColor: "#ffffff",
-  arrowColor: "orange",
-  monthTextColor: "#7DA74D",
-  indicatorColor: "#7DA74D",
-  textDayFontFamily: "monospace",
-  textMonthFontFamily: "monospace",
-  textDayHeaderFontFamily: "monospace",
-  textDayFontWeight: "300",
-  textMonthFontWeight: "bold",
-  textDayHeaderFontWeight: "300",
-  textDayFontSize: 16,
-  textMonthFontSize: 16,
-  textDayHeaderFontSize: 16,
-};

@@ -5,13 +5,13 @@ import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { screens } from "../../../utils";
 import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
-import { Auth } from "../api/auth";
 import { initialValues, validationSchema } from "../forms/LoginForm.form";
 import { useAuth } from "../hooks";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/LoginScreen.styles";
 import { Alert } from "../../../components/core/Modal/Alert";
 import { Response } from "../../../utils/Response";
+import { Auth } from "../../../api/auth";
 
 const authController = new Auth();
 

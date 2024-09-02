@@ -78,7 +78,7 @@ export function PendingScreen() {
           </StyledText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.options__item}>
-          <View style={stylesGlobal.imageMd}>{getIconById("decline")}</View>
+          <View style={stylesGlobal.imageMd}>{getIconById("iconDecline")}</View>
           <StyledText font12pt regularGray redText>
             Cancel
           </StyledText>

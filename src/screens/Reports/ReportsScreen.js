@@ -74,21 +74,18 @@ export function ReportsScreen() {
             </StyledText>
             <View>
               <StyledText boldGray> Montly Services</StyledText>
-              <Image source={assets.image.png.Group} />
             </View>
             <StyledText font14pt regularGreen>
               Weekly
             </StyledText>
             <View>
               <StyledText boldGray> Weekly Services</StyledText>
-              <Image source={assets.image.png.Group} />
             </View>
             <StyledText font14pt regularGreen>
               Day
             </StyledText>
             <View>
               <StyledText boldGray> Day Services</StyledText>
-              <Image source={assets.image.png.Group} />
             </View>
           </View>
 

@@ -4,6 +4,7 @@ export function initialValues() {
   return {
     email: "",
     name: "",
+    typeBussiness: "",
     password: "",
     confirmPassword: "",
     userType: "customer", 
