@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFormik } from "formik";
-import { getIconById } from "../../../utils/util";
+import { getIconById, validatePassword } from "../../../utils/util";
 import { initialValues, validationSchema } from "../forms/RegisterForm.form";
 import LayoutAuth from "../layout/layout.auth";
 import { styles } from "../styles/RegisterScreen.styles";
@@ -54,6 +54,15 @@ export function RegisterScreen() {
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue, { resetForm }) => {
+
+      const isValidPassword = validatePassword(formik.values.password);
+      if (isValidPassword) {
+        setModalVisible(true)
+        setMessage(isValidPassword)
+        return false;
+      }
+
+
       setLoading(true);
       setMessage("");
       setModalVisible(true)
@@ -215,13 +224,13 @@ export function RegisterScreen() {
                   <View
                     style={[
                       styles.inputContainer,
-                      formik.errors.name && styles.inputError,
+                    formik.errors.bussinessName && styles.inputError,
                     ]}
                   >
                     <TextInput
                       autoCapitalize="none"
-                      value={formik.values.name}
-                      onChangeText={(text) => formik.setFieldValue("name", text)}
+                    value={formik.values.bussinessName}
+                    onChangeText={(text) => formik.setFieldValue("bussinessName", text)}
                       style={styles.input}
                     />
                   </View>

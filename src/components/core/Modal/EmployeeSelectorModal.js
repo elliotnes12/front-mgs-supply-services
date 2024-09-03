@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, FlatList, TextInput, TouchableOpacity, Button, KeyboardType, StyleSheet } from 'react-native';
 import { Employee } from '../../../api/employee';
 import { useAuth } from '../../../modules/Auth/hooks';
+import { StyledGradientButton } from '../../../utils/globalstyle';
 
 const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
     const [employees, setEmployees] = useState([]);
@@ -72,7 +73,7 @@ const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
                 <View style={styles.searchContainer}>
                     <TextInput
                         style={styles.searchInput}
-                        placeholder={`Buscar por ${searchType === 'id' ? 'ID de Empleado' : 'Nombre'}`}
+                        placeholder={`Search by ${searchType === 'id' ? 'employee ID' : 'name'}`}
                         value={searchQuery}
                         onChangeText={handleSearchChange}
                         keyboardType={keyboardType}
@@ -98,8 +99,8 @@ const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
                     onEndReachedThreshold={0.5}
                     ListFooterComponent={loading && <Text>Cargando...</Text>}
                 />
-                <Button title="Confirmar" onPress={handleConfirm} />
-                <Button title="Cerrar" onPress={onClose} />
+                <StyledGradientButton text={"Confirm"} action={handleConfirm} />
+
             </View>
         </Modal>
     );

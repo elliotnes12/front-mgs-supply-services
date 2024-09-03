@@ -4,6 +4,7 @@ export function initialValues() {
   return {
     email: "",
     name: "",
+    bussinessName: "",
     typeBussiness: "",
     password: "",
     confirmPassword: "",
@@ -20,13 +21,22 @@ export function validationSchema() {
       then: Yup.string().required("Name is required"),
       otherwise: Yup.string().notRequired() 
     }),
+    typeBussiness: Yup.string().when("userType", {
+      is: userType => userType === "customer",
+      then: Yup.string().required("Type of business is required for customer"),
+      otherwise: Yup.string().notRequired()
+    }),
+    bussinessName: Yup.string().when(
+      ["typeBussiness", "userType"],
+      {
+        is: (typeBussiness, userType) =>
+          userType === "customer" && typeBussiness !== "NOTBUSSINESS",
+        then: Yup.string().required("Business name is required"),
+        otherwise: Yup.string().notRequired()
+      }
+    ),
     password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters")
-      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-      .matches(/[0-9]/, "Password must contain at least one number")
-      .matches(/[@$!%*?&#]/, "Password must contain at least one special character"),
+      .required("Password is required"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
