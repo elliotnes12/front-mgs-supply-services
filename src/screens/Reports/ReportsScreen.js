@@ -7,6 +7,7 @@ import { assets } from "../../assets";
 import StyledText, { StyledGradientButtonSmall } from "../../utils/globalstyle";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { getIconById } from "../../utils/util";
+import { stylesGlobal } from "../../modules/styles/global.style";
 
 export function ReportsScreen() {
   const { logout } = useAuth();
@@ -100,11 +101,17 @@ export function ReportsScreen() {
                 <StyledText boldGray>Product 1</StyledText>
                 <StyledText regularGray>Lorem Ipsum simply</StyledText>
                 <View style={styles.Contenidoranking}>
-                  <Image
-                    style={styles.startranking}
-                    source={assets.image.png.iconRaiting}
-                  />
-                  <Text style={styles.ranking}>4.8 </Text>
+                  <View
+                    style={[stylesGlobal.imageMin, { width: 10, height: 10 }]}
+                  >
+                    {getIconById("iconRaiting")}
+                  </View>
+
+                  <View style={styles.ranking}>
+                    <StyledText font10pt regularGray>
+                      4.8{" "}
+                    </StyledText>
+                  </View>
                 </View>
                 <View style={styles.item__total}>
                   <StyledText regularGray>Total:</StyledText>

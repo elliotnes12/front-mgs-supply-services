@@ -29,9 +29,14 @@ export const styles = StyleSheet.create({
     width: 35,
     height: 35,
     marginRight: 10,
-    backgroundColor: "red",
+    backgroundColor: "#CEDC39",
     padding: 6,
     borderRadius: 20,
+  },
+  iconClose: {
+    width: 20,
+    height: 20,
+    left: 200,
   },
   street__googleMaps: {
     fontFamily: theme.textStyles.regular,

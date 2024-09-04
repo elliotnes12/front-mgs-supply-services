@@ -60,6 +60,7 @@ const png = {
   iconEdit: require("./icons/edit.png"),
   imgVerificationCode: require("./icons/icon-message-verification.png"),
   iconSentingFocus: require("./buttonmenu/settingfocus.png"),
+  iconClose: require("./icons/close.png"),
 };
 
 export { png };

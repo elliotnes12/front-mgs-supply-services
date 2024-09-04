@@ -1,13 +1,9 @@
-
 import { StyleSheet } from "react-native";
 import { theme } from "../../utils/theme";
 
-
 export const styles = StyleSheet.create({
-
-
   item: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 10,
     backgroundColor: "#F9F9F9",
     borderRadius: 10,
@@ -18,38 +14,42 @@ export const styles = StyleSheet.create({
     height: 100,
   },
   containerText: {
-    flexDirection: 'column',
-    alignSelf: 'center',
+    flexDirection: "column",
+    alignSelf: "center",
     marginLeft: 20,
   },
   containerStart: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   ContenidoMontly: {
-    flexDirection: 'row',
-    marginTop: 10
+    flexDirection: "row",
+    marginTop: 10,
   },
   Containertree: {
     marginTop: 0,
     flexGrow: 1,
-    backgroundColor: "#F9F9F9"
+    backgroundColor: "#F9F9F9",
   },
   Contenidoranking: {
     marginTop: 10,
-    flexDirection: 'row',
-    alignContent: 'center'
+    flexDirection: "row",
+    alignContent: "center",
+  },
+  ranking: {
+    height: "100%",
+    width: "100%",
   },
   startranking: {
     marginTop: 5,
     width: 10,
-    height: 10
+    height: 10,
   },
   item__total: {
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
+    justifyContent: "flex-end",
+    flexDirection: "row",
   },
   Num__Total: {
     color: "#7DA74D",
-    fontFamily: theme.textStyles.bold
-  }
+    fontFamily: theme.textStyles.bold,
+  },
 });

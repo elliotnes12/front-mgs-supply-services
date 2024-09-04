@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { theme } from "./theme";
 import { LinearGradient } from "expo-linear-gradient";
+import { getIconById } from "./util";
 
 const styles = StyleSheet.create({
   headerBig: {
@@ -59,9 +60,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: 120,
-    marginEnd: 10,
-    height: 45.5,
+    width: 100,
+    marginEnd: 18,
+    height: 43.5,
   },
   font8pt: {
     fontSize: 8,
@@ -198,7 +199,7 @@ export default function StyledText({
   return <Text style={[textStyles, paraStyles]}>{children}</Text>;
 }
 
-export function StyledGradientButton({text, action}) {
+export function StyledGradientButton({ text, action }) {
   const buttonStyles = [];
   return (
     <Pressable onPress={action}>
@@ -211,7 +212,11 @@ export function StyledGradientButton({text, action}) {
     </Pressable>
   );
 }
-export function StyledGradientButtonSmall({text, action = () => {}, focused}) {
+export function StyledGradientButtonSmall({
+  text,
+  action = () => {},
+  focused,
+}) {
   const gradientColors = focused
     ? [theme.gradientsmall.color1Focused, theme.gradientsmall.color2Focused]
     : [theme.gradientsmall.color1, theme.gradientsmall.color2];
@@ -224,7 +229,7 @@ export function StyledGradientButtonSmall({text, action = () => {}, focused}) {
         colors={gradientColors}
         style={styles.gradientButtonSmall}
       >
-        <Text style={[styles.gradientButtonTextsmall, {color: textColor}]}>
+        <Text style={[styles.gradientButtonTextsmall, { color: textColor }]}>
           {text}
         </Text>
       </LinearGradient>

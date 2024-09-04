@@ -9,7 +9,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Modal from "react-native-modal";
@@ -18,11 +18,12 @@ import EmployeeSelectorModal from "../../components/core/Modal/EmployeeSelectorM
 import { useLocation } from "../../contexts";
 import StyledText, {
   StyledGradientButton,
-  StyledGradientButtonSmall
+  StyledGradientButtonSmall,
 } from "../../utils/globalstyle";
 import { getIconById } from "../../utils/util";
 import { styles } from "./styles/CreateService.style";
 import { MapModal } from "../../components/core/Modal/MapModal";
+import { stylesGlobal } from "../../modules/styles/global.style";
 
 const data = [
   { id: "1", title: "Cleaning" },
@@ -36,10 +37,8 @@ const dataEmployees = [
 ];
 
 export function CreateService() {
-  const [bussinessName, setBussinessName] = useState(
-    ""
-  );
-
+  const [bussinessName, setBussinessName] = useState("");
+  const [bussinessAdditional, setBussinessAdditional] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [origin, setOrigin] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(
@@ -47,13 +46,28 @@ export function CreateService() {
   );
   const [mapClicked, setMapClicked] = useState(false);
   const { location } = useLocation();
-  const [isModalCalendar, setIsModalCalendar] = useState(false)
-  const [selectedButton, setSelectedButton] = useState('Cleaning');
-  const [assignedEmployees, setAssignedEmployees] = useState([])
+  const [isModalCalendar, setIsModalCalendar] = useState(false);
+  const [selectedButton, setSelectedButton] = useState("Cleaning");
+  const [assignedEmployees, setAssignedEmployees] = useState([]);
   const timeOptions = [
-    { id: "1", icon: "iconCalendar", label: "Choose a Date", callback: () => console.log("") },
-    { id: "2", icon: "icontime", label: "Choose a Time", callback: () => console.log("") },
-    { id: "3", icon: "iconlupa", label: "Assign Employee", callback: () => handleOpenModal() },
+    {
+      id: "1",
+      icon: "iconCalendar",
+      label: "Choose a Date",
+      callback: () => console.log(""),
+    },
+    {
+      id: "2",
+      icon: "icontime",
+      label: "Choose a Time",
+      callback: () => console.log(""),
+    },
+    {
+      id: "3",
+      icon: "iconlupa",
+      label: "Assign Employee",
+      callback: () => handleOpenModal(),
+    },
   ];
 
   const [modalEmployeeVisible, setModalEmployeeVisible] = useState(false);
@@ -67,9 +81,8 @@ export function CreateService() {
   };
 
   const handleConfirmSelection = (selected) => {
-    setAssignedEmployees(selected)
+    setAssignedEmployees(selected);
   };
-
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -77,8 +90,6 @@ export function CreateService() {
       setMapClicked(false);
     }
   };
-
-
 
   const handleMapPress = async (e) => {
     if (!mapClicked) {
@@ -105,16 +116,19 @@ export function CreateService() {
     }
   };
 
-
   const confirmDate = () => {
     toggleModalCalendar();
-  }
+  };
   const toggleModalCalendar = () => {
-    setIsModalCalendar(prevStatus => !prevStatus)
-  }
+    setIsModalCalendar((prevStatus) => !prevStatus);
+  };
 
   const handleButtonPress = (buttonName) => {
     setSelectedButton(buttonName);
+  };
+
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
   };
 
   return (
@@ -126,12 +140,11 @@ export function CreateService() {
           goBack={true}
         />
 
-
-
         <View style={{ paddingTop: 20, paddingHorizontal: 24 }}>
-
           <View style={{ marginVertical: 15 }}>
-            <StyledText font17pt neutralGray bold>Select a service</StyledText>
+            <StyledText font17pt neutralGray bold>
+              Select a service
+            </StyledText>
           </View>
 
           <View style={styles.categories}>
@@ -151,90 +164,112 @@ export function CreateService() {
               action={() => handleButtonPress("Polishing")}
               focused={selectedButton === "Polishing"}
               text={"Polishing"}
-          />
-
-
-        </View>
-
-          <View style={{ marginVertical: 15 }}>
-            <StyledText font17pt neutralGray bold>Set date & time</StyledText>
+            />
           </View>
 
+          <View style={{ marginVertical: 15 }}>
+            <StyledText font17pt neutralGray bold>
+              Set date & time
+            </StyledText>
+          </View>
 
           {timeOptions.map((item) => (
             <TouchableOpacity
               onPress={item.callback}
               key={item.id}
-              style={[{ backgroundColor: "#FAFAFA", marginBottom: 10, borderRadius: 10 }]}
+              style={[
+                {
+                  backgroundColor: "#FAFAFA",
+                  marginBottom: 10,
+                  borderRadius: 10,
+                },
+              ]}
             >
               <View style={[styles.item, { paddingLeft: 15 }]}>
                 <View style={{ width: 30, height: 30, marginRight: 10 }}>
                   {getIconById(item.icon)}
-              </View>
-                <StyledText graySilver font16pt>{item.label}</StyledText>
+                </View>
+                <StyledText graySilver font14pt regular>
+                  {item.label}
+                </StyledText>
               </View>
             </TouchableOpacity>
           ))}
 
-
-
           <View style={{ marginVertical: 15 }}>
-            <StyledText font17pt neutralGray bold>Employees</StyledText>
+            <StyledText font17pt neutralGray bold>
+              Employees
+            </StyledText>
           </View>
 
           <View>
-
             {assignedEmployees.length > 0 &&
-
               assignedEmployees.map((item) => (
                 <View
                   key={item.id}
-                  style={[{
-                    backgroundColor: "#FAFAFA",
-                    marginBottom: 10, borderRadius: 10
-                  }]}>
-
+                  style={[
+                    {
+                      backgroundColor: "#FAFAFA",
+                      marginBottom: 10,
+                      borderRadius: 10,
+                    },
+                  ]}
+                >
                   <View style={[styles.item, { paddingLeft: 15 }]}>
                     <View style={styles.avatarAssingEmployee}>
                       {getIconById("iconAvatar")}
                     </View>
-                    <StyledText graySilver font16pt>{item.name}</StyledText>
+
+                    <StyledText graySilver font16pt>
+                      {item.name}
+                    </StyledText>
+                    <TouchableOpacity style={styles.iconClose}>
+                      {getIconById("iconClose")}
+                    </TouchableOpacity>
                   </View>
                 </View>
-              ))
-
-            }
-            {assignedEmployees.length == 0 &&
+              ))}
+            {assignedEmployees.length == 0 && (
               <View
-                style={[{
-                  backgroundColor: "#FAFAFA",
-                  marginBottom: 10, borderRadius: 10,
-                  paddingVertical: 15
-                }]}>
-
+                style={[
+                  {
+                    backgroundColor: "#FAFAFA",
+                    marginBottom: 10,
+                    borderRadius: 10,
+                    paddingVertical: 15,
+                  },
+                ]}
+              >
                 <View style={[{ paddingLeft: 15 }]}>
-                  <StyledText graySilver font16pt>No Employees Assigned</StyledText>
+                  <StyledText graySilver font14pt regular>
+                    No Employees Assigned
+                  </StyledText>
                 </View>
               </View>
-            }
-
+            )}
           </View>
 
-
           <View style={{ marginVertical: 15 }}>
-            <StyledText font17pt neutralGray bold>Service Location</StyledText>
+            <StyledText font17pt neutralGray bold>
+              Service Location
+            </StyledText>
           </View>
 
           <View
-            style={[{
-              backgroundColor: "#FAFAFA",
-              marginBottom: 10, borderRadius: 10,
-              paddingVertical: 15
-            }]}>
-
-            <View style={[{ paddingLeft: 15 }, styles.item]}>
+            style={[
+              {
+                backgroundColor: "#FAFAFA",
+                marginBottom: 10,
+                borderRadius: 10,
+                paddingVertical: 15,
+              },
+            ]}
+          >
+            <View style={[{ paddingLeft: 15, minHeight: 70 }, styles.item]}>
               <View style={{ flex: 2 }}>
-                <StyledText graySilver font16pt>{selectedAddress}</StyledText>
+                <StyledText graySilver font16pt>
+                  {selectedAddress}
+                </StyledText>
               </View>
               <TouchableOpacity onPress={toggleModal}>
                 <Text style={styles.street__googleMaps}>SET GOOGLE MAP</Text>
@@ -242,58 +277,66 @@ export function CreateService() {
             </View>
           </View>
 
-            <View style={styles.bussiness}>
-            <StyledText font17pt bold >Bussiness Details</StyledText>
+          <View style={styles.bussiness}>
+            <StyledText font17pt bold>
+              Bussiness Details
+            </StyledText>
 
             <TouchableOpacity
-              style={[{ backgroundColor: "#FAFAFA", marginBottom: 10, borderRadius: 10 }]}
+              style={[
+                {
+                  backgroundColor: "#FAFAFA",
+                  marginBottom: 10,
+                  borderRadius: 10,
+                },
+              ]}
             >
               <View style={[styles.item, { paddingLeft: 15 }]}>
                 <View style={{ width: 30, height: 30, marginRight: 10 }}>
                   {getIconById("iconlupa")}
                 </View>
-                <StyledText graySilver font16pt>Assing Customer</StyledText>
+                <StyledText graySilver font14pt regular>
+                  Assing Customer
+                </StyledText>
               </View>
             </TouchableOpacity>
 
+            <Text font16pt style={[styles.textGray, styles.titleServices]}>
+              Bussiness Name
+            </Text>
+            <Text style={styles.bussiness__name}>{bussinessName}</Text>
 
-
-              <Text font16pt style={[styles.textGray, styles.titleServices]}>
-                Bussiness Name
-              </Text>
-              <Text style={styles.bussiness__name}>{bussinessName}</Text>
-
-              <Text style={[styles.textGray, styles.titleServices]}>
-                Additional Message
-              </Text>
-              <TextInput
-                style={styles.textArea}
-                multiline={true}
-                numberOfLines={4}
-                onChangeText={(text) => setBussinessAdditional(text)}
-                placeholder="Enter your text here"
-              />
-            </View>
-            <View style={styles.submit}>
-              <TouchableOpacity>
-                <LinearGradient
-                  colors={["#CEDC39", "#7DA74D"]}
-                  style={styles.button}
-                >
-                  <Text style={styles.button__text}>Appoinment a Service</Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-
+            <Text style={[styles.textGray, styles.titleServices]}>
+              Additional Message
+            </Text>
+            <TextInput
+              style={styles.textArea}
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={(text) => setBussinessAdditional(text)}
+              placeholder="Enter your text here"
+            />
+          </View>
+          <View style={styles.submit}>
+            <TouchableOpacity>
+              <LinearGradient
+                colors={["#CEDC39", "#7DA74D"]}
+                style={styles.button}
+              >
+                <Text style={styles.button__text}>Appoinment a Service</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
 
           <Modal isVisible={isModalCalendar}>
             <View style={{ flex: 1, justifyContent: "center" }}>
               <CalendarRange />
 
-              <StyledGradientButton text={"Confirm"} action={() => confirmDate()} />
-
+              <StyledGradientButton
+                text={"Confirm"}
+                action={() => confirmDate()}
+              />
             </View>
-
           </Modal>
 
           <EmployeeSelectorModal
@@ -309,6 +352,7 @@ export function CreateService() {
             setOrigin={setOrigin}
             handleMapPress={handleMapPress}
             toggleModal={toggleModal}
+            onSelectAddress={handleAddressSelect}
           />
         </View>
       </ScrollView>
