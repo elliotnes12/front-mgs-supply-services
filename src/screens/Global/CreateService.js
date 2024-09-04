@@ -1,29 +1,24 @@
 import { LinearGradient } from "expo-linear-gradient";
-import * as Location from "expo-location";
 import React, { useState } from "react";
 import { default as CalendarRange } from "../../components/DatePicker";
 
 import {
-  ActivityIndicator,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
 import Modal from "react-native-modal";
 import { Header } from "../../components/core/Header";
 import EmployeeSelectorModal from "../../components/core/Modal/EmployeeSelectorModal";
-import { useLocation } from "../../contexts";
+import { MapModal } from "../../components/core/Modal/MapModal";
 import StyledText, {
   StyledGradientButton,
   StyledGradientButtonSmall,
 } from "../../utils/globalstyle";
 import { getIconById } from "../../utils/util";
 import { styles } from "./styles/CreateService.style";
-import { MapModal } from "../../components/core/Modal/MapModal";
-import { stylesGlobal } from "../../modules/styles/global.style";
 
 const data = [
   { id: "1", title: "Cleaning" },
@@ -45,7 +40,6 @@ export function CreateService() {
     "Aquí va la dirección"
   );
   const [mapClicked, setMapClicked] = useState(false);
-  const { location } = useLocation();
   const [isModalCalendar, setIsModalCalendar] = useState(false);
   const [selectedButton, setSelectedButton] = useState("Cleaning");
   const [assignedEmployees, setAssignedEmployees] = useState([]);
@@ -91,30 +85,6 @@ export function CreateService() {
     }
   };
 
-  const handleMapPress = async (e) => {
-    if (!mapClicked) {
-      setMapClicked(true);
-
-      const { latitude, longitude } = e.nativeEvent.coordinate;
-
-      try {
-        const geocode = await Location.reverseGeocodeAsync({
-          latitude,
-          longitude,
-        });
-
-        if (geocode.length > 0) {
-          const { street, city, region, postalCode } = geocode[0];
-          const address = `${street}, ${city}, ${region} ${postalCode}`;
-
-          setSelectedAddress(address);
-          toggleModal();
-        }
-      } catch (error) {
-        console.error("Error al obtener la dirección:", error);
-      }
-    }
-  };
 
   const confirmDate = () => {
     toggleModalCalendar();
@@ -127,9 +97,6 @@ export function CreateService() {
     setSelectedButton(buttonName);
   };
 
-  const handleAddressSelect = (address) => {
-    setSelectedAddress(address);
-  };
 
   return (
     <>
@@ -347,12 +314,7 @@ export function CreateService() {
 
           <MapModal
             isVisible={isModalVisible}
-            location={location}
-            origin={origin}
-            setOrigin={setOrigin}
-            handleMapPress={handleMapPress}
             toggleModal={toggleModal}
-            onSelectAddress={handleAddressSelect}
           />
         </View>
       </ScrollView>

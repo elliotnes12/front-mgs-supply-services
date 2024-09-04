@@ -12,60 +12,63 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import StyledText from "../../../utils/globalstyle";
 import { getIconById } from "../../../utils/util";
+import { useLocation } from "../../../modules/Auth/hooks";
+import { styles } from "./MapModal.styles";
 
 export function MapModal({
   isVisible,
-  location,
-  origin,
-  setOrigin,
-  handleMapPress,
   toggleModal,
-  onSelectAddress,
 }) {
   const [address, setAddress] = useState("");
   const refInput = useRef();
   const animation = useRef(new Animated.Value(0)).current;
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
+  const { origin, loading } = useLocation();
+  const [coords, setCoords] = useState(undefined)
+
 
   const getAddressFromCoordinates = async (coords) => {
+    console.log("Cuales son las cordenadas")
+    console.log(coords)
     try {
       const geocode = await Location.reverseGeocodeAsync(coords);
+      console.log(geocode)
       if (geocode.length > 0) {
         const { street, city, region, postalCode } = geocode[0];
         return `${street}, ${city}, ${region} ${postalCode}`;
       }
+
     } catch (error) {
       console.error("Error al obtener la dirección:", error);
-      return "Dirección no disponible";
     }
   };
 
-  const handleMarkerDragEnd = async (e) => {
-    const newCoords = e.nativeEvent.coordinate;
-    setOrigin(newCoords);
-    const newAddress = await getAddressFromCoordinates(newCoords);
-    setAddress(newAddress);
+  const handleMarkerDragEnd = (e) => {
+
+    (async () => {
+
+      const newCoords = e.nativeEvent.coordinate;
+      setCoords(newCoords);
+      const newAddress = await getAddressFromCoordinates(newCoords);
+      setAddress(newAddress);
+    })()
   };
 
   useEffect(() => {
-    if (origin) {
-      getAddressFromCoordinates(origin).then((addr) => setAddress(addr));
-    }
+
+    (async () => {
+
+      if (origin) {
+        setCoords(origin)
+        const newAddress = await getAddressFromCoordinates(origin);
+        setAddress(newAddress);
+      }
+
+      console.log(origin)
+    })()
+
   }, [origin]);
-
-  const handleSelectAddress = () => {
-    if (onSelectAddress) {
-      onSelectAddress(address);
-    }
-    resetAddress();
-    toggleModal();
-  };
-
-  const resetAddress = () => {
-    setAddress("");
-    setOrigin(null);
-  };
 
   const handleAnimated = () => {
     Animated.timing(animation, {
@@ -97,60 +100,55 @@ export function MapModal({
     }),
   };
 
+
+  const handleAddressSelect = (address) => {
+  };
+
+  const handleMapPress = async (e) => {
+    if (!mapClicked) {
+      setMapClicked(true);
+
+      const { latitude, longitude } = e.nativeEvent.coordinate;
+
+      try {
+        const geocode = await Location.reverseGeocodeAsync({
+          latitude,
+          longitude,
+        });
+
+        if (geocode.length > 0) {
+          const { street, city, region, postalCode } = geocode[0];
+          const address = `${street}, ${city}, ${region} ${postalCode}`;
+
+          setSelectedAddress(address);
+          toggleModal();
+        }
+      } catch (error) {
+        console.error("Error al obtener la dirección:", error);
+      }
+    }
+  };
+
+
   return (
-    <Modal style={{ padding: 0, margin: 0 }} isVisible={isVisible}>
-      <View style={{ flex: 1, backgroundColor: "#fff" }}>
-        {location ? (
+    <Modal style={styles.modalContainer} isVisible={isVisible}>
+      <View style={styles.container}>
+        {coords ? (
           <>
-            <View
-              style={{
-                position: "absolute",
-                top: 20,
-                left: 10,
-                right: 10,
-                zIndex: 1,
-              }}
-            >
-              <View
-                style={{
-                  height: 50,
-                  borderRadius: 60,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
+            <View style={{ flex: 7 }}>
+
+              <View style={styles.searchContainer}>
+                <View style={styles.searchBar}>
                 <TouchableOpacity
                   onPress={() => setToggle(!toggle)}
-                  style={{
-                    width: 46,
-                    height: 46,
-                    borderRadius: 50,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "#CEDC39",
-                    borderWidth: 1.5,
-                    borderColor: "#fff",
-                    zIndex: 10,
-                  }}
+                    style={styles.searchButton}
                 >
-                  <View style={{ width: 30, height: 30 }}>
+                    <View style={styles.searchIcon}>
                     {getIconById("iconoLupaWhite")}
                   </View>
                 </TouchableOpacity>
 
-                <Animated.View
-                  style={[
-                    {
-                      height: 50,
-                      backgroundColor: "#CEDC39",
-                      borderRadius: 60,
-                      marginLeft: -50,
-                      justifyContent: "center",
-                      paddingLeft: 60,
-                    },
-                    animatedStyles,
-                  ]}
-                >
+                  <Animated.View style={[styles.animatedSearch, animatedStyles]}>
                   <TextInput
                     ref={refInput}
                     value={text}
@@ -158,93 +156,58 @@ export function MapModal({
                     selectionColor={"#fff"}
                     placeholder="Comienza a buscar..."
                     placeholderTextColor={"rgba(255,255,255,0.5)"}
-                    style={{
-                      fontSize: 18,
-                      fontWeight: "bold",
-                      color: "#fff",
-                      height: "100%",
-                    }}
+                      style={styles.searchInput}
                   />
                 </Animated.View>
               </View>
             </View>
 
             <MapView
-              style={{ flexGrow: 1 }}
+                style={styles.mapView}
               initialRegion={{
-                latitude: location.latitude,
-                longitude: location.longitude,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.005,
+                latitude: coords?.latitude,
+                longitude: coords?.longitude,
+                latitudeDelta: coords?.latitudeDelta,
+                longitudeDelta: coords?.longitudeDelta,
               }}
               onPress={handleMapPress}
             >
               <Marker
                 draggable
-                coordinate={location}
+                  coordinate={coords}
                 onDragEnd={handleMarkerDragEnd}
               />
             </MapView>
+            </View>
+            <View style={{ flex: 1, flexDirection: "row" }}>
 
-            <View
-              style={{
-                position: "absolute",
-                bottom: 30,
-                left: 10,
-                right: 150,
-                backgroundColor: "#F5F5F5",
-                padding: 12,
-                borderRadius: 5,
-                zIndex: 1,
-              }}
-            >
+              <View style={styles.addressContainer}>
               <StyledText graySilver font12pt>
                 {address || "Drag the marker to get the address"}
               </StyledText>
             </View>
 
             <TouchableOpacity
-              onPress={handleSelectAddress}
-              style={{
-                position: "absolute",
-                bottom: 30,
-                left: 260,
-                right: 15,
-                backgroundColor: "#CEDC39",
-                paddingVertical: 20,
-                borderRadius: 10,
-                alignItems: "center",
-              }}
+                onPress={handleAddressSelect}
+                style={styles.selectAddressButton}
             >
-              <StyledText font12pt regularWhite>
-                Select Address
-              </StyledText>
+                <View>
+                  {getIconById("iconClose")}
+                </View>
             </TouchableOpacity>
+            </View>
+
           </>
         ) : (
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+            <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#CEDC39" />
           </View>
         )}
-        <TouchableOpacity
-          onPress={toggleModal}
-          style={{
-            position: "absolute",
-            top: 40,
-            right: 20,
-            width: 20,
-            height: 20,
-          }}
-        >
+        <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
           {getIconById("iconClose")}
         </TouchableOpacity>
       </View>
     </Modal>
   );
 }
+

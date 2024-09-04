@@ -1,44 +1,50 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 
-
-const LocationContext = createContext();
+export const LocationContext = createContext();
 
 export function LocationProvider({ children }) {
-    const [location, setLocation] = useState(null);
+    const [origin, setOrigin] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
             try {
-                let { status } = await Location.requestForegroundPermissionsAsync();
+                setLoading(true)
+                let { status } = await Location.requestForegroundPermissionsAsync({
+                    accuracy: Location.Accuracy.High,
+
+                    enableHighAccuracy: true
+                });
                 if (status !== 'granted') {
                     console.error("Permission to access location was denied");
+                    setLoading(false);
                     return;
                 }
 
-                let currentLocation = await Location.getCurrentPositionAsync({});
-                setLocation({
+                let currentLocation = await Location.getCurrentPositionAsync({
+                    enableHighAccuracy: true,
+                    accuracy: Location.Accuracy.High,
+                });
+                console.log("What is current location")
+                console.log(currentLocation)
+                setOrigin({
                     latitude: currentLocation.coords.latitude,
                     longitude: currentLocation.coords.longitude,
-                    latitudeDelta: 0.05, // Ajusta para definir el zoom de la región inicial
-                    longitudeDelta: 0.05,
+                    latitudeDelta: 0.005,
+                    longitudeDelta: 0.005,
                 });
-
                 setLoading(false);
             } catch (error) {
                 console.error(error);
+                setLoading(false); 
             }
         })();
     }, []);
 
     return (
-        <LocationContext.Provider value={{ location, loading }}>
+        <LocationContext.Provider value={{ origin, loading }}>
             {children}
         </LocationContext.Provider>
     );
-}
-
-export function useLocation() {
-    return useContext(LocationContext);
 }
