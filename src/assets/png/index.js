@@ -61,6 +61,7 @@ const png = {
   imgVerificationCode: require("./icons/icon-message-verification.png"),
   iconSentingFocus: require("./buttonmenu/settingfocus.png"),
   iconClose: require("./icons/close.png"),
+  iconArrowRight: require("./icons/arrowRight.png"),
 };
 
 export { png };

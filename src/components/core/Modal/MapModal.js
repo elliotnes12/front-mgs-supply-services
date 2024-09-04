@@ -192,7 +192,7 @@ export function MapModal({
                 style={styles.selectAddressButton}
             >
                 <View>
-                  {getIconById("iconClose")}
+                  {getIconById("iconArrowRight")}
                 </View>
             </TouchableOpacity>
             </View>

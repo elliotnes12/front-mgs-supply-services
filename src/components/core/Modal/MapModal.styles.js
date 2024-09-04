@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "#fff",
         paddingVertical: 20,
         paddingHorizontal: 10,
-        flex: 4,
+        flex: 5,
         borderRadius: 5,
     },
     selectAddressButton: {
