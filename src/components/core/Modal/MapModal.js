@@ -15,59 +15,50 @@ import { getIconById } from "../../../utils/util";
 import { useLocation } from "../../../modules/Auth/hooks";
 import { styles } from "./MapModal.styles";
 
-export function MapModal({
-  isVisible,
-  toggleModal,
-}) {
+export function MapModal({ isVisible, toggleModal }) {
   const [address, setAddress] = useState("");
   const refInput = useRef();
+  const mapRef = useRef(null);
   const animation = useRef(new Animated.Value(0)).current;
   const [toggle, setToggle] = useState(false);
   const [text, setText] = useState("");
   const { origin, loading } = useLocation();
-  const [coords, setCoords] = useState(undefined)
-
+  const [coords, setCoords] = useState(undefined);
 
   const getAddressFromCoordinates = async (coords) => {
-    console.log("Cuales son las cordenadas")
-    console.log(coords)
+    console.log("Cuales son las cordenadas");
+    console.log(coords);
     try {
       const geocode = await Location.reverseGeocodeAsync(coords);
-      console.log(geocode)
+      console.log(geocode);
       if (geocode.length > 0) {
         const { street, city, region, postalCode } = geocode[0];
         return `${street}, ${city}, ${region} ${postalCode}`;
       }
-
     } catch (error) {
       console.error("Error al obtener la dirección:", error);
     }
   };
 
   const handleMarkerDragEnd = (e) => {
-
     (async () => {
-
       const newCoords = e.nativeEvent.coordinate;
       setCoords(newCoords);
       const newAddress = await getAddressFromCoordinates(newCoords);
       setAddress(newAddress);
-    })()
+    })();
   };
 
   useEffect(() => {
-
     (async () => {
-
       if (origin) {
-        setCoords(origin)
+        setCoords(origin);
         const newAddress = await getAddressFromCoordinates(origin);
         setAddress(newAddress);
       }
 
-      console.log(origin)
-    })()
-
+      console.log(origin);
+    })();
   }, [origin]);
 
   const handleAnimated = () => {
@@ -100,9 +91,31 @@ export function MapModal({
     }),
   };
 
+  const handleSearch = async () => {
+    if (text.trim().length > 0) {
+      try {
+        const geocode = await Location.geocodeAsync(text);
+        if (geocode.length > 0) {
+          const { latitude, longitude } = geocode[0];
+          const newCoords = {
+            latitude,
+            longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          };
+          setCoords(newCoords);
+          const newAddress = await getAddressFromCoordinates(newCoords);
+          setAddress(newAddress);
 
-  const handleAddressSelect = (address) => {
+          mapRef.current.animateToRegion(newCoords, 1000);
+        }
+      } catch (error) {
+        console.error("Error al buscar la ubicación:", error);
+      }
+    }
   };
+
+  const handleAddressSelect = (address) => {};
 
   const handleMapPress = async (e) => {
     if (!mapClicked) {
@@ -129,77 +142,76 @@ export function MapModal({
     }
   };
 
-
   return (
     <Modal style={styles.modalContainer} isVisible={isVisible}>
       <View style={styles.container}>
         {coords ? (
           <>
             <View style={{ flex: 7 }}>
-
               <View style={styles.searchContainer}>
                 <View style={styles.searchBar}>
-                <TouchableOpacity
-                  onPress={() => setToggle(!toggle)}
+                  <TouchableOpacity
+                    onPress={() => setToggle(!toggle)}
                     style={styles.searchButton}
-                >
+                  >
                     <View style={styles.searchIcon}>
-                    {getIconById("iconoLupaWhite")}
-                  </View>
-                </TouchableOpacity>
+                      {getIconById("iconoLupaWhite")}
+                    </View>
+                  </TouchableOpacity>
 
-                  <Animated.View style={[styles.animatedSearch, animatedStyles]}>
-                  <TextInput
-                    ref={refInput}
-                    value={text}
-                    onChangeText={setText}
-                    selectionColor={"#fff"}
-                    placeholder="Comienza a buscar..."
-                    placeholderTextColor={"rgba(255,255,255,0.5)"}
+                  <Animated.View
+                    style={[styles.animatedSearch, animatedStyles]}
+                  >
+                    <TextInput
+                      ref={refInput}
+                      value={text}
+                      onChangeText={setText}
+                      onSubmitEditing={handleSearch}
+                      selectionColor={"#fff"}
+                      placeholder="Comienza a buscar..."
+                      placeholderTextColor={"rgba(255,255,255,0.5)"}
                       style={styles.searchInput}
-                  />
-                </Animated.View>
+                    />
+                  </Animated.View>
+                </View>
               </View>
-            </View>
 
-            <MapView
+              <MapView
+                ref={mapRef}
                 style={styles.mapView}
-              initialRegion={{
-                latitude: coords?.latitude,
-                longitude: coords?.longitude,
-                latitudeDelta: coords?.latitudeDelta,
-                longitudeDelta: coords?.longitudeDelta,
-              }}
-              onPress={handleMapPress}
-            >
-              <Marker
-                draggable
+                initialRegion={{
+                  latitude: coords?.latitude,
+                  longitude: coords?.longitude,
+                  latitudeDelta: coords?.latitudeDelta,
+                  longitudeDelta: coords?.longitudeDelta,
+                }}
+                onPress={handleMapPress}
+              >
+                <Marker
+                  draggable
                   coordinate={coords}
-                onDragEnd={handleMarkerDragEnd}
-              />
-            </MapView>
+                  onDragEnd={handleMarkerDragEnd}
+                />
+              </MapView>
             </View>
+
             <View style={{ flex: 1, flexDirection: "row" }}>
-
               <View style={styles.addressContainer}>
-              <StyledText graySilver font12pt>
-                {address || "Drag the marker to get the address"}
-              </StyledText>
-            </View>
+                <StyledText graySilver font12pt>
+                  {address || "Drag the marker to get the address"}
+                </StyledText>
+              </View>
 
-            <TouchableOpacity
+              <TouchableOpacity
                 onPress={handleAddressSelect}
                 style={styles.selectAddressButton}
-            >
-                <View>
-                  {getIconById("iconClose")}
-                </View>
-            </TouchableOpacity>
+              >
+                <View>{getIconById("iconArrowRight")}</View>
+              </TouchableOpacity>
             </View>
-
           </>
         ) : (
-            <View style={styles.loadingContainer}>
+          <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#CEDC39" />
           </View>
         )}
@@ -210,4 +222,3 @@ export function MapModal({
     </Modal>
   );
 }
-

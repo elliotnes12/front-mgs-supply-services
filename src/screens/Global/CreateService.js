@@ -7,7 +7,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import Modal from "react-native-modal";
 import { Header } from "../../components/core/Header";
@@ -85,7 +85,6 @@ export function CreateService() {
     }
   };
 
-
   const confirmDate = () => {
     toggleModalCalendar();
   };
@@ -96,7 +95,6 @@ export function CreateService() {
   const handleButtonPress = (buttonName) => {
     setSelectedButton(buttonName);
   };
-
 
   return (
     <>
@@ -312,10 +310,7 @@ export function CreateService() {
             onConfirm={handleConfirmSelection}
           />
 
-          <MapModal
-            isVisible={isModalVisible}
-            toggleModal={toggleModal}
-          />
+          <MapModal isVisible={isModalVisible} toggleModal={toggleModal} />
         </View>
       </ScrollView>
     </>

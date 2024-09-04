@@ -26,18 +26,20 @@ export function LocationProvider({ children }) {
                     enableHighAccuracy: true,
                     accuracy: Location.Accuracy.High,
                 });
-                console.log("What is current location")
-                console.log(currentLocation)
                 setOrigin({
                     latitude: currentLocation.coords.latitude,
                     longitude: currentLocation.coords.longitude,
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005,
                 });
-                setLoading(false);
             } catch (error) {
-                console.error(error);
-                setLoading(false); 
+                setOrigin({
+                    latitude: 30.2672,
+                    longitude: -97.7431,
+                    latitudeDelta: 0.005,
+                    longitudeDelta: 0.005,
+                });
+
             }
         })();
     }, []);
