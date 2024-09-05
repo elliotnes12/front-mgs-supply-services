@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Color } from "../../../utils/constantsStyle";
+import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
   background: {
@@ -22,7 +23,8 @@ export const styles = StyleSheet.create({
   imgProfile: {
     width: 80,
     height: 80,
-    backgroundColor: "#CCC",
+    backgroundColor: theme.gradient.color1,
+    padding: 8,
     borderRadius: 55,
     overflow: "hidden",
     shadowColor: 'black',

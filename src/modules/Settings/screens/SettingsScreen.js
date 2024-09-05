@@ -9,6 +9,8 @@ import { styles } from "../styles/settings.styles";
 import { LinearGradient } from 'expo-linear-gradient';
 import { assets } from "../../../assets";
 import { Color } from "../../../utils/constantsStyle";
+import { AlertConfirm } from "../../../components/core/Modal/AlertConfirm";
+import { getIconById } from "../../../utils/util";
 
 export function SettingsScreen() {
   const { logout, user: { role, active, email }, userInfo } = useAuth();
@@ -85,6 +87,7 @@ export function SettingsScreen() {
     setIsModalVisible(false);
   };
 
+
   return (
     <View style={styles.background}>
       <SafeAreaView style={styles.container}>
@@ -93,7 +96,7 @@ export function SettingsScreen() {
             {image ? (
               <Image style={{ width: "100%", height: "100%" }} source={{ uri: image }} />
             ) : (
-              <Image style={{ width: "100%", height: "110%" }} resizeMode="cover" source={assets.image.png.profile} />
+                getIconById("iconAvatar")
             )}
           </View>
         </View>
@@ -153,12 +156,23 @@ export function SettingsScreen() {
 
         </View>
 
-        <TouchableOpacity  onPress={logout}>
+        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
           <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.signOff}>
             <Text style={styles.signOffText}>Sign Off</Text>
           </LinearGradient>
         </TouchableOpacity>
       </SafeAreaView>
+
+
+      <AlertConfirm
+        show={isModalVisible}
+        type={'info'}
+        onClose={closeModal}
+        textConfirm="LogOut"
+        onConfirm={() => logout()}
+        message={"Are you sure you want to log out?"}
+        isDanger
+      />
 
     </View>
   );
