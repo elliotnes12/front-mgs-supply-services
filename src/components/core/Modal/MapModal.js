@@ -18,6 +18,7 @@ import { styles } from "./MapModal.styles";
 export function MapModal({
   isVisible,
   toggleModal,
+  setSelectedAddress
 }) {
   const [address, setAddress] = useState("");
   const refInput = useRef();
@@ -102,7 +103,9 @@ export function MapModal({
   };
 
 
-  const handleAddressSelect = (address) => {
+  const handleAddressSelect = () => {
+    toggleModal()
+    setSelectedAddress(address)
   };
 
   const handleMapPress = async (e) => {
