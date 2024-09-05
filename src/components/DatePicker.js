@@ -4,8 +4,9 @@ import IonIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import tw from 'twrnc'
 import { ENV } from '../utils';
 import { theme } from '../utils/theme';
+import { StyledGradientButton } from '../utils/globalstyle';
 
-export default () => {
+export default ({ toggleModal, setDateFrom, setDateUntil }) => {
     const language = '0'
     let currenDay = 0;
     let currentMonth = 0;
@@ -47,7 +48,6 @@ export default () => {
 
     const { from, until, dataFrom, dataUntil } = range
 
-    console.log(getCurrentDate().substring(8, 10))
 
     const [initialState, setInitialState] = useState({
         current: 1,
@@ -75,10 +75,6 @@ export default () => {
         var diasMes = new Date(año, mes, 0).getDate();
         var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
-        console.log("mes")
-        console.log(currenDay)
-        console.log("mes")
-        console.log(currentMonth)
 
 
         //este es para todos los dias del mes
@@ -142,14 +138,16 @@ export default () => {
 
         boxActual = boxActual.map((x, i, a) => ({ ...x, id: ((constante * mesCuenta) - (mesCuenta !== 1 ? 42 : 0)) + (i + 1) }))
 
-        console.log(boxActual)
         setInitialState({ ...initialState, dias: boxActual })
 
     }, [mesCuenta])
 
 
     useEffect(() => {
-        console.log(dataFrom.complete, dataUntil.complete)
+        if (dataFrom.complete != null && dataUntil.complete != null) {
+            setDateFrom(dataFrom.complete)
+            setDateUntil(dataUntil.complete)
+        }
         if (dataFrom.day !== '--') setInitialState({ ...initialState, requestDate: { ...requestDate, origin: `${language === '1' ? 'Del' : 'From'} ${(dataFrom.day < 10 ? ('0' + dataFrom.day) : dataFrom.day) + '/' + (dataFrom.month < 10 ? ('0' + dataFrom.month) : dataFrom.month) + '/' + dataFrom.year} ${language === '1' ? 'hasta el' : 'Until'} ${(dataUntil.day < 10 ? ('0' + dataUntil.day) : dataUntil.day) + '/' + (dataUntil.month < 10 ? ('0' + dataUntil.month) : dataUntil.month) + '/' + dataUntil.year}` } })
     }, [from, until])
 
@@ -187,6 +185,10 @@ export default () => {
         let completita = `${finAño}-${finMes < 10 ? `0${finMes}` : finMes}`
         setInitialState({ ...initialState, mes: finMes, año: finAño, complete: completita, current: type === '+' ? (current + 1) : (current - 1), mesCuenta: type === '+' ? (mesCuenta + 1) : (mesCuenta - 1) })
     })
+
+    const handleSelectedDate = () => {
+        toggleModal();
+    }
 
     return (
         <>
@@ -271,6 +273,14 @@ export default () => {
                     editable={false}
                     style={{ height: 45, alignSelf: 'stretch', backgroundColor: '#fff', fontSize: 14, color: theme.colors.primary, fontWeight: 'normal', borderWidth: 1, borderColor: '#eaeaea', textAlign: 'center' }}
                     value={origin}
+                />
+            </View>
+
+            <View>
+
+                <StyledGradientButton
+                    text={"Confirm"}
+                    action={() => toggleModal()}
                 />
             </View>
         </>

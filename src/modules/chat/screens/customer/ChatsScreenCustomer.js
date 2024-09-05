@@ -74,13 +74,8 @@ export function ChatsScreenCustomer() {
     (async () => {
       try {
 
-        console.log(accessToken)
-        console.log(user._id)
-        console.log(idUser)
         const response = await chatController.create(accessToken, user._id, idUser);
-
         const { meta: { code, message }, data } = response;
-
 
         if (code == 200) {
 
@@ -90,7 +85,6 @@ export function ChatsScreenCustomer() {
 
 
       } catch (error) {
-        console.log(error)
       }
     })();
   };

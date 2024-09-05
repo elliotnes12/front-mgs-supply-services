@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Text } from "react-native";
 import { AlertDialog, Button } from "native-base";
-import { styles } from "./AlertConfirm.styles";
+import { styles } from "./styles/AlertConfirm.styles";
 import StyledText from "../../../utils/globalstyle";
 
 export function AlertConfirm(props) {

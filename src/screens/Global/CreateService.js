@@ -1,102 +1,47 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
-import { default as CalendarRange } from "../../components/DatePicker";
-
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React from "react";
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import { Header } from "../../components/core/Header";
 import EmployeeSelectorModal from "../../components/core/Modal/EmployeeSelectorModal";
 import { MapModal } from "../../components/core/Modal/MapModal";
-import StyledText, {
-  StyledGradientButton,
-  StyledGradientButtonSmall,
-} from "../../utils/globalstyle";
+import StyledText, { StyledGradientButtonSmall } from "../../utils/globalstyle";
 import { getIconById } from "../../utils/util";
 import { styles } from "./styles/CreateService.style";
 import { theme } from "../../utils/theme";
-
-const data = [
-  { id: "1", title: "Cleaning" },
-  { id: "2", title: "Painting" },
-  { id: "3", title: "Polishing" },
-];
+import { CustomerSelectorModal } from "../../components/core/Modal/CustomerSelectorModal";
+import CalendarRange from "../../components/DatePicker";
+import { useCreateServiceMethods } from "./CreateServiceMethods";
 
 export function CreateService() {
-  const [bussinessName, setBussinessName] = useState("");
-  const [bussinessAdditional, setBussinessAdditional] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState(
-    "Aquí va la dirección"
-  );
-  const [mapClicked, setMapClicked] = useState(false);
-  const [isModalCalendar, setIsModalCalendar] = useState(false);
-  const [selectedButton, setSelectedButton] = useState("Cleaning");
-  const [assignedEmployees, setAssignedEmployees] = useState([]);
-  const timeOptions = [
-    {
-      id: "1",
-      icon: "iconCalendar",
-      label: "Choose a Date",
-      callback: () => setIsModalCalendar(true),
-    },
-    {
-      id: "2",
-      icon: "icontime",
-      label: "Choose a Time",
-      callback: () => console.log(""),
-    },
-    {
-      id: "3",
-      icon: "iconlupa",
-      label: "Assign Employee",
-      callback: () => handleOpenModal(),
-    },
-  ];
-
-  const [modalEmployeeVisible, setModalEmployeeVisible] = useState(false);
-
-  const handleOpenModal = () => {
-    setModalEmployeeVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalEmployeeVisible(false);
-  };
-
-  const handleConfirmSelection = (selected) => {
-    setAssignedEmployees(selected);
-  };
-
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-    if (isModalVisible) {
-      setMapClicked(false);
-    }
-  };
-
-  const confirmDate = () => {
-    toggleModalCalendar();
-  };
-  const toggleModalCalendar = () => {
-    setIsModalCalendar((prevStatus) => !prevStatus);
-  };
-
-  const handleButtonPress = (buttonName) => {
-    setSelectedButton(buttonName);
-  };
-
-  const unAssingEmployee = (id) => {
-    const tempAssingedEmployees = assignedEmployees.filter(
-      (element) => element.idEmployee != id
-    );
-    setAssignedEmployees(tempAssingedEmployees);
-  };
+  const {
+    bussinessName,
+    setBussinessName,
+    dateFrom,
+    dateUntil,
+    bussinessAdditional,
+    setBussinessAdditional,
+    selectedAddress,
+    setSelectedAddress,
+    isModalVisible,
+    isModalCalendarVisible,
+    isModalEmployeeVisible,
+    isModalCustomerVisible,
+    selectedButton,
+    assignedEmployees,
+    timeOptions,
+    handleOpenModal,
+    handleCloseModal,
+    handleConfirmSelection,
+    toggleModal,
+    toggleModalCustomer,
+    toggleModalCalendar,
+    handleButtonPress,
+    unAssingEmployee,
+    setDateFrom,
+    setDateUntil,
+    setIsModalCustomerVisible
+  } = useCreateServiceMethods();
 
   return (
     <>
@@ -255,16 +200,17 @@ export function CreateService() {
             </StyledText>
 
             <TouchableOpacity
+              onPress={() => setIsModalCustomerVisible(true)}
               style={[
                 {
-                  backgroundColor: "#FAFAFA",
+                  backgroundColor: theme.colors.lightGray,
                   marginBottom: 10,
                   borderRadius: 10,
                 },
               ]}
             >
               <View style={[styles.item, { paddingLeft: 15 }]}>
-                <View style={{ width: 30, height: 30, marginRight: 10 }}>
+                <View style={{ width: 30, height: 30, marginRight: 10, zIndex: 10 }}>
                   {getIconById("iconlupa")}
                 </View>
                 <StyledText graySilver font14pt regular>
@@ -300,19 +246,23 @@ export function CreateService() {
             </TouchableOpacity>
           </View>
 
-          <Modal isVisible={isModalCalendar}>
-            <View style={{ flex: 1, justifyContent: "center" }}>
-              <CalendarRange />
+          <CustomerSelectorModal
+            isVisible={isModalCustomerVisible}
+            onClose={toggleModalCustomer}
+          />
 
-              <StyledGradientButton
-                text={"Confirm"}
-                action={() => confirmDate()}
-              />
+
+          <Modal animationType="slide" isVisible={isModalCalendarVisible}>
+            <View style={{ flex: 1, justifyContent: "center" }}>
+              <CalendarRange
+                setDateFrom={setDateFrom}
+                setDateUntil={setDateUntil}
+                toggleModal={toggleModalCalendar} />
             </View>
           </Modal>
 
           <EmployeeSelectorModal
-            visible={modalEmployeeVisible}
+            isVisible={isModalEmployeeVisible}
             onClose={handleCloseModal}
             onConfirm={handleConfirmSelection}
           />

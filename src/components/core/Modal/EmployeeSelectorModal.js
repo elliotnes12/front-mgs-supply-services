@@ -3,9 +3,8 @@ import { View, Text, Modal, FlatList, TextInput, TouchableOpacity, Button, Keybo
 import { Employee } from '../../../api/employee';
 import { useAuth } from '../../../modules/Auth/hooks';
 import { StyledGradientButton } from '../../../utils/globalstyle';
-import { useFocusEffect } from '@react-navigation/native';
 
-const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
+const EmployeeSelectorModal = ({ isVisible, onClose, onConfirm }) => {
     const [employees, setEmployees] = useState([]);
     const [selectedEmployees, setSelectedEmployees] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -75,7 +74,7 @@ const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
     const keyboardType = searchType === 'id' ? 'numeric' : 'default';
 
     return (
-        <Modal visible={visible} animationType="slide">
+        <Modal visible={isVisible} animationType="slide">
             <View style={styles.container}>
                 <View style={styles.searchContainer}>
                     <TextInput

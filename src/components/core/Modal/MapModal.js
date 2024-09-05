@@ -9,11 +9,17 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import MapView, { Marker } from "react-native-maps";
-import * as Location from "expo-location";
 import StyledText from "../../../utils/globalstyle";
 import { getIconById } from "../../../utils/util";
 import { useLocation } from "../../../modules/Auth/hooks";
-import { styles } from "./MapModal.styles";
+import { styles } from "./styles/MapModal.styles";
+
+import {
+  getAddressFromCoordinates,
+  handleMarkerDragEnd,
+  handleSearch,
+  handleMapPress,
+} from "./mapFunctions";  
 
 export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
   const [address, setAddress] = useState("");
@@ -25,32 +31,6 @@ export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
   const { origin, loading } = useLocation();
   const [coords, setCoords] = useState(undefined);
   const [mapClicked, setMapClicked] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState("");
-
-  const getAddressFromCoordinates = async (coords) => {
-    try {
-      const geocode = await Location.reverseGeocodeAsync(coords);
-      console.log(geocode);
-      if (geocode.length > 0) {
-        const { street, city, region, postalCode } = geocode[0];
-        return `${street}, ${city}, ${region} ${postalCode}`;
-      }
-    } catch (error) {
-      console.error("Error al obtener la dirección:", error);
-    }
-  };
-
-  const handleMarkerDragEnd = async (e) => {
-    try {
-      const newCoords = e.nativeEvent.coordinate;
-      setCoords(newCoords);
-
-      const newAddress = await getAddressFromCoordinates(newCoords);
-      setAddress(newAddress);
-    } catch (error) {
-      console.error("Error al actualizar el marcador:", error);
-    }
-  };
 
   useEffect(() => {
     (async () => {
@@ -59,8 +39,6 @@ export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
         const newAddress = await getAddressFromCoordinates(origin);
         setAddress(newAddress);
       }
-
-      console.log(origin);
     })();
   }, [origin]);
 
@@ -93,62 +71,8 @@ export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
     }),
   };
 
-  const handleSearch = async () => {
-    if (text.trim().length > 0) {
-      try {
-        const geocode = await Location.geocodeAsync(text);
-        if (geocode.length > 0) {
-          const { latitude, longitude } = geocode[0];
-          const newCoords = {
-            latitude,
-            longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          };
-          setCoords(newCoords);
-          const newAddress = await getAddressFromCoordinates(newCoords);
-          setAddress(newAddress);
-
-          mapRef.current.animateToRegion(newCoords, 1000);
-        }
-      } catch (error) {
-        console.error("Error al buscar la ubicación:", error);
-      }
-    }
-  };
-
-  const handleAddressSelect = () => {
-    setSelectedAddress(address);
-    toggleModal();
-  };
-
-  const handleMapPress = async (e) => {
-    if (!mapClicked) {
-      setMapClicked(true);
-
-      const { latitude, longitude } = e.nativeEvent.coordinate;
-
-      try {
-        const geocode = await Location.reverseGeocodeAsync({
-          latitude,
-          longitude,
-        });
-
-        if (geocode.length > 0) {
-          const { street, city, region, postalCode } = geocode[0];
-          const address = `${street}, ${city}, ${region} ${postalCode}`;
-
-          setSelectedAddress(address);
-          toggleModal();
-        }
-      } catch (error) {
-        console.error("Error al obtener la dirección:", error);
-      }
-    }
-  };
-
   return (
-    <Modal style={styles.modalContainer} isVisible={isVisible}>
+    <Modal style={styles.modalContainer} animationType="slide" isVisible={isVisible}>
       <View style={styles.container}>
         {coords ? (
           <>
@@ -171,7 +95,7 @@ export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
                       ref={refInput}
                       value={text}
                       onChangeText={setText}
-                      onSubmitEditing={handleSearch}
+                      onSubmitEditing={() => handleSearch(text, setCoords, mapRef, setAddress)}
                       selectionColor={"#fff"}
                       placeholder="Comienza a buscar..."
                       placeholderTextColor={"rgba(255,255,255,0.5)"}
@@ -194,12 +118,12 @@ export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
                       }
                     : undefined
                 }
-                onPress={handleMapPress}
+                onPress={(e) => handleMapPress(e, setSelectedAddress, toggleModal, setMapClicked)}
               >
                 <Marker
                   draggable
                   coordinate={coords}
-                  onDragEnd={handleMarkerDragEnd}
+                  onDragEnd={(e) => handleMarkerDragEnd(e, setCoords, setAddress)}
                 />
               </MapView>
             </View>
@@ -212,7 +136,10 @@ export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
               </View>
 
               <TouchableOpacity
-                onPress={handleAddressSelect}
+                onPress={() => {
+                  setSelectedAddress(address);
+                  toggleModal();
+                }}
                 style={styles.selectAddressButton}
               >
                 <View>{getIconById("iconArrowRight")}</View>
