@@ -19,7 +19,6 @@ import StyledText, {
 } from "../../utils/globalstyle";
 import { getIconById } from "../../utils/util";
 import { styles } from "./styles/CreateService.style";
-import { Alert } from "react-native";
 import { theme } from "../../utils/theme";
 
 const data = [
@@ -28,16 +27,10 @@ const data = [
   { id: "3", title: "Polishing" },
 ];
 
-const dataEmployees = [
-  { id: "1", name: "Elliot Guillermo Garcia Montoya" },
-  { id: "2", name: "Nazario Perez Lopez" },
-];
-
 export function CreateService() {
   const [bussinessName, setBussinessName] = useState("");
   const [bussinessAdditional, setBussinessAdditional] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [origin, setOrigin] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(
     "Aquí va la dirección"
   );
@@ -50,7 +43,7 @@ export function CreateService() {
       id: "1",
       icon: "iconCalendar",
       label: "Choose a Date",
-      callback: () => console.log(""),
+      callback: () => setIsModalCalendar(true),
     },
     {
       id: "2",
@@ -153,7 +146,7 @@ export function CreateService() {
               key={item.id}
               style={[
                 {
-                  backgroundColor: "#FAFAFA",
+                  backgroundColor: theme.colors.lightGray,
                   marginBottom: 10,
                   borderRadius: 10,
                 },
@@ -212,7 +205,7 @@ export function CreateService() {
               <View
                 style={[
                   {
-                    backgroundColor: "#FAFAFA",
+                    backgroundColor: theme.colors.lightGray,
                     marginBottom: 10,
                     borderRadius: 10,
                     paddingVertical: 15,
@@ -237,7 +230,7 @@ export function CreateService() {
           <View
             style={[
               {
-                backgroundColor: "#FAFAFA",
+                backgroundColor: theme.colors.lightGray,
                 marginBottom: 10,
                 borderRadius: 10,
                 paddingVertical: 15,
@@ -325,7 +318,7 @@ export function CreateService() {
           />
 
           <MapModal
-            selectedAddress={setSelectedAddress}
+            setSelectedAddress={setSelectedAddress}
             isVisible={isModalVisible}
             toggleModal={toggleModal}
           />

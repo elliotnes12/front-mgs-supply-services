@@ -15,7 +15,7 @@ import { getIconById } from "../../../utils/util";
 import { useLocation } from "../../../modules/Auth/hooks";
 import { styles } from "./MapModal.styles";
 
-export function MapModal({ isVisible, toggleModal }) {
+export function MapModal({ isVisible, toggleModal, setSelectedAddress }) {
   const [address, setAddress] = useState("");
   const refInput = useRef();
   const mapRef = useRef(null);
