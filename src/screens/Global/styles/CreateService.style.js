@@ -36,7 +36,8 @@ export const styles = StyleSheet.create({
   iconClose: {
     width: 20,
     height: 20,
-    left: 200,
+    zIndex: 10,
+    marginRight: 5
   },
   street__googleMaps: {
     fontFamily: theme.textStyles.regular,

@@ -19,6 +19,8 @@ import StyledText, {
 } from "../../utils/globalstyle";
 import { getIconById } from "../../utils/util";
 import { styles } from "./styles/CreateService.style";
+import { Alert } from "react-native";
+import { theme } from "../../utils/theme";
 
 const data = [
   { id: "1", title: "Cleaning" },
@@ -96,6 +98,13 @@ export function CreateService() {
     setSelectedButton(buttonName);
   };
 
+  const unAssingEmployee = (id) => {
+    const tempAssingedEmployees = assignedEmployees.filter(
+      (element) => element.idEmployee != id
+    );
+    setAssignedEmployees(tempAssingedEmployees);
+  };
+
   return (
     <>
       <ScrollView style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
@@ -171,24 +180,29 @@ export function CreateService() {
             {assignedEmployees.length > 0 &&
               assignedEmployees.map((item) => (
                 <View
-                  key={item.id}
+                  key={item.idEmployee}
                   style={[
                     {
-                      backgroundColor: "#FAFAFA",
+                      backgroundColor: theme.colors.lightGray,
                       marginBottom: 10,
                       borderRadius: 10,
                     },
                   ]}
                 >
                   <View style={[styles.item, { paddingLeft: 15 }]}>
-                    <View style={styles.avatarAssingEmployee}>
-                      {getIconById("iconAvatar")}
-                    </View>
+                    <View style={[styles.item, { flex: 2 }]}>
+                      <View style={styles.avatarAssingEmployee}>
+                        {getIconById("iconAvatar")}
+                      </View>
 
-                    <StyledText graySilver font16pt>
-                      {item.name}
-                    </StyledText>
-                    <TouchableOpacity style={styles.iconClose}>
+                      <StyledText graySilver font16pt>
+                        {item.name} - {item.idEmployee}
+                      </StyledText>
+                    </View>
+                    <TouchableOpacity
+                      onPress={() => unAssingEmployee(item.idEmployee)}
+                      style={styles.iconClose}
+                    >
                       {getIconById("iconClose")}
                     </TouchableOpacity>
                   </View>
@@ -310,7 +324,11 @@ export function CreateService() {
             onConfirm={handleConfirmSelection}
           />
 
-          <MapModal isVisible={isModalVisible} toggleModal={toggleModal} />
+          <MapModal
+            selectedAddress={setSelectedAddress}
+            isVisible={isModalVisible}
+            toggleModal={toggleModal}
+          />
         </View>
       </ScrollView>
     </>

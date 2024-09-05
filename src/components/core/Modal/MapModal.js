@@ -24,10 +24,10 @@ export function MapModal({ isVisible, toggleModal }) {
   const [text, setText] = useState("");
   const { origin, loading } = useLocation();
   const [coords, setCoords] = useState(undefined);
+  const [mapClicked, setMapClicked] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState("");
 
   const getAddressFromCoordinates = async (coords) => {
-    console.log("Cuales son las cordenadas");
-    console.log(coords);
     try {
       const geocode = await Location.reverseGeocodeAsync(coords);
       console.log(geocode);
@@ -40,13 +40,16 @@ export function MapModal({ isVisible, toggleModal }) {
     }
   };
 
-  const handleMarkerDragEnd = (e) => {
-    (async () => {
+  const handleMarkerDragEnd = async (e) => {
+    try {
       const newCoords = e.nativeEvent.coordinate;
       setCoords(newCoords);
+
       const newAddress = await getAddressFromCoordinates(newCoords);
       setAddress(newAddress);
-    })();
+    } catch (error) {
+      console.error("Error al actualizar el marcador:", error);
+    }
   };
 
   useEffect(() => {
@@ -61,13 +64,13 @@ export function MapModal({ isVisible, toggleModal }) {
     })();
   }, [origin]);
 
-  const handleAnimated = () => {
+  useEffect(() => {
     Animated.timing(animation, {
       toValue: toggle ? 1 : 0,
       duration: 550,
       useNativeDriver: false,
     }).start();
-  };
+  }, [toggle]);
 
   useEffect(() => {
     if (toggle) {
@@ -75,7 +78,6 @@ export function MapModal({ isVisible, toggleModal }) {
     } else {
       Keyboard.dismiss();
     }
-    handleAnimated();
   }, [toggle]);
 
   const animatedStyles = {
@@ -115,7 +117,10 @@ export function MapModal({ isVisible, toggleModal }) {
     }
   };
 
-  const handleAddressSelect = (address) => {};
+  const handleAddressSelect = () => {
+    setSelectedAddress(address);
+    toggleModal();
+  };
 
   const handleMapPress = async (e) => {
     if (!mapClicked) {
@@ -179,12 +184,16 @@ export function MapModal({ isVisible, toggleModal }) {
               <MapView
                 ref={mapRef}
                 style={styles.mapView}
-                initialRegion={{
-                  latitude: coords?.latitude,
-                  longitude: coords?.longitude,
-                  latitudeDelta: coords?.latitudeDelta,
-                  longitudeDelta: coords?.longitudeDelta,
-                }}
+                initialRegion={
+                  coords
+                    ? {
+                        latitude: coords.latitude,
+                        longitude: coords.longitude,
+                        latitudeDelta: 0.01,
+                        longitudeDelta: 0.01,
+                      }
+                    : undefined
+                }
                 onPress={handleMapPress}
               >
                 <Marker
