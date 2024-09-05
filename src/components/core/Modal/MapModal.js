@@ -29,8 +29,6 @@ export function MapModal({
 
 
   const getAddressFromCoordinates = async (coords) => {
-    console.log("Cuales son las cordenadas")
-    console.log(coords)
     try {
       const geocode = await Location.reverseGeocodeAsync(coords);
       console.log(geocode)
@@ -49,6 +47,9 @@ export function MapModal({
     (async () => {
 
       const newCoords = e.nativeEvent.coordinate;
+
+      console.log("Market")
+      console.log(newCoords)
       setCoords(newCoords);
       const newAddress = await getAddressFromCoordinates(newCoords);
       setAddress(newAddress);

@@ -39,6 +39,9 @@ export const ENV = {
     GET_ALL_SERVICES_SUPERVISOR: "services/orders/supervisor",
     GET_ALL_SERVICES: "services/orders/supervisor"
   },
+  LOCATION: {
+    CURRENT_LOCATION: "CURRENT"
+  },
   JWT: {
     ACCESS: "access",
     REFRESH: "refresh",

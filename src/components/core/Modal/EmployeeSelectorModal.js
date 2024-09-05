@@ -3,6 +3,7 @@ import { View, Text, Modal, FlatList, TextInput, TouchableOpacity, Button, Keybo
 import { Employee } from '../../../api/employee';
 import { useAuth } from '../../../modules/Auth/hooks';
 import { StyledGradientButton } from '../../../utils/globalstyle';
+import { useFocusEffect } from '@react-navigation/native';
 
 const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
     const [employees, setEmployees] = useState([]);
@@ -15,6 +16,12 @@ const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
     const { accessToken } = useAuth();
     const [hasMore, setHasMore] = useState(true);
 
+    useEffect(() => {
+        setSelectedEmployees([]);
+
+        setEmployees(prevEmployees => [...prevEmployees]);
+
+    }, []) 
 
     useEffect(() => {
         if (hasMore) {
@@ -95,6 +102,7 @@ const EmployeeSelectorModal = ({ visible, onClose, onConfirm }) => {
                             <Text>{item.idEmployee}</Text>
                         </TouchableOpacity>
                     )}
+                    refreshing={true}
                     onEndReached={loadMoreEmployees}
                     onEndReachedThreshold={0.5}
                     ListFooterComponent={loading && <Text>Cargando...</Text>}
