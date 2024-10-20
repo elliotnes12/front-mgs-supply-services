@@ -4,7 +4,7 @@ import { theme } from "../../utils/theme";
 export const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 20,
     backgroundColor: "#F9F9F9",
     borderRadius: 10,
     flex: 1,

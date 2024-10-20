@@ -3,6 +3,7 @@ import { Text, TouchableWithoutFeedback, View, ActivityIndicator } from "react-n
 import { AlertDialog } from "native-base";
 import { styled } from "../styles/Alert.styles";
 import { getIconById } from "../../../utils/util";
+import StyledText from "../../../utils/globalstyle";
 
 export function Alert(props) {
   const { show, type, message, onClose, loading } = props;

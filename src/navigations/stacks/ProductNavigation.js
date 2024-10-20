@@ -17,7 +17,7 @@ export function ProductNavigation() {
      }>
 
       <Stack.Screen
-        name={screens.tab.products.productScreen}
+        name={screens.tab.products.productScreen + "Nav"}
         component={ProductScreen}
         options={{headerShown:false}}
       />

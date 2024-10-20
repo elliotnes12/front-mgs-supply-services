@@ -14,7 +14,7 @@ export function ReportsNavigation(){
             }
          }>
             <Stack.Screen component={ReportsScreen} 
-            options={{headerShown:false}} name={screens.tab.reports.root} />
+                options={{ headerShown: false }} name={screens.tab.reports.root + "Nav"} />
         </Stack.Navigator>
     )
 }

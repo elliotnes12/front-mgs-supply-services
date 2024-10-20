@@ -33,6 +33,5 @@ export const stylesGlobal = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    bottom: 5,
   },
 });

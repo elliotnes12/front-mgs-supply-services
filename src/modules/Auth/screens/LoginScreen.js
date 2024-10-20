@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import { screens } from "../../../utils";
+import { ENV, screens } from "../../../utils";
 import StyledText, { StyledGradientButton } from "../../../utils/globalstyle";
 import { initialValues, validationSchema } from "../forms/LoginForm.form";
 import { useAuth } from "../hooks";
@@ -12,6 +12,7 @@ import { styles } from "../styles/LoginScreen.styles";
 import { Alert } from "../../../components/core/Modal/Alert";
 import { Response } from "../../../utils/Response";
 import { Auth } from "../../../api/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const authController = new Auth();
 
@@ -42,14 +43,22 @@ export function LoginScreen() {
           throw new Error(message);
         }
 
+
         await authController.setAccessToken(data?.access);
         await authController.setRefreshToken(data?.refresh);
+
+        if (!data.active) {
+          await AsyncStorage.setItem(ENV.STORAGE.EMAIL, email);
+          navigation.navigate(screens.global.tokenVerification)
+          return;
+        }
         await login(data?.access);
 
         setMessage("Login successful!");
         setLoading(false);
 
       } catch (error) {
+        console.log(error)
         setMessage(error.message);
         setLoading(false);
       }
@@ -124,7 +133,7 @@ export function LoginScreen() {
         textConfirm="OK"
         onConfirm={() => setModalVisible(false)}
         message={message}
-        isDanger={loading ? false : true}
+        isDanger={loading ? true : false}
       />
     </LayoutAuth>
   );

@@ -82,11 +82,6 @@ export function ChatContactsScreenEmployee() {
                     data={users}
                     renderItem={({ item }) => <ItemUser item={item} />}
                     keyExtractor={item => item.id}
-                    onContentSizeChange={
-                         () =>{
-                            
-                         }
-                    }
                     contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 20 }}
                     ListHeaderComponent={
                         <>

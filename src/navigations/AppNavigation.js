@@ -15,6 +15,10 @@ import { ChatScreenSupervisor } from "../screens/Global/ChatScreenSupervisor";
 import { ServicesScreen } from "../screens/Global/ServicesScreen";
 import { ChatContactsScreenEmployee } from "../screens/Global/ChatContactsScreenEmployee";
 import { SettingsScreen } from "../modules/Settings";
+import { EmailTokenVerificationScreen } from "../modules/Auth/screens/EmailTokenVerificationScreen";
+import { DetailService } from "../screens/Global/DetailServices";
+import { CompleteService } from "../screens/Global/CompleteServices";
+import { UpdateService } from "../screens/Global/UpdateServices";
 
 initSockets();
 
@@ -38,11 +42,31 @@ export function AppNavigation() {
       <Stack.Group
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
+
+        <Stack.Screen
+          name={screens.global.updateService}
+          component={UpdateService}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name={screens.global.settingScreen}
           component={SettingsScreen}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+          name={screens.global.detailService}
+          component={DetailService}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name={screens.global.completeService}
+          component={CompleteService}
+          options={{ headerShown: false }}
+        />
+
 
         <Stack.Screen
           name={screens.tab.chats.chatContactsScreenEmployee}
@@ -89,6 +113,13 @@ export function AppNavigation() {
           component={ImageFullScreen}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+          name={screens.global.tokenVerification}
+          component={EmailTokenVerificationScreen}
+          options={{ headerShown: false }}
+        />
+
       </Stack.Group>
     </Stack.Navigator>
   );

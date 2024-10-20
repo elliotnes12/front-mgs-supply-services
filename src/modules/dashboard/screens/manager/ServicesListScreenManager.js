@@ -1,136 +1,126 @@
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { TabBar, TabView } from "react-native-tab-view";
+import { useCallback, useState } from "react";
+import { LayoutAnimation, TouchableOpacity, View } from "react-native";
+import { Service } from "../../../../api/service";
 import { ItemServiceManager } from "../../../../components/core/items/ItemService";
-import { screens, tabIds } from "../../../../utils";
-import { theme } from "../../../../utils/theme";
+import StyledText from "../../../../utils/globalstyle";
 import { getIconById } from "../../../../utils/util";
+import { useAuth } from "../../../Auth/hooks";
 import { styles } from "./ServiceListScreenManager.styles";
-import { map } from "lodash";
+import { LoadingScreen } from "../../../../components/core/LoadingScreen";
+import { screens } from "../../../../utils";
 
-const data = [
-  {
-    title: "Office Cleaning",
-    subTitle: "Cleaning the lobby area",
-    date: "May 12, 2024",
-    status: "progress",
-  },
-  {
-    title: "Office Cleaning 2",
-    subTitle: "Cleaning the lobby area",
-    date: "May 12, 2024",
-    status: "cancel",
-  },
-  {
-    title: "Office Cleaning 2",
-    subTitle: "Cleaning the lobby area",
-    date: "May 12, 2024",
-    status: "success",
-  },
-];
 
-const initialLayout = { width: "100%" };
-
-const RenderLastServices = ({ navigation }) => (
-  <>
-    <View style={styles.options}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate(screens.tab.services.root)}
-      >
-        <Text style={styles.options__all}>View All</Text>
-      </TouchableOpacity>
-    </View>
-
-    {map(data, (element, id) => {
-      return <ItemServiceManager key={id} item={element} />;
-    })}
-
-  </>
-);
-
-const RenderLastProducts = () => (
-  <View style={[styles.scene, styles.backgroundWhite]}>
-    <Text>Contenido de la segunda pestaña</Text>
-  </View>
-);
 
 export const ServiceListScreenManager = () => {
-  const [index, setIndex] = useState(0);
-  const [height, setHeight] = useState(0);
-
+  const [selectedTab, setSelectedTab] = useState("services");
+  const [isLoading, setIsLoading] = useState(false);
+  const [services, setServices] = useState([]);
+  const controllerService = new Service();
+  const { accessToken } = useAuth();
   const navigation = useNavigation();
 
-  const routes = [
-    { key: tabIds.TAB_ID_SERVICES, title: "services", label: "services" },
-    { key: tabIds.TAB_ID_PRODUCTS, title: "products", label: "Orders" },
-  ];
 
-  useEffect(() => {
-    switch (routes[index].key) {
-      case tabIds.TAB_ID_SERVICES:
-        setHeight((data.length + 1) * 130);
-        break;
-      case tabIds.TAB_ID_PRODUCTS:
-      case tabIds.TAB_ID_RAITING:
-        setHeight(140);
-        break;
-      default:
-        setHeight(0);
-    }
-  }, [index]);
 
-  const renderScene = ({ route }) => {
-    switch (route.key) {
-      case tabIds.TAB_ID_SERVICES:
-        return <RenderLastServices navigation={navigation} />;
-      case tabIds.TAB_ID_PRODUCTS:
-        return <RenderLastProducts />;
-      default:
-        return null;
-    }
-  };
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        try {
+          setIsLoading(true)
+          const { data } = await controllerService.findAllServicesByManager(accessToken);
+          setServices(data);
+        } catch (error) {
 
-  const renderTabBar = (props) => (
-    <TabBar
-      {...props}
-      indicatorStyle={styles.indicatorStyle}
-      pressColor="transparent"
-      style={styles.tabBarStyle}
-      tabStyle={styles.tabStyle}
-      renderLabel={({ route, focused }) =>
-        focused ? (
-          <LinearGradient
-            colors={[theme.gradient.color1, theme.gradient.color2]}
-            style={styles.gradient}
-          >
-            <View style={{ width: 22, height: 22, marginRight: 5 }}>
-              {getIconById("iconDocument")}
-            </View>
-            <Text style={styles.tabTextFocused}>{route.label}</Text>
-          </LinearGradient>
-        ) : (
-          <View style={styles.tabItem}>
-            <View style={{ width: 22, height: 22, marginRight: 5 }}>
-              {getIconById("iconDocumentGray")}
-            </View>
-            <Text style={styles.tabText}>{route.label}</Text>
-          </View>
-        )
-      }
-    />
+          setServices([]);
+        } finally {
+          setIsLoading(false)
+        }
+      })();
+    }, [])
   );
 
+
+  const routes = [
+    { key: "services", label: "Services", icon: "iconDocument" },
+    { key: "products", label: "Products", icon: "iconDocument" },
+  ];
+
+  const handleTabChange = (tabKey) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setSelectedTab(tabKey);
+  };
+
   return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      style={{ height: height }}
-      onIndexChange={setIndex}
-      initialLayout={initialLayout}
-      renderTabBar={renderTabBar}
-    />
+    <View style={styles.container}>
+      <View style={{ marginVertical: 10 }}>
+        <StyledText font17pt boldGray>Services Generated</StyledText>
+      </View>
+      <View style={{ flexDirection: "row-reverse" }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(screens.tab.services.root)}
+        >
+          <StyledText font14pt regularGreen>
+            View All
+          </StyledText>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.tabContainer}>
+        {routes.map((route) => (
+          selectedTab === route.key ? (
+            <LinearGradient
+              key={route.key}
+              colors={["#CEDC39", "#7DA74D"]}
+              style={[selectedTab === "services" ? { marginRight: 10 } : {}, styles.gradient]}
+            >
+              <TouchableOpacity
+                key={route.key}
+                onPress={() => handleTabChange(route.key)}
+                style={[styles.tabButtonActive, { flexDirection: "row" }]}
+              >
+                <View style={{ width: 20, height: 20, marginRight: 5 }}>
+                  {getIconById(route.icon + "White")}
+                </View>
+                <StyledText regularWhite>{route.label}</StyledText>
+              </TouchableOpacity>
+            </LinearGradient>
+          ) : (
+            <TouchableOpacity
+              key={route.key}
+              onPress={() => handleTabChange(route.key)}
+              style={[styles.tabButton, { flexDirection: "row" }]}
+            >
+              <View style={{ width: 20, height: 20, marginRight: 5 }}>
+                {getIconById(route.icon + "Gray")}
+              </View>
+              <StyledText regularGray>{route.label}</StyledText>
+            </TouchableOpacity>
+          )
+        ))}
+      </View>
+
+      <View style={styles.contentContainer}>
+        {isLoading ? (
+          <View style={{ minHeight: 400 }}>
+            <LoadingScreen />
+          </View>
+        ) : selectedTab === "services" ? (
+          services.length > 0 ? (
+            services.map((item) => (
+              <ItemServiceManager key={item.id} item={item} />
+            ))
+          ) : (
+            <View style={{ flexGrow: 1, justifyContent: "center", alignItems: "center", minHeight: 400 }}>
+              <StyledText regularGreen>No services available.</StyledText>
+            </View>
+          )
+        ) : (
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <StyledText regularGreen>No products available.</StyledText>
+          </View>
+        )}
+      </View>
+    </View>
   );
 };

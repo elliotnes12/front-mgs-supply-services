@@ -4,7 +4,7 @@ import { assets } from '../../assets';
 import { Image } from 'react-native';
 import { styles } from "./styles/ChatScreen.style";
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text } from 'native-base';
+import { ScrollView, Text } from 'native-base';
 import { HeaderChat } from '../../components/core/HeaderChat';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Chat } from '../../modules/chat/api/Chat';
@@ -18,6 +18,9 @@ import { useFormik } from 'formik';
 import { getIconById } from '../../utils/util';
 import { AlertConfirm } from "../../components/core/Modal/AlertConfirm";
 import StyledText from '../../utils/globalstyle';
+import { LABEL } from '../../utils/labels';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Color } from '../../utils/constantsStyle';
 
 export function ChatScreenCustomer({ chat }) {
   const { accessToken } = useAuth();
@@ -32,7 +35,15 @@ export function ChatScreenCustomer({ chat }) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const chatController = new Chat();
   const chatMessageController = new ChatMessage();
-  const [inputValue, setInputValue] = useState('');
+  const [questions] = useState([
+    "What service do I need to book?",
+    "How can you help me?",
+    "Can I schedule a cleaning service online?",
+    "How long will the service take?",
+    "What is included in the cleaning services?",
+    "Can you offer me a customized service?",
+    "What is the cost of the service?",
+  ]);
 
 
   const openCloseDelete = () => setShowDelete((prevState) => !prevState);
@@ -58,6 +69,9 @@ export function ChatScreenCustomer({ chat }) {
     }
     setIsMenuSettings(!isMenuSettings);
   };
+  const toggleMenu = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
 
   const handleClickOutside = () => {
     if (isMenuVisible) {
@@ -68,6 +82,7 @@ export function ChatScreenCustomer({ chat }) {
       setIsMenuSettings(false);
     }
   };
+
 
   const newMessage = (msg) => {
     setMessages((prevMessages) => [...prevMessages, msg]);
@@ -107,6 +122,17 @@ export function ChatScreenCustomer({ chat }) {
     })();
   }, []);
 
+
+  const handleQuestionSelect = question => {
+    setIsMenuVisible(false);
+    (async () => {
+      try {
+        await chatMessageController.sendText(accessToken, chatId, question);
+      } catch (error) { }
+
+    })();
+  };
+
   useEffect(() => {
     if (!socket) {
       console.error("Socket not initialized");
@@ -127,6 +153,7 @@ export function ChatScreenCustomer({ chat }) {
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
+
         await chatMessageController.sendText(
           accessToken,
           chatId,
@@ -190,9 +217,56 @@ export function ChatScreenCustomer({ chat }) {
                     </TouchableOpacity>
                   </View>
                 </View>
+                <View
+                  style={{
+                    alignItems: "center",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    width: 65,
+                    marginTop: 5,
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={toggleMenu}
+                    style={{
+                      width: 45,
+                      height: 45,
+                      borderRadius: 22.5,
+                      marginRight: 10,
+                    }}
+                  >
+                    <LinearGradient
+                      style={styles.btn_questions}
+                      colors={["#CEDC39", "#7DA74D"]}
+                    >
+                      {getIconById("iconQuestion")}
+                    </LinearGradient>
+                  </TouchableOpacity>
+                </View>
+
+                {isMenuVisible && (
+                  <ScrollView
+                    style={styles.menu__questions}
+                  >
+                    <View style={{ paddingBottom: 40 }}>
+                      {questions.map((question, index) => (
+                        <TouchableOpacity
+                          key={index}
+                          onPress={() => handleQuestionSelect(question)}
+                          style={{
+                            padding: 14,
+                            backgroundColor: Color.colorWhitesmoke_100,
+                            marginBottom: 5,
+                          }}
+                        >
+                          <StyledText>{question}</StyledText>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </ScrollView>
+                )}
               </View>
             </View>
-
           </View>
         </View>
       </TouchableWithoutFeedback>

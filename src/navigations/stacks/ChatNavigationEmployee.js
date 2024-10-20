@@ -16,7 +16,7 @@ export function ChatNavigationEmployee() {
     }>
 
       <Stack.Screen
-        name={screens.tab.chats.chatsScreenEmployee}
+        name={screens.tab.chats.chatsScreenEmployee + "Nav"}
         component={ChatsScreenEmployee}
         options={{ headerShown: false }}
       />

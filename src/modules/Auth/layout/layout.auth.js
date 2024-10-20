@@ -74,7 +74,8 @@ export default function LayoutAuth({ children, userType, logo }) {
               <ActivityIndicator
                 size="large"
                 color="#0000ff"
-                style={styles.loadingIndicator}
+
+                style={{ display: "none" }}
               />
             )}
             <ImageBackground

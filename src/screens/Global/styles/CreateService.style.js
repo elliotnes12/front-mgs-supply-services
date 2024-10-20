@@ -34,8 +34,8 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   iconClose: {
-    width: 20,
-    height: 20,
+    width: 25,
+    height: 25,
     zIndex: 10,
     marginRight: 5
   },
@@ -62,7 +62,8 @@ export const styles = StyleSheet.create({
     height: 100,
     justifyContent: "flex-start",
     textAlignVertical: "top",
-    borderColor: "#828282",
+    borderColor: "#fff",
+    backgroundColor: theme.colors.lightGray,
     borderWidth: 1,
     padding: 10,
   },
@@ -71,6 +72,7 @@ export const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
+    zIndex: 10
   },
   button: {
     position: "relative",

@@ -4,18 +4,16 @@ import {
 } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFormik } from "formik";
-import { Text } from "native-base";
+import { ScrollView, Text } from "native-base";
 import React, { useEffect, useState } from "react";
 import {
-  Image,
   Keyboard,
   Platform,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
+  View
 } from "react-native";
-import { assets } from "../../assets";
 import { HeaderChat } from "../../components/core/HeaderChat";
 import { LoadingScreen } from "../../components/core/LoadingScreen";
 import { AlertConfirm } from "../../components/core/Modal/AlertConfirm";
@@ -30,10 +28,11 @@ import { ChatMessage } from "../../modules/chat/api/chatMessage";
 import { UnreadMessages } from "../../modules/chat/api/unreadMessages";
 import { ENV, socket } from "../../utils";
 import { Color } from "../../utils/constantsStyle";
-import { styles } from "./styles/ChatScreen.style";
-import { getIconById } from "../../utils/util";
 import StyledText from "../../utils/globalstyle";
-import { LABEL } from "../../utils/labels";
+import { getIconById } from "../../utils/util";
+import { styles } from "./styles/ChatScreen.style";
+import * as ImagePicker from 'expo-image-picker';
+
 
 export function ChatScreenSupervisor() {
   const {accessToken, user} = useAuth();
@@ -42,10 +41,13 @@ export function ChatScreenSupervisor() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isMenuSettings, setIsMenuSettings] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [photos, setPhotos] = useState([]);
   const [questions] = useState([
-    "What service do you need?",
-    "How can we help you?",
-    "We have services available for you?",
+    "What type of cleaning service is required for this job?",
+    "When and where do you need the service?",
+    "Is the cleaning service urgent?",
+    "What are the specific cleaning tasks that need to be completed?",
+    "How many cleaning staff will be assigned to the job?",
   ]);
   const [optionsSettings] = useState(["Delete Chat", "Settings"]);
   const {chatId, userName} = route.params;
@@ -104,6 +106,52 @@ export function ChatScreenSupervisor() {
     }
   };
 
+
+  const openGallery = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Sorry, we need camera roll permissions to make this work!');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true,
+      quality: 1,
+    });
+
+
+    if (!result.canceled) {
+      const selectedPhotos = result.assets.map(asset => asset.uri);
+      setPhotos(prevPhotos => [...prevPhotos, ...selectedPhotos]);
+      setIsModalVisible(true);
+    }
+  };
+
+
+  const openCamera = async () => {
+    console.log("Opening camera...");
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Sorry, we need camera permissions to make this work!');
+      return;
+    }
+
+    try {
+      const result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+      });
+
+      if (!result.canceled) {
+        const selectedPhotos = result.assets.map(asset => asset.uri);
+        setPhotos(prevPhotos => [...prevPhotos, ...selectedPhotos]);
+      }
+    } catch (error) {
+      console.error("Error launching camera: ", error);
+    }
+  };
+
   useEffect(() => {
     const showKeyboardSub = Keyboard.addListener("keyboardDidShow", e => {
       const {startCoordinates} = e;
@@ -124,9 +172,10 @@ export function ChatScreenSupervisor() {
           accessToken,
           chatId
         );
+
         if (data?.messages) {
 
-          setMessages(messages);
+          setMessages(data.messages);
           unreadMessagesController.setTotalReadMessages(
             chatId,
             data.total
@@ -228,10 +277,13 @@ export function ChatScreenSupervisor() {
                   />
                   <View style={styles.contente__icons}>
                     <TouchableOpacity
+                    onPress={() => openGallery()}
                       style={{width: 28, height: 28, marginRight: 15}}>
                     {getIconById("iconClip")}
                     </TouchableOpacity>
-                    <TouchableOpacity style={{width: 25, height: 25}}>
+                  <TouchableOpacity
+                    onPress={() => openCamera()}
+                    style={{ width: 25, height: 25 }}>
                     {getIconById("iconCamera")}
                     </TouchableOpacity>
                   </View>
@@ -268,33 +320,25 @@ export function ChatScreenSupervisor() {
               )}
             </View>
             {isMenuVisible && (
-              <View
+              <ScrollView
                 style={styles.menu__questions}
               >
-                {questions.map((question, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => handleQuestionSelect(question)}
-                    style={{
-                      padding: 14,
-                      backgroundColor: Color.colorWhitesmoke_100,
-                      marginBottom: 5,
-                    }}
-                  >
-                    <StyledText>{question}</StyledText>
-                  </TouchableOpacity>
-                ))}
-                <View>
-                  <TouchableOpacity>
-                    <LinearGradient
-                      style={styles.btnCreateService}
-                      colors={["#CEDC39", "#7DA74D"]}
+                <View style={{ paddingBottom: 50 }}>
+                  {questions.map((question, index) => (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => handleQuestionSelect(question)}
+                      style={{
+                        padding: 14,
+                        backgroundColor: Color.colorWhitesmoke_100,
+                        marginBottom: 5,
+                      }}
                     >
-                      <StyledText regularWhite>{LABEL.CHAT_SUPERVISOR_BTN_CREATE_SERVICE}</StyledText>
-                    </LinearGradient>
-                  </TouchableOpacity>
+                      <StyledText>{question}</StyledText>
+                    </TouchableOpacity>
+                  ))}
                 </View>
-              </View>
+              </ScrollView>
             )}
           </View>
         </View>

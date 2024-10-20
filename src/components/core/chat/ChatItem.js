@@ -42,50 +42,54 @@ export function ChatItem({ chat, isCustomer, upTopChat }) {
 
   useEffect(() => {
     if (isFocused) {
-      //Ejecuta la cache no manda llamar de nuevo a los servicios cuando hago go back
 
-      (async () => {
-        try {
-          const { data } = await chatControllerMessage.getTotal(
-            accessToken,
-            chat.idChat
-          );
+      if (chat.idChat) {
+        (async () => {
+          try {
+            const { data } = await chatControllerMessage.getTotal(
+              accessToken,
+              chat.idChat
+            );
 
-          setTotalMessages(data.total);
+            setTotalMessages(data.total);
 
-          const totalReadMessages =
-            await unreadMessagesController.getTotalReadMessages(chat.idChat);
-        } catch (error) {
-          console.error(error);
-        }
-      })();
+            const totalReadMessages =
+              await unreadMessagesController.getTotalReadMessages(chat.idChat);
+          } catch (error) {
+            console.error(error);
+          }
+        })();
+      }
     }
   }, [isFocused]);
 
   useEffect(() => {
+
     const fetchLastMessage = async () => {
       try {
         const response = await chatController.getLastMessage(
           accessToken,
-          chat?.idChat
+          chat.idChat // No es necesario usar optional chaining aquí
         );
         if (!isEmpty(response.data)) {
-          setLastMessage(response?.data);
+          setLastMessage(response.data);
         }
       } catch (error) {
         console.error("Error fetching last message:", error);
       }
     };
 
-    fetchLastMessage();
+    if (chat.idChat) {
+      fetchLastMessage();
+    }
   }, [chat.idChat]);
+
 
   useEffect(() => {
     if (!socket) {
       console.error("Socket not initialized");
       return;
     }
-
     socket.emit("subscribe", `${chat?.idChat}_notify`);
     socket.on("message_notify", newMessage);
 

@@ -17,7 +17,7 @@ export function PendingSupervisorNavigation() {
     }>
 
       <Stack.Screen
-        name={screens.tab.pedings.pendingSupervisorScreen}
+        name={screens.tab.pedings.pendingSupervisorScreen + "Nav"}
         component={PendingScreen}
         options={{ headerShown: false }}
       />

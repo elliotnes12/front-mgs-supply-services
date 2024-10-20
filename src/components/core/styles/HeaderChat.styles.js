@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "flex-start",
     flexDirection: "row",
-    paddingTop: 10,
+    marginTop: 10,
   },
   title: {
     color: "#fff",
@@ -106,12 +106,29 @@ export const styles = StyleSheet.create({
     color: "#46526a",
     textAlign: "left",
     height: "100%",
-    paddingTop: 2,
+    paddingTop: 5,
     flex: 2,
   },
   menuVertical: {
     width: 45,
     height: 45,
     paddingRight: 20
+  },
+  boxSearch: {
+    height: 140,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    justifyContent: "center",
+    paddingLeft: 5
+  },
+  boxInputSearch: {
+
+    padding: 5,
+    backgroundColor: "#fff",
+    width: "80%",
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    flexDirection: "row"  
   }
+
 });

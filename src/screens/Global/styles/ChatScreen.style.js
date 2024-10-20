@@ -138,11 +138,13 @@ export const styles = StyleSheet.create({
     },
    menu__questions: {
       position: "absolute",
-      bottom: 80,
-      right: 10,
+      bottom: 60,
+      right: 20,
       backgroundColor: "#fff",
-      padding: 10,
+      padding: 20,
+      height: 380,
       borderRadius: 5,
+      paddingVertical: 25
    },
    btn_questions: {
       width: "100%",

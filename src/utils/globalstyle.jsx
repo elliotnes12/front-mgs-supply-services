@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import { theme } from "./theme";
 import { LinearGradient } from "expo-linear-gradient";
 import { getIconById } from "./util";
+import {View} from "react-native";
 
 const styles = StyleSheet.create({
   headerBig: {
@@ -54,13 +55,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     width: 220,
+    zIndex: 10,
   },
   gradientButtonSmall: {
-    padding: 5,
+    flexDirection: "row",
+    padding: 8,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    minWidth: 100,
     marginEnd: 18,
     height: 43.5,
   },
@@ -115,7 +118,9 @@ const styles = StyleSheet.create({
   neutralGray: {
     color: theme.colors.neutralGray,
   },
-
+  gray: {
+    color: "#828282",
+  },
   textGreen2: {
     color: "#7EA74C",
   },
@@ -130,6 +135,9 @@ const styles = StyleSheet.create({
   gradientButtonTextsmall: {
     fontFamily: theme.textStyles.regular,
     fontSize: 15,
+  },
+  readOnly: {
+    backgroundColor: "#F2F2F2",
   },
 });
 
@@ -160,10 +168,12 @@ export default function StyledText({
   brightRed,
   neutralGray,
   gold,
+  gray,
   titlleBig,
   line20,
   white,
   paraStyles,
+  readOnly,
 }) {
   const textStyles = [
     bold && styles.textBold,
@@ -192,19 +202,25 @@ export default function StyledText({
     textGreen2 && styles.textGreen2,
     line20 && styles.line20,
     white && styles.white,
+    gray && styles.gray,
     lightGray && styles.lightGray,
     neutralGray && styles.neutralGray,
+    readOnly && styles.readOnly,
   ];
 
   return <Text style={[textStyles, paraStyles]}>{children}</Text>;
 }
 
-export function StyledGradientButton({ text, action }) {
-  const buttonStyles = [];
+export function StyledGradientButton({text, action, disabled = false}) {
+  // Colores del gradiente: si está deshabilitado, aplica colores diferentes
+  const gradientColors = disabled
+    ? [theme.disabled.color1, theme.disabled.color2] // Colores para estado deshabilitado
+    : [theme.gradient.color1, theme.gradient.color2]; // Colores normales
+
   return (
-    <Pressable onPress={action}>
+    <Pressable disabled={disabled} onPress={action}>
       <LinearGradient
-        colors={[theme.gradient.color1, theme.gradient.color2]}
+        colors={gradientColors} // Aplica los colores condicionalmente
         style={styles.gradientButton}
       >
         <Text style={styles.gradientButtonText}>{text}</Text>
@@ -216,20 +232,27 @@ export function StyledGradientButtonSmall({
   text,
   action = () => {},
   focused,
+  icon,
 }) {
   const gradientColors = focused
     ? [theme.gradientsmall.color1Focused, theme.gradientsmall.color2Focused]
-    : [theme.gradientsmall.color1, theme.gradientsmall.color2];
+    : [theme.colors.gray6, theme.colors.gray6];
 
   const textColor = focused ? "#fff" : theme.colors.darkGray;
 
+  const whatIcon = focused ? icon + "Focus" : icon + "Blur";
   return (
     <Pressable onPress={action}>
       <LinearGradient
         colors={gradientColors}
         style={styles.gradientButtonSmall}
       >
-        <Text style={[styles.gradientButtonTextsmall, { color: textColor }]}>
+        {icon && (
+          <View style={{width: 22, height: 22, marginRight: 5}}>
+            {getIconById(whatIcon)}
+          </View>
+        )}
+        <Text style={[styles.gradientButtonTextsmall, {color: textColor}]}>
           {text}
         </Text>
       </LinearGradient>

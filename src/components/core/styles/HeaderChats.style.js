@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
       },
       chats_header__content: {
         paddingHorizontal: 22,
-        paddingTop: 10,
         position: "relative",
+        flex: 1,
         justifyContent: "space-between",
         alignItems: "center",
         display: "flex",

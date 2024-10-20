@@ -35,7 +35,8 @@ export const theme = {
         darkGray: "#4f4f4f",
         colorSilver_100: "#c4c4c4",
         gray4: "#bdbdbd",
-        neutralGray: "#828282"
+        neutralGray: "#828282",
+        disabled: "#d3d3d3"
     },
     textStyles: {
         bold: "Poppins_700Bold",
@@ -47,6 +48,10 @@ export const theme = {
         color1: "#CEDC39",
         color2: "#7DA74D",
 
+    },
+    disabled: {
+        color1: '#cccccc',
+        color2: '#999999'
     },
     gradientsmall: {
         color1: "#fff",

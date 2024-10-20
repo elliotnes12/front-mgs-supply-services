@@ -11,18 +11,18 @@ import { User } from "../../../../api/user";
 import { ChatItem } from "../../../../components/core/chat/ChatItem";
 import { HeaderChats } from "../../../../components/core/HeaderChats";
 import { LoadingScreen } from "../../../../components/core/LoadingScreen";
-import { screens } from "../../../../utils";
+import { screens, socket } from "../../../../utils";
 import { getIconById } from "../../../../utils/util";
 import { useAuth } from "../../../Auth/hooks";
 import { Chat } from "../../api/Chat";
 import { styles } from "../../styles/chatsScreen.employees.styles";
-import { socket } from "../../../../utils";
+import StyledText from "../../../../utils/globalstyle";
 
 export function ChatsScreenEmployee() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [chats, setChats] = useState(null);
+  const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const { userInfo, isCustomer, accessToken, user } = useAuth();
@@ -48,13 +48,40 @@ export function ChatsScreenEmployee() {
     })();
   }, []);
 
+
+  useEffect(() => {
+    if (!socket) {
+      console.error("Socket not initialized");
+      return;
+    }
+    socket.emit("subscribe", `user_channel_${user._id}`);
+    socket.on("message_notify", (newChat) => {
+
+      setChats((prevChats) => {
+
+        const chatExists = prevChats.some(chat => chat.idChat === newChat.idChat);
+
+        if (!chatExists) {
+
+          return [newChat, ...prevChats].sort((a, b) => new Date(b.last_message_chat) - new Date(a.last_message_chat));
+        }
+
+        return prevChats.map(chat => chat.idChat === newChat.idChat ? newChat : chat);
+      });
+    });
+
+    return () => {
+      socket.emit("unsubscribe", `user_channel_${user._id}`);
+      socket.off("message_notify", undefined);
+    };
+  }, []);
+
   useFocusEffect(
     useCallback(() => {
       setLoading(true);
       (async () => {
         try {
           const response = await chatController.getAll(accessToken);
-
           if (response && response?.data) {
             const result = response.data.sort((a, b) => {
               const dateA = new Date(a.last_message_chat);
@@ -64,6 +91,7 @@ export function ChatsScreenEmployee() {
             setChats(result);
           }
         } catch (error) {
+          console.log(error)
           setChats([]);
         } finally {
           setLoading(false);
@@ -99,7 +127,6 @@ export function ChatsScreenEmployee() {
     }
   };
 
-  if (!chats) return <LoadingScreen />;
   return (
     <TouchableWithoutFeedback onPress={handleClickOutside}>
       <View style={styles.background}>
@@ -117,28 +144,33 @@ export function ChatsScreenEmployee() {
             ))}
           </View>
         )}
-        <View style={{ flex: 1 }}>
-          <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 0 }}>
-            <View style={styles.recentChatsContainer}>
-              {chats.length > 0 ? (
-                chats.map((chat) => (
-                  <ChatItem
-                    upTopChat={upTopChat}
-                    setMenu
-                    key={chat?.idChat?.toString()}
-                    chat={chat}
-                    isCustomer={isCustomer}
-                    token={accessToken}
-                  />
-                ))
-              ) : (
-                <View style={styles.noChats}>
-                  <Text style={styles.noChatsText}>Empty</Text>
-                </View>
-              )}
-            </View>
-          </ScrollView>
-        </View>
+        {!loading &&
+          <View style={{ flex: 1 }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 0 }}>
+              <View style={styles.recentChatsContainer}>
+                {chats.length > 0 ? (
+                  chats.map((chat) => (
+                    <ChatItem
+                      upTopChat={upTopChat}
+                      setMenu
+                      key={chat?.idChat?.toString()}
+                      chat={chat}
+                      isCustomer={isCustomer}
+                      token={accessToken}
+                    />
+                  ))
+                ) : (
+                  <View style={styles.noChats}>
+                    <StyledText regularGreen>Chats not found</StyledText>
+                  </View>
+                )}
+              </View>
+            </ScrollView>
+          </View>
+        }
+        {loading &&
+          <LoadingScreen />
+        }
         <TouchableOpacity
           onPress={() =>
             navigation.navigate(screens.tab.chats.chatContactsScreenEmployee)

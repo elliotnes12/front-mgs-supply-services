@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
     width: 106,
     borderRadius: 5,
     fontSize: 12,
+    alignItems: "center",
     backgroundColor: Color.bottomGradiente,
   },
   item__titleCategory: {

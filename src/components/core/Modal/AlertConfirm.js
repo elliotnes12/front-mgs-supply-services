@@ -5,12 +5,9 @@ import { styles } from "./styles/AlertConfirm.styles";
 import StyledText from "../../../utils/globalstyle";
 
 export function AlertConfirm(props) {
-  const { show, onClose, title, message, textConfirm, onConfirm, isDanger } =
+  const { show, onClose, title, message, textConfirm, onConfirm, isDanger, loading } =
     props;
-  const [loading, setLoading] = useState(false);
-
   const onConfirmWrapper = () => {
-    setLoading(true);
     onConfirm();
   };
 

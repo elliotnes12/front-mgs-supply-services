@@ -3,6 +3,16 @@ import { Border, Color, FontSize } from "../../../utils/constantsStyle";
 import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
+
+  bgRating: {
+    position: "absolute",
+    height: 120,
+    zIndex: 10,
+    width: "102%",
+    backgroundColor: "rgba(125, 167, 77, 0.7)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   item: {
     flexDirection: "row",
     width: "100%",
@@ -21,6 +31,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Color.blanco,
     paddingTop: 10,
     paddingLeft: 5,
+    overflow: "hidden"
   },
   item__img: {
     width: 100,
@@ -58,21 +69,8 @@ export const styles = StyleSheet.create({
     height: 12.5,
   },
   item__date: {
-    position: "absolute",
-    right: 0,
-    bottom: -15,
-    display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    width: 130,
   },
-  item__datetext: {
-    color: Color.gray1,
-    fontSize: FontSize.textXsReguler_size,
-    marginLeft: 5,
-    height: 17,
-  },
-
   item__flechaContainer: {
     width: 20,
     height: 20,
@@ -93,4 +91,7 @@ export const styles = StyleSheet.create({
     left: 15,
     bottom: "15%",
   },
+  txtRating: {
+    color: theme.colors.secondary
+  }
 });

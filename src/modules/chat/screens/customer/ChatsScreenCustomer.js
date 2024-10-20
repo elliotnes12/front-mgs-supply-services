@@ -75,9 +75,9 @@ export function ChatsScreenCustomer() {
       try {
 
         const response = await chatController.create(accessToken, user._id, idUser);
-        const { meta: { code, message }, data } = response;
+        const { meta: { code }, data } = response;
 
-        if (code == 200) {
+        if (code == 200 || code == 201) {
 
           navigation.navigate(screens.tab.chats.customer.chatScreenCustomer, { chatId: data.chatId, userName: name });
 
@@ -110,7 +110,7 @@ export function ChatsScreenCustomer() {
   if (!users) return <LoadingScreen />;
 
   return (
-    <ScrollView style={{ flex: 1, padding: 0, margin: 0 }} alwaysBounceVertical={false}>
+    <ScrollView style={{ flex: 1, padding: 0, margin: 0, backgroundColor: "#f2f2f2" }} alwaysBounceVertical={false}>
       <Header title={"Chat"} headerType={"headerContact"} support={true} />
       <View style={styles.container}>
         <Text style={styles.chatsTitle}>Support Team</Text>

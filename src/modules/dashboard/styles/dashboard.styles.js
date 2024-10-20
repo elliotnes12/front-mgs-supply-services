@@ -5,9 +5,7 @@ import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
   background: {
-    flexGrow: 1,
-    height: "100%",
-    backgroundColor: "#fff",
+    flex: 1,
     paddingHorizontal: 24,
     paddingBottom: 40,
   },
@@ -15,7 +13,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 24,
     marginTop: 5,
-    flexGrow: 1,
+    flex: 1,
   },
   header: {
     backgroundColor: "#fff",

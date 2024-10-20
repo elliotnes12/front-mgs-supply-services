@@ -12,7 +12,10 @@ const global = {
   groupProfileScreen: "GroupProfileScreen",
   addUserGroupScreen: "AddUserGroupScreen",
   settingScreen: "SettingsScreen",
-  tokenVerification: "EmailTokenVerificationScreen"
+  tokenVerification: "EmailTokenVerificationScreen",
+  detailService: "DetailService",
+  updateService: "UpdateService",
+  completeService: "CompleteService"
 };
 
 const workFlow = {

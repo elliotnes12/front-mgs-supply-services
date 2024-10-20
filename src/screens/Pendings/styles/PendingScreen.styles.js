@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Border, Color, FontSize } from "../../../utils/constantsStyle";
+import { theme } from "../../../utils/theme";
 
 export const styles = StyleSheet.create({
   gradient: {
@@ -20,26 +21,23 @@ export const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   container_item: {
-    paddingVertical: 5,
-    position: "relative",
-    display: "flex",
-    justifyContent: "space-between",
     flexDirection: "row",
     width: "100%",
-    borderRadius: Border.br_3xs,
+    position: "relative",
+    marginBottom: 10,
     shadowOpacity: 1,
-    elevation: 5,
-    shadowRadius: 5,
     shadowOffset: {
       width: 0,
       height: 5,
     },
-    shadowColor: Color.gray1,
-    paddingTop: 15,
-    minHeight: 153,
-    paddingLeft: 10,
+    elevation: 10,
+    shadowRadius: 10,
+    shadowColor: "#333",
+    borderRadius: Border.br_3xs,
+    minHeight: 120,
     backgroundColor: Color.blanco,
-    marginBottom: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
   },
   office: {
     fontFamily: "Poppins_700Bold",
@@ -55,7 +53,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
-    fontSize: 15,
+
   },
   notice_description: {
     fontWeight: "300",
@@ -83,6 +81,7 @@ export const styles = StyleSheet.create({
   item: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
     alignItems: "center",
     width: "100%",
     marginBottom: 5,
@@ -92,9 +91,9 @@ export const styles = StyleSheet.create({
     width: 40,
     borderRadius: 20,
     overflow: "hidden",
-    borderWidth: 4,
-    borderColor: "#fff",
     marginRight: 10,
+    backgroundColor: theme.gradient.color1,
+    padding: 5
   },
   container__item: {
     alignItems: "flex-end",
@@ -116,11 +115,12 @@ export const styles = StyleSheet.create({
   options: {
     display: "flex",
     flexDirection: "row",
-    width: 120,
     height: "100%",
     justifyContent: "space-between",
     alignItems: "center",
-    position: "relative",
+    paddingTop: 20,
+    flex: 1,
+    marginLeft: 5,
   },
   options__item: {
     flex: 1,

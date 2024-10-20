@@ -13,13 +13,6 @@ export const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      },
-    item__estatus: {
-        color: Color.fontWhite,
-        fontWeight: "300",
-        lineHeight: 24,
-        textAlign: "left",
-        fontSize: FontSize.paragraphRegularSmall_size,
     },
     aprobado: {
         backgroundColor: "#ECB403",

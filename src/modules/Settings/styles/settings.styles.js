@@ -5,20 +5,33 @@ import { theme } from "../../../utils/theme";
 export const styles = StyleSheet.create({
   background: {
     height: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.gray6,
   },
   container: {
     justifyContent: "flex-start",
-    alignItems: "center",
     flex: 1,
   },
+  containerFields: {
+    paddingHorizontal: 30,
+  },
+  bgContainerAvatar: {
+    backgroundColor: "#fff",
+    width: "100%",
+    alignItems: "center",
+    marginBottom: 20,
+    paddingBottom: 15
+  },
   containerImg: {
-    width: 140,
-    height: 140,
+    width: 100,
+    height: 100,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: 10,
     marginTop: 20,
+    padding: 5,
+    borderWidth: 1,
+    borderColor: theme.gradient.color1,
+    borderRadius: 50
   },
   imgProfile: {
     width: 80,
@@ -37,17 +50,21 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   field: {
-    borderColor: Color.gray1,
-    borderWidth: 1,
+    backgroundColor: "#fff",
     alignSelf: "stretch",
     marginBottom: 20,
-    borderRadius: 18,
+    borderRadius: 10,
     height: 40,
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: 'row',
-    width: 300,
+    width: 340,
     overflow: "hidden",
+  },
+  iconField: {
+    width: 25,
+    height: 25,
+    marginHorizontal: 10
   },
   input: {
     fontFamily: "Poppins_400Regular",
@@ -55,14 +72,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: '80%',
     color: "#000",
-    paddingHorizontal: 13,
     maxWidth: 250,
-    paddingLeft: 20,
+    paddingLeft: 10,
   },
   signOff: {
     fontSize: 18,
     borderRadius: 50,
-    width: 170,
     height: 50,
     justifyContent: "center",
     alignItems: "center",
@@ -76,4 +91,10 @@ export const styles = StyleSheet.create({
   errorlogin: {
     color: '#dc3545',
   },
+  actions: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomWidth: 18,
+    borderBottomColor: "#fff"
+  }
 });

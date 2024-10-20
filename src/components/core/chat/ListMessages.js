@@ -3,6 +3,7 @@ import { FlatList, View } from 'react-native';
 import { ItemText } from './ItemText';
 import { ItemImage } from './ItemImage';
 import { styles } from '../styles/ListMessages.styles';
+import { useEffect } from 'react';
 
 export function ListMessages({ messages }) {
   const flatListRef = useRef();

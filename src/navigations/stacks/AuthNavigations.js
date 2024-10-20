@@ -28,15 +28,18 @@ export function AuthNavigation() {
         component={RegisterScreen}
         options={{ headerShown: false }}
       />
+
       <Stack.Group
         screenOptions={{ presentation: "modal", ...styles.modalStyles }}
       >
+
         <Stack.Screen
-          name={"EmailTokenVerificationScreen"}
+          name={screens.global.tokenVerification}
           component={EmailTokenVerificationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Group>
+
     </Stack.Navigator>
   );
 }

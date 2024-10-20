@@ -45,4 +45,7 @@ export const style = StyleSheet.create({
   buttom: {
     marginTop: 25,
   },
+  timerText: {
+    marginTop: 20
+  }
 });

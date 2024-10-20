@@ -17,7 +17,7 @@ export function SettingsNavigation() {
      }>
 
       <Stack.Screen
-        name={screens.global.settingScreen}
+        name={screens.global.settingScreen + "Nav"}
         component={SettingsScreen}
         options={{headerShown:false}}
       />

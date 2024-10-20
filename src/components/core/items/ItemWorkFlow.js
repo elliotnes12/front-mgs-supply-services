@@ -1,18 +1,23 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import React, { } from "react";
+import { View, TouchableOpacity } from "react-native";
 import { styles } from "./styles/ItemWorkFlow.styles";
 import { stylesGlobal } from "../../../modules/styles/global.style";
-import { assets } from "../../../assets";
 import { LinearGradient } from "expo-linear-gradient";
 import { getIconById } from "../../../utils/util";
 import StyledText from "../../../utils/globalstyle";
+import { useNavigation } from "@react-navigation/native";
+import { screens } from "../../../utils";
 
-export function ItemWorkFlow({ item }) {
-  // Divide los empleados en filas de dos
+export function ItemWorkFlow({ item, setIsModalVisible, setSelectedId }) {
+
+  const navigation = useNavigation();
+
   const employeeRows = [];
   for (let i = 0; i < item.employees.length; i += 2) {
     employeeRows.push(item.employees.slice(i, i + 2));
   }
+
+
 
   return (
     <View style={styles.item}>
@@ -22,7 +27,7 @@ export function ItemWorkFlow({ item }) {
         </View>
         <View style={styles.item__supervisor}>
           <StyledText font17pt bold>
-            {item.supervisor}
+            {item?.supervisor?.name + " " + item?.supervisor.lastName}
           </StyledText>
         </View>
 
@@ -30,21 +35,19 @@ export function ItemWorkFlow({ item }) {
           colors={["#CEDC39", "#7DA74D"]}
           style={styles.item__etqSupervisor}
         >
-          <View style={styles.item__textSupervisor}>
-            <StyledText font14pt regularWhite>
-              Supervisor
-            </StyledText>
-          </View>
+          <StyledText font14pt regularWhite>
+            Supervisor
+          </StyledText>
         </LinearGradient>
       </View>
       <StyledText font16pt bold>
-        {item.title}
+        {item?.customer?.businessType} {item.category}
       </StyledText>
       <View style={stylesGlobal.itemHorizontal}>
         <View style={stylesGlobal.imageSmall}>{getIconById("notice")}</View>
         <View style={styles.item__titleCategory}>
           <StyledText font14pt regularGray>
-            {item.subTitle}
+            {item.category} the {item?.customer?.businessType}
           </StyledText>
         </View>
       </View>
@@ -73,7 +76,10 @@ export function ItemWorkFlow({ item }) {
               </View>
               <View style={styles.item__employee_name}>
                 <StyledText font14pt regularGray>
-                  {employee.name}
+                  {employee.name + " " + employee.lastName}
+                </StyledText>
+                <StyledText font14pt regularGray>
+                  {employee.idEmployee}
                 </StyledText>
               </View>
             </View>
@@ -82,7 +88,14 @@ export function ItemWorkFlow({ item }) {
       ))}
 
       <View style={stylesGlobal.itemHorizontal}>
-        <TouchableOpacity style={[styles.btnEdit, stylesGlobal.itemHorizontal]}>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate(
+            screens.global.updateService,
+            {
+              serviceId: item.id
+            }
+          )
+        }} style={[styles.btnEdit, stylesGlobal.itemHorizontal]}>
           <View
             style={[
               stylesGlobal.imageMin,
@@ -98,6 +111,10 @@ export function ItemWorkFlow({ item }) {
 
         <TouchableOpacity
           style={[styles.btnCancel, stylesGlobal.itemHorizontal]}
+          onPress={() => {
+            setIsModalVisible(true)
+            setSelectedId(item.id)
+          }}
         >
           <View style={[{ height: 30, width: 30, marginRight: 5 }]}>
             {getIconById("iconCancel")}
@@ -107,6 +124,7 @@ export function ItemWorkFlow({ item }) {
           </StyledText>
         </TouchableOpacity>
       </View>
+
     </View>
   );
 }

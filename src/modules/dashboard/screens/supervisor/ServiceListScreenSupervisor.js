@@ -1,78 +1,58 @@
-import { useNavigation } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
-import { map } from "lodash";
-import { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, Dimensions } from "react-native";
-import { TabBar, TabView } from "react-native-tab-view";
+import { useCallback, useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, LayoutAnimation } from "react-native";
 import { ItemServiceSupervisor } from "../../../../components/core/items/ItemService";
-import { screens, tabIds } from "../../../../utils";
 import { styles } from "./ServiceListScreenSupervisor.styles";
 import { Service } from "../../../../api/service";
 import { useAuth } from "../../../Auth/hooks";
+import { LoadingScreen } from "../../../../components/core/LoadingScreen";
 import StyledText from "../../../../utils/globalstyle";
+import { LinearGradient } from "expo-linear-gradient";
+import { getIconById } from "../../../../utils/util";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { screens } from "../../../../utils";
 
 export const ServiceListScreenSupervisor = () => {
-  const [index, setIndex] = useState(0);
-  const [height, setHeight] = useState(Dimensions.get("window").height);
-  const controllerService = new Service();
+  const [selectedTab, setSelectedTab] = useState("services");
   const [services, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
-  const { accessToken } = useAuth();
-  const initialLayout = { width: "100%" };
+  const { accessToken, userInfo } = useAuth();
+  const controllerService = new Service();
 
-  const routes = [
-    { key: tabIds.TAB_ID_SERVICES, title: "services", label: "services" },
-    { key: tabIds.TAB_ID_PRODUCTS, title: "products", label: "Orders" },
-  ];
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await controllerService.findAllServices(accessToken);
-        setServices(data);
-      } catch (error) {
-        setServices([]);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    switch (routes[index].key) {
-      case tabIds.TAB_ID_SERVICES:
-        setHeight((services.length + 1) * 130);
-        break;
-      case tabIds.TAB_ID_PRODUCTS:
-      case tabIds.TAB_ID_RAITING:
-        setHeight(140);
-        break;
-      default:
-        setHeight(0);
-    }
-  }, [index, services]);
-
-  const renderScene = ({ route }) => {
-    switch (route.key) {
-      case tabIds.TAB_ID_SERVICES:
-        return <RenderLastServices navigation={navigation} />;
-      case tabIds.TAB_ID_PRODUCTS:
-        return <RenderLastProducts />;
-      default:
-        return null;
-    }
-  };
-
-  const RenderLastProducts = () => (
-    <View style={[styles.scene, styles.backgroundWhite]}>
-      <Text>Contenido de la segunda pestaña</Text>
-    </View>
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        try {
+          setIsLoading(true);
+          const { data, meta } = await controllerService.findAllServices(accessToken, userInfo._id);
+          console.log(meta)
+          setServices(data);
+        } catch (error) {
+          setServices([]);
+        } finally {
+          setIsLoading(false);
+        }
+      })();
+    }, [])
   );
 
-  const RenderLastServices = ({ navigation }) => (
-    <View style={{ flex: 1 }}>
-      <View style={styles.options}>
-        <StyledText font17pt bold>
-          Services Generated
-        </StyledText>
+  const routes = [
+    { key: "services", label: "Services", icon: "iconDocument" },
+    { key: "products", label: "Products", icon: "iconDocument" },
+  ];
+
+
+  const handleTabChange = (tabKey) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setSelectedTab(tabKey);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={{ marginVertical: 10 }}>
+        <StyledText font17pt boldGray>Services Generated</StyledText>
+      </View>
+      <View style={{ flexDirection: "row-reverse" }}>
         <TouchableOpacity
           onPress={() => navigation.navigate(screens.tab.services.root)}
         >
@@ -81,46 +61,58 @@ export const ServiceListScreenSupervisor = () => {
           </StyledText>
         </TouchableOpacity>
       </View>
-      {map(services, (element, id) => {
-        return <ItemServiceSupervisor key={id} item={element} />;
-      })}
-    </View>
-  );
+      <View style={styles.tabContainer}>
+        {routes.map((route) => (
+          selectedTab === route.key ? (
+            <LinearGradient
+              key={route.key}
+              colors={["#CEDC39", "#7DA74D"]}
+              style={[selectedTab === "services" ? { marginRight: 10 } : {}, styles.gradient]}
+            >
+              <TouchableOpacity
+                onPress={() => handleTabChange(route.key)}
+                style={[styles.tabButtonActive, { flexDirection: "row" }]}
+              >
+                <View style={{ width: 20, height: 20, marginRight: 5 }}>
+                  {getIconById(route.icon + "White")}
+                </View>
+                <StyledText regularWhite>{route.label}</StyledText>
+              </TouchableOpacity>
+            </LinearGradient>
+          ) : (
+              <TouchableOpacity
+                key={route.key}
+                onPress={() => handleTabChange(route.key)}
+                style={[styles.tabButton, { flexDirection: "row" }]}
+              >
+                <View style={{ width: 20, height: 20, marginRight: 5 }}>
+                  {getIconById(route.icon + "Gray")}
+                </View>   
+                <StyledText regularGray>{route.label}</StyledText>
+              </TouchableOpacity>
+            )
+        ))}
+      </View>
 
-  const renderTabBar = (props) => (
-    <TabBar
-      {...props}
-      indicatorStyle={styles.indicatorStyle}
-      pressColor="white"
-      style={styles.tabBarStyle}
-      tabStyle={styles.tabStyle}
-      renderLabel={({ route, focused }) =>
-        focused ? (
-          <LinearGradient
-            colors={["#CEDC39", "#7DA74D"]}
-            style={styles.gradient}
-          >
-            <StyledText regularWhite>{route.label}</StyledText>
-          </LinearGradient>
+      <View style={styles.contentContainer}>
+        {isLoading ? (
+          <LoadingScreen />
+        ) : selectedTab === "services" ? (
+          services.length > 0 ? (
+            services.map((item) => (
+              <ItemServiceSupervisor key={item.id} item={item} />
+            ))
+          ) : (
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+              <StyledText regularGreen>No services available.</StyledText>
+            </View>
+          )
         ) : (
-          <View style={styles.tabItem}>
-            <StyledText graySilver regularWhite>
-              {route.label}
-            </StyledText>
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <StyledText regularGreen>No products available.</StyledText>
           </View>
-        )
-      }
-    />
-  );
-
-  return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      style={{ height: height }}
-      onIndexChange={setIndex}
-      initialLayout={initialLayout}
-      renderTabBar={renderTabBar}
-    />
+        )}
+      </View>
+    </View>
   );
 };

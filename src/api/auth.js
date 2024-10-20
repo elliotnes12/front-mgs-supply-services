@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export class Auth {
 
 
-  async register(email, password, idEmployee, name) {
+  async register(email, password, idEmployee, name, businessName, businessType) {
     let json = undefined;
 
     const url = `${ENV.API_URL}/${ENV.ENDPOINTS.AUTH.REGISTER}`;
@@ -15,7 +15,7 @@ export class Auth {
       json = JSON.stringify({ email, password, idEmployee });
     }
     else {
-      json = JSON.stringify({ email, name, password });
+      json = JSON.stringify({ email, name, password, businessName, businessType });
     }
 
     const response = await fetch(url, this.getPostParams(json));
@@ -28,14 +28,25 @@ export class Auth {
     return await response.json();
   }
 
-
   async refreshAccessToken(refreshToken) {
-
     const url = `${ENV.API_URL}/${ENV.ENDPOINTS.AUTH.REFRESH_ACCESS_TOKEN}`;
-
     const response = await fetch(url, JSON.stringify({ refreshToken: refreshToken }));
     return await response.json();
   }
+
+  async validateCode(code, email) {
+    const url = `${ENV.API_URL}/${ENV.ENDPOINTS.AUTH.VALIDATE_CODE}`;
+    const response = await fetch(url, this.getPostParams(JSON.stringify({ code, email })));
+    return await response.json();
+  }
+
+  async generateCode(email) {
+
+    const url = `${ENV.API_URL}/${ENV.ENDPOINTS.AUTH.GENERATE_CODE}`;
+    const response = await fetch(url, this.getPostParams(JSON.stringify({ email })));
+    return await response.json();
+  }
+
 
   async setAccessToken(token) {
     await AsyncStorage.setItem(ENV.JWT.ACCESS, token);

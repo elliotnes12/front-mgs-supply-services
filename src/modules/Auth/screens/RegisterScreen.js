@@ -15,6 +15,7 @@ import { theme } from "../../../utils/theme";
 import { Response } from "../../../utils/Response";
 import { Auth } from "../../../api/auth";
 import { Picker } from '@react-native-picker/picker';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const authController = new Auth();
 const objectResponse = new Response();
@@ -62,31 +63,36 @@ export function RegisterScreen() {
         return false;
       }
 
-
       setLoading(true);
       setMessage("");
       setModalVisible(true)
-
       try {
         const response = await authController.register(
           formValue.email,
           formValue.password,
           formValue.employeeNumber,
-          formValue.name
+          formValue.name,
+          formValue.bussinessName,
+          formValue.bussinessType
         );
+
 
         const { code, message, data } = objectResponse.getResponse(response);
 
         if (code != 201) {
           throw Error(message);
         }
+
+        await AsyncStorage.setItem(ENV.STORAGE.EMAIL, formValue.email);
         toggleModal();
         setLoading(false);
         navigation.navigate(screens.global.tokenVerification);
+
       } catch (error) {
         setMessage(error.message);
         setLoading(false);
       }
+
     },
   });
 
@@ -184,19 +190,18 @@ export function RegisterScreen() {
 
 
             <View style={styles.field}>
-              <StyledText regularWhite>Type Bussiness</StyledText>
+              <StyledText regularWhite>Bussiness Type</StyledText>
               <View
                 style={[
                   styles.inputContainer,
-                  formik.errors.typeBussiness && styles.inputError,
+                  formik.errors.bussinessType && styles.inputError,
                 ]}>
 
                 <Picker
-                  selectedValue={formik.values.typeBussiness}
+                  selectedValue={formik.values.bussinessType}
                   style={styles.picker}
                   onValueChange={(itemValue) => {
-
-                    formik.setFieldValue("typeBussiness", itemValue);
+                    formik.setFieldValue("bussinessType", itemValue);
 
                     setTypeBussiness(itemValue)
                     if (itemValue != "NOTBUSSINESS") {
@@ -209,6 +214,7 @@ export function RegisterScreen() {
                   <Picker.Item label="Select a option" value="" />
                   <Picker.Item label="Not a Business" value="NOTBUSSINESS" />
                   <Picker.Item label="Hotel" value="Hotel" />
+                  <Picker.Item label="Hospital" value="Hospital" />
                   <Picker.Item label="Office" value="Office" />
                 </Picker>
 
@@ -220,7 +226,9 @@ export function RegisterScreen() {
               <>
 
                 <View style={styles.field}>
-                  <StyledText regularWhite>Bussiness Name</StyledText>
+                <StyledText regularWhite>
+                  {typeBussiness === "Hotel" ? "Hotel Name" : typeBussiness === "Hospital" ? "Hospital Name" : "Bussiness Name"}
+                </StyledText>
                   <View
                     style={[
                       styles.inputContainer,

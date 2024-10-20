@@ -51,7 +51,7 @@ export const handleSearch = async (text, setCoords, mapRef, setAddress) => {
 };
 
 // Función para seleccionar una dirección desde el mapa
-export const handleMapPress = async (e, setSelectedAddress, toggleModal, setMapClicked) => {
+export const handleMapPress = async (e, setSelectedAddress, setMapClicked) => {
     const { latitude, longitude } = e.nativeEvent.coordinate;
     try {
         const geocode = await Location.reverseGeocodeAsync({
@@ -64,7 +64,6 @@ export const handleMapPress = async (e, setSelectedAddress, toggleModal, setMapC
             const address = `${street}, ${city}, ${region} ${postalCode}`;
 
             setSelectedAddress(address);
-            toggleModal();
         }
     } catch (error) {
         console.error("Error al obtener la dirección:", error);

@@ -192,7 +192,7 @@ export default ({ toggleModal, setDateFrom, setDateUntil }) => {
 
     return (
         <>
-            <View style={[tw`h-auto self-stretch justify-center items-center border-[#eaeaea] overflow-hidden`, { borderWidth: 1.8, borderRadius: 10 }]}>
+            <View style={[tw`h-auto self-stretch justify-center items-center border-[transparent] overflow-hidden`, { borderWidth: 1.8, borderRadius: 10 }]}>
                 <View style={[tw`h-10 w-[100%] flex-row bg-white border-b border-b-[#eaeaea]`, { borderBottomWidth: 1.8, borderTopStartRadius: 2, borderTopEndRadius: 2 }]}>
 
                     <TouchableOpacity disabled={mesCuenta > 1 ? false : true} style={tw`w-12.5 h-[100%] justify-center items-center`} onPress={() => handleChangeMonth('-')}>

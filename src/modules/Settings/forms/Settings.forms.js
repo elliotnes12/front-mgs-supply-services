@@ -2,6 +2,10 @@ import * as Yup from "yup";
 
 export function initialValues() {
   return {
+    language: "",
+    ubication: "",
+    email: "",
+    businessType: "",
     name: "",
     lastName: "",
     company: "",

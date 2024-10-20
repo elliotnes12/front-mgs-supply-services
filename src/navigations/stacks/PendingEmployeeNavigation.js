@@ -17,7 +17,7 @@ export function PendingEmployeeNavigation() {
     }>
 
       <Stack.Screen
-        name={screens.tab.pedings.pendingScreenEmployee}
+        name={screens.tab.pedings.pendingScreenEmployee + "Nav"}
         component={PendingScreenEmployee}
         options={{ headerShown: false }}
       />

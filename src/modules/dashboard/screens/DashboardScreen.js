@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Animated,
   Easing,
@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Service } from "../../../api/service";
+import RatingModal from "../../../components/core/Modal/RatingModal";
 import { ENV, screens } from "../../../utils";
 import StyledText from "../../../utils/globalstyle";
 import { theme } from "../../../utils/theme";
@@ -25,8 +27,13 @@ export function DashboardScreen() {
   const { userInfo, isCustomer, accessToken } = useAuth();
 
   const { name } = userInfo;
+  const [infoRating, setInfoRating] = useState({})
+  const [isModalRating, setIsModalRating] = useState(false)
   const swingAnim = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
+  const controllerService = new Service();
+  const [isLoading, setIsLoading] = useState(false)
+  const [refreshServices, setRefreshServices] = useState(() => () => { });
 
   const animateAlert = () => {
     Animated.sequence([
@@ -65,6 +72,32 @@ export function DashboardScreen() {
     inputRange: [-1, 1],
     outputRange: ["-15deg", "15deg"],
   });
+
+  const sendRating = async (rating, comments) => {
+
+    try {
+      setIsLoading(true)
+      const { meta } = await controllerService.update(accessToken,
+        {
+          id: infoRating,
+          rating: rating,
+          comments: comments
+        });
+
+      if (meta.code != 200) {
+        throw new Error();
+      }
+
+      refreshServices();
+
+    }
+    catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+      setIsModalRating(false)
+    }
+  }
 
   const DashboardHeader = () => {
     return (
@@ -128,36 +161,43 @@ export function DashboardScreen() {
   };
 
   return (
-    <ScrollView
-      style={{ flexGrow: 1, padding: 0, margin: 0, backgroundColor: "#fff" }}
-      alwaysBounceVertical={false}
-    >
-      {<DashboardHeader />}
-      <View style={styles.background}>
-        {isCustomer && (
-          <>
-            {<Banner />}
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        alwaysBounceVertical={false}
+      >
+        <DashboardHeader />
+        <View style={styles.background}>
+          {isCustomer && (
+            <>
+              <Banner />
+              <View style={{ marginVertical: 10 }}>
+                <StyledText bold font20pt>Choose a category</StyledText>
+              </View>
+              <ServiceListScreenCt
+                setRefreshServices={setRefreshServices}
+                setIsModalRating={setIsModalRating}
+                setInfoRating={setInfoRating} />
+            </>
+          )}
+          {!isCustomer && userInfo.type === ENV.TYPES_USERS.SUPERVISOR && (
+            <ServiceListScreenSupervisor />
+          )}
+          {!isCustomer && userInfo.type === ENV.TYPES_USERS.EMPLOYEE && (
+            <ServiceListScreenEmployee />
+          )}
+          {!isCustomer && userInfo.type === ENV.TYPES_USERS.MANAGER && (
+            <ServiceListScreenManager />
+          )}
+        </View>
+      </ScrollView>
 
-            <View style={{ marginVertical: 10 }}>
-              <StyledText bold font20pt>
-                Choose a category
-              </StyledText>
-            </View>
-
-            <ServiceListScreenCt />
-          </>
-        )}
-        {!isCustomer && userInfo.type === ENV.TYPES_USERS.SUPERVISOR && (
-          <ServiceListScreenSupervisor />
-        )}
-
-        {!isCustomer && userInfo.type === ENV.TYPES_USERS.EMPLOYEE && (
-          <ServiceListScreenEmployee />
-        )}
-        {!isCustomer && userInfo.type === ENV.TYPES_USERS.MANAGER && (
-          <ServiceListScreenManager />
-        )}
-      </View>
-    </ScrollView>
+      <RatingModal
+        visible={isModalRating}
+        isLoading={isLoading}
+        onClose={() => setIsModalRating(false)}
+        onSubmit={sendRating}
+      />
+    </View>
   );
 }

@@ -11,5 +11,5 @@ export default function HandlerNavigation() {
 
     const { user } = useAuth();
 
-    return user ? <LocationProvider><AppNavigation /></LocationProvider> : <AuthNavigation />;
+    return user && user.active ? <LocationProvider><AppNavigation /></LocationProvider> : <AuthNavigation />;
 }

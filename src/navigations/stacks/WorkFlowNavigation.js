@@ -14,7 +14,7 @@ export function WorkFlowNavigation() {
             }
         }>
             <Stack.Screen
-                name={screens.tab.workFlow.root}
+                name={screens.tab.workFlow.root + "Nav"}
                 component={WorkFlowScreen}
                 options={{ headerShown: false }}
             />

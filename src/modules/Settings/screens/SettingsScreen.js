@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView, TextInput, TouchableOpacity, View, Text } from "react-native";
+import { Image, SafeAreaView, TextInput, TouchableOpacity, View, Text, ScrollView } from "react-native";
 import { useAuth } from "../../Auth/hooks";
 import { useFormik } from "formik";
 import * as ImagePicker from 'expo-image-picker';
@@ -11,9 +11,11 @@ import { assets } from "../../../assets";
 import { Color } from "../../../utils/constantsStyle";
 import { AlertConfirm } from "../../../components/core/Modal/AlertConfirm";
 import { getIconById } from "../../../utils/util";
+import { Header } from "../../../components/core/Header";
+import StyledText from "../../../utils/globalstyle";
 
 export function SettingsScreen() {
-  const { logout, user: { role, active, email }, userInfo } = useAuth();
+  const { logout, user: { role, active, email, businessType }, userInfo } = useAuth();
   const [image, setImage] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [idEmployee, setIdEmployee] = useState(false);
@@ -21,6 +23,7 @@ export function SettingsScreen() {
   const [isLastNameFocused, setIsLastNameFocused] = useState(false);
   const [isCompanyFocused, setIsCompanyFocused] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
+
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -37,7 +40,11 @@ export function SettingsScreen() {
 
   useEffect(() => {
     if (userInfo) {
+      formik.setFieldValue("language", "English");
+      formik.setFieldValue("ubication", "New York");
+      formik.setFieldValue("email", email);
       formik.setFieldValue("name", userInfo.name);
+      formik.setFieldValue("businessType", userInfo.businessType);
       formik.setFieldValue("lastName", userInfo.lastName);
     }
     formik.setFieldValue("email", email);
@@ -89,24 +96,91 @@ export function SettingsScreen() {
 
 
   return (
-    <View style={styles.background}>
+
+    <ScrollView style={styles.background}>
+      <Header
+        title={"Settings"}
+      />
       <SafeAreaView style={styles.container}>
-        <View style={styles.containerImg}>
-          <View style={styles.imgProfile}>
-            {image ? (
-              <Image style={{ width: "100%", height: "100%" }} source={{ uri: image }} />
-            ) : (
+
+        <View style={styles.bgContainerAvatar}>
+          <View style={styles.containerImg}>
+            <View style={styles.imgProfile}>
+              {image ? (
+                <Image style={{ width: "100%", height: "100%" }} source={{ uri: image }} />
+              ) : (
                 getIconById("iconAvatar")
-            )}
+              )}
+            </View>
           </View>
+
+          <TouchableOpacity style={{ width: 150 }} onPress={() => setIsModalVisible(true)}>
+            <LinearGradient style={{ flexDirection: "row", paddingHorizontal: 15, paddingVertical: 5, borderRadius: 20 }} colors={['#CEDC39', '#7DA74D']} >
+              <View style={{ width: 20, height: 20, marginRight: 5 }}>
+                {getIconById("iconEditWhite")}
+              </View>
+              <Text style={styles.signOffText}>Edit Profile</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+
         </View>
 
-        <View>
-          <View style={[styles.field, { borderColor: Color.gray1}]}>
+        <View style={{ paddingHorizontal: 30, marginBottom: 10 }}>
+          <StyledText boldGray font17pt>Preferences</StyledText>
+        </View>
+
+        <View style={[styles.containerFields, { borderBottomWidth: 12, borderColor: "#fff", marginBottom: 15 }]}>
+          <View style={styles.field}>
+            <View style={styles.iconField}>
+              {getIconById("iconLanguage")}
+            </View>
+            <StyledText regularGray>language:</StyledText>
+            <TextInput
+              editable={!active}
+              placeholderTextColor="#333"
+              autoCapitalize="none"
+              style={styles.input}
+              value={formik.values.language}
+              onChangeText={(text) => formik.setFieldValue("language", text)}
+              onFocus={handleNameFocus}
+              onBlur={handleNameBlur}
+            />
+          </View>
+
+          <View style={styles.field}>
+            <View style={styles.iconField}>
+              {getIconById("iconUbication")}
+            </View>
+            <StyledText regularGray>Ubication:</StyledText>
             <TextInput
               editable={!active}
               placeholder="Name"
               placeholderTextColor="#7DA74D"
+              autoCapitalize="none"
+              style={styles.input}
+              value={formik.values.ubication}
+              onChangeText={(text) => formik.setFieldValue("ubication", text)}
+              onFocus={handleNameFocus}
+              onBlur={handleNameBlur}
+            />
+          </View>
+
+        </View>
+
+        <View style={styles.containerFields}>
+
+          <View style={{ marginBottom: 10 }}>
+            <StyledText boldGray font17pt>Personal Info</StyledText>
+          </View>
+
+          <View style={styles.field}>
+            <View style={styles.iconField}>
+              {getIconById("iconAvatarName")}
+            </View>
+            <StyledText regularGray>Name:</StyledText>
+            <TextInput
+              editable={!active}
               autoCapitalize="none"
               style={styles.input}
               value={formik.values.name}
@@ -116,51 +190,66 @@ export function SettingsScreen() {
             />
           </View>
 
-          <View style={[styles.field, { borderColor: Color.gray1}]}>
+
+          <View style={styles.field}>
+            <View style={styles.iconField}>
+              {getIconById("iconMail")}
+            </View>
+            <StyledText regularGray>Email:</StyledText>
             <TextInput
               editable={!active}
-              placeholder="LastName"
-              placeholderTextColor="#7DA74D"
-              autoCapitalize="none"
-              style={styles.input}
-              value={formik.values.lastName}
-              onChangeText={(text) => formik.setFieldValue("lastName", text)}
-              onFocus={handleLastNameFocus}
-              onBlur={handleLastNameBlur}
-            />
-          </View>
-
-          <View style={[styles.field, { borderColor: Color.gray1}]}>
-            <TextInput
-              editable={false}
-              placeholder="Email"
-              placeholderTextColor="#7DA74D"
               autoCapitalize="none"
               style={styles.input}
               value={formik.values.email}
+              onChangeText={(text) => formik.setFieldValue("email", text)}
+              onFocus={handleNameFocus}
+              onBlur={handleNameBlur}
             />
           </View>
 
-          {idEmployee && (
-            <View style={styles.field}>
-              <TextInput
-                editable={false}
-                placeholder="Id Employee"
-                placeholderTextColor="#7DA74D"
-                autoCapitalize="none"
-                style={styles.input}
-                value={userInfo.idEmployee}
-              />
+
+          <View style={styles.field}>
+            <View style={styles.iconField}>
+              {getIconById("iconBriefcase")}
             </View>
-          )}
+            <StyledText regularGray>Business type:</StyledText>
+            <TextInput
+              editable={!active}
+              autoCapitalize="none"
+              style={styles.input}
+              value={formik.values.businessType}
+              onChangeText={(text) => formik.setFieldValue("businessType", text)}
+              onFocus={handleNameFocus}
+              onBlur={handleNameBlur}
+            />
+          </View>
+
+
+          <View style={styles.field}>
+            <View style={styles.iconField}>
+              {getIconById("iconPhone")}
+            </View>
+            <StyledText regularGray>Telephone:</StyledText>
+            <TextInput
+              editable={!active}
+              autoCapitalize="none"
+              style={styles.input}
+              value={formik.values.telephone}
+              onChangeText={(text) => formik.setFieldValue("telephone", text)}
+              onFocus={handleNameFocus}
+              onBlur={handleNameBlur}
+            />
+          </View>
 
         </View>
 
-        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
-          <LinearGradient colors={['#CEDC39', '#7DA74D']} style={styles.signOff}>
-            <Text style={styles.signOffText}>Sign Off</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+        <View style={styles.actions}>
+          <TouchableOpacity style={{ width: 170 }} onPress={() => setIsModalVisible(true)}>
+            <LinearGradient style={styles.signOff} colors={['#CEDC39', '#7DA74D']} >
+              <Text style={styles.signOffText}>Sign Off</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
 
 
@@ -174,6 +263,8 @@ export function SettingsScreen() {
         isDanger
       />
 
-    </View>
+
+
+    </ScrollView>
   );
 }

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../../../utils/theme";
 
 export const styles = StyleSheet.create({
     modalContainer: {
@@ -9,48 +10,35 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
     },
-    searchContainer: {
-        position: "absolute",
-        top: 20,
-        left: 10,
-        right: 10,
-        zIndex: 1,
-    },
-    searchBar: {
+    inputContainer: {
         height: 50,
-        borderRadius: 60,
-        flexDirection: "row",
-        alignItems: "center",
+        borderRadius: 50,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        alignItems: "flex-start",
     },
-    searchButton: {
-        width: 46,
-        height: 46,
+    imageContainer: {
+        width: 47,
+        height: 47,
         borderRadius: 50,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#CEDC39",
+        backgroundColor: theme.gradient.color2,
+        position: "absolute",
+        left: 1,
         borderWidth: 1.5,
-        borderColor: "#fff",
-        zIndex: 10,
+        borderColor: theme.gradient.color2,
+        zIndex: 10
     },
-    searchIcon: {
-        width: 35,
-        height: 35,
-        padding: 5,
-    },
-    animatedSearch: {
-        height: 50,
-        backgroundColor: "#CEDC39",
-        borderRadius: 60,
-        marginLeft: -50,
-        justifyContent: "center",
-        paddingLeft: 60,
-    },
-    searchInput: {
+    input: {
+        height: '100%',
+        flex: 1,
         fontSize: 18,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         color: "#fff",
-        height: "100%",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        paddingLeft: 60
     },
     mapView: {
         flexGrow: 1,
@@ -75,11 +63,22 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
     },
     closeButton: {
-        position: "absolute",
-        top: 40,
-        right: 20,
-        width: 20,
-        height: 20,
+        marginRight: 10,
+        width: 30,
+        height: 30,
         zIndex: 10
+    },
+    suggestionsContainer: {
+        backgroundColor: "#fff",
+        borderRadius: 5,
+        marginTop: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        maxHeight: 150,  // Limitar el alto de la lista de sugerencias
+    },
+    suggestionItem: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ddd",
     },
 });

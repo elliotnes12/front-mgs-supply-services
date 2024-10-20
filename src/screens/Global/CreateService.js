@@ -1,17 +1,20 @@
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import { Header } from "../../components/core/Header";
+import { Alert } from "../../components/core/Modal/Alert";
+import { CustomerSelectorModal } from "../../components/core/Modal/CustomerSelectorModal";
 import EmployeeSelectorModal from "../../components/core/Modal/EmployeeSelectorModal";
 import { MapModal } from "../../components/core/Modal/MapModal";
-import StyledText, { StyledGradientButtonSmall } from "../../utils/globalstyle";
-import { getIconById } from "../../utils/util";
-import { styles } from "./styles/CreateService.style";
-import { theme } from "../../utils/theme";
-import { CustomerSelectorModal } from "../../components/core/Modal/CustomerSelectorModal";
+import SupervisorSelectorModal from "../../components/core/Modal/SupervisorSelectorModal";
 import CalendarRange from "../../components/DatePicker";
+import StyledText, { StyledGradientButtonSmall } from "../../utils/globalstyle";
+import { theme } from "../../utils/theme";
+import { getIconById } from "../../utils/util";
 import { useCreateServiceMethods } from "./CreateServiceMethods";
+import { styles } from "./styles/CreateService.style";
 
 export function CreateService() {
   const {
@@ -27,9 +30,13 @@ export function CreateService() {
     isModalCalendarVisible,
     isModalEmployeeVisible,
     isModalCustomerVisible,
+    isModalTimeVisible,
+    setIsModalTimeVisible,
     selectedButton,
     assignedEmployees,
+    assignedSupervisores,
     timeOptions,
+    assingedCustomer,
     handleOpenModal,
     handleCloseModal,
     handleConfirmSelection,
@@ -38,14 +45,37 @@ export function CreateService() {
     toggleModalCalendar,
     handleButtonPress,
     unAssingEmployee,
+    assignedSupervisor,
+    setAssignedSupervisor,
     setDateFrom,
     setDateUntil,
-    setIsModalCustomerVisible
+    setIsModalCustomerVisible,
+    setIsModalSupervisorVisible,
+    isModalSupervisorVisible,
+    closeModalCustomer,
+    onTimeChange,
+    setIsModalVisible,
+    time,
+    setTime,
+    setCurrentTime,
+    currentTime,
+    createService,
+    userInfo,
+    message,
+    loading,
+    isModalService,
+    setIsModalService,
+    toggleModalSevice
   } = useCreateServiceMethods();
+
+
+  useEffect(() => {
+    setAssignedSupervisor(userInfo)
+  }, [])
 
   return (
     <>
-      <ScrollView style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
+      <ScrollView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
         <Header
           title={"Create a Service"}
           subtitle={"Schedule a service with us"}
@@ -61,20 +91,23 @@ export function CreateService() {
 
           <View style={styles.categories}>
             <StyledGradientButtonSmall
-              action={() => handleButtonPress("Cleaning")}
-              focused={selectedButton === "Cleaning"}
+              action={() => handleButtonPress("cleaning")}
+              focused={selectedButton === "cleaning"}
+              icon={"iconBroom"}
               text={"Cleaning"}
             />
 
             <StyledGradientButtonSmall
-              action={() => handleButtonPress("Painting")}
-              focused={selectedButton === "Painting"}
+              action={() => handleButtonPress("painting")}
+              focused={selectedButton === "painting"}
+              icon={"iconPainting"}
               text={"Painting"}
             />
 
             <StyledGradientButtonSmall
-              action={() => handleButtonPress("Polishing")}
-              focused={selectedButton === "Polishing"}
+              action={() => handleButtonPress("polishing")}
+              focused={selectedButton === "polishing"}
+              icon={"iconPolishing"}
               text={"Polishing"}
             />
           </View>
@@ -113,6 +146,8 @@ export function CreateService() {
               Employees
             </StyledText>
           </View>
+
+
 
           <View>
             {assignedEmployees.length > 0 &&
@@ -166,6 +201,28 @@ export function CreateService() {
             )}
           </View>
 
+          <View style={{ marginTop: 15 }}>
+            <StyledText font17pt neutralGray bold>
+              Assigned Supervisor
+            </StyledText>
+          </View>
+
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <StyledText paraStyles={{ flex: 2 }} graySilver font14pt regular>
+              {assignedSupervisor?.name} {assignedSupervisor?.lastName}
+            </StyledText>
+
+            {userInfo.type == "manager" &&
+              <TouchableOpacity onPress={() => setIsModalSupervisorVisible(true)}
+                style={{ alignItems: "center" }}>
+                <View style={{ width: 30, height: 30 }}>
+                  {getIconById("iconAvatar")}
+                </View>
+                <StyledText regularGreen>Other</StyledText>
+              </TouchableOpacity>
+            }
+          </View>
+
           <View style={{ marginVertical: 15 }}>
             <StyledText font17pt neutralGray bold>
               Service Location
@@ -183,7 +240,7 @@ export function CreateService() {
             ]}
           >
             <View style={[{ paddingLeft: 15, minHeight: 70 }, styles.item]}>
-              <View style={{ flex: 2 }}>
+              <View style={{ flex: 3, paddingVertical: 15 }}>
                 <StyledText graySilver font16pt>
                   {selectedAddress}
                 </StyledText>
@@ -219,24 +276,39 @@ export function CreateService() {
               </View>
             </TouchableOpacity>
 
-            <Text font16pt style={[styles.textGray, styles.titleServices]}>
-              Bussiness Name
-            </Text>
-            <Text style={styles.bussiness__name}>{bussinessName}</Text>
 
-            <Text style={[styles.textGray, styles.titleServices]}>
-              Additional Message
-            </Text>
+            <StyledText gray regular font16pt>Name</StyledText>
+            <View style={{ backgroundColor: theme.colors.gray6, padding: 15, borderRadius: 5 }}>
+              <StyledText regularGray>{assingedCustomer?.name}</StyledText>
+            </View>
+
+            <StyledText gray regular font16pt>Email</StyledText>
+            <View style={{ backgroundColor: theme.colors.gray6, padding: 15, marginBottom: 25, borderRadius: 5 }}>
+              <StyledText regularGray>{assingedCustomer?.user?.email}</StyledText>
+            </View>
+
+            {assingedCustomer?.bussinessName &&
+
+              <>
+                <StyledText gray font16pt bold>businessName</StyledText>
+                <View style={{ backgroundColor: theme.colors.gray6, padding: 15, marginBottom: 25, borderRadius: 5 }}>
+                  <StyledText regularGray>{assingedCustomer?.bussinessName}</StyledText>
+                </View>
+              </>
+
+            }
+            <StyledText gray regular> Additional Message</StyledText>
             <TextInput
               style={styles.textArea}
               multiline={true}
+              value={bussinessAdditional}
               numberOfLines={4}
               onChangeText={(text) => setBussinessAdditional(text)}
               placeholder="Enter your text here"
             />
           </View>
           <View style={styles.submit}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => createService()}>
               <LinearGradient
                 colors={["#CEDC39", "#7DA74D"]}
                 style={styles.button}
@@ -248,7 +320,7 @@ export function CreateService() {
 
           <CustomerSelectorModal
             isVisible={isModalCustomerVisible}
-            onClose={toggleModalCustomer}
+            onClose={closeModalCustomer}
           />
 
 
@@ -265,12 +337,44 @@ export function CreateService() {
             isVisible={isModalEmployeeVisible}
             onClose={handleCloseModal}
             onConfirm={handleConfirmSelection}
+            assignedEmployees={assignedEmployees}
           />
+
+
+          <SupervisorSelectorModal
+            isVisible={isModalSupervisorVisible}
+            onClose={() => setIsModalSupervisorVisible(false)}
+            onConfirm={(supervisor) => { setAssignedSupervisor(supervisor) }}
+            assignedEmployees={assignedSupervisores}
+          />
+
+
 
           <MapModal
             setSelectedAddress={setSelectedAddress}
             isVisible={isModalVisible}
             toggleModal={toggleModal}
+          />
+
+          {isModalTimeVisible && (
+            <DateTimePicker
+              value={time}
+              mode="time"
+              is24Hour={true}
+              display="default"
+              onChange={onTimeChange}
+            />
+          )}
+
+          <Alert
+            show={isModalService}
+            type={"info"}
+            loading={loading}
+            onClose={toggleModalSevice}
+            textConfirm="OK"
+            onConfirm={() => setIsModalService(false)}
+            message={message}
+            isDanger={loading ? false : true}
           />
         </View>
       </ScrollView>

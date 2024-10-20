@@ -4,12 +4,12 @@ export function initialValues() {
   return {
     email: "",
     name: "",
-    bussinessName: "",
-    typeBussiness: "",
     password: "",
     confirmPassword: "",
     userType: "customer", 
-    employeeNumber: ""
+    employeeNumber: "",
+    bussinessName: "",
+    bussinessType: ""
   };
 }
 
@@ -21,16 +21,16 @@ export function validationSchema() {
       then: Yup.string().required("Name is required"),
       otherwise: Yup.string().notRequired() 
     }),
-    typeBussiness: Yup.string().when("userType", {
+    bussinessType: Yup.string().when("userType", {
       is: userType => userType === "customer",
       then: Yup.string().required("Type of business is required for customer"),
       otherwise: Yup.string().notRequired()
     }),
     bussinessName: Yup.string().when(
-      ["typeBussiness", "userType"],
+      ["businessType", "userType"],
       {
-        is: (typeBussiness, userType) =>
-          userType === "customer" && typeBussiness !== "NOTBUSSINESS",
+        is: (bussinessType, userType) =>
+          userType === "customer" && bussinessType !== "NOTBUSSINESS",
         then: Yup.string().required("Business name is required"),
         otherwise: Yup.string().notRequired()
       }

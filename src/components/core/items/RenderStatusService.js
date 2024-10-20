@@ -5,15 +5,18 @@ import { Text, View } from "react-native";
 import StyledText from "../../../utils/globalstyle";
 
 export function RenderStatusService({ status }) {
+
   const renderStatus = (status) => {
     switch (status) {
-      case "progress":
+      case "in_progress":
         return (
           <>
             <View style={[stylesGlobal.itemHorizontal]}>
-              <StyledText font10pt regularGray style={styles.item__estatus}>
-                Estatus:
-              </StyledText>
+              <View style={{ marginTop: 5 }}>
+                <StyledText font12pt regularGray>
+                  Status:
+                </StyledText>
+              </View>
               <View style={[styles.estatus, styles.aprobado]}>
                 <StyledText font10pt white regularGray>
                   in progress
@@ -22,12 +25,14 @@ export function RenderStatusService({ status }) {
             </View>
           </>
         );
-      case "cancel":
+      case "cancelled":
         return (
           <View style={[stylesGlobal.itemHorizontal]}>
-            <StyledText font10pt regularGray style={styles.item__estatus}>
-              Estatus:
-            </StyledText>
+            <View style={{ marginTop: 5 }}>
+              <StyledText font12pt regularGray>
+                Status:
+              </StyledText>
+            </View>
             <View style={[styles.estatus, styles.canceled]}>
               <StyledText font10pt white regularGray>
                 Canceled
@@ -35,12 +40,14 @@ export function RenderStatusService({ status }) {
             </View>
           </View>
         );
-      case "success":
+      case "completed":
         return (
           <View style={[stylesGlobal.itemHorizontal]}>
-            <StyledText font10pt regularGray style={styles.item__estatus}>
-              Estatus:
-            </StyledText>
+            <View style={{ marginTop: 5 }}>
+              <StyledText font12pt regularGray>
+                Status:
+              </StyledText>
+            </View>
             <View style={[styles.estatus, styles.success]}>
               <StyledText font10pt white regularGray>
                 Success

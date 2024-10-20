@@ -31,21 +31,21 @@ export function BottomTabNavigation() {
 
   const baseTabs = isCustomer
     ? [
-        { name: screens.tab.rootCustomer, title: "Home", iconName: "home" },
-        { name: screens.tab.chats.root, title: "Chats", iconName: "chat" },
-        {
-          name: screens.tab.products.root,
-          title: "Products",
-          iconName: "order",
-        },
-        {
-          name: screens.global.settingScreen,
-          title: "Setting",
-          iconName: "setting",
-        },
-      ]
+      { name: screens.tab.rootCustomer, title: "Home", iconName: "home" },
+      { name: screens.tab.chats.root, title: "Chats", iconName: "chat" },
+      {
+        name: screens.tab.products.root,
+        title: "Products",
+        iconName: "order",
+      },
+      {
+        name: screens.global.settingScreen,
+        title: "Setting",
+        iconName: "setting",
+      },
+    ]
     : userType === ENV.TYPES_USERS.SUPERVISOR
-    ? [
+      ? [
         { name: screens.tab.rootSupervisor, title: "Home", iconName: "home" },
         {
           name: screens.tab.chats.chatsScreenEmployee,
@@ -64,47 +64,47 @@ export function BottomTabNavigation() {
           iconName: "setting",
         },
       ]
-    : userType === ENV.TYPES_USERS.EMPLOYEE
-    ? [
-        { name: screens.tab.rootEmployee, title: "Home", iconName: "home" },
-        {
-          name: screens.tab.chats.chatsScreenEmployee,
-          title: "Chats",
-          iconName: "chat",
-        },
+      : userType === ENV.TYPES_USERS.EMPLOYEE
+        ? [
+          { name: screens.tab.rootEmployee, title: "Home", iconName: "home" },
+          {
+            name: screens.tab.chats.chatsScreenEmployee,
+            title: "Chats",
+            iconName: "chat",
+          },
 
-        {
-          name: screens.tab.pedings.pendingScreenEmployee,
-          title: "Pending",
-          iconName: "pending",
-        },
-        {
-          name: screens.global.settingScreen,
-          title: "Setting",
-          iconName: "setting",
-        },
-      ]
-    : userType === ENV.TYPES_USERS.MANAGER
-    ? [
-        { name: screens.tab.rootEmployee, title: "Home", iconName: "home" },
-        {
-          name: screens.tab.chats.chatsScreenEmployee,
-          title: "Chats",
-          iconName: "chat",
-        },
-        { name: "boton-central", title: "", iconName: "plus" },
-        {
-          name: screens.tab.workFlow.root,
-          title: "Workflow",
-          iconName: "pending",
-        },
-        {
-          name: screens.tab.reports.root,
-          title: "Reports",
-          iconName: "reports",
-        },
-      ]
-    : [];
+          {
+            name: screens.tab.pedings.pendingScreenEmployee,
+            title: "Pending",
+            iconName: "pending",
+          },
+          {
+            name: screens.global.settingScreen,
+            title: "Setting",
+            iconName: "setting",
+          },
+        ]
+        : userType === ENV.TYPES_USERS.MANAGER
+          ? [
+            { name: screens.tab.rootEmployee, title: "Home", iconName: "home" },
+            {
+              name: screens.tab.chats.chatsScreenEmployee,
+              title: "Chats",
+              iconName: "chat",
+            },
+            { name: "boton-central", title: "", iconName: "plus" },
+            {
+              name: screens.tab.workFlow.root,
+              title: "Workflow",
+              iconName: "pending",
+            },
+            {
+              name: screens.tab.reports.root,
+              title: "Reports",
+              iconName: "reports",
+            },
+          ]
+          : [];
 
   const getComponentByName = (name) => {
     const components = {
@@ -154,7 +154,7 @@ export function BottomTabNavigation() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerTitle: false,
-        headerShown: route.name === screens.global.settingScreen,
+        headerShown: false,
         tabBarLabelStyle: { display: "none" },
         tabBarActiveTintColor: "green",
         tabBarStyle: [{ display: tabBarVisible }, styles.tabBar],

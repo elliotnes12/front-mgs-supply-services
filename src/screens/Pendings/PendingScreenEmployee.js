@@ -1,71 +1,77 @@
-import React, { useState, useEffect } from "react";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 import {
-  Text,
-  View,
-  FlatList,
   ActivityIndicator,
+  FlatList,
   TouchableOpacity,
+  View
 } from "react-native";
-import { Image } from "native-base";
-import { assets } from "../../assets";
-import { styles } from "./styles/PendingScreen.styles";
-import { stylesGlobal } from "../../modules/styles/global.style";
+import { Service } from "../../api/service";
 import { Header } from "../../components/core/Header";
 import { LoadingScreen } from "../../components/core/LoadingScreen";
-import { getIconById } from "../../utils/util";
+import { useAuth } from "../../modules/Auth/hooks";
+import { stylesGlobal } from "../../modules/styles/global.style";
+import { getBusinessLabel, screens } from "../../utils";
 import StyledText from "../../utils/globalstyle";
+import { getIconById } from "../../utils/util";
+import { styles } from "./styles/PendingScreen.styles";
 
 export function PendingScreenEmployee() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
+  const controllerService = new Service();
+  const { accessToken, userInfo } = useAuth();
+  const navigation = useNavigation();
 
-  useEffect(() => {
-    setLoading(true);
-    setTasks([
-      {
-        id: 1,
-        title: "Cleaning office",
-        description: "cleaning de lobby area",
-        employees: [
-          { idEmployee: "2323", name: "Jose Luis Carmona" },
-          { idEmployee: "2323", name: "Jorge Antonio Ruiz Perez" },
-        ],
-      },
-      {
-        id: 2,
-        title: "Cleaning Hospital",
-        description: "cleaning de lobby area",
-        employees: [{ idEmployee: "43434", name: "Carlos Roberto Garcia" }],
-      },
-      {
-        id: 3,
-        title: "Cleaning Hospital",
-        description: "cleaning de lobby area",
-        employees: [{ idEmployee: "43434", name: "Carlos Roberto Garcia" }],
-      },
-    ]);
-    setLoading(false);
-  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        try {
+          setLoading(true)
+          const { data, meta } = await controllerService.findByServicesInProcessEmployee(accessToken, userInfo._id);
+          console.log()
+          if (meta.code != 200) {
+            throw new Error();
+          }
+          setTasks(data);
+        } catch (error) {
+          setTasks([]);
+        } finally {
+          setLoading(false)
+        }
+      })();
+    }, [])
+  );
+
+
+
 
   const renderItem = ({ item }) => (
     <View key={item.id} style={styles.container_item}>
       <View>
         <StyledText font16pt bold style={styles.office}>
-          {item.title}
+          {item.customer.businessType} {item.category}
         </StyledText>
         <View style={styles.notice}>
           <View style={stylesGlobal.imageMin}>{getIconById("notice")}</View>
-          <StyledText font12pt regularGray>
-            {item.description}
+          <StyledText paraStyles={{ marginLeft: 5 }} font12pt regularGray>
+            {getBusinessLabel(item.customer.businessType, item.category)}
           </StyledText>
         </View>
+        <StyledText font14pt bold>
+          Assigned Supervisor:
+        </StyledText>
+        <StyledText paraStyles={{ marginBottom: 5 }} font12pt regularGray>
+          {item.supervisor.name} {item.supervisor.lastName}
+        </StyledText>
         <StyledText font14pt regularGray>
           Assigned employees: {item.employees.length}
         </StyledText>
         <View style={styles.employeeList}>
           {item.employees.map((employee) => (
             <View key={employee.idEmployee} style={styles.item}>
-              <View style={styles.item__img}>{getIconById("iconProfile")}</View>
+              <View style={styles.item__img}>{getIconById("iconAvatar")}</View>
               <StyledText font12pt regularGray>
                 {employee.name}
               </StyledText>
@@ -74,12 +80,16 @@ export function PendingScreenEmployee() {
         </View>
       </View>
       <View style={styles.options}>
-        <TouchableOpacity style={styles.options__item}>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate(
+            screens.global.completeService,
+            {
+              serviceId: item.id
+            }
+          )
+        }} style={styles.options__item}>
           <View style={{ width: 30, height: 30, padding: 1 }}>
-            <Image
-              source={assets.image.png.iconsuccess}
-              style={{ width: "100%", height: "100%" }}
-            />
+            {getIconById("iconsuccess")}
           </View>
           <StyledText font12pt asparagus regularGray>
             Complet
@@ -95,19 +105,17 @@ export function PendingScreenEmployee() {
   };
 
   return (
-    <>
+    <View style={{ backgroundColor: "#f2f2f2", flex: 1 }}>
       <Header title={"Pendings"} />
       <View
         style={{
           flexGrow: 1,
-          justifyContent: "center",
           flexDirection: "row",
-          alignItems: "center",
-          paddingHorizontal: 24,
+          paddingHorizontal: 24
         }}
       >
         {loading && <LoadingScreen />}
-        {!loading && tasks.length > 0 && (
+        {!loading && tasks?.length > 0 && (
           <FlatList
             data={tasks}
             renderItem={renderItem}
@@ -117,8 +125,12 @@ export function PendingScreenEmployee() {
             contentContainerStyle={styles.scrollViewContent}
           />
         )}
-        {!loading && tasks.length === 0 && <Text>Empty</Text>}
+        {!loading && tasks?.length === 0 &&
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <StyledText regularGreen>Services not found</StyledText>
+          </View>
+        }
       </View>
-    </>
+    </View>
   );
 }

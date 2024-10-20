@@ -2,7 +2,6 @@ import { useState, useEffect, createContext } from "react";
 import { User } from "../api/user";
 import { hasExpiredToken } from "../utils/token";
 import { useNavigation } from '@react-navigation/native';
-import { CommonActions } from '@react-navigation/native';
 import { Auth } from "../api/auth";
 
 
